@@ -1,4 +1,4 @@
-from django.test import client
+from django.test import Client
 from django.urls import reverse
 
 import unittest
@@ -7,7 +7,8 @@ import unittest
 
 class TopPageTest(unittest.TestCase):
     def test_show_top_page(self):
-        response = self.client.get('GroupConnect:index')
+        client = Client()
+        response = client.get(reverse('GroupConnect:index'))
         self.assertEqual(
             response.status_code,
             200
