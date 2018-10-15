@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> アカウント設定ページ </title>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, inital-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'GroupConnect/style.css' %}" />
+    </head>
+    <body>
+        <div id="pagebody">
+        
+            <!-- ヘッダ -->
+            <div id="header"><h1><a href="../">GroupConnect</a></h1></div>
+            
+            <!-- メインメニュー -->
+            <ul id="menu">
+                <li id="menu01"><a href="xxx.html">グループ</a></li>
+                <li id="menu02"><a href="xxx.html">カレンダー</a></li>
+                <li id="menu03"><a href="xxx.html">チャット</a></li>
+                <li id="menu04"><a href="xxx.html">アカウント</a></li>
+            </ul>
+        
+            <!-- サブメニュー（左カラム） -->
+            <div id="submenu">
+                <div id="submenu_header">サブメニュー</div>
+                <ul id="submenu_body">
+                    <li><a href="xxx.html">プロフィール設定</a></li>
+                    <li><a href="xxx.html">パスワード設定</a></li>
+                    <li><a href="xxx.html">メール設定</a></li>
+                    <li><a href="xxx.html">退会</a></li>
+                </ul>
+            </div>
+        
+            <!-- コンテンツ（中央と右の2カラム） -->
+            <div id="content">
+                <!-- ニュース（中央カラム） -->
+                <div id="news">
+                    <h3>マイページ  >  プロフィール設定</h3>
+                    <br>
+                    <p>プロフィール画像<img src="#" width="200" height="155" /></p>
+                    <p><button>アップロード</button><a href="">削除する</a></p>
+                    <h2></h2>
+                    <form>
+                        名前[必須]　　姓：<input type="text" name="first_name" size="10">名：<input type="text" name="last_name" size="10"><br>
+                        名前(ローマ字)[必須]　　姓：<input type="text" name="r_first_name" size="10">名：<input type="text" name="r_last_name" size="10">
+                        <h2></h2>
+                        自己紹介<br>
+                        <textarea name="introduction" rows="10" cols="60"></textarea>
+                    </form>
+                    <button type="button" class="submit">変更</button><button type="button" >キャンセル</button>
+                </div>
+            </div>
+        
+            <!-- フッタ -->
+            <div id="footer"><address>Copyright (c) HTMQ All Rights Reserved.</address></div>
+        
+        </div>
+    </body>
+</html>
