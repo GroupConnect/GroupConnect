@@ -4,7 +4,6 @@ from django.contrib.auth.forms import (
  
  
 class LoginForm(AuthenticationForm):
-    """ログインフォーム"""
  
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

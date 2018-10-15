@@ -10,16 +10,11 @@ from .forms import LoginForm
 class IndexView(generic.TemplateView):
     template_name = 'GroupConnect/index.html'
 
-class Top(generic.TemplateView):
-    template_name = 'GroupConnect/top.html'
- 
-class Login(LoginView):
-    """ログインページ"""
+class Top(generic.TemplateView, LoginView):
     form_class = LoginForm
-    template_name = 'GroupConnect/login.html'
+    template_name = 'GroupConnect/top.html'
  
  
 class Logout(LoginRequiredMixin, LogoutView):
-    """ログアウトページ"""
     template_name = 'GroupConnect/top.html'
  
