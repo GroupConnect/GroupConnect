@@ -11,12 +11,12 @@ class Account(models.Model):
     icon = models.ImageField(upload_to='static/images/', db_column='icon', blank=True, null=True)
     introduction = models.TextField(db_column='introduction', blank=True, null=True)
     plan_mail_time = models.TimeField(db_column='plan_time')
-    new_mail_stop_time = models.DateTimeField(db_column='mail_stop_time')
-    new_mail_start_time = models.DateTimeField(db_column='mail_start_time')
-    notice_signboard = models.BooleanField(db_column='notice_signboard')
-    notice_chat = models.BooleanField(db_column='notice_chat')
-    notice_calendar = models.BooleanField(db_column='notice_calendar')
-    notice_group = models.BooleanField(db_column='notice_group')
+    new_mail_stop_time = models.TimeField(db_column='mail_stop_time')
+    new_mail_start_time = models.TimeField(db_column='mail_start_time')
+    notice_signboard = models.BooleanField(db_column='notice_signboard', default=True)
+    notice_chat = models.BooleanField(db_column='notice_chat', default=True)
+    notice_calendar = models.BooleanField(db_column='notice_calendar', default=True)
+    notice_group = models.BooleanField(db_column='notice_group', default=True)
 
 class Group(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
