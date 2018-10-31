@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/python,django
 
+./static/
+./app.json
+
 ### Django ###
 *.log
 *.pot
