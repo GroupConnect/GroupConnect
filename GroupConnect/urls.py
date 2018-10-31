@@ -4,5 +4,6 @@ from . import views
 
 app_name = 'GroupConnect'
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
+    path('', views.Top.as_view(), name='top'),
+    path('logout/', views.Logout.as_view(), name='logout'),
 ]
