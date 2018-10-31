@@ -4,8 +4,10 @@ from django.db import models
 
 class Account(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
-    name = models.CharField(max_length=100, db_column='name')
-    rome_name = models.CharField(max_length=100, db_column='rome_name', blank=True, null=True)
+    last_name = models.CharField(max_length=100, db_column='last_name', blank=True, null=True)
+    first_name = models.CharField(max_length=100, db_column='first_name', blank=True, null=True)
+    rome_last_name = models.CharField(max_length=100, db_column='rome_last_name', blank=True, null=True)
+    rome_first_name = models.CharField(max_length=100, db_column='rome_first_name', blank=True, null=True)
     mail_address = models.EmailField(db_column='mail_address')
     password = models.CharField(max_length=250, db_column='password')
     icon = models.ImageField(upload_to='static/images/', db_column='icon', blank=True, null=True)
