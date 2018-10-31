@@ -1,11 +1,6 @@
 {% extends "GroupConnect/base.html" %}
 {% block content %}
 <div class="row">
-    <div class="card col-md-6">
-        <div class="card-body">
-            <a href="{% url 'GroupConnect:user_create' %}" class="btn btn-success btn-lg btn-block" >新規登録</a>
-        </div>
-    </div>
         <div class="card col-md-6">
             <div class="card-body">
                 <form action="" method="POST">
@@ -17,17 +12,11 @@
                     {% endfor %}
                 <div class="row">
                     <div class="col">
-                        <button type="submit" class="btn btn-success btn-lg btn-block" >ログイン</button>
-                        <input type="hidden" name="next" value="{{ next }}" />
-                        {% csrf_token %}
-                    </div>
-                    <div class="col">
-                        <a href="" class="btn btn-success btn-lg btn-block" >パスワードを忘れた方</a>
+                        <a href="" class="btn btn-success btn-lg btn-block" >登録</a>
                     </div>
                 </div>
                 </form>
             </div>
         </div>
 </div>
-
 {% endblock %}
