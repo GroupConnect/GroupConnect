@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 
 # Create your models here.
@@ -12,9 +13,9 @@ class Account(models.Model):
     password = models.CharField("パスワード", max_length=250, db_column='password')
     icon = models.ImageField(upload_to='static/images/', db_column='icon', blank=True, null=True)
     introduction = models.TextField(db_column='introduction', blank=True, null=True)
-    plan_mail_time = models.TimeField(db_column='plan_time')
-    new_mail_stop_time = models.TimeField(db_column='mail_stop_time')
-    new_mail_start_time = models.TimeField(db_column='mail_start_time')
+    plan_mail_time = models.TimeField(db_column='plan_time', default=datetime.time(7,0,0))
+    new_mail_stop_time = models.TimeField(db_column='mail_stop_time', default=datetime.time(1,0,0))
+    new_mail_start_time = models.TimeField(db_column='mail_start_time', default=datetime.time(6,0,0))
     notice_signboard = models.BooleanField(db_column='notice_signboard', default=True)
     notice_chat = models.BooleanField(db_column='notice_chat', default=True)
     notice_calendar = models.BooleanField(db_column='notice_calendar', default=True)
