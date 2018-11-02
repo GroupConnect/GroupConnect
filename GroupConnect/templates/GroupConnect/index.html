@@ -12,23 +12,38 @@
         <link rel="stylesheet" type="text/css" href="{% static 'GroupConnect/style.css' %}" />
     </head>
     <body>
-        <h1>GroupConnect</h1>
-        <p>～簡単操作で快適なグループ活動を～</p>
-        <h4>全ての機能が無料で使える！！</h4>
-        <button type="button" class="btn btn-primary">今すぐ使ってみる(登録)</button>
-        <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;">
-            <form>
-                ログイン<br><br>
-                メールアドレス<br>
-                <input type="text" name="name" size="20"><br><br>
-                パスワード<br>
-                <input type="text" name="name" size="20"><br><br>
-                <input type="checkbox" name="name">ログイン状態を保持する<br><br>
-            </form>
-            <button type="button" class="submit">ログイン</button><br><br>
-            <a href="http:localhost:8000">パスワードを忘れた場合はこちら</a>
-        </div>
-
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 headline">
+                        <h1><font face="Times New Roman">GroupConnect</font></h1>
+                        <p>～簡単操作で快適なグループ活動を～</p>
+                        <h2><font size="7">全て</font>の機能が<font size="7">無料</font>で使える！！</h2>
+                        <button type="button" class="btn btn-primary">今すぐ使ってみる(登録)</button>
+                    </div>
+                    <div class="col-md-4 loginform">
+                        <form action="{% url 'GroupConnect:index' %}" method="get">
+                            {% csrf_token %}
+                            <p>ログイン</p>
+                            <div>
+                                <label for="mail">メールアドレス</label><br>
+                                <input type="text" name="mail" class="mail" size="25">
+                            </div>
+                            <div>
+                                <label for="pass">パスワード</label><br>
+                                <input type="text" name="pass" class="pass" size="25">
+                            </div>
+                            <div>
+                                <input type="checkbox" name="save" class="save">
+                                <label for="save">ログイン状態を保持する</label>
+                            </div>
+                            <input type="submit" value="ログイン">
+                            <p><a href="" class="forget">パスワードを忘れた場合はこちら</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+        
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
