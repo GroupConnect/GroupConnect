@@ -10,6 +10,7 @@ body {
 .headline h1 {
     max-width: 100%;
     font-size: 100px;
+    font-family: Times New Roman;
     margin: 55px 0px 0px 0px;
 }
 
@@ -23,7 +24,7 @@ body {
     margin: 40px 0px 0px 0px;
 }
 
-.headline .character {
+.headline span {
     font-size: 55px;
 }
 
@@ -50,9 +51,8 @@ body {
 
 .loginform .mail {
     width:90%; 
-    
     border: 1px solid;
-    margin: 0px 0px 20px 0px;
+    margin: 0px 0px 10px 0px;
 }
 
 .loginform .mailblank {
@@ -70,7 +70,7 @@ body {
 .loginform .pass {
     width:90%;
     border: 1px solid;
-    margin: 0px 0px 20px 0px;
+    margin: 0px 0px 10px 0px;
 }
 
 .loginform .passblank {
@@ -165,7 +165,7 @@ body {
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 640px) {
     .headline h1 {
         max-width: 100%;
         font-size: 60px;
