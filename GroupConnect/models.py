@@ -75,14 +75,14 @@ class Event(models.Model):
     updated_at = models.DateTimeField(db_column='updated_at')
     deleted_at = models.DateTimeField(default="None", db_column='deleted_at')
 
-# class File(models.Model):
-#     id = models.AutoField(primary_key=True, db_column='id')
-#     group_id = models.IntegerField(db_column='id')
-#     file_name = models.CharField(default="None", max_length=100, db_column='file_name')
-#     file_path = models.CharField(db_column='file_path')
-#     folder_id = models.IntegerField(default="None", db_column='folder_id')
-#     create_at = models.DateTimeField(db_column='create_at')
-#     delete_at = models.DateTimeField(default="None", db_column='delete_at')
+class File(models.Model):
+    id = models.AutoField(primary_key=True, db_column='id')
+    group_id = models.IntegerField(db_column='group_id')
+    file_name = models.CharField(default="None", max_length=100, db_column='file_name')
+    file_path = models.CharField(max_length=100, db_column='file_path')
+    folder_id = models.IntegerField(default="None", db_column='folder_id')
+    create_at = models.DateTimeField(db_column='create_at')
+    delete_at = models.DateTimeField(default="None", db_column='delete_at')
 
 class Folder(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
@@ -102,3 +102,13 @@ class Talk(models.Model):
     text = models.TextField(db_column='text')
     create_at = models.DateTimeField(db_column='create_at')
     delete_at = models.DateTimeField(default="None", db_column='delete_at')
+
+
+
+
+
+
+
+
+
+
