@@ -4,34 +4,43 @@ body {
 
 .headline {
     text-align: center;
+    margin: auto;
 }
 
 .headline h1 {
-    font-size: 60px;
-    margin: 40px 0px 0px 0px;
+    max-width: 100%;
+    font-size: 100px;
+    margin: 55px 0px 0px 0px;
 }
 
 .headline p {
-    font-size: 17px;
-    margin: 20px 0px 0px 0px;
+    font-size: 34px;
+    margin: 40px 0px 0px 0px;
 }
 
 .headline h2 {
-    font-size: 25px;
-    margin: 20px 0px 0px 0px;
+    font-size: 45px;
+    margin: 40px 0px 0px 0px;
+}
+
+.headline .character {
+    font-size: 55px;
 }
 
 .headline .btn {
-    margin: 25px 0px 0px 0px;
+    width: 400px;
+    height: 70px;
+    font-size: 30px;
+    margin: 50px 0px 0px 0px;
 }
     
 .loginform {
     margin: 0 auto;
-    padding: 45px 0px 45px 0px;
+    padding: 80px 0px 20px 0px;
 }
 
 .loginform form {
-    font-size: 13px;
+    font-size: 25px;
     width: 85%;
     margin: 0 auto;
     border: solid 1px #333333;
@@ -40,98 +49,90 @@ body {
 }
 
 .loginform .mail {
+    width:90%; 
+    
     border: 1px solid;
-    margin: 0px 0px 8px 0px;
+    margin: 0px 0px 20px 0px;
 }
 
 .loginform .mailblank {
     color: #ff0000;
-    font-size: 10px;
+    font-size: 20px;
     display: none;
 }
 
 .loginform .mailformatcheck {
     color: #ff0000;
-    font-size: 10px;
+    font-size: 20px;
     display: none;
 }
 
 .loginform .pass {
+    width:90%;
     border: 1px solid;
-    margin: 0px 0px 8px 0px;
+    margin: 0px 0px 20px 0px;
 }
 
 .loginform .passblank {
     color: #ff0000;
-    font-size: 10px;
+    font-size: 20px;
     display: none;
 }
 
 .loginform .passformatcheck {
     color: #ff0000;
-    font-size: 10px;
+    font-size: 20px;
     display: none;
 }
 
 .loginform .save{
-    margin: 0px 0px 8px 0px;
+    font-size: 23px;
+    margin: 0px 0px 20px 0px;
 }
 
-.loginform .button {
-    margin: 0px 0px 8px 0px;
+.loginform .submit {
+    margin: 0px 0px 20px 0px;
 }
 
 .loginform .forget {
-    font-size: 10px;
+    font-size: 20px;
 }
 
-@media only screen and (min-width: 641px) and (max-width: 767px) {
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .headline h1 {
+        max-width: 100%;
+        font-size: 110px;
+        margin: 55px 0px 0px 0px;
+    }
+    
+    .headline p {
+        font-size: 34px;
+        margin: 40px 0px 0px 0px;
+    }
+    
+    .headline h2 {
+        font-size: 45px;
+        margin: 40px 0px 0px 0px;
+    }
+    
+    .headline .character {
+        font-size: 55px;
+    }
+    
+    .headline .btn {
+        width: 400px;
+        height: 70px;
+        font-size: 30px;
+        margin: 50px 0px 0px 0px;
+    }
+
     .loginform {
         margin: 0 auto;
-        padding: 45px 0px 45px 0px;
+        padding: 80px 0px 45px 0px;
     }
     
     .loginform form {
-        font-size: 13px;
-        width: 85%;
-        margin: 0 auto;
-        border: solid 1px #333333;
-        padding: 8px;
-        text-align: center; 
-        background: #fff;
-    }
-    
-    .loginform mail {
-        border: 1px solid;
-        margin: 0px 0px 8px 0px;
-    }
-    
-    .loginform .pass {
-        border: 1px solid;
-        margin: 0px 0px 8px 0px;
-    }
-    
-    .loginform .save{
-        margin: 0px 0px 8px 0px;
-    }
-    
-    .loginform .button {
-        margin: 0px 0px 8px 0px;
-    }
-    
-    .loginform .forget {
-        font-size: 10px;
-    }
-}
-
-@media screen and (max-width: 640px) {
-    .loginform {
-        margin: 0 auto;
-        padding: 45px 0px 45px 0px;
-    }
-    
-    .loginform form {
-        font-size: 13px;
+        font-size: 25px;
         width: 85%;
         margin: 0 auto;
         border: solid 1px #333333;
@@ -142,28 +143,92 @@ body {
     
     .loginform .mail {
         border: 1px solid;
-        margin: 0px 0px 8px 0px;
-    }
-
-    .loginform .pmail {
-        font-size: 5px;
-        display: none;
+        margin: 0px 0px 20px 0px;
     }
     
     .loginform .pass {
         border: 1px solid;
-        margin: 0px 0px 8px 0px;
+        margin: 0px 0px 20px 0px;
     }
     
     .loginform .save{
-        margin: 0px 0px 8px 0px;
+        font-size: 23px;
+        margin: 0px 0px 20px 0px;
     }
     
     .loginform .button {
-        margin: 0px 0px 8px 0px;
+        margin: 0px 0px 20px 0px;
     }
     
     .loginform .forget {
-        font-size: 10px;
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .headline h1 {
+        max-width: 100%;
+        font-size: 60px;
+        margin: 55px 0px 0px 0px;
+    }
+    
+    .headline p {
+        font-size: 20px;
+        margin: 40px 0px 0px 0px;
+    }
+    
+    .headline h2 {
+        font-size: 20px;
+        margin: 40px 0px 0px 0px;
+    }
+    
+    .headline .character {
+        font-size: 30px;
+    }
+    
+    .headline .btn {
+        width: 250px;
+        height: 50px;
+        font-size: 20px;
+        margin: 50px 0px 0px 0px;
+    }
+
+    .loginform {
+        margin: 0 auto;
+        padding: 80px 0px 45px 0px;
+    }
+    
+    .loginform form {
+        font-size: 25px;
+        width: 85%;
+        margin: 0 auto;
+        border: solid 1px #333333;
+        padding: 8px;
+        text-align: center; 
+        background: #fff;
+    }
+    
+    .loginform .mail {
+        border: 1px solid;
+        margin: 0px 0px 20px 0px;
+    }
+
+    
+    .loginform .pass {
+        border: 1px solid;
+        margin: 0px 0px 20px 0px;
+    }
+    
+    .loginform .save{
+        font-size: 23px;
+        margin: 0px 0px 20px 0px;
+    }
+    
+    .loginform .button {
+        margin: 0px 0px 20px 0px;
+    }
+    
+    .loginform .forget {
+        font-size: 20px;
     }
 }

@@ -14,13 +14,13 @@
     <body>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8 headline">
+                    <div class="col-md-12 col-lg-8 headline">
                         <h1><font face="Times New Roman">GroupConnect</font></h1>
                         <p>～簡単操作で快適なグループ活動を～</p>
-                        <h2><font size="7">全て</font>の機能が<font size="7">無料</font>で使える！！</h2>
+                        <h2><font class="character">全て</font>の機能が<font class="character">無料</font>で使える！！</h2>
                         <button type="button" class="btn btn-primary">今すぐ使ってみる(登録)</button>
                     </div>
-                    <div class="col-md-4 loginform">
+                    <div class="col-md-10 col-lg-4 loginform">
                         <form action="{% url 'GroupConnect:index' %}" method="get">
                             {% csrf_token %}
                             <p>ログイン</p>
@@ -39,9 +39,9 @@
                             </div>
                             <div>
                                 <input type="checkbox" name="save" class="save">
-                                <label for="save">ログイン状態を保持する</label>
+                                <label for="save" class="save">ログイン状態を保持する</label>
                             </div>
-                            <input type="submit" value="ログイン">
+                            <input type="submit" class="submit" value="ログイン">
                             <p><a href="" class="forget">パスワードを忘れた場合はこちら</a></p>
                         </form>
                     </div>
