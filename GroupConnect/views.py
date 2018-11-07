@@ -8,7 +8,7 @@ from django.views import generic
 from .forms import (
     LoginForm, UserCreateForm
 )
-from .models import Account
+from .models import User
 
 # Create your views here.
 
@@ -31,7 +31,10 @@ class UserCreate(generic.CreateView):
     template_name = 'GroupConnect/user_create.html'
 
     def form_valid(self, form):
-        account = form.save(commit=False)
-        account.save()
+        user = form.save(commit=False)
+        user.save()
 
         return redirect('GroupConnect:top')
+
+class Mypage(generic.TemplateView):
+    template_name = 'GroupConnect/mypage.html'

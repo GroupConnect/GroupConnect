@@ -8,5 +8,6 @@ urlpatterns = [
     path('logout/', views.Logout.as_view(), name='logout'),
     path('provisional_user_create/', views.MailSend.as_view(), name='provisional_user_create'),
     path('user_create/', views.UserCreate.as_view(), name='user_create'),
+    path('mypage/', views.Mypage.as_view(), name='mypage'),
 
 ]
