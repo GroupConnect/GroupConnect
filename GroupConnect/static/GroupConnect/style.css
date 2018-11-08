@@ -157,7 +157,7 @@ address {
 	font-style:normal;			 /*フォントスタイルを標準にする*/
 	font-size:small;			 /*フォントサイズを小さくする*/
 	padding:5px 0px 5px 0px;		 /*要素内容の位置調整*/
-=======
+}
 body {
     background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
 }

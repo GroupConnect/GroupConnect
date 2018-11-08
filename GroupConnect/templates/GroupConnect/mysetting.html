@@ -46,11 +46,11 @@
                     <p><button>アップロード</button><a href="">削除する</a></p>
                     <h2></h2>
                     <form>
-                        名前[必須]　　姓：<input type="text" name="first_name" size="10">名：<input type="text" name="last_name" size="10"><br>
-                        名前(ローマ字)[必須]　　姓：<input type="text" name="r_first_name" size="10">名：<input type="text" name="r_last_name" size="10">
+                        名前[必須]　　姓：<input type="text" name="last_name" size="10" value="{{ acc.last_name }}" >名：<input type="text" name="first_name" size="10" value="{{ acc.first_name }}"><br>
+                        名前(ローマ字)[必須]　　姓：<input type="text" name="r_last_name" size="10" value="{{ acc.rome_last_name }}">名：<input type="text" name="r_first_name" size="10" value="{{ acc.rome_first_name }}">
                         <h2></h2>
                         自己紹介<br>
-                        <textarea name="introduction" rows="10" cols="60"></textarea>
+                        <textarea name="introduction" rows="10" cols="60">{{ acc.introduction }}</textarea>
                     </form>
                     <button type="button" class="submit">変更</button><button type="button" >キャンセル</button>
                 </div>
