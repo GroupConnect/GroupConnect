@@ -1,8 +1,13 @@
+body {
+    padding-top:4.0rem;
+}
+
 .navbar {
+    border:solid 2px #5f9644;
     background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
 }
 
-.groupconnect {
+.GroupConnect {
     font-size: 25px;
     font-family: Times New Roman;
 }
@@ -27,8 +32,6 @@
 }
 
 .up{
-    /* border-top: 1px solid;
-    border-bottom: 1px solid; */
     border:solid 2px #5f9644;
     min-height: 157px;
     max-height: none;
@@ -58,7 +61,7 @@
 }
 
 .down {
-    min-height: 219px;
+    min-height: 218px;
     border:solid 2px #5f9644;
     max-height: none;
   /* height: 33.33333% ; 
