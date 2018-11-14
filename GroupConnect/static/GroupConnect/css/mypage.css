@@ -1,0 +1,73 @@
+.navbar {
+    background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
+}
+
+.groupconnect {
+    font-size: 25px;
+    font-family: Times New Roman;
+}
+
+.left {
+    border:solid 2px #5f9644;
+    text-align: center;
+}
+
+.left-up {
+    border-bottom: 2px solid #5f9644;
+    background: #bae1a7;
+}
+
+.left-middle {
+    border-bottom: 2px solid #5f9644;
+    margin: 0px 0px 10px 0px;
+}
+
+.left-down {
+    border-bottom: 2px solid #5f9644;
+}
+
+.up{
+    /* border-top: 1px solid;
+    border-bottom: 1px solid; */
+    border:solid 2px #5f9644;
+    min-height: 157px;
+    max-height: none;
+  /*   height: 33.33333% ; /* 
+  /* height: -webkit-calc(100% / 3) ; */
+  /* height: calc(100% / 3) ; */
+}
+
+.up h1 {
+    font-size: 30px;
+    margin: 10px 0px 0px 0px;
+}
+
+.middle {
+    min-height: 218px;
+    border:solid 2px #5f9644;
+    max-height: none;
+    /* border-bottom: 1px solid; */ 
+  /*   height: 33.33333% ; /* 
+  /* height: -webkit-calc(100% / 3) ;
+  height: calc(100% / 3) ; */
+}
+
+.middle h1 {
+    font-size: 30px;
+    margin: 10px 0px 0px 0px;
+}
+
+.down {
+    min-height: 219px;
+    border:solid 2px #5f9644;
+    max-height: none;
+  /* height: 33.33333% ; 
+  height: -webkit-calc(100% / 3) ;
+  height: calc(100% / 3) ;
+   */
+}
+
+.down h1 {
+    font-size: 30px;
+    margin: 10px 0px 0px 0px;
+}
