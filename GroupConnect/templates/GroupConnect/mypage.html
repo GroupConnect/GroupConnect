@@ -1,4 +1,13 @@
 {% extends "GroupConnect/base.html" %}
 {% block content %}
-<p>ログイン成功</p>
+<div class="row">
+    <div class="card col-md-4">
+        <div class="card-body">
+            <button type="submit" class="btn btn-success btn-lg btn-block" >⊕グループを作成する</button>
+            <p>どうも、{{ user.first_name }}さん。</p>
+
+        </div>
+    </div>
+
+</div>
 {% endblock %}

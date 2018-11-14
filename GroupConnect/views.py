@@ -1,40 +1,95 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import (
     LoginView, LogoutView
 )
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.signing import BadSignature, SignatureExpired, loads, dumps
+from django.http import Http404, HttpResponseBadRequest
+from django.shortcuts import redirect
+from django.template.loader import get_template
 from django.views import generic
 from .forms import (
     LoginForm, UserCreateForm
 )
-from .models import User
 
-# Create your views here.
 
-class IndexView(generic.TemplateView):
-    template_name = 'GroupConnect/index.html'
+User = get_user_model()
 
-class Top(generic.TemplateView, LoginView):
-    form_class = LoginForm
+class Top(generic.TemplateView):
     template_name = 'GroupConnect/top.html'
- 
- 
+
+
+class Login(LoginView):
+    form_class = LoginForm
+    template_name = 'GroupConnect/login.html'
+
+
 class Logout(LoginRequiredMixin, LogoutView):
     template_name = 'GroupConnect/top.html'
- 
-class MailSend(generic.TemplateView):
-    template_name = 'GroupConnect/provisional_user_create.html'
 
 class UserCreate(generic.CreateView):
-    form_class = UserCreateForm
     template_name = 'GroupConnect/user_create.html'
+    form_class = UserCreateForm
 
     def form_valid(self, form):
+
         user = form.save(commit=False)
+        user.is_active = False
         user.save()
 
-        return redirect('GroupConnect:top')
+        current_site = get_current_site(self.request)
+        domain = current_site.domain
+        context = {
+            'protocol': 'https' if self.request.is_secure() else 'http',
+            'domain': domain,
+            'token': dumps(user.pk),
+            'user': user,
+        }
 
-class Mypage(generic.TemplateView):
+        subject_template = get_template('GroupConnect/mail_template/create/subject.txt')
+        subject = subject_template.render(context)
+
+        message_template = get_template('GroupConnect/mail_template/create/message.txt')
+        message = message_template.render(context)
+
+        user.email_user(subject, message)
+        return redirect('GroupConnect:user_create_done')
+
+
+class UserCreateDone(generic.TemplateView):
+    template_name = 'GroupConnect/user_create_done.html'
+
+
+class UserCreateComplete(generic.TemplateView):
+    template_name = 'GroupConnect/user_create_complete.html'
+    timeout_seconds = getattr(settings, 'ACTIVATION_TIMEOUT_SECONDS', 60*60*24)  # デフォルトでは1日以内
+
+    def get(self, request, **kwargs):
+        token = kwargs.get('token')
+        try:
+            user_pk = loads(token, max_age=self.timeout_seconds)
+
+        except SignatureExpired:
+            return HttpResponseBadRequest()
+
+        except BadSignature:
+            return HttpResponseBadRequest()
+
+        else:
+            try:
+                user = User.objects.get(pk=user_pk)
+            except User.DoesNotExist:
+                return HttpResponseBadRequest()
+            else:
+                if not user.is_active:
+                    user.is_active = True
+                    user.save()
+                    return super().get(request, **kwargs)
+
+        return HttpResponseBadRequest()
+
+
+class MyPage(generic.TemplateView):
     template_name = 'GroupConnect/mypage.html'

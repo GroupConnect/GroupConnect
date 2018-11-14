@@ -143,3 +143,9 @@ SASS_OUTPUT_STYLE = 'compressed'
 SASS_TEMPLATE_EXTS = ['.html', '.haml']
 
 AUTH_USER_MODEL = 'GroupConnect.User'
+
+LOGIN_URL = 'GroupConnect:login'
+LOGIN_REDIRECT_URL = 'GroupConnect:mypage'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
