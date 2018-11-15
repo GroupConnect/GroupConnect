@@ -1,9 +1,55 @@
-{% extends "GroupConnect/base.html" %}
-{% block content %}
+{% load static %}
 
-{% if user.is_authenticated %}
-    <p>ようこそ、{{ user.first_name }}さん。</p>
-{% else %}
-    <p>ようこそ</p>
-{% endif %}
-{% endblock %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> トップページ </title>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, inital-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'GroupConnect/css/style.css' %}" />
+    </head>
+    <body>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-lg-8 headline">
+                        <h1>GroupConnect</h1>
+                        <p>～簡単操作で快適なグループ活動を～</p>
+                        <h2><span>全て</span>の機能が<span>無料</span>で使える！！</h2>
+                        <a href="{% url 'GroupConnect:user_create' %}" class="btn btn-primary">今すぐ使ってみる(登録)</a>
+                    </div>
+                    <div class="col-md-10 col-lg-4 loginform">
+                        <form action="{% url 'GroupConnect:top' %}" method="POST">
+                            {% csrf_token %}
+                            <p>ログイン</p>
+                            <div class="form-group">
+                                    {{ form.non_field_errors }}
+                                    {% for field in form %}
+                                        {{ field }}
+                                        {{ field.errors }}
+                                        <hr>
+                                    {% endfor %}                              {{ form.non_field_errors }}
+
+                            </div>
+                            <div>
+                                <input type="checkbox" name="save" class="save">
+                                <label for="save" class="save">ログイン状態を保持する</label>
+                            </div>
+                            <input type="submit" class="submit" value="ログイン">
+                            <p><a href="" class="forget">パスワードを忘れた場合はこちら</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="static/GroupConnect/js/top.js"></script>
+    </body>
+</html>

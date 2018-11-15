@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import (
@@ -17,13 +18,12 @@ from .forms import (
 
 User = get_user_model()
 
-class Top(generic.TemplateView):
+class Top(LoginView):
+    form_class = LoginForm
     template_name = 'GroupConnect/top.html'
 
 
-class Login(LoginView):
-    form_class = LoginForm
-    template_name = 'GroupConnect/login.html'
+
 
 
 class Logout(LoginRequiredMixin, LogoutView):
@@ -91,5 +91,10 @@ class UserCreateComplete(generic.TemplateView):
         return HttpResponseBadRequest()
 
 
-class MyPage(generic.TemplateView):
+
+class Mypage(generic.ListView):
     template_name = 'GroupConnect/mypage.html'
+
+    def get_queryset(self):
+        return User.objects.all().order_by('id')[:3]
+

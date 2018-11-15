@@ -144,8 +144,9 @@ SASS_TEMPLATE_EXTS = ['.html', '.haml']
 
 AUTH_USER_MODEL = 'GroupConnect.User'
 
-LOGIN_URL = 'GroupConnect:login'
+LOGIN_URL = 'GroupConnect:top'
 LOGIN_REDIRECT_URL = 'GroupConnect:mypage'
+LOGOUT_REDIRECT_URL = 'GroupConnect:top'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
