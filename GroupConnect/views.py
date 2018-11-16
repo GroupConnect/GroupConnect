@@ -8,3 +8,6 @@ class IndexView(generic.TemplateView):
 
 class MypageView(generic.TemplateView):
     template_name = 'GroupConnect/mypage.html'
+
+class GrouptopView(generic.TemplateView):
+    template_name = 'GroupConnect/grouptop.html'
