@@ -14,7 +14,7 @@
     <div  class="nav-bar fixed-top">
         <!-- ナビゲーションバー -->
     <nav class="navbar navbar-expand-sm navbar-light bar">
-        <a class="navbar-brand groupconnect" href="#">GroupConnect</a>
+        <a class="navbar-brand groupconnect" href="{% url 'GroupConnect:mypage' %}">GroupConnect</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,6 +26,10 @@
                     グループ
                     </a>
                     <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
+                        <a class="dropdown-item" href="#">グループ名</a>
+                        <a class="dropdown-item" href="#">グループ名</a>
+                        <a class="dropdown-item" href="#">グループ名</a>
                         <a class="dropdown-item" href="#">グループ一覧へ</a>
                     </div>
                 </li>
@@ -67,7 +71,7 @@
                     </a>
                     <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item d-inline grname" href="#">KBC</a>
-                    <a class="dropdown-item d-inline" href="#">掲示板</a>
+                    <a class="dropdown-item d-inline" href="{% url 'GroupConnect:bord' %}">掲示板</a>
                     <a class="dropdown-item d-inline" href="#">共有フォルダ</a>
                     <a class="dropdown-item d-inline" href="#">メンバー一覧</a>
                     <a class="dropdown-item d-inline" href="#">設定</a>

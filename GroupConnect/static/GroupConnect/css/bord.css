@@ -1,0 +1,128 @@
+body {
+    padding-top:4.0rem;
+}
+
+.bar {
+    font-size: 18px;
+    border:solid 2px #5f9644;
+    background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
+}
+
+.bar2 {
+    font-size: 20px;
+    height: 55px;
+    background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
+}
+
+.mega-dropdown { 
+    position: static;
+}
+
+.dropdown-menu.mega-dropdown-menu.show { 
+    font-size: 20px;
+    width: 100%;
+    background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
+}
+
+.menu, .dropdown-menu {
+    background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
+}
+
+.grbar {
+    
+    border:solid 2px #5f9644;
+}
+
+.groupconnect {
+    font-size: 25px;
+    font-family: Times New Roman;
+}
+
+.grname {
+    font-size: 25px;
+    font-family: Times New Roman;
+    margin: 0px 0px 0px 40px;
+}
+
+.left {
+    border:solid 2px #5f9644;
+    text-align: center;
+}
+
+.left-up {
+    margin: 10px 0px 10px 0px;
+    border-bottom: 2px solid #5f9644;
+}
+
+.bordlist {
+    font-size: 20px;
+    margin: 0px 20px 0px 20px;
+}
+
+.quantity {
+    font-size: 15px;
+    float: right;
+    margin: 4px 0px 9px 0px;
+}
+
+
+.category {
+    font-size: 20px;
+    margin: 0px 0px 0px 10px;
+}
+
+.createcategory {
+    float: right;
+    margin: 4px 0px 0px 0px;
+
+}
+
+.sidebar-dropdown {
+    float: left;
+    margin: 10px 0px 0px 0px;
+}
+
+.sidebtn {
+    background-color: #fff;
+}
+
+.subquantity {
+    float: right;
+    margin: 15px 0px 0px 0px;
+}
+
+.right {
+    min-height: 593px;
+    max-height: none;
+    border:solid 2px #5f9644;
+}
+
+.history {
+    margin: 10px 0px 10px 0px;
+}
+
+.bar3 {
+    background-color: #fff;
+    margin: 0px -15px 0px -15px;
+    border-bottom: 2px solid #5f9644;
+}
+
+.bord-name {
+    font-size: 30px;
+    margin: 3px 0px 0px 0px;
+}
+
+.configuration, .borddelete {
+    margin: 0px 0px 0px 10px;
+}
+
+.file-select {
+    margin: 15px 0px 0px 15px;
+}
+
+.btn-warning {
+    width: 95px;
+    height: 35px;
+    float: right;
+    margin: 15px 30px 0px 0px;
+}

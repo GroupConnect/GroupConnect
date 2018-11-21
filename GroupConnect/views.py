@@ -11,3 +11,6 @@ class MypageView(generic.TemplateView):
 
 class GrouptopView(generic.TemplateView):
     template_name = 'GroupConnect/grouptop.html'
+
+class BordView(generic.TemplateView):
+    template_name = 'GroupConnect/bord.html'
