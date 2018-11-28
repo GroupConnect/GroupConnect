@@ -38,6 +38,10 @@ body {
     font-family: Times New Roman;
 }
 
+.button {
+    background-color: #bae1a7;
+}
+
 .grname {
     font-size: 25px;
     font-family: Times New Roman;
@@ -76,5 +80,12 @@ body {
 
 @media screen and (max-width: 640px) {
 
-
+    .grname {
+        font-size: 15px; 
+        font-family: Times New Roman;
+    }
+    .dropdown-menu.mega-dropdown-menu.show { 
+        font-size:15px;
+        background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
+    }
 }

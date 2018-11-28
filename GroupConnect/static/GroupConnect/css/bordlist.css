@@ -44,23 +44,26 @@ body {
     margin: 0px 0px 0px 40px;
 }
 
-.left {
+.side {
+    height: 593px;
     border:solid 2px #5f9644;
     text-align: center;
+    /* overflow-y: auto; */
 }
 
-.left-top {
+.side-top {
     background-color: #bae1a7;
 }
 
-.left-grname {
+.side-grname {
     margin: 0px 0px 0px 20px;
     font-family: Times New Roman;
     color: #000000;
 }
 
-.left-up {
+.side-up {
     margin: 10px 0px 10px 0px;
+    padding: 0px 0px 10px 0px;
     border-bottom: 2px solid #5f9644;
 }
 
@@ -68,13 +71,6 @@ body {
     font-size: 20px;
     margin: 0px 20px 0px 20px;
 }
-
-.quantity {
-    font-size: 15px;
-    float: right;
-    margin: 4px 0px 9px 0px;
-}
-
 
 .ctgr {
     font-size: 20px;
@@ -87,6 +83,11 @@ body {
 
 }
 
+.side-down {
+    height: 440px;
+    overflow-y: auto;
+}
+
 .sidebar-dropdown {
     float: left;
     margin: 10px 0px 0px 0px;
@@ -96,48 +97,62 @@ body {
     background-color: #fff;
 }
 
-.subquantity {
+.quantity {
     float: right;
     margin: 15px 0px 0px 0px;
 }
 
 .right {
-    min-height: 593px;
-    max-height: none;
+    height: 593px;
+    max-height: 593px;
     border:solid 2px #5f9644;
 }
 
 .history {
-    margin: 13px 0px 0px 0px;
-}
-
-.bar3 {
-    background-color: #fff;
-    margin: 0px -15px 0px -15px;
-    border-bottom: 2px solid #5f9644;
-}
-
-.bord-name {
-    font-size: 30px;
-    margin: 3px 0px 0px 0px;
-}
-
-.configuration, .borddelete {
-    margin: 0px 0px 0px 10px;
-}
-
-.file-select {
-    margin: 15px 0px 0px 15px;
-}
-
-.btn-warning {
-    width: 95px;
-    height: 35px;
-    float: right;
-    margin: 15px 30px 0px 0px;
+    margin: 13px 0px 10px 0px;
 }
 
 .area {
-    margin: 10px 0px 0px 0px; 
+    margin: 30px 0px 0px 0px; 
     background-color: #a6e288;
 }
+
+.bord-create, .choice {
+    margin: 0px 0px 0px 70px;
+    /* color: #000000; */
+    background-color: #e5eee6;
+}
+
+.sort {
+    float: right;
+    margin: 0px 120px 0px 0px;
+}
+
+.ctgr-content {
+    margin: 20px 0px 10px 30px;
+}
+
+.list {
+    width: 93%;
+    height: 385px;
+    margin: 0px 0px 0px 30px;
+    border-bottom:solid 1px #000000;
+}
+
+thead, tbody {
+    display: block;
+}
+
+tbody {
+    height: 334px;
+    overflow-y: auto;
+}
+
+th, td {
+    width: 319px;
+    border: solid 1px #000000;
+}
+
+.th, .td {
+    width: 80px;
+} 
