@@ -14,6 +14,9 @@ from django.views import generic
 from .forms import (
     LoginForm, UserCreateForm
 )
+from .models import (
+    Notice, Group, Member
+)
 
 
 User = get_user_model()
@@ -94,7 +97,36 @@ class UserCreateComplete(generic.TemplateView):
 
 class Mypage(generic.ListView):
     template_name = 'GroupConnect/mypage.html'
+    context_object_name = 'group_list'
+
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'notice_list' : Notice.objects.all()
+        })
+        return context
 
     def get_queryset(self):
-        return User.objects.all().order_by('id')[:3]
+        ID = self.request.user.id
+
+        members = Member.objects.filter(user_id=ID)
+        
+        g = []
+
+        for i in members:
+            groups = Group.objects.all().filter(id=i.group_id)
+            g += groups
+
+
+        return g
+
+class NoticeDetail(generic.DetailView):
+    model = Notice
+    template_name = 'GroupConnect/notice_detail.html'
+
+    def index(self, request):
+        return Notice.objects.filter(id = request.notice.id)
+
+
 

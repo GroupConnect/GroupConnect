@@ -108,7 +108,7 @@ class Group(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
     group_name = models.CharField(max_length=100, db_column='group_name')
     icon = models.ImageField(upload_to='static/images/', db_column='icon', blank=True, null=True)
-    create_date = models.DateTimeField(db_column='create_date')
+    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
 class Member(models.Model):
     user_id = models.IntegerField(db_column='user_id')
@@ -190,7 +190,10 @@ class Talk(models.Model):
     delete_at = models.DateTimeField(default="None", db_column='delete_at')
 
 
-
+class Notice(models.Model):
+	id = models.AutoField(primary_key=True, db_column='id')
+	title = models.CharField(max_length=200, db_column='title')
+	content = models.TextField(db_column='content')
 
 
 
