@@ -121,12 +121,6 @@ class Mypage(generic.ListView):
 
         return g
 
-class NoticeDetail(generic.DetailView):
-    model = Notice
-    template_name = 'GroupConnect/notice_detail.html'
-
-    def index(self, request):
-        return Notice.objects.filter(id = request.notice.id)
-
-
-
+def detail(request, notice_id):
+    notice = Notice.objects.get(id = notice_id)
+    return render(request, 'GroupConnect/notice_detail.html', {'notice':notice})

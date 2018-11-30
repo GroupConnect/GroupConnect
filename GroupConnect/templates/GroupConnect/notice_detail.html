@@ -1,6 +1,8 @@
 {% extends "GroupConnect/base.html" %}
 {% block content %}
 <div class="row">
-{{notice.content}}
+    タイトル:{{notice.title}}
+    <br>
+    本文:「{{notice.content}}」
 </div>
 {% endblock %}
