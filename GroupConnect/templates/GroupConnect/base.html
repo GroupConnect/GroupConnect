@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <title>{% block title %}アカウント設定ページ{% endblock %}</title>
+</head>
+
+<body>
+    <!-- ヘッダ -->
+    <div id="header"><h1><a href="">GroupConnect</a></h1></div>
+            
+    <!-- メインメニュー -->
+    <ul id="menu">
+        <li id="menu01"><a href="">グループ</a></li>
+        <li id="menu02"><a href="">カレンダー</a></li>
+        <li id="menu03"><a href="">チャット</a></li>
+        <li id="menu04"><a href="">アカウント</a></li>
+    </ul>
+    
+    <div id="sidebar">
+        {% block sidebar %}
+        <ul>
+            <li><a href="">プロフール設定</a></li>
+            <li><a href="">パスワード設定</a></li>
+            <li><a href="">メールアドレス設定</a></li>
+            <li><a href="">退会</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
