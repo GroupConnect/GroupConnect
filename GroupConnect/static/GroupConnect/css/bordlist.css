@@ -136,8 +136,6 @@ body {
     width: 93%;
     height: 385px;
     margin: 0px 0px 0px 30px;
-    border-bottom:solid 1px #000000;
-}
 
 thead, tbody {
     display: block;
