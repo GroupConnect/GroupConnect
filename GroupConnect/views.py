@@ -17,3 +17,6 @@ class BordlistView(generic.TemplateView):
 
 class BordView(generic.TemplateView):
     template_name = 'GroupConnect/bord.html'
+
+class NotFoundView(generic.TemplateView):
+    template_name = 'GroupConnect/notfound.html'

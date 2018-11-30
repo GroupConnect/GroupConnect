@@ -1,0 +1,84 @@
+body {
+    padding-top:4.0rem;
+}
+
+.bar {
+    font-size: 18px;
+    border:solid 2px #5f9644;
+    background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
+}
+
+.bar2 {
+    font-size: 20px;
+    height: 55px;
+    background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
+}
+
+.mega-dropdown { 
+    position: static;
+}
+
+.dropdown-menu.mega-dropdown-menu.show { 
+    font-size: 20px;
+    width: 100%;
+    background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
+}
+
+.menu {
+    background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
+}
+
+.grbar {
+    
+    border:solid 2px #5f9644;
+}
+
+.groupconnect {
+    font-size: 25px;
+    font-family: Times New Roman;
+}
+
+.button {
+    background-color: #bae1a7;
+}
+
+.grname {
+    font-size: 25px;
+    font-family: Times New Roman;
+    margin: 0px 0px 0px 40px;
+}
+
+.left {
+    border:solid 2px #5f9644;
+    text-align: center;
+}
+
+.left-up {
+    margin: 0px 0px 10px 0px;
+    border-bottom: 2px solid #5f9644;
+}
+
+.left-down {
+    font-size: 20px;
+}
+
+.right {
+    min-height: 576px;
+    max-height: none;
+    border:solid 2px #5f9644;
+}
+
+.headline {
+    margin: 20px 0px 0px 20px;
+    border-bottom: 2px solid #5f9644;
+}
+
+.right p {
+    font-size: 25px;
+}
+
+
+.buttonset {
+    text-align : center ;
+}
+
