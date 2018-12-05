@@ -1,25 +1,25 @@
 {% extends "GroupConnect/base.html" %}
 {% block content %}
-<table class="table">
-    <tbody>
-        <tr>
-            <th>ユーザー名</th>
-            <td>{{ user.username }}</td>
-        </tr>
-        {% if user.username != user.email %}
-        <tr>
-            <th>ユーザー名</th>
-            <td>{{ user.email }}</td>
-        </tr>
-        {% endif %}
-        <tr>
-            <th>姓</th>
-            <td>{{ user.last_name }}</td>
-        </tr>
-        <tr>
-            <th>名</th>
-            <td>{{ user.first_name }}</td>
-        </tr>
-    </tbody>
-</table>
+<form action="" method="POST" enctype="multipart/form-data">
+    {{ form.non_field_errors }}
+    <table class="table">
+        <tbody>
+            {% for field in form %}
+                {% if field.label == 'Icon' %}
+                    <tr>
+                        <th><label for="{{ field.id_for_label }}">{{ field.label }}</label></th>
+                        <td>{{ field }} {{ field.errors }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <th><label for="{{ field.id_for_label }}">{{ field.label }}</label></th>
+                        <td>{{ field }} {{ field.errors }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success btn-lg" >送信</button>
+</form>
 {% endblock %}
