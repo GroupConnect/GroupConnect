@@ -6,6 +6,12 @@ from django.views import generic
 class IndexView(generic.TemplateView):
     template_name = 'GroupConnect/index.html'
 
+class Temp_entryView(generic.TemplateView):
+    template_name = 'GroupConnect/temp_entry.html'
+
+class Temp_entry_resultView(generic.TemplateView):
+    template_name = 'GroupConnect/temp_entry_result.html'
+
 class MypageView(generic.TemplateView):
     template_name = 'GroupConnect/mypage.html'
 
