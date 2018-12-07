@@ -133,9 +133,20 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
+# User Settings
 
-# Sass(Scss)
+AUTH_USER_MODEL = 'GroupConnect.User'
 
+LOGIN_URL = 'GroupConnect:top'
+LOGIN_REDIRECT_URL = 'GroupConnect:mypage'
+LOGOUT_REDIRECT_URL = 'GroupConnect:top'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+<<<<<<< HEAD
 SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static/BootStrap/scss/')
 SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.(sass|scss)$'
 SASS_PRECISION = 8
@@ -153,3 +164,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+=======
+>>>>>>> master
