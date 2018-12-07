@@ -89,6 +89,7 @@ DATABASES = {
         'OPTIONS' : {
             'init_command' : settings.db_init_command,
             'charset' : settings.db_charset,
+            'sql_mode' : settings.db_sql_mode,
         },
     }
 }
@@ -141,7 +142,11 @@ LOGIN_URL = 'GroupConnect:top'
 LOGIN_REDIRECT_URL = 'GroupConnect:mypage'
 LOGOUT_REDIRECT_URL = 'GroupConnect:top'
 
+# Email Settings
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Media Settings
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
