@@ -3,6 +3,9 @@ from django.contrib.auth.forms import (
     AuthenticationForm, UserCreationForm
 )
 from django.contrib.auth import get_user_model
+from .models import (
+    Group
+)
 
 User = get_user_model()
 
@@ -32,3 +35,6 @@ class UserCreateForm(UserCreationForm):
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
 
+class GroupCreateForm(forms.Form):
+    group_name = forms.CharField(max_length=100, required=True)
+    icon = forms.ImageField()

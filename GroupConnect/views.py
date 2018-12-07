@@ -12,10 +12,10 @@ from django.shortcuts import redirect
 from django.template.loader import get_template
 from django.views import generic
 from .forms import (
-    LoginForm, UserCreateForm
+    LoginForm, UserCreateForm, GroupCreateForm
 )
 from .models import (
-    Notice, Group, Member
+    Notice, Group, Member, GroupIcon
 )
 
 
@@ -124,3 +124,15 @@ class Mypage(generic.ListView):
 def detail(request, notice_id):
     notice = Notice.objects.get(id = notice_id)
     return render(request, 'GroupConnect/notice_detail.html', {'notice':notice})
+
+class GroupCreate(generic.TemplateView):
+    template_name = 'GroupConnect/group_create.html'
+
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'icon_list' : GroupIcon.objects.all()
+        })
+        return context
+

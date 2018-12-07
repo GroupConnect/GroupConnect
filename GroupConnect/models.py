@@ -195,6 +195,9 @@ class Notice(models.Model):
 	title = models.CharField(max_length=200, db_column='title')
 	content = models.TextField(db_column='content')
 
+class GroupIcon(models.Model):
+	id = models.AutoField(primary_key=True, db_column='id')
+	icon = models.ImageField(upload_to='static/images/', db_column='icon')
 
 
 
