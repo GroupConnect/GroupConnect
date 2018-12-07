@@ -5,15 +5,20 @@
     <table class="table">
         <tbody>
             {% for field in form %}
-                {% if field.label == 'Icon' %}
+                {% if field.label != 'Icon' %}
                     <tr>
                         <th><label for="{{ field.id_for_label }}">{{ field.label }}</label></th>
                         <td>{{ field }} {{ field.errors }}</td>
                     </tr>
-                {% else %}
+                {% endif %}
+                {% if field.label == 'Icon' %}
                     <tr>
                         <th><label for="{{ field.id_for_label }}">{{ field.label }}</label></th>
-                        <td>{{ field }} {{ field.errors }}</td>
+                        <td><img src='{{ rogin_user.icon.url }}'width="100" height="100" alt="マイアイコン">
+                            <br><br>
+                            <input type="file" name="icon" class="form-control" id="id_icon">
+                            {{ field.errors }}
+                        </td>
                     </tr>
                 {% endif %}
             {% endfor %}

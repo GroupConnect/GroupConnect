@@ -148,3 +148,11 @@ class UserUpdate(OnlyYouMixin, generic.UpdateView):
 
     def get_success_url(self):
         return resolve_url('GroupConnect:user_update', pk=self.kwargs['pk'])
+
+    context_object_name = 'rogin_user'
+
+    def get_queryset(self):
+        ID = self.request.user.id
+        user = User.objects.filter(id = ID)
+
+        return user
