@@ -103,9 +103,6 @@ if settings.AUTH_USER_MODEL == 'GroupConnect.User':
         def username(self):
             return self.email
 
-class AdminUser(AbstractUser):
-    pass
-
 class Group(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
     group_name = models.CharField(max_length=100, db_column='group_name')
