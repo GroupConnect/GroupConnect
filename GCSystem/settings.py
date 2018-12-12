@@ -89,7 +89,6 @@ DATABASES = {
         'OPTIONS' : {
             'init_command' : settings.db_init_command,
             'charset' : settings.db_charset,
-            'sql_mode' : settings.db_sql_mode,
         },
     }
 }
