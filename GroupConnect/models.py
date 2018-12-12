@@ -2,7 +2,7 @@ import datetime
 from django.conf import settings
 from django.db import models
 from django.core.mail import send_mail
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin, AbstractUser
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
@@ -103,7 +103,6 @@ if settings.AUTH_USER_MODEL == 'GroupConnect.User':
         def username(self):
             return self.email
 
-
 class Group(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
     group_name = models.CharField(max_length=100, db_column='group_name')
@@ -118,7 +117,7 @@ class Member(models.Model):
 
 class Signboard(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
-    group_id = models.IntegerField(db_column='group_id')
+    group_id = models.ForeignKey(Group, on_delete=models.CASCADE, db_column='group_id')
     title = models.CharField(max_length=100, db_column='title')
     category = models.CharField(max_length=100, db_column='category')
     text = models.TextField(db_column='text')
