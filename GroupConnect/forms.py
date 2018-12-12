@@ -38,7 +38,22 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         if User.USERNAME_FIELD == 'email':
-            fields = ('last_name', 'first_name','rome_last_name', 'rome_first_name', 'email', 'icon', 'introduction')
+            fields = ('last_name', 'first_name','rome_last_name', 'rome_first_name', 'icon', 'introduction')
+        else:
+            fields = ('username', 'email', 'first_name', 'last_name')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+class UserMailaddressUpdateForm(forms.ModelForm):
+    """ユーザーメールアドレス更新フォーム"""
+
+    class Meta:
+        model = User
+        if User.USERNAME_FIELD == 'email':
+            fields = ('email',)
         else:
             fields = ('username', 'email', 'first_name', 'last_name')
 

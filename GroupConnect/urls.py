@@ -15,6 +15,7 @@ urlpatterns = [
     path('<int:notice_id>/', views.NoticeDetail.as_view(), name='notice_detail'),
     path('user_detail/<int:pk>/', views.UserDetail.as_view(), name='user_detail'),
     path('user_update/<int:pk>/', views.UserUpdate.as_view(), name='user_update'),
+    path('user_mailaddress_update/<int:pk>/', views.UserMailaddressUpdate.as_view(), name='user_mailaddress_update'),
 
 ]
 

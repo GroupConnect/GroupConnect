@@ -12,7 +12,7 @@ from django.shortcuts import redirect, resolve_url
 from django.template.loader import get_template
 from django.views import generic
 from .forms import (
-    LoginForm, UserCreateForm, UserUpdateForm
+    LoginForm, UserCreateForm, UserUpdateForm, UserMailaddressUpdateForm
 )
 from .models import (
     Notice, Group, Member
@@ -148,6 +148,22 @@ class UserUpdate(OnlyYouMixin, generic.UpdateView):
 
     def get_success_url(self):
         return resolve_url('GroupConnect:user_update', pk=self.kwargs['pk'])
+
+    context_object_name = 'rogin_user'
+
+    def get_queryset(self):
+        ID = self.request.user.id
+        user = User.objects.filter(id = ID)
+
+        return user
+
+class UserMailaddressUpdate(OnlyYouMixin, generic.UpdateView):
+    model = User
+    form_class = UserMailaddressUpdateForm
+    template_name = 'GroupConnect/user_mailaddress_update.html'
+
+    def get_success_url(self):
+        return resolve_url('GroupConnect:user_mailaddress_update', pk=self.kwargs['pk'])
 
     context_object_name = 'rogin_user'
 

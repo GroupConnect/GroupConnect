@@ -29,6 +29,9 @@
             <a class="nav-item nav-link" href="{% url 'GroupConnect:user_update' user.pk %}">ユーザー情報更新</a>
           </li>
           <li>
+            <a class="nav-item nav-link" href="{% url 'GroupConnect:user_mailaddress_update' user.pk %}">メールアドレス更新</a>
+          </li>
+          <li>
             <a class="nav-item nav-link" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
           </li>
           {% else %}
