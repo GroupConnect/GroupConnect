@@ -1,30 +1,154 @@
-{% extends "GroupConnect/base.html" %}
-{% block content %}
-<form action="" method="POST" enctype="multipart/form-data">
-    {{ form.non_field_errors }}
-    <table class="table">
-        <tbody>
-            {% for field in form %}
-                {% if field.label != 'Icon' %}
-                    <tr>
-                        <th><label for="{{ field.id_for_label }}">{{ field.label }}</label></th>
-                        <td>{{ field }} {{ field.errors }}</td>
-                    </tr>
-                {% endif %}
-                {% if field.label == 'Icon' %}
-                    <tr>
-                        <th><label for="{{ field.id_for_label }}">{{ field.label }}</label></th>
-                        <td><img src='{{ rogin_user.icon.url }}'width="100" height="100" alt="マイアイコン">
-                            <br><br>
-                            <input type="file" name="icon" class="form-control" id="id_icon">
-                            {{ field.errors }}
-                        </td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-        </tbody>
-    </table>
-    {% csrf_token %}
-    <button type="submit" class="btn btn-success btn-lg" >送信</button>
-</form>
-{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> プロフィール設定 </title>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, inital-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'GroupConnect/css/user_form.css' %}" />
+    </head>
+    <body>
+        <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-expand-sm navbar-light fixed-top">
+        <a class="navbar-brand groupconnect" href="{% url 'GroupConnect:mypage' %}">GroupConnect</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="Navber">
+            <ul class="navbar-nav">
+                <li class="nav-item active dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    グループ
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">グループ名</a>
+                    <a class="dropdown-item" href="#">グループ名</a>
+                    <a class="dropdown-item" href="#">グループ名</a>
+                    <a class="dropdown-item" href="#">グループ名</a>
+                    <a class="dropdown-item" href="#">グループ一覧へ</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item active dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    アカウント
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.id %}">プロフィール設定</a>
+                    <a class="dropdown-item" href="#">メール設定</a>
+                    <a class="dropdown-item" href="#">パスワード設定</a>
+                    <a class="dropdown-item" href="#">ログアウト</a>
+                    <a class="dropdown-item" href="#">ヘルプ</a>
+                    </div>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- サイドバー -->
+                <div class="col-lg-2 left">
+                    <a class="setting" href="{% url 'GroupConnect:user_update' user.id %}">プロフィール設定</a>
+                    <a class="setting" href="#">パスワード設定</a>
+                    <a class="setting" href="#">メール設定</a>
+                    <a class="setting" href="#">退会</a>
+                </div>
+
+                <!-- メインコンテンツ -->
+                <div class="col-lg-10 right">
+                    <div class="row">
+                        <div class="col-lg-12 right-up">
+                            <div class="history">
+                                <a href="{% url 'GroupConnect:mypage' %}">マイページ</a><span>　>　</span>
+                                <a href="{% url 'GroupConnect:user_update' user.id %}">プロフィール設定</a><span>
+                            </div>
+                            <!-- プロフィール画像埋め込み -->
+                            <div class="up">
+                                <div class="row">
+                                    <div class="col-lg-2 profile">
+                                        <div class="form-group d-inline">
+                                            <img src="" class="rounded border">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <form class="d-inline" method="post" enctype="multipart/form-data">
+                                            <h1 class="d-block">プロフィール画像</h1>
+                                            <label class="input-group-btn">
+                                                <span class="btn btn-primary">
+                                                    画像の選択<input type="file" style="display:none">
+                                                </span>
+                                            </label>
+                                            <input type="text" class="form-control d-inline form" readonly="">
+                                            <input type="button" class="delete d-inline" value="削除する">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 名前入力欄 -->
+                        <div class="col-lg-12 right-middle">
+                            <div class="middle">
+                                <div class="middle-up">
+                                    <p class="d-inline name">名前<span class="text-danger required">[必須]</span></p>
+                                    <p class="d-inline lastname1">姓: <input type="text" name="name1"></p>
+                                    <p class="d-inline firstname1">名: <input type="text"  name="name2"></p><br>
+                                    <!-- <p class="d-inline nameblank1">※姓を入力してください。</p>
+                                    <p class="d-inline nameblank2">※名を入力してください。</p><br> -->
+                                </div>
+                                <div class="middle-down">
+                                    <p class="d-inline romaji">名前[ローマ字]<span class="text-danger required">[必須]</span></p>
+                                    <p class="d-inline romajilastname2">姓[ローマ字]: <input type="text" name="romaji1"></p>
+                                    <p class="d-inline romajifirstname2">名[ローマ字]: <input type="text"  name="romaji2"></p><br>
+                                    <!-- <p class="d-inline romajiblank1">※姓[ローマ字]を入力してください。</p>
+                                    <p class="d-inline romajiblank2">※名[ローマ字]を入力してください。</p> -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 自己紹介 -->
+                        <div class="col-lg-12 right-down">
+                            <h2>自己紹介</h2>
+                            <div class="textarea">  
+                                <div class="rounded p-4">
+                                    <form action="" method="get">
+                                        {% csrf_token %}
+                                        <div class="form-group d-inline">
+                                            <textarea class="border border-dark form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
+                                            <input type="button" class="cancel" data-toggle="modal" data-target="#basicModal" value="キャンセル">
+                                            <div class="modal fade"id="basicModal"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <h3>変更内容が破棄されますが<br>よろしいですか？</h3>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button"class="btn btn-primary">はい</button>
+                                                            <button type="button"class="btn btn-default"data-dismiss="modal">いいえ</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="submit" class="submit btn-warning" value="変更">
+                                        </div>         
+                                    </form>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="static/GroupConnect/js/profile.js"></script>
+    </body>
+</html>

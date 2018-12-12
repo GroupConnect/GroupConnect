@@ -16,7 +16,7 @@ from .forms import (
     LoginForm, UserCreateForm, UserUpdateForm, UserMailaddressUpdateForm, MyPasswordChangeForm
 )
 from .models import (
-    Notice, Group, Member
+    Notice, Group, Member, User
 )
 
 
@@ -142,7 +142,7 @@ class UserDetail(OnlyYouMixin, generic.DetailView):
     template_name = 'GroupConnect/user_detail.html'
 
 
-class UserUpdate(OnlyYouMixin, generic.UpdateView):
+'''class UserUpdate(OnlyYouMixin, generic.UpdateView):
     model = User
     form_class = UserUpdateForm
     template_name = 'GroupConnect/user_form.html'
@@ -156,7 +156,11 @@ class UserUpdate(OnlyYouMixin, generic.UpdateView):
         ID = self.request.user.id
         user = User.objects.filter(id = ID)
 
-        return user
+        return user'''
+
+def UserUpdate(request, user_id):
+    user = User.objects.get(id = user_id)
+    return render(request, 'GroupConnect/user_form.html', {'user':user})
 
 class UserMailaddressUpdate(OnlyYouMixin, generic.UpdateView):
     model = User
