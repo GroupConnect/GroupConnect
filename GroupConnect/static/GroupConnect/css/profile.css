@@ -1,0 +1,118 @@
+body {
+    padding-top:4.0rem;
+}
+
+.navbar {
+    border:solid 2px #5f9644;
+    background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
+}
+
+.groupconnect {
+    font-size: 25px;
+    font-family: Times New Roman;
+}
+
+.left {
+    border:solid 2px #5f9644;
+    text-align: left;
+}
+
+.setting {
+    font-size: 20px;
+    margin: 12px 0px 0px 0px;
+    display: block;
+}
+
+.right-up{
+    min-height: 218px;
+    max-height: none;
+}
+
+.history {
+    margin: 13px 0px 0px 0px;
+}
+
+.up {
+    border-bottom: solid 2px #5f9644;
+}
+
+img {
+    margin: 10px 0px 10px 0px;
+}
+
+h1 {
+    font-size: 30px;
+    margin: 30px 0px 0px 0px;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+}
+
+.form {
+    width: 300px;
+}
+
+.delete {
+    margin: 40px 0px 0px 30px;
+}
+
+.right-middle {
+    min-height: 150px;
+    max-height: none;
+}
+
+.middle {
+    font-size: 17px;
+    border-bottom: solid 2px #5f9644;
+}
+
+.middle-up {
+    margin: 30px 0px 0px 0px;
+}
+
+.middle-down {
+    margin: 30px 0px 30px 0px;
+}
+
+.name {
+    margin: 0px 0px 0px 78px;
+}
+
+.lastname1, .firstname1 {
+    margin: 0px 0px 0px 109px;
+}
+
+.romajilastname2, .romajifirstname2 {
+    margin: 0px 0px 0px 30px;
+}
+
+.right-down {
+    min-height: 218px;
+    max-height: none;
+    border-bottom: solid 2px #5f9644;
+}
+
+h2 {
+    margin: 10px 0px 0px 0px;
+}
+
+.submit, .cancel {
+    margin: 30px 30px 30px 0px;
+    float:right;
+}
+
+.submit {
+    width: 120px;
+    height: 35px;
+}
+
+.cancel {
+    width: 120px;
+    height: 35px;
+}
+
+h3 {
+    text-align: center;
+}

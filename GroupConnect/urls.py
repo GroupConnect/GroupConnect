@@ -8,6 +8,7 @@ urlpatterns = [
     path('temp_entry', views.Temp_entryView.as_view(), name='temp_entry'),
     path('temp_entry_result', views.Temp_entry_resultView.as_view(), name='temp_entry_result'),
     path('mypage', views.MypageView.as_view(), name='mypage'),
+    path('profile', views.ProfileView.as_view(), name='profile'),
     path('grouptop', views.GrouptopView.as_view(), name='grouptop'),
     path('bordlist', views.BordlistView.as_view(), name='bordlist'),
     path('bord', views.BordView.as_view(), name='bord'),
