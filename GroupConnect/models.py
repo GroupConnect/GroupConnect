@@ -117,7 +117,7 @@ class Member(models.Model):
 
 class Signboard(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
-    group_id = models.IntegerField(db_column='group_id')
+    group_id = models.ForeignKey(Group, on_delete=models.CASCADE, db_column='group_id')
     title = models.CharField(max_length=100, db_column='title')
     category = models.CharField(max_length=100, db_column='category')
     text = models.TextField(db_column='text')
