@@ -3,8 +3,9 @@ from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import (
-    LoginView, LogoutView
+    LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 )
+from django.urls import reverse_lazy
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.signing import BadSignature, SignatureExpired, loads, dumps
 from django.http import Http404, HttpResponseBadRequest
@@ -12,7 +13,7 @@ from django.shortcuts import redirect, resolve_url
 from django.template.loader import get_template
 from django.views import generic
 from .forms import (
-    LoginForm, UserCreateForm, UserUpdateForm, UserMailaddressUpdateForm
+    LoginForm, UserCreateForm, UserUpdateForm, UserMailaddressUpdateForm, MyPasswordChangeForm
 )
 from .models import (
     Notice, Group, Member
@@ -172,3 +173,14 @@ class UserMailaddressUpdate(OnlyYouMixin, generic.UpdateView):
         user = User.objects.filter(id = ID)
 
         return user
+
+class PasswordChange(PasswordChangeView):
+    """パスワード変更ビュー"""
+    form_class = MyPasswordChangeForm
+    success_url = reverse_lazy('GroupConnect:password_change_done')
+    template_name = 'GroupConnect/password_change.html'
+
+
+class PasswordChangeDone(PasswordChangeDoneView):
+    """パスワード変更しました"""
+    template_name = 'GroupConnect/password_change_done.html'

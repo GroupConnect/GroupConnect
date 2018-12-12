@@ -32,6 +32,9 @@
             <a class="nav-item nav-link" href="{% url 'GroupConnect:user_mailaddress_update' user.pk %}">メールアドレス更新</a>
           </li>
           <li>
+            <a class="nav-item nav-link" href="{% url 'GroupConnect:password_change' %}">パスワードの変更</a>
+          </li>
+          <li>
             <a class="nav-item nav-link" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
           </li>
           {% else %}
