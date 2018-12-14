@@ -63,59 +63,59 @@
                 <!-- メインコンテンツ -->
                 <div class="col-lg-10 right">
                     <div class="row">
-                        <div class="col-lg-12 right-up">
-                            <div class="history">
-                                <a href="{% url 'GroupConnect:mypage' %}">マイページ</a><span>　>　</span>
-                                <a href="{% url 'GroupConnect:profile' %}">プロフィール設定</a><span>
-                            </div>
-                            <!-- プロフィール画像埋め込み -->
-                            <div class="up">
-                                <div class="row">
-                                    <div class="col-lg-2 profile">
-                                        <div class="form-group d-inline">
-                                            <img src="" class="rounded border">
+                        <form action="" method="get">
+                            <div class="col-lg-12 right-up">
+                                <div class="history">
+                                    <a href="{% url 'GroupConnect:mypage' %}">マイページ</a><span>　>　</span>
+                                    <a href="{% url 'GroupConnect:profile' %}">プロフィール設定</a><span>
+                                </div>
+                                <!-- プロフィール画像埋め込み -->
+                                <div class="up">
+                                    <div class="row">
+                                        <div class="col-lg-2 profile">
+                                            <div class="form-group d-inline">
+                                                <img src="" class="rounded border">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="d-inline" method="post">
+                                                <h1 class="d-block">プロフィール画像</h1>
+                                                <label class="input-group-btn">
+                                                    <span class="btn btn-primary">
+                                                        画像の選択<input type="file" style="display:none">
+                                                    </span>
+                                                </label>
+                                                <input type="text" class="form-control d-inline form" readonly="">
+                                                <input type="button" class="delete d-inline" value="削除する">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
-                                        <form class="d-inline" method="post">
-                                            <h1 class="d-block">プロフィール画像</h1>
-                                            <label class="input-group-btn">
-                                                <span class="btn btn-primary">
-                                                    画像の選択<input type="file" style="display:none">
-                                                </span>
-                                            </label>
-                                            <input type="text" class="form-control d-inline form" readonly="">
-                                            <input type="button" class="delete d-inline" value="削除する">
-                                        </form>
+                                </div>
+                            </div>
+                            <!-- 名前入力欄 -->
+                            <div class="col-lg-12 right-middle">
+                                <div class="middle">
+                                    <div class="middle-up">
+                                        <p class="d-inline name">名前<span class="text-danger required">[必須]</span></p>
+                                        <p class="d-inline lastname1">姓: <input type="text" name="name1"></p>
+                                        <p class="d-inline firstname1">名: <input type="text"  name="name2"></p><br>
+                                        <!-- <p class="d-inline nameblank1">※姓を入力してください。</p>
+                                        <p class="d-inline nameblank2">※名を入力してください。</p><br> -->
+                                    </div>
+                                    <div class="middle-down">
+                                        <p class="d-inline romaji">名前[ローマ字]<span class="text-danger required">[必須]</span></p>
+                                        <p class="d-inline romajilastname2">姓[ローマ字]: <input type="text" name="romaji1"></p>
+                                        <p class="d-inline romajifirstname2">名[ローマ字]: <input type="text"  name="romaji2"></p><br>
+                                        <!-- <p class="d-inline romajiblank1">※姓[ローマ字]を入力してください。</p>
+                                        <p class="d-inline romajiblank2">※名[ローマ字]を入力してください。</p> -->
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- 名前入力欄 -->
-                        <div class="col-lg-12 right-middle">
-                            <div class="middle">
-                                <div class="middle-up">
-                                    <p class="d-inline name">名前<span class="text-danger required">[必須]</span></p>
-                                    <p class="d-inline lastname1">姓: <input type="text" name="name1"></p>
-                                    <p class="d-inline firstname1">名: <input type="text"  name="name2"></p><br>
-                                    <!-- <p class="d-inline nameblank1">※姓を入力してください。</p>
-                                    <p class="d-inline nameblank2">※名を入力してください。</p><br> -->
-                                </div>
-                                <div class="middle-down">
-                                    <p class="d-inline romaji">名前[ローマ字]<span class="text-danger required">[必須]</span></p>
-                                    <p class="d-inline romajilastname2">姓[ローマ字]: <input type="text" name="romaji1"></p>
-                                    <p class="d-inline romajifirstname2">名[ローマ字]: <input type="text"  name="romaji2"></p><br>
-                                    <!-- <p class="d-inline romajiblank1">※姓[ローマ字]を入力してください。</p>
-                                    <p class="d-inline romajiblank2">※名[ローマ字]を入力してください。</p> -->
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 自己紹介 -->
-                        <div class="col-lg-12 right-down">
-                            <h2>自己紹介</h2>
-                            <div class="textarea">  
-                                <div class="rounded p-4">
-                                    <form action="" method="get">
+                            <!-- 自己紹介 -->
+                            <div class="col-lg-12 right-down">
+                                <h2>自己紹介</h2>
+                                <div class="textarea">  
+                                    <div class="rounded p-4">
                                         {% csrf_token %}
                                         <div class="form-group d-inline">
                                             <textarea class="border border-dark form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
@@ -134,11 +134,11 @@
                                                 </div>
                                             </div>
                                             <input type="submit" class="submit btn-warning" value="変更">
-                                        </div>         
-                                    </form>
-                                </div>  
+                                        </div>
+                                    </div>  
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>    
                 </div>
             </div>
