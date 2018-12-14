@@ -109,6 +109,9 @@ class Group(models.Model):
     icon = models.ImageField(upload_to='static/images/', db_column='icon', blank=True, null=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
+    def __str__(self):
+        return self.group_name
+
 class Member(models.Model):
     user_id = models.IntegerField(db_column='user_id')
     group_id = models.IntegerField(db_column='group_id')
@@ -121,6 +124,9 @@ class Signboard(models.Model):
     title = models.CharField(max_length=100, db_column='title')
     category = models.CharField(max_length=100, db_column='category')
     text = models.TextField(db_column='text')
+
+    def __str__(self):
+        return self.title
 
 class Post(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
