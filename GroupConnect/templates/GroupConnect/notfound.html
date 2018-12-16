@@ -14,7 +14,7 @@
     <div  class="nav-bar fixed-top">
         <!-- ナビゲーションバー -->
     <nav class="navbar navbar-expand-sm navbar-light bar">
-        <a class="navbar-brand groupconnect" href="#">GroupConnect</a>
+        <a class="navbar-brand groupconnect" href="{% url 'GroupConnect:mypage' %}">GroupConnect</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,25 +26,13 @@
                     グループ
                     </a>
                     <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">グループ一覧へ</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:grouplist' %}">グループ一覧へ</a>
                     </div>
                 </li>
-            </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">チャット</a>
-                </li>
-            </ul>    
-            <ul class="navbar-nav">
-                <li class="nav-item active dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    カレンダー
-                    </a>
-                    <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">カレンダー</a>
-                        <a class="dropdown-item" href="#">設定</a>
-                    </div>
-            </li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item active dropdown">
@@ -52,7 +40,7 @@
                     アカウント
                     </a>
                     <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">プロフィール設定</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:profile' %}">プロフィール設定</a>
                         <a class="dropdown-item" href="#">メール設定</a>
                         <a class="dropdown-item" href="#">パスワード設定</a>
                         <a class="dropdown-item" href="#">ログアウト</a>
@@ -66,9 +54,8 @@
                     グループメニュー
                     </a>
                     <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item d-inline grname" href="#">KBC</a>
+                        <a class="dropdown-item d-inline grname" href="{% url 'GroupConnect:grouptop' %}">(グループ名)</a>
                     <a class="dropdown-item d-inline" href="#">掲示板</a>
-                    <a class="dropdown-item d-inline" href="#">共有フォルダ</a>
                     <a class="dropdown-item d-inline" href="#">メンバー一覧</a>
                     <a class="dropdown-item d-inline" href="#">設定</a>
                     </div>
@@ -87,16 +74,16 @@
         <span class="display-4 lead">お探しのページが見つかりませんでした。</span>
         <footer>
             <p class="rounded p-3">
-                    申し訳ありません。　あなたがアクセスしようとページは見つかりませんでした。<br>
-                    お探しのページは移動、または、削除された可能性がございます。<br>
-                    もしくは、ご指定のURLが間違っていたかもしれません。
+                    申し訳ありません。　あなたがアクセスしようとしたページは見つかりませんでした。<br>
+                    お探しのページは移動、または、削除された可能性があります。<br>
+                    もしくは、ご指定のURLが間違っている可能性があります。
             </p>
         </footer>
     </blockquote>
 
     <div class="buttonset">
         <button type="button" class="bg-white badge-pill btn-lg">
-            <a class="bg-white" href="{% url 'GroupConnect:grouptop' %}">トップページに戻る</a>
+            <a class="bg-white" href="{% url 'GroupConnect:mypage' %}">マイページに戻る</a>
         </button>
     </div>
 

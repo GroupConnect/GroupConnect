@@ -10,6 +10,7 @@ urlpatterns = [
     path('mypage', views.MypageView.as_view(), name='mypage'),
     path('profile', views.ProfileView.as_view(), name='profile'),
     path('grouptop', views.GrouptopView.as_view(), name='grouptop'),
+    path('grouplist', views.GrouplistView.as_view(), name='grouplist'),
     path('bordlist', views.BordlistView.as_view(), name='bordlist'),
     path('bord', views.BordView.as_view(), name='bord'),
     path('notfound', views.NotFoundView.as_view(), name='notfound'),
