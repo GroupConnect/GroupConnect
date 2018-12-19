@@ -129,6 +129,24 @@ class Signboard(models.Model):
         return self.title
 
 class Post(models.Model):
+    """
+    投稿のクラス
+
+    Parameters
+    ----------
+    id : int
+        識別用PrimaryKey
+    signboard_id : int
+        SignBoardクラスのidを参照する外部キー
+    text : str
+        投稿の本文
+    contributer : str
+        Userクラスの:emailを参照する外部キー
+    posted : datetime.datetime
+        投稿日時をPython標準のdatetime型で保存する
+    read_number : int
+        自クラスに結び付くSituationクラスのユーザ数を格納する
+    """
     id = models.AutoField(primary_key=True, db_column='id')
     signboard_id = models.IntegerField(db_column='signboard_id')
     text = models.TextField(db_column='text')
