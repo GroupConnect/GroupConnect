@@ -18,7 +18,7 @@
                         <h1>GroupConnect</h1>
                         <p>～簡単操作で快適なグループ活動を～</p>
                         <h2><span>全て</span>の機能が<span>無料</span>で使える！！</h2>
-                        <button type="button" class="btn btn-primary">今すぐ使ってみる(登録)</button>
+                        <a href="{% url 'GroupConnect:temp_entry' %}"><button type="button" class="btn btn-primary">今すぐ使ってみる(登録)</button></a>
                     </div>
                     <div class="col-md-10 col-lg-4 loginform">
                         <form action="{% url 'GroupConnect:mypage' %}" method="get">
@@ -34,7 +34,7 @@
                                 <label for="pass">パスワード</label><br>
                                 <input type="password" name="pass" class="pass">
                                 <p class="passblank">パスワードを入力してください。</p>
-                                <p class="passformatcheck">半角英数字を8文字以上入力してください。</p>
+                                <p class="passformatcheck">半角英数字を8文字以上32文字以下で入力してください。</p>
                             </div>
                             <div>
                                 <input type="checkbox" name="save" class="save">
@@ -46,7 +46,6 @@
                     </div>
                 </div>
             </div>
-        </div>
             
         
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

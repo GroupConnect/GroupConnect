@@ -12,6 +12,12 @@ class Temp_entryView(generic.TemplateView):
 class Temp_entry_resultView(generic.TemplateView):
     template_name = 'GroupConnect/temp_entry_result.html'
 
+class Main_entryView(generic.TemplateView):
+    template_name = 'GroupConnect/main_entry.html'
+
+class Main_entry_confView(generic.TemplateView):
+    template_name = 'GroupConnect/main_entry_conf.html'
+
 class MypageView(generic.TemplateView):
     template_name = 'GroupConnect/mypage.html'
 
