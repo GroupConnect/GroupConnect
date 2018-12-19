@@ -12,4 +12,7 @@ urlpatterns = [
     path('mypage/', views.Mypage.as_view(), name='mypage'),
     path('notice_detail/<int:notice_id>/', views.detail, name='notice_detail'),
     path('group_create/', views.GroupCreate.as_view(), name='group_create'),
+
+    path('group_top/<int:group_id>/', views.group, name='group_top'),
+    path('user_form/<int:user_id>', views.userform, name='user_form'),
 ]

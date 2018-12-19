@@ -106,7 +106,7 @@ if settings.AUTH_USER_MODEL == 'GroupConnect.User':
 
 class Group(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
-    group_name = models.CharField(max_length=100, db_column='group_name')
+    group_name = models.CharField(_('グループ名'), max_length=100, db_column='group_name')
     icon = models.ImageField(upload_to='static/images/', db_column='icon', blank=True, null=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 

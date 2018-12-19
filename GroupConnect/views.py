@@ -125,8 +125,9 @@ def detail(request, notice_id):
     notice = Notice.objects.get(id = notice_id)
     return render(request, 'GroupConnect/notice_detail.html', {'notice':notice})
 
-class GroupCreate(generic.TemplateView):
+class GroupCreate(generic.CreateView):
     template_name = 'GroupConnect/group_create.html'
+    form_class = GroupCreateForm
 
     def get_context_data(self, **kwargs):
 
@@ -136,3 +137,37 @@ class GroupCreate(generic.TemplateView):
         })
         return context
 
+    def form_valid(self, form):
+        group = form.save(commit=False)
+        group.save()
+
+        return redirect('GroupConnect:mypage')
+
+
+
+
+class GroupTop(generic.DetailView):
+    template_name = 'GroupConnect/group_top.html'
+    model = Group
+
+    def get_queryset(self):
+        ID = self.request.user.id
+
+        members = Member.objects.filter(user_id=ID)
+        
+        g = []
+
+        for i in members:
+            groups = Group.objects.all().filter(id=i.group_id)
+            g += groups
+
+
+        return g
+
+def group(request, group_id):
+    group = Group.objects.get(id = group_id)
+    return render(request, 'GroupConnect/group_top.html', {'group':group})
+
+def userform(request, user_id):
+    user = User.objects.get(id = user_id)
+    return render(request, 'GroupConnect/user_form.html', {'user':user})

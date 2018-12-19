@@ -146,7 +146,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-<<<<<<< HEAD
 SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static/BootStrap/scss/')
 SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.(sass|scss)$'
 SASS_PRECISION = 8
@@ -164,5 +163,3 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-=======
->>>>>>> master

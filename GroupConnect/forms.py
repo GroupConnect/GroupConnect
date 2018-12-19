@@ -35,6 +35,17 @@ class UserCreateForm(UserCreationForm):
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
 
-class GroupCreateForm(forms.Form):
-    group_name = forms.CharField(max_length=100, required=True)
-    icon = forms.ImageField()
+class GroupCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Group
+        fields = ('group_name',)
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"
+
+
