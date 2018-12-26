@@ -30,6 +30,9 @@ class GrouptopView(generic.TemplateView):
 class GrouplistView(generic.TemplateView):
     template_name = 'GroupConnect/grouplist.html'
 
+class CreategroupView(generic.TemplateView):
+    template_name = 'GroupConnect/creategroup.html'
+
 class BordlistView(generic.TemplateView):
     template_name = 'GroupConnect/bordlist.html'
 
