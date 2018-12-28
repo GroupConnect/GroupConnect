@@ -158,9 +158,48 @@ class UserDetail(OnlyYouMixin, generic.DetailView):
 
         return user'''
 
-def UserUpdate(request, user_id):
+'''def UserUpdate(request, user_id):
     user = User.objects.get(id = user_id)
     return render(request, 'GroupConnect/user_form.html', {'user':user})
+'''
+class OnlyYouMixinTest(UserPassesTestMixin):
+    raise_exception = True
+
+    def test_func(self):
+        user = self.request.user
+        return user.id == self.kwargs['pk'] or user.is_superuser
+
+class UserUpdate(OnlyYouMixin, generic.UpdateView):
+    model = User
+    form_class = UserUpdateForm
+    template_name = 'GroupConnect/user_form.html'
+
+    def get_success_url(self):
+        return resolve_url('GroupConnect:user_update', pk=self.kwargs['pk'])
+
+    context_object_name = 'rogin_user'
+
+    def get_queryset(self):
+        ID = self.request.user.id
+        user = User.objects.filter(id = ID)
+
+        return user
+
+class UserTestUpdate(OnlyYouMixin, generic.UpdateView):
+    model = User
+    form_class = UserUpdateForm
+    template_name = 'GroupConnect/user_testform.html'
+
+    def get_success_url(self):
+        return resolve_url('GroupConnect:user_testupdate', pk=self.kwargs['pk'])
+
+    context_object_name = 'rogin_user'
+
+    def get_queryset(self):
+        ID = self.request.user.id
+        user = User.objects.filter(id = ID)
+
+        return user
 
 class UserMailaddressUpdate(OnlyYouMixin, generic.UpdateView):
     model = User

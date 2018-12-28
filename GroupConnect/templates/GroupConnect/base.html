@@ -26,7 +26,10 @@
             <a class="nav-item nav-link" href="{% url 'GroupConnect:user_detail' user.pk %}">ユーザー情報閲覧</a>
           </li>
           <li>
-            <a class="nav-item nav-link" href="{% url 'GroupConnect:user_update' user.id %}">ユーザー情報更新</a>
+            <a class="nav-item nav-link" href="{% url 'GroupConnect:user_update' user.pk %}">ユーザー情報更新</a>
+          </li>
+          <li>
+            <a class="nav-item nav-link" href="{% url 'GroupConnect:user_testupdate' user.id %}">ユーザー情報更新(テストver)</a>
           </li>
           <li>
             <a class="nav-item nav-link" href="{% url 'GroupConnect:user_mailaddress_update' user.pk %}">メールアドレス更新</a>

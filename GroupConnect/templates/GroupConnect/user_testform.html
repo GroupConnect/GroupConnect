@@ -1,0 +1,30 @@
+{% extends "GroupConnect/base.html" %}
+{% block content %}
+<form action="" method="POST" enctype="multipart/form-data">
+    {{ form.non_field_errors }}
+    <table class="table">
+        <tbody>
+            {% for field in form %}
+                {% if field.label != 'Icon' %}
+                    <tr>
+                        <th><label for="{{ field.id_for_label }}">{{ field.label }}</label></th>
+                        <td>{{ field }} {{ field.errors }}</td>
+                    </tr>
+                {% endif %}
+                {% if field.label == 'Icon' %}
+                    <tr>
+                        <th><label for="{{ field.id_for_label }}">{{ field.label }}</label></th>
+                        <td><img src='{{ rogin_user.icon.url }}'width="100" height="100" alt="マイアイコン">
+                            <br><br>
+                            <input type="file" name="icon" class="form-control" id="id_icon">
+                            {{ field.errors }}
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success btn-lg" >送信</button>
+</form>
+{% endblock %}

@@ -13,14 +13,24 @@ body {
 }
 
 .left {
-    border:solid 2px #5f9644;
     text-align: left;
+    border:solid 2px #5f9644;
 }
 
 .setting {
     font-size: 20px;
     margin: 12px 0px 0px 0px;
     display: block;
+}
+
+.right {
+    height: 562px;
+    border: solid 2px #5f9644;
+    overflow-y: scroll;
+}
+
+form {
+    width: 100%;
 }
 
 .right-up{
@@ -37,7 +47,7 @@ body {
 }
 
 img {
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0px 10px 20px;
 }
 
 h1 {
@@ -69,11 +79,11 @@ img {
 }
 
 .middle-up {
-    margin: 30px 0px 0px 0px;
+    margin: 30px 0px 0px 20px;
 }
 
 .middle-down {
-    margin: 30px 0px 30px 0px;
+    margin: 30px 0px 30px 20px;
 }
 
 .name {
@@ -91,11 +101,10 @@ img {
 .right-down {
     min-height: 218px;
     max-height: none;
-    border-bottom: solid 2px #5f9644;
 }
 
 h2 {
-    margin: 10px 0px 0px 0px;
+    margin: 10px 0px 0px 20px;
 }
 
 .submit, .cancel {
