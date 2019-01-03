@@ -1,0 +1,221 @@
+body {
+    padding-top:4.0rem;
+}
+
+.bar {
+    font-size: 18px;
+    border:solid 2px #5f9644;
+    background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
+}
+
+.bar2 {
+    font-size: 20px;
+    height: 55px;
+    background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
+}
+
+.mega-dropdown { 
+    position: static;
+}
+
+.dropdown-menu.mega-dropdown-menu.show { 
+    font-size: 20px;
+    width: 100%;
+    background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
+}
+
+.menu, .dropdown-menu {
+    background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
+}
+
+.grbar {
+    border:solid 2px #5f9644;
+}
+
+.groupconnect {
+    font-size: 25px;
+    font-family: Times New Roman;
+}
+
+.grname {
+    font-size: 25px;
+    font-family: Times New Roman;
+    margin: 0px 0px 0px 40px;
+}
+
+.area {
+    margin: 0px 40px 0px 40px;
+    border:solid 2px #44968f;
+    background: linear-gradient(-90deg, #d4e4e8, #a7e1e1);
+}
+
+.conf {
+    margin: 10px 0px 0px 50px;
+}
+
+.conf2 {
+    margin: 0px 0px 0px 50px;
+}
+
+/* エリア左 */
+/* グループ名入力 */
+.name {
+    font-size: 20px;
+    font-weight:bold;
+    margin: 20px 0px 10px 0px;
+}
+
+.hissu {
+    color: #ff0000;
+}
+
+.name-form {
+    width: 90%;
+}
+
+/* アイコン選択 */
+.gr-icon {
+    font-size: 20px;
+    font-weight:bold;
+    margin: 30px 0px 10px 0px;
+}
+
+.image_list, .image_lists {
+    margin: -5px 30px 20px -10px;
+    display: inline-block;
+}
+.image_list, .image_lists, .image_box {
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+.image_box, .thumbnail {
+    width: 100%;
+    height: 100%;
+}
+.image_box {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: none;
+}
+.checked {
+    border: 4px solid blue;
+    box-sizing: border-box;
+}
+.image_box, img, .thumbnail {
+    display: block;
+}
+
+/* エリア右 */
+.member-setting {
+    font-size: 20px;
+    font-weight:bold;
+}
+
+.tab-content {
+    background-color: #fff;
+}
+
+.mail-tab {
+    width: 140%;
+    text-align: center;
+}
+.connection-tab {
+    width: 113%;
+    margin: 0px 0px 0px 69px;
+    text-align: center;
+}
+
+/* メールアドレス入力 */
+#tab1 {
+    height: 300px;
+    padding: 10px 0px 0px 0px;
+}
+
+.mail-range {
+    height: 240px;
+    overflow-y: auto;
+}
+
+.range {
+    margin: 0px 0px 10px 0px;
+}
+
+.mail-address {
+    margin: 0px 0px 0px 10px;
+}
+
+.mail-delete {
+    margin: 0px 0px 0px 200px;
+}
+
+.mail {
+    position: absolute;
+    width: 75%;
+    height: 8%;
+    bottom: 0;
+    margin: 0px 0px 55px 5px;
+}
+
+.mailadd {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0px 40px 55px 0px;
+}
+
+.create {
+    text-align: right;
+}
+
+/* コネクション一覧 */
+#tab2 {
+    height: 300px;
+    /* padding: 10px 0px 0px 0px; */
+}
+
+.left {
+    height: 300px;
+    border: solid 2px #616161;
+    overflow-y: auto;
+}
+
+.add-btn {
+    margin: 90px 0px 0px 0px;
+}
+
+.delete-btn {
+    margin: 20px 0px 0px 0px;
+}
+
+.left-mark {
+    width: 10px;
+    height: 10px;
+}
+
+.right-mark {
+    width: 10px;
+    height: 10px;
+}
+
+.right-up {
+    margin: 10px 0px 0px 0px;
+}
+
+.right-down {
+    height: 242px;
+    margin: 10px 0px 0px 0px;
+    border: solid 2px #616161;
+    overflow-y: auto;
+}
+
+.submit, .cancel {
+    height:35px;
+    margin: 0px 20px 0px 0px;
+}
+
+h1 {
+    font-size: 30px;
+    text-align: center;
+}

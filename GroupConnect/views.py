@@ -138,8 +138,20 @@ class GroupCreate(generic.CreateView):
         return context
 
     def form_valid(self, form):
+        icon = self.request.POST['icon']
         group = form.save(commit=False)
+        group.icon = icon
         group.save()
+
+        groups = Group.objects.all().latest('date_joined')
+        group_id = groups.id
+
+        ID = self.request.user.id
+        user_name = self.request.user.first_name
+
+        Member(user_id=ID, group_id=group_id, name=user_name, authority=True).save()
+        
+
 
         return redirect('GroupConnect:mypage')
 
