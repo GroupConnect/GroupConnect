@@ -11,6 +11,7 @@ urlpatterns = [
     path('main_entry_conf', views.Main_entry_confView.as_view(), name='main_entry_conf'),
     path('mypage', views.MypageView.as_view(), name='mypage'),
     path('profile', views.ProfileView.as_view(), name='profile'),
+    path('mail_setting', views.Mail_settingView.as_view(), name='mail_setting'),
     path('grouptop', views.GrouptopView.as_view(), name='grouptop'),
     path('grouplist', views.GrouplistView.as_view(), name='grouplist'),
     path('creategroup', views.CreategroupView.as_view(), name='creategroup'),

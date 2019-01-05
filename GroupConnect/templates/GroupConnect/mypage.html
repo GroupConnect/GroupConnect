@@ -13,7 +13,7 @@
     <body>
         <!-- ナビゲーションバー -->
     <nav class="navbar navbar-expand-sm navbar-light fixed-top">
-        <a class="navbar-brand groupconnect" href="{% url 'GroupConnect:mypage' %}">GroupConnect</a>
+        <a class="navbar-brand groupconnect" href="mypage">GroupConnect</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -25,11 +25,11 @@
                     グループ
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                        <a class="dropdown-item" href="{% url 'GroupConnect:grouplist' %}">グループ一覧へ</a>
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouplist">グループ一覧へ</a>
                     </div>
                 </li>
             </ul>
@@ -40,7 +40,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="profile">プロフィール設定</a>
-                    <a class="dropdown-item" href="#">メール設定</a>
+                    <a class="dropdown-item" href="mail_setting">メール設定</a>
                     <a class="dropdown-item" href="#">パスワード設定</a>
                     <a class="dropdown-item" href="#">ログアウト</a>
                     <a class="dropdown-item" href="#">ヘルプ</a>
@@ -58,7 +58,7 @@
                         <h1 class="navbar-brand grlist">グループ一覧</h1>
                     </div>
                     <div class="col-lg-12 left-middle">
-                        <a class="navbar-brand creategr" href="{% url 'GroupConnect:creategroup' %}">⊕グループを作成</a>
+                        <a class="navbar-brand creategr" href="creategroup">⊕グループを作成</a>
                     </div>
                     <!-- ソート -->
                     <div class="col-lg-12 left-down">
