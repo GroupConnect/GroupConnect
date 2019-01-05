@@ -18,17 +18,26 @@ class Main_entryView(generic.TemplateView):
 class Main_entry_confView(generic.TemplateView):
     template_name = 'GroupConnect/main_entry_conf.html'
 
+class Main_entry_compView(generic.TemplateView):
+    template_name = 'GroupConnect/main_entry_comp.html'
+
 class MypageView(generic.TemplateView):
     template_name = 'GroupConnect/mypage.html'
 
 class ProfileView(generic.TemplateView):
     template_name = 'GroupConnect/profile.html'
 
+class Mail_settingView(generic.TemplateView):
+    template_name = 'GroupConnect/mail_setting.html'
+
 class GrouptopView(generic.TemplateView):
     template_name = 'GroupConnect/grouptop.html'
 
 class GrouplistView(generic.TemplateView):
     template_name = 'GroupConnect/grouplist.html'
+
+class CreategroupView(generic.TemplateView):
+    template_name = 'GroupConnect/creategroup.html'
 
 class BordlistView(generic.TemplateView):
     template_name = 'GroupConnect/bordlist.html'

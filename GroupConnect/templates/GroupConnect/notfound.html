@@ -14,7 +14,7 @@
     <div  class="nav-bar fixed-top">
         <!-- ナビゲーションバー -->
     <nav class="navbar navbar-expand-sm navbar-light bar">
-        <a class="navbar-brand groupconnect" href="{% url 'GroupConnect:mypage' %}">GroupConnect</a>
+        <a class="navbar-brand groupconnect" href="mypage">GroupConnect</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,11 +26,11 @@
                     グループ
                     </a>
                     <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                        <a class="dropdown-item" href="{% url 'GroupConnect:grouplist' %}">グループ一覧へ</a>
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouplist">グループ一覧へ</a>
                     </div>
                 </li>
             </ul>
@@ -40,8 +40,8 @@
                     アカウント
                     </a>
                     <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'GroupConnect:profile' %}">プロフィール設定</a>
-                        <a class="dropdown-item" href="#">メール設定</a>
+                        <a class="dropdown-item" href="profile">プロフィール設定</a>
+                        <a class="dropdown-item" href="mail_setting">メール設定</a>
                         <a class="dropdown-item" href="#">パスワード設定</a>
                         <a class="dropdown-item" href="#">ログアウト</a>
                         <a class="dropdown-item" href="#">ヘルプ</a>
@@ -54,8 +54,8 @@
                     グループメニュー
                     </a>
                     <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item d-inline grname" href="{% url 'GroupConnect:grouptop' %}">(グループ名)</a>
-                    <a class="dropdown-item d-inline" href="#">掲示板</a>
+                        <a class="dropdown-item d-inline grname" href="grouptop">(グループ名)</a>
+                    <a class="dropdown-item d-inline" href="bordlist">掲示板</a>
                     <a class="dropdown-item d-inline" href="#">メンバー一覧</a>
                     <a class="dropdown-item d-inline" href="#">設定</a>
                     </div>
@@ -83,7 +83,7 @@
 
     <div class="buttonset">
         <button type="button" class="bg-white badge-pill btn-lg">
-            <a class="bg-white" href="{% url 'GroupConnect:mypage' %}">マイページに戻る</a>
+            <a class="bg-white" href="mypage">マイページに戻る</a>
         </button>
     </div>
 
@@ -99,7 +99,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script type="text/javascript" src="static/GroupConnect/js/bulletinboard.js"></script>
+        <script type="text/javascript" src="{% static 'GroupConnect/js/notfound.js' %}"></script>
     </body>
 </html>
 

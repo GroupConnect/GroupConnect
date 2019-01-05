@@ -14,7 +14,7 @@
     <div  class="nav-bar fixed-top">
         <!-- ナビゲーションバー -->
     <nav class="navbar navbar-expand-sm navbar-light bar">
-        <a class="navbar-brand groupconnect" href="{% url 'GroupConnect:mypage' %}">GroupConnect</a>
+        <a class="navbar-brand groupconnect" href="mypage">GroupConnect</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,11 +26,11 @@
                     グループ
                     </a>
                     <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                        <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                        <a class="dropdown-item" href="{% url 'GroupConnect:grouplist' %}">グループ一覧へ</a>
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouplist">グループ一覧へ</a>
                     </div>
                 </li>
             </ul>
@@ -40,8 +40,8 @@
                     アカウント
                     </a>
                     <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'GroupConnect:profile' %}">プロフィール設定</a>
-                        <a class="dropdown-item" href="#">メール設定</a>
+                        <a class="dropdown-item" href="profile">プロフィール設定</a>
+                        <a class="dropdown-item" href="mail_setting">メール設定</a>
                         <a class="dropdown-item" href="#">パスワード設定</a>
                         <a class="dropdown-item" href="#">ログアウト</a>
                         <a class="dropdown-item" href="#">ヘルプ</a>
@@ -54,8 +54,8 @@
                     グループメニュー
                     </a>
                     <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item d-inline grname" href="{% url 'GroupConnect:grouptop' %}">(グループ名)</a>
-                    <a class="dropdown-item d-inline" href="{% url 'GroupConnect:bordlist' %}">掲示板</a>
+                    <a class="dropdown-item d-inline grname" href="grouptop">(グループ名)</a>
+                    <a class="dropdown-item d-inline" href="bordlist">掲示板</a>
                     <a class="dropdown-item d-inline" href="#">メンバー一覧</a>
                     <a class="dropdown-item d-inline" href="#">設定</a>
                     </div>
@@ -67,68 +67,118 @@
     <div class="container-fluid">
             <div class="row">
                 <!-- サイドバー -->
-                <div class="col-lg-2 left">
+                <div class="col-lg-2 side">
                     <div class="row">
-                        <div class="col-lg-12 left-top">
+                        <div class="col-lg-12 side-top">
                             <nav class="navbar navbar-light">
-                                <a class="navbar-brand left-grname" href="{% url 'GroupConnect:grouptop' %}">(グループ名)</a>
+                                <a class="navbar-brand side-grname" href="grouptop">(グループ名)</a>
                             </nav>
                         </div>
-                        <div class="col-lg-12 left-up">
+                        <div class="col-lg-12 side-up">
                             <p class="d-inline navbar-brand bordlist">掲示板</p>
-                            <p class="d-inline quantity">(4)</p>
                         </div>
-                        <div class="col-lg-12 left-middle">
+                        <div class="col-lg-12 side-middle">
                             <p class="d-inline ctgr">カテゴリ</p>
                             <a href="#"><addr title="カテゴリーの追加" class="d- inline create-ctgr">追加</addr></a>  
                         </div>
-                        <div class="col-lg-12 left-down">
+                        <div class="col-lg-12 side-down">
                             <!-- サイドバードロップダウンメニュー -->
                             <div class="sidebar-dropdown">
+                                <div class="sidebar-dropdown">
+                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">未分類１</a>
+                                        <a class="dropdown-item" href="#">未分類２</a>
+                                        <a class="dropdown-item" href="#">Python</a>
+                                        <a class="dropdown-item" href="#">セキュリティ</a>
+                                        <a class="dropdown-item" href="#">リレー</a>
+                                        <a class="dropdown-item" href="#">ダンス</a>
+                                    </div>
+                                    <p class="d-inline">　すべて</p>
+                                </div>
+                                <p class="d-inline quantity">(6)</p>
                                 <div class="sidebar-dropdown">
                                     <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#">未分類1</a>
                                         <a class="dropdown-item" href="#">未分類2</a>
                                     </div>
-                                    <button type="button" class="btn sidebtn">
-                                        未分類
-                                    </button>        
+                                    <p class="d-inline">　未分類</p>
+                                        
                                 </div>
-                                <p class="d-inline subquantity">(1)</p>
+                                <p class="d-inline quantity">(2)</p>
                                 <div class="sidebar-dropdown">
                                     <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#">Python</a>
                                         <a class="dropdown-item" href="#">セキュリティ</a>
                                     </div>
-                                    <button type="button" class="btn sidebtn">
-                                        授業
-                                    </button>
+                                    <p class="d-inline">　授業</p>
                                 </div>
-                                <p class="d-inline subquantity">(1)</p>
+                                <p class="d-inline quantity">(2)</p>
                                 <div class="sidebar-dropdown">
                                     <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#">リレー</a>
                                         <a class="dropdown-item" href="#">ダンス</a>
                                     </div>
-                                    <button type="button" class="btn sidebtn">
-                                        スポフェス
-                                    </button>
+                                    <p class="d-inline">　スポフェス</p>
                                 </div>
-                                <p class="d-inline subquantity">(1)</p>
+                                <p class="d-inline quantity">(2)</p>
                                 <div class="sidebar-dropdown">
                                     <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#">てきとー</a>
                                         <a class="dropdown-item" href="#">てきとー</a>
                                     </div>
-                                    <button type="button" class="btn sidebtn">
-                                        てきとー
-                                    </button>
+                                    <p class="d-inline">　てきとー</p>
                                 </div>
-                                <p class="d-inline subquantity">(1)</p>
+                                <p class="d-inline quantity">(2)</p>
+                                <div class="sidebar-dropdown">
+                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">てきとー</a>
+                                        <a class="dropdown-item" href="#">てきとー</a>
+                                    </div>
+                                    <p class="d-inline">　てきとー</p>
+                                </div>
+                                <p class="d-inline quantity">(2)</p>
+                                <div class="sidebar-dropdown">
+                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">てきとー</a>
+                                        <a class="dropdown-item" href="#">てきとー</a>
+                                    </div>
+                                    <p class="d-inline">　てきとー</p>
+                                </div>
+                                <p class="d-inline quantity">(2)</p>
+                                <div class="sidebar-dropdown">
+                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">てきとー</a>
+                                        <a class="dropdown-item" href="#">てきとー</a>
+                                    </div>
+                                    <p class="d-inline">　てきとー</p>
+                                </div>
+                                <p class="d-inline quantity">(2)</p>
+                                <div class="sidebar-dropdown">
+                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">てきとー</a>
+                                        <a class="dropdown-item" href="#">てきとー</a>
+                                    </div>
+                                    <p class="d-inline">　てきとー</p>
+                                </div>
+                                <p class="d-inline quantity">(2)</p>
+                                <div class="sidebar-dropdown">
+                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">てきとー</a>
+                                        <a class="dropdown-item" href="#">てきとー</a>
+                                    </div>
+                                    <p class="d-inline">　てきとー</p>
+                                </div>
+                                <p class="d-inline quantity">(2)</p>
                             </div>
                         </div>
                     </div>
@@ -139,9 +189,9 @@
                         <div class="col-lg-12 up">
                             <div class="headline">
                                 <div class="history">
-                                    <a href="{% url 'GroupConnect:grouptop' %}">(グループ名)</a><span>　>　</span>
-                                    <a href="{% url 'GroupConnect:bordlist' %}">掲示板</a><span>　>　</span>
-                                    <a href="{% url 'GroupConnect:bord' %}">(掲示板名)</a>
+                                    <a href="grouptop">(グループ名)</a><span>　>　</span>
+                                    <a href="bordlist">掲示板</a><span>　>　</span>
+                                    <a href="bord">(掲示板名)</a>
                                 </div>
                                 <nav class="navbar navbar-expand-md navbar-light bar3">
                                     <p class="bord-name">(掲示板名)</p>
@@ -167,15 +217,17 @@
                                     </div>
                                 </nav> 
                             </div>
-                            <div class="rounded p-4 background area">
-                                <form action="{% url 'GroupConnect:bord' %}" method="get" enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    <div class="form-group d-inline">
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
-                                            <input type="file" name="s_file" accept="image/png, image/jpeg, image/gif" class="file-select"　multiple>
-                                            <input type="submit" class="btn-warning" value="投稿"> 
-                                    </div>         
-                                </form>
+                            <div class="bord">
+                                <div class="rounded p-4 background area">
+                                    <form action="bord" method="get" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-group d-inline">
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
+                                                <input type="file" name="s_file" accept="image/png, image/jpeg, image/gif" class="file-select"　multiple>
+                                                <input type="submit" class="btn-warning" value="投稿"> 
+                                        </div>         
+                                    </form>
+                                </div>
                             </div>    
                         </div>
                     </div>
