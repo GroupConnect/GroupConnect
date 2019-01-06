@@ -30,6 +30,9 @@ class ProfileView(generic.TemplateView):
 class Mail_settingView(generic.TemplateView):
     template_name = 'GroupConnect/mail_setting.html'
 
+class WithdrawView(generic.TemplateView):
+    template_name = 'GroupConnect/withdraw.html'
+
 class GrouptopView(generic.TemplateView):
     template_name = 'GroupConnect/grouptop.html'
 
