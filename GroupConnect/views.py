@@ -27,6 +27,9 @@ class MypageView(generic.TemplateView):
 class ProfileView(generic.TemplateView):
     template_name = 'GroupConnect/profile.html'
 
+class Pass_settingView(generic.TemplateView):
+    template_name = 'GroupConnect/pass_setting.html'
+
 class Mail_settingView(generic.TemplateView):
     template_name = 'GroupConnect/mail_setting.html'
 
