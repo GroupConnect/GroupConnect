@@ -119,6 +119,22 @@ class Member(models.Model):
     authority = models.BooleanField(db_column='authority')
 
 class Signboard(models.Model):
+    """
+    掲示板のクラス
+
+    Parameters
+    ----------
+    id : int
+        識別用PrimaryKey
+    group_id : int
+        Groupクラスのidを参照する外部キー
+    title : str
+        掲示板のタイトル
+    category : str
+        掲示板を分類するカテゴリ
+    text : str
+        掲示板の説明
+    """
     id = models.AutoField(primary_key=True, db_column='id')
     group_id = models.ForeignKey(Group, on_delete=models.CASCADE, db_column='group_id')
     title = models.CharField(max_length=100, db_column='title')
