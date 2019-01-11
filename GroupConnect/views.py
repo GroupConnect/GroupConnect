@@ -20,18 +20,31 @@ from django.shortcuts import redirect
 from django.template.loader import get_template
 from django.views import generic
 from .forms import (
-    LoginForm, UserCreateForm, GroupCreateForm
+    LoginForm, UserCreateForm, GroupCreateForm , CreateSignboardForm
 )
 from .models import (
     Notice, Group, Member, GroupIcon,Signboard,Post,Situation
 )
 
+from django.views.generic.edit import ModelFormMixin
+
 
 User = get_user_model()
 
-class bordlist(generic.ListView) :
+class bordlist(generic.CreateView) :
     template_name = 'GroupConnect/bordlist.html'
+    form_class = CreateSignboardForm
     context_object_name='group_list'
+
+
+    def form_valid(self,form):
+        """ 掲示板作成 """
+        signboard = form.save(commit = False)
+        signboard.group_id= 1
+        signboard.save()
+
+
+        return redirect('GroupConnect:bordlist')
 
 
     

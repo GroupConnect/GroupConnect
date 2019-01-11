@@ -1,0 +1,157 @@
+body {
+    padding-top:4.0rem;
+}
+
+.bar {
+    font-size: 18px;
+    border:solid 2px #5f9644;
+    background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
+}
+
+.bar2 {
+    font-size: 20px;
+    height: 55px;
+    background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
+}
+
+.mega-dropdown { 
+    position: static;
+}
+
+.dropdown-menu.mega-dropdown-menu.show { 
+    font-size: 20px;
+    width: 100%;
+    background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
+}
+
+.menu, .dropdown-menu {
+    background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
+}
+
+.grbar {
+    
+    border:solid 2px #5f9644;
+}
+
+.groupconnect {
+    font-size: 25px;
+    font-family: Times New Roman;
+}
+
+.grname {
+    font-size: 25px;
+    font-family: Times New Roman;
+    margin: 0px 0px 0px 40px;
+}
+
+.side {
+    height: 593px;
+    border:solid 2px #5f9644;
+    text-align: center;
+    /* overflow-y: auto; */
+}
+
+.side-top {
+    background-color: #bae1a7;
+}
+
+.side-grname {
+    margin: 0px 0px 0px 20px;
+    font-family: Times New Roman;
+    color: #000000;
+}
+
+.side-up {
+    margin: 10px 0px 10px 0px;
+    padding: 0px 0px 10px 0px;
+    border-bottom: 2px solid #5f9644;
+}
+
+.bordlist {
+    font-size: 20px;
+    margin: 0px 20px 0px 20px;
+}
+
+.ctgr {
+    font-size: 20px;
+    margin: 0px 0px 0px 10px;
+}
+
+.create-ctgr {
+    float: right;
+    margin: 4px 0px 0px 0px;
+
+}
+
+.side-down {
+    height: 440px;
+    overflow-y: auto;
+}
+
+.sidebar-dropdown {
+    float: left;
+    margin: 10px 0px 0px 0px;
+}
+
+.sidebtn {
+    background-color: #fff;
+}
+
+.quantity {
+    float: right;
+    margin: 15px 0px 0px 0px;
+}
+
+.right {
+    height: 593px;
+    max-height: 593px;
+    border:solid 2px #5f9644;
+}
+
+.history {
+    margin: 13px 0px 10px 0px;
+}
+
+.area {
+    margin: 30px 0px 0px 0px; 
+    background-color: #a6e288;
+}
+
+.bord-create, .choice {
+    margin: 0px 0px 0px 70px;
+    /* color: #000000; */
+    background-color: #e5eee6;
+}
+
+.sort {
+    float: right;
+    margin: 0px 120px 0px 0px;
+}
+
+.ctgr-content {
+    margin: 20px 0px 10px 30px;
+}
+
+.list {
+    width: 93%;
+    height: 385px;
+    margin: 0px 0px 0px 30px;
+}
+
+thead, tbody {
+    display: block;
+}
+
+tbody {
+    height: 334px;
+    overflow-y: auto;
+}
+
+th, td {
+    width: 319px;
+    border: solid 1px #000000;
+}
+
+.th, .td {
+    width: 80px;
+} 
