@@ -104,12 +104,32 @@ if settings.AUTH_USER_MODEL == 'GroupConnect.User':
             return self.email
 
 class Group(models.Model):
+    """
+    グループのクラス
+
+    Parameters
+    ----------
+    id : int
+        対象の識別用PrimaryKey
+    group_name : str
+        対象のグループ名
+    icon :  str
+        対象のグループのアイコン
+    date_joined : datetime
+        対象のグループが作られた日時
+    """
     id = models.AutoField(primary_key=True, db_column='id')
     group_name = models.CharField(max_length=100, db_column='group_name')
     icon = models.ImageField(upload_to='static/images/', db_column='icon', blank=True, null=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
     def __str__(self):
+        """
+        Returns
+        -------
+        __str__ : str
+            対象のグループ名を返す
+        """
         return self.group_name
 
 class Member(models.Model):
@@ -125,15 +145,15 @@ class Signboard(models.Model):
     Parameters
     ----------
     id : int
-        識別用PrimaryKey
+        対象の識別用PrimaryKey
     group_id : int
-        Groupクラスのidを参照する外部キー
+        対象のGroupクラスのidを参照する外部キー
     title : str
-        掲示板のタイトル
+        対象の掲示板のタイトル
     category : str
-        掲示板を分類するカテゴリ
+        対象の掲示板を分類するカテゴリ
     text : str
-        掲示板の説明
+        対象の掲示板の説明
     """
     id = models.AutoField(primary_key=True, db_column='id')
     group_id = models.ForeignKey(Group, on_delete=models.CASCADE, db_column='group_id')
@@ -142,6 +162,12 @@ class Signboard(models.Model):
     text = models.TextField(db_column='text')
 
     def __str__(self):
+        """
+        Returns
+        -------
+        __str__ : str
+            対象のタイトルを返す
+        """
         return self.title
 
 class Post(models.Model):
@@ -151,17 +177,17 @@ class Post(models.Model):
     Parameters
     ----------
     id : int
-        識別用PrimaryKey
+        対象の識別用PrimaryKey
     signboard_id : int
-        SignBoardクラスのidを参照する外部キー
+        対象のSignBoardクラスのidを参照する外部キー
     text : str
-        投稿の本文
+        対象の投稿の本文
     contributer : str
-        Userクラスの:emailを参照する外部キー
+        対象のUserクラスの:emailを参照する外部キー
     posted : datetime.datetime
-        投稿日時をPython標準のdatetime型で保存する
+        対象の投稿日時をPython標準のdatetime型で保存する
     read_number : int
-        自クラスに結び付くSituationクラスのユーザ数を格納する
+        対象の自クラスに結び付くSituationクラスのユーザ数を格納する
     """
     id = models.AutoField(primary_key=True, db_column='id')
     signboard_id = models.IntegerField(db_column='signboard_id')
