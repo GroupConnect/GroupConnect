@@ -41,7 +41,7 @@ class MyUserAdmin(UserAdmin):
 admin.site.register(User, MyUserAdmin)
 
 class GroupAdmin(admin.ModelAdmin):
-    list_display = ('id', 'group_name', 'icon', 'date_joined')
+    list_display = ('id', 'group_name', 'icon', 'created_at')
 
 admin.site.register(Group, GroupAdmin)
 
@@ -56,7 +56,7 @@ class SignboardAdmin(admin.ModelAdmin):
 admin.site.register(Signboard, SignboardAdmin)
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'signboard_id', 'text', 'contributer', 'posted', 'read_number')
+    list_display = ('id', 'signboard_id', 'text', 'contributer', 'created_at', 'read_number')
 
 admin.site.register(Post, PostAdmin)
 
