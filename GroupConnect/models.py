@@ -133,6 +133,20 @@ class Group(models.Model):
         return self.group_name
 
 class Member(models.Model):
+    """
+    グループにおけるメンバーのクラス
+
+    Parameters
+    ----------
+    user_id = int
+        対象のユーザを参照する外部キー
+    group_id : int
+        対象の所属するグループを参照する外部キー
+    name : str
+        対象のメンバーの名前
+    authority : boolean
+        対象のメンバーの権限のフラグ
+    """
     user_id = models.IntegerField(db_column='user_id')
     group_id = models.IntegerField(db_column='group_id')
     name = models.CharField(max_length=100, db_column='name')
