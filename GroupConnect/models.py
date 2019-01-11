@@ -197,7 +197,7 @@ class Post(models.Model):
     text : str
         対象の投稿の本文
     contributer : str
-        対象のUserクラスの:emailを参照する外部キー
+        対象のUserクラスのemailを参照する外部キー
     posted : datetime.datetime
         対象の投稿日時をPython標準のdatetime型で保存する
     read_number : int
@@ -211,6 +211,20 @@ class Post(models.Model):
     read_number = models.IntegerField(db_column='read_number')
 
 class Situation(models.Model):
+    """
+    既読状況のクラス
+
+    Parameters
+    ----------
+    id : int
+        対象の識別用PrimaryKey
+    post_id : int
+        対象の元となる投稿IDを参照する外部キー
+    user_id : int
+        対象の投稿に対して既読になっているUserIDを参照する外部キー
+    read_situation : boolean
+        対象の元となる投稿の既読可否を保持する
+    """
     id = models.AutoField(primary_key=True, db_column='id')
     post_id = models.IntegerField(db_column='post_id')
     user_id = models.IntegerField(db_column='user_id')
