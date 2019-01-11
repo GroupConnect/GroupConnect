@@ -32,17 +32,23 @@ User = get_user_model()
 class bordlist(generic.ListView) :
     template_name = 'GroupConnect/bordlist.html'
     context_object_name='group_list'
+
+
     
     def get_context_data(self, **kwargs):
 
+        
+
         context = super().get_context_data(**kwargs)
         context.update({
-            'notice_list' : Notice.objects.all()
+            'messages' : Signboard.objects.all()
         })
         return context
 
     def get_queryset(self):
         ID = self.request.user.id
+
+        
 
         members = Member.objects.filter(user_id=ID)
         
@@ -54,4 +60,9 @@ class bordlist(generic.ListView) :
 
 
         return g
+
+
+
+
+
         
