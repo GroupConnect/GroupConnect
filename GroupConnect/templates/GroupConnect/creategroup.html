@@ -1,0 +1,283 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>グループ作成</title>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, inital-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'GroupConnect/css/creategroup.css' %}" />
+    </head>
+    <body>
+    <div  class="nav-bar fixed-top">
+        <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-expand-sm navbar-light bar">
+        <a class="navbar-brand groupconnect" href="mypage">GroupConnect</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="Navber">
+            <ul class="navbar-nav">
+                <li class="nav-item active dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    グループ
+                    </a>
+                    <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouptop">グループ名</a>
+                        <a class="dropdown-item" href="grouplist">グループ一覧へ</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item active dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    アカウント
+                    </a>
+                    <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="profile">プロフィール設定</a>
+                        <a class="dropdown-item" href="mail_setting">メール設定</a>
+                        <a class="dropdown-item" href="pass_setting">パスワード設定</a>
+                        <a class="dropdown-item" href="#">ログアウト</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item active dropdown mega-dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    グループメニュー
+                    </a>
+                    <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item d-inline grname" href="grouptop">(グループ名)</a>
+                    <a class="dropdown-item d-inline" href="bordlist">掲示板</a>
+                    <a class="dropdown-item d-inline" href="#">メンバー一覧</a>
+                    <a class="dropdown-item d-inline" href="#">設定</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        </nav>
+    </div>
+    <!-- メインコンテンツ -->
+    <!-- メイン左 -->
+    <p class="d-block conf">作成するグループの情報を設定してください。</p>
+    <p class="d-block conf2">※作成後にいつでも変更できます。</p>
+    <div class="rounded p-3 area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name" class="d-block name">グループ名<span class="hissu">[必須]</span></label>
+                        <input type="text" name="name" class="name-form">
+                    </div>
+                    <!-- アイコン -->
+                    <div>
+                        <label class="gr-icon">グループアイコン</p>
+                        <div class="icon-area">
+                            <ul class="image_list">
+                                <li class="image_lists">
+                                    <div class="image_box">
+                                        <img class="thumbnail" src="{% static 'GroupConnect/img/たまご.jpg' %}" alt="foo" />
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="image_list">
+                                <li class="image_lists">
+                                    <div class="image_box">
+                                        <img class="thumbnail" src="{% static 'GroupConnect/img/たまご.jpg' %}" alt="foo" />
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="image_list">
+                                <li class="image_lists">
+                                    <div class="image_box">
+                                        <img class="thumbnail" src="{% static 'GroupConnect/img/たまご.jpg' %}" alt="foo" />
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="image_list">
+                                <li class="image_lists">
+                                    <div class="image_box">
+                                        <img class="thumbnail" src="{% static 'GroupConnect/img/たまご.jpg' %}" alt="foo" />
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="image_list">
+                                <li class="image_lists">
+                                    <div class="image_box">
+                                        <img class="thumbnail" src="{% static 'GroupConnect/img/たまご.jpg' %}" alt="foo" />
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="image_list">
+                                <li class="image_lists">
+                                    <div class="image_box">
+                                        <img class="thumbnail" src="{% static 'GroupConnect/img/たまご.jpg' %}" alt="foo" />
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="image_list">
+                                <li class="image_lists">
+                                    <div class="image_box">
+                                        <img class="thumbnail" src="{% static 'GroupConnect/img/たまご.jpg' %}" alt="foo" />
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="image_list">
+                                <li class="image_lists">
+                                    <div class="image_box">
+                                        <img class="thumbnail" src="{% static 'GroupConnect/img/たまご.jpg' %}" alt="foo" />
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- メイン右 -->
+                <div class="col-md-6">
+                    <div class="p-3">
+                        <div>
+                            <p class="member-setting">メンバー設定</p>
+                            <!-- タブボタン部分 -->
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a href="#tab1" type="button" class="nav-link active mail-tab" data-toggle="tab">メールアドレス入力</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#tab2" type="button" class="nav-link connection-tab" data-toggle="tab">コネクション一覧</a>
+                                </li>
+                            </ul>
+                        
+                            <!--タブのコンテンツ部分-->
+                            <div class="tab-content">
+                                <div id="tab1" class="tab-pane active">
+                                    <form>
+                                        <div class="mail-range">
+                                            <div class="range">
+                                                <p class="d-inline mail-address">******@stu.kawahara.ac.jp</p><button type="button" class="btn mail-delete">削除</button>
+                                            </div>
+                                            <div class="range">
+                                                <p class="d-inline mail-address">******@stu.kawahara.ac.jp</p><button type="button" class="btn mail-delete">削除</button>
+                                            </div>
+                                            <div class="range">
+                                                <p class="d-inline mail-address">******@stu.kawahara.ac.jp</p><button type="button" class="btn mail-delete">削除</button>
+                                            </div>
+                                            <div class="range">
+                                                <p class="d-inline mail-address">******@stu.kawahara.ac.jp</p><button type="button" class="btn mail-delete">削除</button>
+                                            </div>
+                                            <div class="range">
+                                                <p class="d-inline mail-address">******@stu.kawahara.ac.jp</p><button type="button" class="btn mail-delete">削除</button>
+                                            </div>
+                                            <div class="range">
+                                                <p class="d-inline mail-address">******@stu.kawahara.ac.jp</p><button type="button" class="btn mail-delete">削除</button>
+                                            </div>
+                                        </div>
+                                        <input type="email" name="mail" class="mail">
+                                        <button type="button" class="btn btn-primary mailadd">追加</button>
+                                    </form>
+                                </div>
+                                <div id="tab2" class="tab-pane">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="left">
+                                                    <table id="tbl1">
+                                                        <tr><td>河原たろう</td></tr>
+                                                        <tr><td>河原たろう</td></tr>
+                                                        <tr><td>河原たろう</td></tr>
+                                                        <tr><td>河原たろう</td></tr>
+                                                        <tr><td>河原たろう</td></tr>
+                                                        <tr><td>河原たろう</td></tr>
+                                                        <tr><td>河原たろう</td></tr>
+                                                        <tr><td>河原たろう</td></tr>
+                                                        <tr><td>河原たろう</td></tr>
+                                                        <tr><td>河原たろう</td></tr>
+                                                        <tr><td>河原たろう</td></tr>
+                                                        <tr><td>河原たろう</td></tr>
+                                                        <tr><td>河原たろう</td></tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 center">
+                                                <a href="#">
+                                                    <button type="button" class="btn btn-default add-btn">
+                                                        <img class="d-inline left-mark" src="{% static 'GroupConnect/img/左矢印.jpg' %}">
+                                                        <span>追加</span>
+                                                    </button>
+                                                </a>
+                                                <a href="#">
+                                                    <button type="button" class="btn btn-default delete-btn">
+                                                        <span>削除</span>
+                                                        <img class="d-inline right-mark" src="{% static 'GroupConnect/img/右矢印.jpg' %}">
+                                                    </button>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="right">
+                                                    <div class="right-up">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" placeholder="メンバー名で検索">
+                                                            <button type="button" class="btn btn-default">検索</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="right-down">
+                                                        <table id="tbl2">
+                                                            <tr><td>河原たろう</td></tr>
+                                                            <tr><td>河原たろう</td></tr>
+                                                            <tr><td>河原たろう</td></tr>
+                                                            <tr><td>河原たろう</td></tr>
+                                                            <tr><td>河原たろう</td></tr>
+                                                            <tr><td>河原たろう</td></tr>
+                                                            <tr><td>河原たろう</td></tr>
+                                                            <tr><td>河原たろう</td></tr>
+                                                            <tr><td>河原たろう</td></tr>
+                                                            <tr><td>河原たろう</td></tr>
+                                                            <tr><td>河原たろう</td></tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="create">
+                        <input type="submit" class="submit btn-warning" value="作成する">
+                        <input type="button" class="cancel" data-toggle="modal" data-target="#basicModal" value="キャンセル">
+                        <div class="modal fade"id="basicModal"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <h1>内容が破棄されますが<br>よろしいですか？</h1>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button"class="btn btn-primary">はい</button>
+                                        <button type="button"class="btn btn-default"data-dismiss="modal">いいえ</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>    
+        </div>
+    </div>
+    
+            
+            
+            
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'GroupConnect/js/creategroup.js' %}"></script>
+    </body>
+</html>

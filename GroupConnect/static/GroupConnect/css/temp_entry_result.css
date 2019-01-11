@@ -1,0 +1,21 @@
+.area {
+    background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
+}
+
+h1 {
+    font-size: 90px;
+    font-family: Times New Roman;
+    text-align: center;
+}
+
+p {
+    font-size: 25px;
+    text-align: center;
+    margin: 50px 0px 0px 0px;
+}
+
+.back {
+    font-size: 20px;
+    margin: 50px 0px 0px 0px;
+    text-align: center;
+}
