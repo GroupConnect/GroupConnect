@@ -30,6 +30,9 @@ class ProfileView(generic.TemplateView):
 class Pass_settingView(generic.TemplateView):
     template_name = 'GroupConnect/pass_setting.html'
 
+class Pass_setting_compView(generic.TemplateView):
+    template_name = 'GroupConnect/pass_setting_comp.html'
+
 class Mail_settingView(generic.TemplateView):
     template_name = 'GroupConnect/mail_setting.html'
 

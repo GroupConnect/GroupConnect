@@ -13,6 +13,7 @@ urlpatterns = [
     path('mypage', views.MypageView.as_view(), name='mypage'),
     path('profile', views.ProfileView.as_view(), name='profile'),
     path('pass_setting', views.Pass_settingView.as_view(), name='pass_setting'),
+    path('pass_setting_comp', views.Pass_setting_compView.as_view(), name='pass_setting_comp'),
     path('mail_setting', views.Mail_settingView.as_view(), name='mail_setting'),
     path('withdraw', views.WithdrawView.as_view(), name='withdraw'),
     path('grouptop', views.GrouptopView.as_view(), name='grouptop'),
