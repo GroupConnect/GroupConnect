@@ -1,0 +1,23 @@
+[
+    {
+        "model": "GroupConnect.account",
+        "pk": 1,
+        "fields": {
+            "last_name": "髙橋",
+            "first_name": "くん",
+            "rome_last_name": "takahashi",
+            "rome_first_name": "kun",
+            "mail_address": "takahashi@groupconnect.hoge",
+            "password": "takahashi",
+            "icon": "",
+            "introduction": "",
+            "plan_mail_time": "08:00:00",
+            "new_mail_stop_time": "00:00:00",
+            "new_mail_start_time": "08:00:00",
+            "notice_signboard": true,
+            "notice_chat": true,
+            "notice_calendar": true,
+            "notice_group": true
+        }
+    }
+]
