@@ -14,21 +14,25 @@ body {
 
 .left {
     border:solid 2px #5f9644;
-    text-align: center;
 }
 
 .left-up {
+    text-align: center;
     border-bottom: 2px solid #5f9644;
     background: #bae1a7;
 }
 
 .left-middle {
-    border-bottom: 2px solid #5f9644;
-    margin: 0px 0px 10px 0px;
+    text-align: center;
 }
 
 .left-down {
+    text-align: center;
     border-bottom: 2px solid #5f9644;
+}
+
+.sidebarmenu {
+    text-align: center;
 }
 
 .up{

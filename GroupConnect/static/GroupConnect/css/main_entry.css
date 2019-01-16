@@ -1,0 +1,64 @@
+.area {
+    background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
+}
+
+h1 {
+    font-size: 90px;
+    font-family: Times New Roman;
+    text-align: center;
+}
+
+.shinki {
+    width: 25%;
+    font-size: 30px;
+    text-align: center;
+    margin: 20px 0px 0px 0px;
+    border-bottom: 2px solid #5f9644;
+}
+
+form {
+    text-align: center;
+}
+
+.entryform1 {
+    font-size: 18px;
+    margin: 20px 0px 0px 0px;
+    text-align: right;
+}
+
+.entryform2 {
+    margin: 20px 0px 0px 0px;
+    text-align: left;
+}
+
+label {
+    margin: 0px 0px 13px 0px;
+}
+
+span {
+    color: #ff0000;
+}
+
+.name, .romaji, .mail, .pass, .passconf {
+    width: 500px;
+    margin: 0px 0px 10px 0px;
+}
+
+img {
+    width: 25px;
+    height: 25px;
+}
+
+.submit {
+    width: 180px;
+    height: 35px;
+    font-size: 20px;
+    margin: 0px 0px 20px 0px;
+    background-color: #ffda37;
+}
+
+.nameblank, .romajiblank, .mailblank, .passblank, .passconfblank, .passformatcheck, .passconfformatcheck, .passconfdifferent {
+    color: #ff0000;
+    font-size: 15px;
+    display: none;
+}

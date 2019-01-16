@@ -1,0 +1,51 @@
+.area {
+    background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
+}
+
+h1 {
+    font-size: 90px;
+    font-family: Times New Roman;
+    text-align: center;
+}
+
+.shinki {
+    width: 25%;
+    font-size: 30px;
+    text-align: center;
+    margin: 20px 0px 0px 0px;
+    border-bottom: 2px solid #5f9644;
+}
+
+.mail-input {
+    font-size: 30px;
+    text-align: center;
+    margin: 50px 0px 0px 0px;
+}
+
+form {
+    text-align: center;
+    margin: 70px 0px 0px 0px;
+}
+
+.mail {
+    width: 400px;
+    height: 40px;
+    margin: 0px 30px 0px 0px;
+}
+
+.mailblank {
+    color: #ff0000;
+    font-size: 20px;
+    margin: 10px 100px 0px 0px;
+    display: none;
+}
+
+.submit {
+    width: 100px;
+    height: 40px;
+}
+
+.back {
+    font-size: 25px;
+    margin: 50px 0px 0px 0px;
+}

@@ -1,0 +1,64 @@
+body {
+    padding-top:4.0rem;
+}
+
+.navbar {
+    border:solid 2px #5f9644;
+    background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
+}
+
+.groupconnect {
+    font-size: 25px;
+    font-family: Times New Roman;
+}
+
+/* サイドバー */
+.left {
+    text-align: left;
+    border:solid 2px #5f9644;
+}
+
+.setting {
+    font-size: 20px;
+    margin: 12px 0px 0px 0px;
+    display: block;
+}
+
+/* メインコンテンツ */
+.right {
+    height: 593px;
+    border: solid 2px #5f9644;
+}
+
+h1 {
+    margin: 30px 0px 30px 0px;
+}
+
+label {
+    display: block;
+}
+
+span {
+    color: #ff0000;
+}
+
+.currentpass, .pass, .passconf {
+    width: 500px;
+    margin: 0px 0px 10px 0px;
+}
+
+img {
+    width: 25px;
+    height: 25px;
+}
+
+.currentpassblank, .passblank, .passconfblank, .currentpassformatcheck, .passformatcheck, .passconfformatcheck, .passconfdifferent {
+    color: #ff0000;
+    font-size: 15px;
+    display: none;
+}
+
+.change {
+    width: 100px;
+    margin: 30px 0px 0px 350px;
+}

@@ -63,7 +63,7 @@ body {
 }
 
 .right {
-    min-height: 593px;
+    min-height: 576px;
     max-height: none;
     border:solid 2px #5f9644;
 }
@@ -78,14 +78,7 @@ body {
 }
 
 
-@media screen and (max-width: 640px) {
-
-    .grname {
-        font-size: 15px; 
-        font-family: Times New Roman;
-    }
-    .dropdown-menu.mega-dropdown-menu.show { 
-        font-size:15px;
-        background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
-    }
+.buttonset {
+    text-align : center ;
 }
+
