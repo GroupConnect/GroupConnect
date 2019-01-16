@@ -1,13 +1,11 @@
 from django.shortcuts import render
 from django.views import generic
 
-# Create your views here.
+from .models import Signboard
 
-class IndexView(generic.TemplateView):
-    template_name = 'GroupConnect/index.html'
+
 
 from django.conf import settings
-from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import (
@@ -66,3 +64,6 @@ class bordlist(generic.ListView) :
 
 
         
+class SignboardView(generic.DetailView):
+    model = Signboard
+    template_name = 'GroupConnect/signboard_detail.html'
