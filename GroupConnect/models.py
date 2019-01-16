@@ -174,6 +174,7 @@ class Signboard(models.Model):
     title = models.CharField(max_length=100, db_column='title')
     category = models.CharField(max_length=100, db_column='category')
     text = models.TextField(db_column='text')
+    updated_at = models.DateTimeField(db_column='updated_at')
 
     def __str__(self):
         """

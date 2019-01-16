@@ -51,7 +51,7 @@ class MemberAdmin(admin.ModelAdmin):
 admin.site.register(Member, MemberAdmin)
 
 class SignboardAdmin(admin.ModelAdmin):
-    list_display = ('id', 'group_id', 'title', 'category', 'text')
+    list_display = ('id', 'group_id', 'title', 'category', 'text', 'updated_at')
 
 admin.site.register(Signboard, SignboardAdmin)
 
