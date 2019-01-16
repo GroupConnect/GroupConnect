@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="col-md-10 right">
-                    <form action="" method="get">
+                    <form action="{% url 'GroupConnect:pass_setting_comp' %}" method="get">
                         {% csrf_token %}
                         <div class="entryform">
                             <h1>パスワードの変更</h1>
