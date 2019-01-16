@@ -14,7 +14,7 @@
     <body>
         <!-- ナビゲーションバー -->
     <nav class="navbar navbar-expand-sm navbar-light fixed-top">
-        <a class="navbar-brand groupconnect" href="{% url 'GroupConnect:mypage' %}">GroupConnect</a>
+        <a class="navbar-brand groupconnect" href="mypage">GroupConnect</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,11 +26,11 @@
                     グループ
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                    <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                    <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                    <a class="dropdown-item" href="{% url 'GroupConnect:grouptop' %}">グループ名</a>
-                    <a class="dropdown-item" href="#">グループ一覧へ</a>
+                    <a class="dropdown-item" href="grouptop">グループ名</a>
+                    <a class="dropdown-item" href="grouptop">グループ名</a>
+                    <a class="dropdown-item" href="grouptop">グループ名</a>
+                    <a class="dropdown-item" href="grouptop">グループ名</a>
+                    <a class="dropdown-item" href="grouplist">グループ一覧へ</a>
                     </div>
                 </li>
             </ul>
@@ -40,11 +40,10 @@
                     アカウント
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'GroupConnect:profile' %}">プロフィール設定</a>
-                    <a class="dropdown-item" href="#">メール設定</a>
-                    <a class="dropdown-item" href="#">パスワード設定</a>
+                    <a class="dropdown-item" href="profile">プロフィール設定</a>
+                    <a class="dropdown-item" href="mail_setting">メール設定</a>
+                    <a class="dropdown-item" href="pass_setting">パスワード設定</a>
                     <a class="dropdown-item" href="#">ログアウト</a>
-                    <a class="dropdown-item" href="#">ヘルプ</a>
                     </div>
                 </li>
             </ul>
@@ -54,10 +53,10 @@
             <div class="row">
                 <!-- サイドバー -->
                 <div class="col-lg-2 left">
-                    <a class="setting" href="{% url 'GroupConnect:profile' %}">プロフィール設定</a>
-                    <a class="setting" href="#">パスワード設定</a>
-                    <a class="setting" href="#">メール設定</a>
-                    <a class="setting" href="#">退会</a>
+                    <a class="setting" href="profile">プロフィール設定</a>
+                    <a class="setting" href="pass_setting">パスワード設定</a>
+                    <a class="setting" href="mail_setting">メール設定</a>
+                    <a class="setting" href="withdraw">退会</a>
                 </div>
 
                 <!-- メインコンテンツ -->
@@ -66,8 +65,8 @@
                         <form action="" method="get">
                             <div class="col-lg-12 right-up">
                                 <div class="history">
-                                    <a href="{% url 'GroupConnect:mypage' %}">マイページ</a><span>　>　</span>
-                                    <a href="{% url 'GroupConnect:profile' %}">プロフィール設定</a><span>
+                                    <a href="mypage">マイページ</a><span>　>　</span>
+                                    <a href="profile">プロフィール設定</a><span>
                                 </div>
                                 <!-- プロフィール画像埋め込み -->
                                 <div class="up">
@@ -119,7 +118,7 @@
                                         {% csrf_token %}
                                         <div class="form-group d-inline">
                                             <textarea class="border border-dark form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
-                                            <input type="button" class="cancel" data-toggle="modal" data-target="#basicModal" value="キャンセル">
+                                            <input type="button" class="btn cancel" data-toggle="modal" data-target="#basicModal" value="キャンセル">
                                             <div class="modal fade"id="basicModal"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -133,7 +132,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <input type="submit" class="submit btn-warning" value="変更">
+                                            <input type="submit" class="btn btn-warning input-btn" value="変更">
                                         </div>
                                     </div>  
                                 </div>
@@ -149,6 +148,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script type="text/javascript" src="static/GroupConnect/js/profile.js"></script>
+        <script type="text/javascript" src="{% static 'GroupConnect/js/profile.js' %}"></script>
     </body>
 </html>

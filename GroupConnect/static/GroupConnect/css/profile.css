@@ -24,7 +24,7 @@ body {
 }
 
 .right {
-    height: 562px;
+    height: 593px;
     border: solid 2px #5f9644;
     overflow-y: scroll;
 }
@@ -107,12 +107,12 @@ h2 {
     margin: 10px 0px 0px 20px;
 }
 
-.submit, .cancel {
+.input-btn, .cancel {
     margin: 30px 30px 30px 0px;
     float:right;
 }
 
-.submit {
+.input-btn {
     width: 120px;
     height: 35px;
 }
