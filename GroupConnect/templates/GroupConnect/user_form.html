@@ -40,7 +40,7 @@
                     アカウント
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.id %}">プロフィール設定</a>
+                    <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
                     <a class="dropdown-item" href="{% url 'GroupConnect:user_mailaddress_update' user.id %}">メール設定</a>
                     <a class="dropdown-item" href="{% url 'GroupConnect:password_change' %}">パスワード設定</a>
                     <a class="dropdown-item" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
@@ -54,10 +54,10 @@
             <div class="row">
                 <!-- サイドバー -->
                 <div class="col-lg-2 left">
-                    <a class="setting" href="{% url 'GroupConnect:user_update' user.id %}">プロフィール設定</a>
+                    <a class="setting" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
                     <a class="setting" href="{% url 'GroupConnect:password_change' %}">パスワード設定</a>
                     <a class="setting" href="{% url 'GroupConnect:user_mailaddress_update' user.id %}">メール設定</a>
-                    <a class="setting" href="#">退会</a>
+                    <a class="setting" href="{% url 'GroupConnect:user_delete' %}">退会</a>
                 </div>
 
                 <!-- メインコンテンツ -->
@@ -86,7 +86,7 @@
                                                     </span>
                                                 </label>
                                                 <input type="text" class="form-control d-inline form" readonly="">
-                                                <input type="button" class="delete d-inline" value="削除する">
+                                                <!--<input type="button" class="delete d-inline" value="削除する">-->
                                             </div>
                                         </div>
                                     </div>
@@ -149,7 +149,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <!--<script type="text/javascript" src="static/GroupConnect/js/user_form.js"></script>-->
         <script type="text/javascript" src="{% static 'GroupConnect/js/user_form.js' %}"></script>
     </body>
 </html>
