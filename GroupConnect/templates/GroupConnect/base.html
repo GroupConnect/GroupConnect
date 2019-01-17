@@ -23,19 +23,25 @@
         <ul class="navbar-nav mr-auto">
           {% if user.is_authenticated %}
           <li>
-            <a class="nav-item nav-link" href="{% url 'GroupConnect:user_detail' user.pk %}">ユーザー情報閲覧</a>
-          </li>
-          <li>
             <a class="nav-item nav-link" href="{% url 'GroupConnect:user_update' user.pk %}">ユーザー情報更新</a>
           </li>
-          <li>
+          <!--<li>
             <a class="nav-item nav-link" href="{% url 'GroupConnect:user_testupdate' user.id %}">ユーザー情報更新(テストver)</a>
+          </li>-->
+          <li>
+            <a class="nav-item nav-link" href="{% url 'GroupConnect:user_mailaddress_update' user.pk %}">メール設定</a>
           </li>
           <li>
-            <a class="nav-item nav-link" href="{% url 'GroupConnect:user_mailaddress_update' user.pk %}">メールアドレス更新</a>
+            <a class="nav-item nav-link" href="{% url 'GroupConnect:user_testmailaddress_update' user.pk %}">メール設定(BootstrapVersion)</a>
           </li>
           <li>
             <a class="nav-item nav-link" href="{% url 'GroupConnect:password_change' %}">パスワードの変更</a>
+          </li>
+          <!--<li>
+            <a class="nav-item nav-link" href="{% url 'GroupConnect:password_change_test' %}">パスワードの変更(testversion)</a>
+          </li>-->
+          <li>
+            <a class="nav-item nav-link" href="{% url 'GroupConnect:user_delete' %}">退会</a>
           </li>
           <li>
             <a class="nav-item nav-link" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
