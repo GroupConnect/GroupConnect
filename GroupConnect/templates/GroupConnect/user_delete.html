@@ -1,0 +1,16 @@
+{% extends "GroupConnect/base.html" %}
+{% load bootstrap4 %}
+{% block content %} 
+<div class="container">
+  <h2>退会</h2>
+  <form method="post" action="{% url 'GroupConnect:user_delete' %}">
+    {% csrf_token %}
+    <div class="form-group column">
+      {{ form }}
+      <button type="submit" class="btn btn-primary">
+        退会
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
