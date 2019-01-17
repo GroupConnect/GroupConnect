@@ -3,7 +3,8 @@ from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import (
-    LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
+    LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView,
+    PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 )
 from django.urls import reverse_lazy
 from django.contrib.sites.shortcuts import get_current_site
@@ -13,7 +14,8 @@ from django.shortcuts import redirect, resolve_url
 from django.template.loader import get_template
 from django.views import generic
 from .forms import (
-    LoginForm, UserCreateForm, UserUpdateForm, UserMailaddressUpdateForm, MyPasswordChangeForm
+    LoginForm, UserCreateForm, UserUpdateForm, UserMailaddressUpdateForm, MyPasswordChangeForm,
+    MyPasswordResetForm, MySetPasswordForm, DeleteUserForm
 )
 from .models import (
     Notice, Group, Member, User
@@ -217,13 +219,75 @@ class UserMailaddressUpdate(OnlyYouMixin, generic.UpdateView):
 
         return user
 
+class UserTestMailaddressUpdate(OnlyYouMixin, generic.UpdateView):
+    model = User
+    form_class = UserMailaddressUpdateForm
+    template_name = 'GroupConnect/user_testmailaddress_update.html'
+
+    def get_success_url(self):
+        return resolve_url('GroupConnect:user_testmailaddress_update', pk=self.kwargs['pk'])
+
+    context_object_name = 'rogin_user'
+
+    def get_queryset(self):
+        ID = self.request.user.id
+        user = User.objects.filter(id = ID)
+
+        return user
+
 class PasswordChange(PasswordChangeView):
     """パスワード変更ビュー"""
     form_class = MyPasswordChangeForm
     success_url = reverse_lazy('GroupConnect:password_change_done')
     template_name = 'GroupConnect/password_change.html'
 
+class PasswordChangeTest(PasswordChangeView):
+    """パスワード変更ビュー(テスト用)"""
+    form_class = MyPasswordChangeForm
+    success_url = reverse_lazy('GroupConnect:password_change_done')
+    template_name = 'GroupConnect/password_change_test.html'
 
 class PasswordChangeDone(PasswordChangeDoneView):
     """パスワード変更しました"""
     template_name = 'GroupConnect/password_change_done.html'
+
+
+class PasswordReset(PasswordResetView):
+    """パスワード変更用URLの送付ページ"""
+    subject_template_name = 'GroupConnect/mail_template/password_reset/subject.txt'
+    email_template_name = 'GroupConnect/mail_template/password_reset/message.txt'
+    template_name = 'GroupConnect/password_reset_form.html'
+    form_class = MyPasswordResetForm
+    success_url = reverse_lazy('GroupConnect:password_reset_done')
+
+
+class PasswordResetDone(PasswordResetDoneView):
+    """パスワード変更用URLを送りましたページ"""
+    template_name = 'GroupConnect/password_reset_done.html'
+
+
+class PasswordResetConfirm(PasswordResetConfirmView):
+    """新パスワード入力ページ"""
+    form_class = MySetPasswordForm
+    success_url = reverse_lazy('GroupConnect:password_reset_complete')
+    template_name = 'GroupConnect/password_reset_confirm.html'
+
+
+class PasswordResetComplete(PasswordResetCompleteView):
+    """新パスワード設定しましたページ"""
+    template_name = 'GroupConnect/password_reset_complete.html'
+
+
+def user_delete(request):
+    if request.method == 'POST':
+        form = DeleteUserForm(request.POST)
+        if form.is_valid(): # フォームデータの形式が正しいかどうかチェック
+            if request.user.check_password(form.cleaned_data['password']): # フォームデータを取得
+                user = User.objects.get(email=request.user.email)
+                user.is_active = False
+                user.save() # saveをしないと上のuser.is_active = Falseは反映されない
+                #messages.success(request, '退会処理が完了しました。')
+                return redirect('GroupConnect:top') # 他のメソッドを実行
+    else:
+        form = DeleteUserForm()
+    return render(request, 'GroupConnect/user_delete.html', {'form': form})
