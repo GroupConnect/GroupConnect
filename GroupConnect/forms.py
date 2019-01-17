@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import (
-    AuthenticationForm, UserCreationForm, PasswordChangeForm
+    AuthenticationForm, UserCreationForm, PasswordChangeForm,
+    PasswordResetForm, SetPasswordForm
 )
 from django.contrib.auth import get_user_model
 
@@ -53,7 +54,7 @@ class UserMailaddressUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         if User.USERNAME_FIELD == 'email':
-            fields = ('email',)
+            fields = ('email','plan_mail_time','new_mail_stop_time','new_mail_start_time')
         else:
             fields = ('username', 'email', 'first_name', 'last_name')
 
@@ -69,3 +70,23 @@ class MyPasswordChangeForm(PasswordChangeForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
+
+class MyPasswordResetForm(PasswordResetForm):
+    """パスワード忘れたときのフォーム"""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+
+class MySetPasswordForm(SetPasswordForm):
+    """パスワード再設定用フォーム(パスワード忘れて再設定)"""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+class DeleteUserForm(forms.Form):
+    password = forms.CharField(label='パスワード', max_length=256, widget=forms.PasswordInput())
