@@ -5,6 +5,9 @@ from django.views import generic
 
 # class IndexView(generic.TemplateView):
 #     template_name = 'GroupConnect/index.html'
+# from .models import Signboard
+
+
 
 # class MypageView(generic.TemplateView):
 #     template_name = 'GroupConnect/mypage.html'
@@ -90,3 +93,6 @@ class bordlist(generic.CreateView) :
 
 
         
+class SignboardView(generic.DetailView):
+    model = Signboard
+    template_name = 'GroupConnect/signboard_detail.html'

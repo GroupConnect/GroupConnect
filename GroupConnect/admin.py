@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 
-from .models import User, Signboard
+from .models import User, Group, Member, Signboard, Post, Situation
 
 class MyUserChangeForm(UserChangeForm):
     class Meta:
@@ -40,4 +40,27 @@ class MyUserAdmin(UserAdmin):
 
 admin.site.register(User, MyUserAdmin)
 
-admin.site.register(Signboard)
+class GroupAdmin(admin.ModelAdmin):
+    list_display = ('id', 'group_name', 'icon', 'created_at')
+
+admin.site.register(Group, GroupAdmin)
+
+class MemberAdmin(admin.ModelAdmin):
+    list_display = ('user_id', 'group_id', 'name', 'authority')
+
+admin.site.register(Member, MemberAdmin)
+
+class SignboardAdmin(admin.ModelAdmin):
+    list_display = ('id', 'group_id', 'title', 'category', 'text', 'updated_at')
+
+admin.site.register(Signboard, SignboardAdmin)
+
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('id', 'signboard_id', 'text', 'contributer', 'created_at', 'read_number')
+
+admin.site.register(Post, PostAdmin)
+
+class SituationAdmin(admin.ModelAdmin):
+    list_display = ('id', 'post_id', 'user_id', 'read_situation')
+
+admin.site.register(Situation, SituationAdmin)
