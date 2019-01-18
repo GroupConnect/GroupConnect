@@ -3,12 +3,6 @@ $(function(){
         var visibleItem = $('.dropdown-toggle', $(this).closest('.dropdown'));
         visibleItem.text($(this).attr('value'));
     });
-<<<<<<< HEAD
-<<<<<<< HEAD
-});
-=======
-=======
->>>>>>> b44cf9b74fbf1ad91b67fefeb76186dd0782ff03
 });
 
 (function($){
@@ -42,9 +36,4 @@ $(function(){
             content.modal('hide');
         });
     });
-<<<<<<< HEAD
 })(jQuery);
->>>>>>> 掲示板一覧機能
-=======
-})(jQuery);
->>>>>>> b44cf9b74fbf1ad91b67fefeb76186dd0782ff03
