@@ -18,6 +18,7 @@ urlpatterns = [
     path('withdraw', views.WithdrawView.as_view(), name='withdraw'),
     path('grouptop', views.GrouptopView.as_view(), name='grouptop'),
     path('grouplist', views.GrouplistView.as_view(), name='grouplist'),
+    path('group_setting', views.Group_settingView.as_view(), name='group_setting'),
     path('creategroup', views.CreategroupView.as_view(), name='creategroup'),
     path('bordlist', views.BordlistView.as_view(), name='bordlist'),
     path('bord', views.BordView.as_view(), name='bord'),

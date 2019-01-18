@@ -45,6 +45,9 @@ class GrouptopView(generic.TemplateView):
 class GrouplistView(generic.TemplateView):
     template_name = 'GroupConnect/grouplist.html'
 
+class Group_settingView(generic.TemplateView):
+    template_name = 'GroupConnect/group_setting.html'
+
 class CreategroupView(generic.TemplateView):
     template_name = 'GroupConnect/creategroup.html'
 
