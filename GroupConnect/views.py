@@ -101,6 +101,9 @@ class Mypage(generic.ListView):
 
     def get_context_data(self, **kwargs):
 
+        """
+            お知らせ一覧の取得。
+        """
         context = super().get_context_data(**kwargs)
         context.update({
             'notice_list' : Notice.objects.all()
@@ -108,6 +111,9 @@ class Mypage(generic.ListView):
         return context
 
     def get_queryset(self):
+        """
+        所属グループ一覧の取得
+        """
         ID = self.request.user.id
 
         members = Member.objects.filter(user_id=ID)
@@ -121,16 +127,20 @@ class Mypage(generic.ListView):
 
         return g
 
-def detail(request, notice_id):
-    notice = Notice.objects.get(id = notice_id)
-    return render(request, 'GroupConnect/notice_detail.html', {'notice':notice})
+class NoticeDetail(generic.DetailView):
+    """
+        選択されたお知らせの詳細取得
+    """
+    model = Notice
 
 class GroupCreate(generic.CreateView):
     template_name = 'GroupConnect/group_create.html'
     form_class = GroupCreateForm
 
     def get_context_data(self, **kwargs):
-
+        """
+        アイコン一覧の取得
+        """
         context = super().get_context_data(**kwargs)
         context.update({
             'icon_list' : GroupIcon.objects.all()
@@ -138,6 +148,9 @@ class GroupCreate(generic.CreateView):
         return context
 
     def form_valid(self, form):
+        """
+        グループとメンバーの作成
+        """
         icon = self.request.POST['icon']
         group = form.save(commit=False)
         group.icon = icon
@@ -162,24 +175,44 @@ class GroupTop(generic.DetailView):
     template_name = 'GroupConnect/group_top.html'
     model = Group
 
-    def get_queryset(self):
-        ID = self.request.user.id
+    def get_context_data(self, **kwargs):
+        """
+            参加メンバー一覧の取得
+        """
+        member_list = Member.objects.filter(group_id=self.kwargs.get('pk'))
+        users = []
+        for members in member_list:
+            username = User.objects.filter(id=members.user_id)
+            users += username
 
-        members = Member.objects.filter(user_id=ID)
-        
-        g = []
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'user_list' : users
+        })
+        return context
 
-        for i in members:
-            groups = Group.objects.all().filter(id=i.group_id)
-            g += groups
+class GroupSet(generic.DetailView):
+    template_name = 'GroupConnect/group_setting.html'
+    model = Group
+
+class MemberList(generic.DetailView):
+    template_name = 'GroupConnect/member_list.html'
+    model = Group
+    
+    def get_context_data(self, **kwargs):
+        """
+            参加メンバー一覧の取得
+        """
+        member_list = Member.objects.filter(group_id=self.kwargs.get('pk'))
+        users = []
+        for members in member_list:
+            username = User.objects.filter(id=members.user_id)
+            users += username
 
 
-        return g
-
-def group(request, group_id):
-    group = Group.objects.get(id = group_id)
-    return render(request, 'GroupConnect/group_top.html', {'group':group})
-
-def userform(request, user_id):
-    user = User.objects.get(id = user_id)
-    return render(request, 'GroupConnect/user_form.html', {'user':user})
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'user_list' : users ,
+            'members' : member_list
+        })
+        return context

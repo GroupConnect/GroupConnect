@@ -10,9 +10,10 @@ urlpatterns = [
     path('user_create/done', views.UserCreateDone.as_view(), name='user_create_done'),
     path('user_create/complete/<token>/', views.UserCreateComplete.as_view(), name='user_create_complete'),
     path('mypage/', views.Mypage.as_view(), name='mypage'),
-    path('notice_detail/<int:notice_id>/', views.detail, name='notice_detail'),
+    path('notice_detail/(?P<pk>[0-9]+)/', views.NoticeDetail.as_view(), name='notice_detail'),
     path('group_create/', views.GroupCreate.as_view(), name='group_create'),
+    path('group_top/(?P<pk>[0-9]+)/', views.GroupTop.as_view(), name='group_top'),
 
-    path('group_top/<int:group_id>/', views.group, name='group_top'),
-    path('user_form/<int:user_id>', views.userform, name='user_form'),
+    path('group_top/(?P<pk>[0-9]+)/group_setting/', views.GroupSet.as_view(), name='group_setting'),
+    path('group_top/(?P<pk>[0-9]+)/member_list/', views.MemberList.as_view(), name='member_list'),
 ]

@@ -14,7 +14,7 @@
     <div  class="nav-bar fixed-top">
         <!-- ナビゲーションバー -->
     <nav class="navbar navbar-expand-sm navbar-light bar">
-        <a class="navbar-brand groupconnect" href="#">GroupConnect</a>
+        <a class="navbar-brand groupconnect" href="{% url 'GroupConnect:mypage' %}">GroupConnect</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -66,11 +66,11 @@
                     グループメニュー
                     </a>
                     <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item d-inline grname" href="#">KBC</a>
+                    <a class="dropdown-item d-inline grname" href="#">{{group.group_name}}</a>
                     <a class="dropdown-item d-inline" href="#">掲示板</a>
                     <a class="dropdown-item d-inline" href="#">共有フォルダ</a>
-                    <a class="dropdown-item d-inline" href="#">メンバー一覧</a>
-                    <a class="dropdown-item d-inline" href="#">設定</a>
+                    <a class="dropdown-item d-inline" href="{% url 'GroupConnect:member_list' group.pk %}">メンバー一覧</a>
+                    <a class="dropdown-item d-inline" href="{% url 'GroupConnect:group_setting' group.pk %}">設定</a>
                     </div>
                 </li>
             </ul>
@@ -86,11 +86,9 @@
                             <h1 class="navbar-brand grlist">参加メンバー</h1>
                         </div>
                         <div class="col-lg-12 left-down">
-                            <a class="d-block" href="#">白方丈晴</a>
-                            <a class="d-block" href="#">越智友昭</a>
-                            <a class="d-block" href="#">久保龍之介</a>
-                            <a class="d-block" href="#">髙橋よしき</a>
-                            <a class="d-block" href="#">本宮ゆうま</a>
+                            {% for users in user_list %}
+                                <a class="d-block" href="#">{{users.last_name}}{{users.first_name}}</a>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

@@ -105,16 +105,12 @@ body {
     /* チェックボックスにカーソルを合わせたときに、
     カーソルが指のマークになるようにします。 */
     cursor: pointer;
+    display: none;
 }
 .image_box img.thumbnail.checked {
     border: 4px solid blue;
     box-sizing: border-box;
 }
-.image_box img.thumbnail.checked + .disabled_checkbox {
-    /* 画像にcheckedクラスが指定されたときは、
-    チェックボックスの非表示を解除します。 */
-    display: block;
-  }
 
 /* エリア右 */
 .member-setting {

@@ -51,7 +51,7 @@
                         アカウント
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'GroupConnect:user_form' user.id %}">プロフィール設定</a>
+                        <a class="dropdown-item" href="#">プロフィール設定</a>
                         <a class="dropdown-item" href="#">メール設定</a>
                         <a class="dropdown-item" href="#">パスワード設定</a>
                         <a class="dropdown-item" href="#">ログアウト</a>
@@ -96,7 +96,7 @@
                     <div class="sidebarmenu">
                         {% for group in group_list %}
                         <p>
-                            <a href="{% url 'GroupConnect:group_top' group.id %}">{{group.group_name}}</a>
+                            <a href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_name}}</a>
 
                         </p>
                         {% endfor %}
@@ -129,7 +129,7 @@
                             {% for notice in notice_list %}
                             <p>
                                 ・
-                                <a href="{% url 'GroupConnect:notice_detail' notice.id %}">{{notice.title}}</a>
+                                <a href="{% url 'GroupConnect:notice_detail' notice.pk %}">{{notice.title}}</a>
                             </p>
                             {% endfor %}
                         
