@@ -121,7 +121,7 @@ class Mypage(generic.ListView):
         g = []
 
         for i in members:
-            groups = Group.objects.all().filter(id=i.group_id)
+            groups = Group.objects.filter(id=i.group_id.id)
             g += groups
 
 
@@ -152,17 +152,20 @@ class GroupCreate(generic.CreateView):
         グループとメンバーの作成
         """
         icon = self.request.POST['icon']
+        name = self.request.user.last_name + self.request.user.first_name
         group = form.save(commit=False)
         group.icon = icon
+        group.author = name
         group.save()
 
-        groups = Group.objects.all().latest('date_joined')
+        groups = Group.objects.all().latest('created_at')
         group_id = groups.id
 
         ID = self.request.user.id
-        user_name = self.request.user.first_name
+        userid = User.objects.get(id=ID)
+        groupid = Group.objects.get(id=group_id)
 
-        Member(user_id=ID, group_id=group_id, name=user_name, authority=True).save()
+        Member(user_id=userid, group_id=groupid, name=name, authority=True).save()
         
 
 
@@ -182,7 +185,7 @@ class GroupTop(generic.DetailView):
         member_list = Member.objects.filter(group_id=self.kwargs.get('pk'))
         users = []
         for members in member_list:
-            username = User.objects.filter(id=members.user_id)
+            username = User.objects.filter(id=members.user_id.id)
             users += username
 
         context = super().get_context_data(**kwargs)
@@ -194,6 +197,20 @@ class GroupTop(generic.DetailView):
 class GroupSet(generic.DetailView):
     template_name = 'GroupConnect/group_setting.html'
     model = Group
+
+    def get_context_data(self, **kwargs):
+        """
+        参加メンバー数取得
+        """
+        member_list = Member.objects.filter(group_id=self.kwargs.get('pk'))
+        membercount = Member.objects.filter(group_id=self.kwargs.get('pk')).count()
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'count' : membercount,
+            'members' : member_list
+        })
+        return context
+
 
 class MemberList(generic.DetailView):
     template_name = 'GroupConnect/member_list.html'

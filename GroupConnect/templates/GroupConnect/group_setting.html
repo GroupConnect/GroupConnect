@@ -135,7 +135,7 @@
                                         <p class="item">作成日時</p>
                                     </div>
                                     <div class="col-lg-10">
-                                        <p class="contents">{{group.date_joined}}</p>
+                                        <p class="contents">{{group.created_at}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
                                         <p class="item">作成者</p>
                                     </div>
                                     <div class="col-lg-10">
-                                        <p class="contents">河原　たろう</p>
+                                        <p class="contents">{{group.author}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +157,7 @@
                                         <p class="item">メンバー数</p>
                                     </div>
                                     <div class="col-lg-10">
-                                        <p class="contents">30名</p>
+                                        <p class="contents">{{count}}名</p>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +171,7 @@
                                         <div class="textarea">  
                                             <div class="rounded p-4">
                                                 <div class="form-group d-inline">
-                                                    <textarea class="border border-dark form-control" id="exampleFormControlTextarea1" rows="7">{{group.icon}}</textarea>
+                                                    <textarea class="border border-dark form-control" id="exampleFormControlTextarea1" rows="7">{{group.notice}}</textarea>
                                                 </div>
                                             </div>  
                                         </div>
@@ -257,122 +257,23 @@
                                         </tr>
                                 　</thead>
                                     <tbody>
+                                        {% for member in members %}
                                         <tr>
-                                        <th scope="row">河原たろう</th>
-                                        <td>******@stu.kawahara.ac.jp</td>
-                                        <td>管理者</td>
-                                        <td class="status"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">河原たろう</th>
-                                            <td>******@stu.kawahara.ac.jp</td>
-                                            <td></td>
-                                            <td class="status">
-                                                <input type="button" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" value="権限付与">
-                                                <form class="d-inline" method="POST">
-                                                    {% csrf_token %}
-                                                    <div class="modal fade"id="basicModal3"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-body">
-                                                                    <h3>権限を付与しますがよろしいですか？</h3>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <input type="submit" class="btn btn-primary" value="はい">
-                                                                    <button type="button" class="btn btn-default"data-dismiss="modal">いいえ</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                                <input type="button" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" value="除名">
-                                                <form class="d-inline" method="POST">
-                                                    {% csrf_token %}
-                                                    <div class="modal fade"id="basicModal4"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-body">
-                                                                    <h3>この操作は元に戻せません。<br>除名してもよろしいですか？</h3>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <input type="submit" class="btn btn-primary" value="はい">
-                                                                    <button type="button" class="btn btn-default"data-dismiss="modal">いいえ</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">河原たろう</th>
-                                            <td>******@stu.kawahara.ac.jp</td>
+                                        <th scope="row">{{member.name}}</th>
+                                        <td>{{member.user_id.email}}</td>
+                                        {% if member.authority == True %}
                                             <td>管理者</td>
-                                            <td class="status">
-                                                <input type="button" class="btn btn-primary authority-deprivation" data-toggle="modal" data-target="#basicModal5" value="権限剥奪">
-                                                <form class="d-inline" method="POST">
-                                                    {% csrf_token %}
-                                                    <div class="modal fade"id="basicModal5"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-body">
-                                                                    <h3>権限を剥奪しますがよろしいですか？</h3>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <input type="submit" class="btn btn-primary" value="はい">
-                                                                    <button type="button" class="btn btn-default"data-dismiss="modal">いいえ</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">河原たろう</th>
-                                            <td>******@stu.kawahara.ac.jp</td>
+                                        {% else %}
                                             <td></td>
-                                            <td class="status">
-                                                <input type="button" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" value="権限付与">
-                                                <input type="button" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" value="除名">
-                                            </td>
+                                        {% endif %}
+                                                <td class="status">
+                                                    <input type="button" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" value="権限付与">
+                                                    <input type="button" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" value="除名">
+                                                </td>
                                         </tr>
-                                        <tr>
-                                            <th scope="row">河原たろう</th>
-                                            <td>******@stu.kawahara.ac.jp</td>
-                                            <td></td>
-                                            <td class="status">
-                                                <input type="button" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" value="権限付与">
-                                                <input type="button" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" value="除名">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">河原たろう</th>
-                                            <td>******@stu.kawahara.ac.jp</td>
-                                            <td></td>
-                                            <td class="status">
-                                                <input type="button" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" value="権限付与">
-                                                <input type="button" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" value="除名">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">河原たろう</th>
-                                            <td>******@stu.kawahara.ac.jp</td>
-                                            <td></td>
-                                            <td class="status">
-                                                <input type="button" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" value="権限付与">
-                                                <input type="button" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" value="除名">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">河原たろう</th>
-                                            <td>******@stu.kawahara.ac.jp</td>
-                                            <td></td>
-                                            <td class="status">
-                                                <input type="button" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" value="権限付与">
-                                                <input type="button" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" value="除名">
-                                            </td>
-                                        </tr>
+                                        {% endfor %}
+
+
                                     </tbody>
                                 </table>
                             </div>

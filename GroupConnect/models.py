@@ -2,7 +2,7 @@ import datetime
 from django.conf import settings
 from django.db import models
 from django.core.mail import send_mail
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin, AbstractUser
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
@@ -103,39 +103,133 @@ if settings.AUTH_USER_MODEL == 'GroupConnect.User':
         def username(self):
             return self.email
 
-
 class Group(models.Model):
+    """
+    グループのクラス
+    Parameters
+    ----------
+    id : int
+        対象の識別用PrimaryKey
+    group_name : str
+        対象のグループ名
+    icon :  str
+        対象のグループのアイコン
+    date_joined : datetime
+        対象のグループが作られた日時
+    notice : str
+        対象のグループのお知らせ
+    author : str
+        対象のグループの作成者名
+    """
     id = models.AutoField(primary_key=True, db_column='id')
-    group_name = models.CharField(_('グループ名'), max_length=100, db_column='group_name')
+    group_name = models.CharField(_('グループ名'),max_length=100, db_column='group_name')
     icon = models.ImageField(upload_to='static/images/', db_column='icon', blank=True, null=True)
-    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    created_at = models.DateTimeField(_('created_at'), default=timezone.now)
+    notice = models.TextField(db_column='notice', null=True)
+    author = models.CharField(max_length=100, db_column='author')
+
+    def __str__(self):
+        """
+        Returns
+        -------
+        __str__ : str
+            対象のグループ名を返す
+        """
+        return self.group_name
 
 class Member(models.Model):
-    user_id = models.IntegerField(db_column='user_id')
-    group_id = models.IntegerField(db_column='group_id')
+    """
+    グループにおけるメンバーのクラス
+    Parameters
+    ----------
+    user_id = int
+        対象のユーザを参照する外部キー
+    group_id : int
+        対象の所属するグループを参照する外部キー
+    name : str
+        対象のメンバーの名前
+    authority : boolean
+        対象のメンバーの権限のフラグ
+    """
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
+    group_id = models.ForeignKey(Group, on_delete=models.CASCADE, db_column='group_id')
     name = models.CharField(max_length=100, db_column='name')
     authority = models.BooleanField(db_column='authority')
 
 class Signboard(models.Model):
+    """
+    掲示板のクラス
+    Parameters
+    ----------
+    id : int
+        対象の識別用PrimaryKey
+    group_id : int
+        対象のGroupクラスのidを参照する外部キー
+    title : str
+        対象の掲示板のタイトル
+    category : str
+        対象の掲示板を分類するカテゴリ
+    text : str
+        対象の掲示板の説明
+    """
     id = models.AutoField(primary_key=True, db_column='id')
-    group_id = models.IntegerField(db_column='group_id')
+    group_id = models.ForeignKey(Group, on_delete=models.CASCADE, db_column='group_id')
     title = models.CharField(max_length=100, db_column='title')
     category = models.CharField(max_length=100, db_column='category')
     text = models.TextField(db_column='text')
 
+    def __str__(self):
+        """
+        Returns
+        -------
+        __str__ : str
+            対象のタイトルを返す
+        """
+        return self.title
+
 class Post(models.Model):
+    """
+    投稿のクラス
+    Parameters
+    ----------
+    id : int
+        対象の識別用PrimaryKey
+    signboard_id : int
+        対象のSignBoardクラスのidを参照する外部キー
+    text : str
+        対象の投稿の本文
+    contributer : str
+        対象のUserクラスのemailを参照する外部キー
+    posted : datetime.datetime
+        対象の投稿日時をPython標準のdatetime型で保存する
+    read_number : int
+        対象の自クラスに結び付くSituationクラスのユーザ数を格納する
+    """
     id = models.AutoField(primary_key=True, db_column='id')
-    signboard_id = models.IntegerField(db_column='signboard_id')
+    signboard_id = models.ForeignKey(Signboard, on_delete=models.CASCADE, db_column='signboard_id')
     text = models.TextField(db_column='text')
-    contributer = models.CharField(max_length=100, db_column='contributer')
-    posted = models.DateTimeField(db_column='posted')
+    contributer = models.ForeignKey(Member, on_delete=models.CASCADE, db_column='contributer')
+    created_at = models.DateTimeField(db_column='created_at')
     read_number = models.IntegerField(db_column='read_number')
 
 class Situation(models.Model):
+    """
+    既読状況のクラス
+    Parameters
+    ----------
+    id : int
+        対象の識別用PrimaryKey
+    post_id : int
+        対象の元となる投稿IDを参照する外部キー
+    user_id : int
+        対象の投稿に対して既読になっているUserIDを参照する外部キー
+    read_situation : boolean
+        対象の元となる投稿の既読可否を保持する
+    """
     id = models.AutoField(primary_key=True, db_column='id')
-    post_id = models.IntegerField(db_column='post_id')
-    user_id = models.IntegerField(db_column='user_id')
-    read_situation = models.CharField(max_length=10, db_column='read_situation')
+    post_id = models.ForeignKey(Post, on_delete=models.CASCADE, db_column='post_id')
+    user_id = models.ForeignKey(Member, on_delete=models.CASCADE, db_column='user_id')
+    read_situation = models.BooleanField(db_column='read_situation')
 
 class Calendar(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
@@ -198,9 +292,6 @@ class Notice(models.Model):
 class GroupIcon(models.Model):
 	id = models.AutoField(primary_key=True, db_column='id')
 	icon = models.ImageField(upload_to='static/images/', db_column='icon')
-
-
-
 
 
 
