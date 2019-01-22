@@ -1,18 +1,18 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import (
     LoginView, LogoutView
 )
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.signing import BadSignature, SignatureExpired, loads, dumps
 from django.http import Http404, HttpResponseBadRequest
-from django.shortcuts import redirect
+from django.shortcuts import redirect, resolve_url
 from django.template.loader import get_template
 from django.views import generic
 from .forms import (
-    LoginForm, UserCreateForm, GroupCreateForm
+    LoginForm, UserCreateForm, GroupCreateForm, UserUpdateForm
 )
 from .models import (
     Notice, Group, Member, GroupIcon
@@ -247,3 +247,27 @@ class MemberList(generic.DetailView):
             'members' : member_list
         })
         return context
+
+class OnlyYouMixin(UserPassesTestMixin):
+    raise_exception = True
+
+    def test_func(self):
+        user = self.request.user
+        return user.pk == self.kwargs['pk'] or user.is_superuser
+
+
+class UserUpdate(OnlyYouMixin, generic.UpdateView):
+    model = User
+    form_class = UserUpdateForm
+    template_name = 'GroupConnect/user_form.html'
+
+    def get_success_url(self):
+        return resolve_url('GroupConnect:user_update', pk=self.kwargs['pk'])
+
+    context_object_name = 'rogin_user'
+
+    def get_queryset(self):
+        ID = self.request.user.id
+        user = User.objects.filter(id = ID)
+
+        return user

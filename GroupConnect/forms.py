@@ -47,5 +47,22 @@ class GroupCreateForm(forms.ModelForm):
         for field in self.fields.values():
             field.widget.attrs["class"] = "form-control"
 
+
+class UserUpdateForm(forms.ModelForm):
+    """ユーザー情報更新フォーム"""
+
+    class Meta:
+        model = User
+        if User.USERNAME_FIELD == 'email':
+            fields = ('last_name', 'first_name','rome_last_name', 'rome_first_name', 'icon', 'introduction')
+        else:
+            fields = ('username', 'email', 'first_name', 'last_name')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+
 class MailSendForm(forms.Form):
     email = forms.CharField()

@@ -49,7 +49,7 @@ if settings.AUTH_USER_MODEL == 'GroupConnect.User':
         rome_last_name = models.CharField(_('苗字(ローマ字)'), max_length=100, blank=True, null=True)
         rome_first_name = models.CharField(_('名前(ローマ字)'), max_length=100, blank=True, null=True)
         password = models.CharField(_('パスワード'), max_length=250)
-        icon = models.ImageField(_('icon'), upload_to='static/images/', blank=True, null=True)
+        icon = models.ImageField(_('icon'), upload_to='static/images/', blank=True, null=True, default='static/images/real-egg.jpg')
         introduction = models.TextField(_('introduction'), blank=True, null=True)
         plan_mail_time = models.TimeField(_('plan_time'), default=datetime.time(7,0,0))
         new_mail_stop_time = models.TimeField(_('mail_stop_time'), default=datetime.time(1,0,0))
