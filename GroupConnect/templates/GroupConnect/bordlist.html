@@ -104,7 +104,22 @@
                                     </div>
                                 </div>
                                 </form> 
-
+                                <!-- カテゴリーコンテンツ -->
+                                <table class="table table-hover">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th scope="col-lg-2">カテゴリー一覧</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="side-tbody">
+                                        {% for message in messages %}
+                                        <tr>
+                                            <th><a href="#">{{ message.category }}</a></th>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                  </table>
+                                <!-- カテゴリーコンテンツ終わり -->
                                <!-- サイドバーカテゴリー追加終わり -->
                             </div>
                        </div>
@@ -175,20 +190,26 @@
                                    <table class="table">
                                        <thead class="thead-dark">
                                            <tr>
-                                               <th scope="col">タイトル</th>
-                                               <th scope="col">掲示板の説明</th>
-                                               <th scope="col">最終更新日</th>
-                                               <th class="th" scope="col">削除</th>
+                                                <th>#</th>
+                                                <th scope="col">タイトル</th>
+                                                <th>掲示板の説明</th>
+                                                <th>最終更新日</th>
+                                                <th>削除</th>
                                            </tr>
                                        </thead>
                                        <tbody>
                                         {% for message in messages %}
+                                        <form method="POST">
+                                        {% csrf_token %}
                                         <tr>
-                                            <td scope="row"><a href="#">{{ message.title }}</a></td>
+                                            <th scope="row">1
+                                            <td><a href="#">{{ message.title }}</a></td>
                                             <td>{{ message.text }}</td>
                                             <td>{{ message.updated_at }}</td>
-                                            <td class="td"><button class="btn-primary">削除</button></td>
+                                            <td><button type="submit" class="btn-primary" name="delete" value="{{ message.id }}">削除</button></td>
+                                            </th>
                                         </tr>
+                                        </form>
                                         {% endfor %}
                                        </tbody>
                                    </table>

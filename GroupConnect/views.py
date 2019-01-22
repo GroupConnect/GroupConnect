@@ -72,6 +72,12 @@ class bordlist(generic.CreateView) :
         })
         return context
 
+    def post(self,request):
+        Signboard_pk = request.POST['delete']
+        Signboard.objects.filter(id=Signboard_pk).delete()
+
+        return redirect('GroupConnect:bordlist')  
+
     def get_queryset(self):
         ID = self.request.user.id
 
@@ -97,6 +103,9 @@ class SignboardView(generic.DetailView):
     model = Signboard
     template_name = 'GroupConnect/signboard_detail.html'
 
-
+class SignboardDelete(generic.DeleteView):
+    model = Signboard
+    success_url = 'GroupConnect:bordlist'
+    
 
 

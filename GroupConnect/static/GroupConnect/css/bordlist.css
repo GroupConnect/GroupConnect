@@ -172,9 +172,13 @@ tbody {
 
 th, td {
     width: 319px;
-    border: solid 1px #000000;
 }
 
 .th, .td {
     width: 80px;
 } 
+
+.side-tbody{
+    height: 380px;
+    overflow-y: auto;
+}
