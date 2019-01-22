@@ -96,3 +96,7 @@ class bordlist(generic.CreateView) :
 class SignboardView(generic.DetailView):
     model = Signboard
     template_name = 'GroupConnect/signboard_detail.html'
+
+
+
+

@@ -44,6 +44,7 @@ body {
     margin: 0px 0px 0px 40px;
 }
 
+/* サイドバー */
 .side {
     height: 593px;
     border:solid 2px #5f9644;
@@ -102,6 +103,7 @@ body {
     margin: 15px 0px 0px 0px;
 }
 
+/* メインコンテンツ */
 .right {
     height: 593px;
     max-height: 593px;
@@ -120,6 +122,23 @@ body {
 .bord-create, .choice {
     margin: 0px 0px 0px 50px;
     background-color: #e5eee6;
+}
+/* モーダル */
+
+.modal-title {
+    margin: 0px 0px 0px 180px;
+}
+
+.modal-category {
+    float: left;
+}
+
+.modal-title2, .modal-category2, .modal-description {
+    margin: 0px 0px 0px 0px;
+}
+
+.form-control {
+    margin: 0px 0px 20px 0px;
 }
 
 .sort1 {
