@@ -14,7 +14,7 @@
         <div  class="nav-bar fixed-top">
             <!-- ナビゲーションバー -->
             <nav class="navbar navbar-expand-sm navbar-light bar">
-                <a class="navbar-brand groupconnect" href="mypage">GroupConnect</a>
+                <a class="navbar-brand groupconnect" href="{% url 'GroupConnect:mypage' %}">GroupConnect</a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -81,12 +81,12 @@
                 <div class="tab-content">
                     <div id="tab1" class="tab-pane active">
                             <div class="col-lg-12 right1">
-                                <form method="POST" id="form1">
+                                <!-- ボタン -->
+                                <div class="nav-item active d-inline">
+                                    <input type="submit" class="btn btn-warning change" value="変更する">
+                                </div>
+                                <form action="" method="POST">
                                     {% csrf_token %}
-                                    <!-- ボタン -->
-                                    <div class="nav-item active d-inline">
-                                        <input type="submit" class="btn btn-warning change" value="変更する">
-                                    </div>
                                     <div class="nav-item active d-inline">
                                         <!--  <button class="btn closure" data-toggle="modal" data-target="#basicModal">閉鎖する</button> -->
                                         <input type="button" class="btn closure" data-toggle="modal" data-target="#basicModal" value="閉鎖する">
@@ -97,7 +97,7 @@
                                                         <h3>この操作は元に戻せません。<br>閉鎖してもよろしいですか？</h3>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <input type="submit" class="btn btn-primary" value="はい">
+                                                        <button type="submit" class="btn btn-primary" name="delete" value="{{group.pk}}">はい</button>
                                                         <button type="button" class="btn btn-default"data-dismiss="modal">いいえ</button>
                                                     </div>
                                                 </div>
@@ -105,6 +105,7 @@
                                         </div>
                                     </div>
                                 </form>
+
                             </div>
                             <div class="col-lg-12 right2">
                                 <!-- グループ名 -->
@@ -225,6 +226,7 @@
                                                 </div>
                                             </div>
                                 </div>
+
                                 <div class="withdrawal">
                                     <input type="button" class="btn" data-toggle="modal" data-target="#basicModal2" value="脱退する">
                                     <form method="POST">
@@ -236,7 +238,7 @@
                                                         <h3>この操作は元に戻せません。<br>脱退してもよろしいですか？</h3>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <input type="submit" class="btn btn-primary" value="はい">
+                                                        <button type="submit" class="btn btn-primary" name="secession" value="{{group.pk}}">はい</button>
                                                         <button type="button" class="btn btn-default"data-dismiss="modal">いいえ</button>
                                                     </div>
                                                 </div>

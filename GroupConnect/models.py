@@ -125,7 +125,7 @@ class Group(models.Model):
     group_name = models.CharField(_('グループ名'),max_length=100, db_column='group_name')
     icon = models.ImageField(upload_to='static/images/', db_column='icon', blank=True, null=True)
     created_at = models.DateTimeField(_('created_at'), default=timezone.now)
-    notice = models.TextField(db_column='notice', null=True)
+    notice = models.TextField(db_column='notice', default='')
     author = models.CharField(max_length=100, db_column='author')
 
     def __str__(self):

@@ -200,7 +200,9 @@ class GroupSet(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         """
+        参加メンバー一覧取得
         参加メンバー数取得
+        (ナビバーに使う参加グループ一覧がいるかも)
         """
         member_list = Member.objects.filter(group_id=self.kwargs.get('pk'))
         membercount = Member.objects.filter(group_id=self.kwargs.get('pk')).count()
@@ -210,6 +212,18 @@ class GroupSet(generic.DetailView):
             'members' : member_list
         })
         return context
+
+    def post(self, request, pk):
+        if 'delete' in request.POST: #閉鎖するボタンを押下した場合
+            group_pks = request.POST['delete']
+            Group.objects.filter(id=group_pks).delete()
+        elif 'secession' in request.POST: #脱退するボタンを押下した場合
+            ID = self.request.user.id
+            group_pks = request.POST['secession']
+            Member.objects.filter(user_id=ID, group_id=group_pks).delete()
+
+
+        return redirect('GroupConnect:mypage')
 
 
 class MemberList(generic.DetailView):
@@ -223,7 +237,7 @@ class MemberList(generic.DetailView):
         member_list = Member.objects.filter(group_id=self.kwargs.get('pk'))
         users = []
         for members in member_list:
-            username = User.objects.filter(id=members.user_id)
+            username = User.objects.filter(id=members.user_id.id)
             users += username
 
 
