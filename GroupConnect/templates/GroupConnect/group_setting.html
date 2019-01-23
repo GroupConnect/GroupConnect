@@ -30,7 +30,7 @@
                                 {% for group in groups %}
                                     <a class="dropdown-item" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_id.group_name}}</a>
                                 {% endfor %}
-                                <a class="dropdown-item" href="grouplist">グループ一覧へ</a>
+                                <a class="dropdown-item" href="{% url 'GroupConnect:group_list'%}">グループ一覧へ</a>
                             </div>
                         </li>
                     </ul>

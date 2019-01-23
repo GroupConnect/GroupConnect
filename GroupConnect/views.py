@@ -287,3 +287,18 @@ class UserUpdate(OnlyYouMixin, generic.UpdateView):
         user = User.objects.filter(id = ID)
 
         return user
+
+class GroupList(generic.ListView):
+    model = Group
+    template_name = 'GroupConnect/grouplist.html'
+
+    def get_context_data(self, **kwargs):
+
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
+
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'groups' : members
+        })
+        return context

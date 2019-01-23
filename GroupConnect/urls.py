@@ -15,9 +15,11 @@ urlpatterns = [
     path('group_top/(?P<pk>[0-9]+)/', views.GroupTop.as_view(), name='group_top'),
     path('group_top/(?P<pk>[0-9]+)/group_setting/', views.GroupSet.as_view(), name='group_setting'),
     path('group_top/(?P<pk>[0-9]+)/member_list/', views.MemberList.as_view(), name='member_list'),
-
-
     path('user_update/<int:pk>/', views.UserUpdate.as_view(), name='user_update'),
     path('groupdel/', views.groupdelete, name='groupdelete'),
     path('secession/', views.groupsecession, name='groupsecession'),
+
+
+    path('group_list/', views.GroupList.as_view(), name='group_list'),
+
 ]
