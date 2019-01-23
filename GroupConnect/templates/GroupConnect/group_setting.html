@@ -80,45 +80,20 @@
                 <!--タブのコンテンツ部分-->
                 <div class="tab-content">
                     <div id="tab1" class="tab-pane active">
+                        <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
                             <div class="col-lg-12 right1">
-                                <!-- ボタン -->
-                                <div class="nav-item active d-inline">
-                                    <input type="submit" class="btn btn-warning change" value="変更する">
-                                </div>
-                                <form action="" method="POST">
-                                    {% csrf_token %}
-                                    <div class="nav-item active d-inline">
-                                        <!--  <button class="btn closure" data-toggle="modal" data-target="#basicModal">閉鎖する</button> -->
-                                        <input type="button" class="btn closure" data-toggle="modal" data-target="#basicModal" value="閉鎖する">
-                                        <div class="modal fade"id="basicModal"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <h3>この操作は元に戻せません。<br>閉鎖してもよろしいですか？</h3>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-primary" name="delete" value="{{group.pk}}">はい</button>
-                                                        <button type="button" class="btn btn-default"data-dismiss="modal">いいえ</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-
-                            </div>
-                            <div class="col-lg-12 right2">
                                 <!-- グループ名 -->
                                 <div class="row">
                                     <div class="col-lg-2">
                                         <p class="item">グループ名</p>
                                     </div>
                                     <div class="col-lg-10">
-                                        <input type="text" name="name" class="name-form" value="{{group.group_name}}">
+                                        <input type="text" name="group_name" class="name-form" value="{{group.group_name}}">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 right3">
+                            <div class="col-lg-12 right2">
                                 <!-- アイコン -->
                                 <div class="row">
                                     <div class="col-lg-2">
@@ -127,9 +102,20 @@
                                     <div class="col-lg-10">
                                         <img class="rounded border" src="{{ group.icon.url }}" alt="foo" />
                                     </div>
+                                    <div class="col-lg-15">
+                                        <div class="d-inline">
+                                            <label class="input-group-btn">
+                                                <span class="btn btn-primary">
+                                                    画像の選択<input type="file" name="icon" style="display:none">
+                                                </span>
+                                            </label>
+                                            <input type="text" class="form-control d-inline form" readonly="">
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 right4">
+                            <div class="col-lg-12 right3">
                                 <!-- 作成日時 -->
                                 <div class="row">
                                     <div class="col-lg-2">
@@ -140,7 +126,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 right5">
+                            <div class="col-lg-12 right4">
                                 <!-- 作成者 -->
                                 <div class="row">
                                     <div class="col-lg-2">
@@ -151,7 +137,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 right6">
+                            <div class="col-lg-12 right5">
                                 <!-- メンバー数 -->
                                 <div class="row">
                                     <div class="col-lg-2">
@@ -162,7 +148,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 right7">
+                            <div class="col-lg-12 right6">
                                 <!-- お知らせ -->
                                 <div class="row">
                                     <div class="col-lg-2">
@@ -172,14 +158,46 @@
                                         <div class="textarea">  
                                             <div class="rounded p-4">
                                                 <div class="form-group d-inline">
-                                                    <textarea class="border border-dark form-control" id="exampleFormControlTextarea1" rows="7">{{group.notice}}</textarea>
+                                                    <textarea name="notice" class="border border-dark form-control" id="exampleFormControlTextarea1" rows="7">{{group.notice}}</textarea>
                                                 </div>
                                             </div>  
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-lg-12 right7">
+                                    <div class="nav-item active d-inline">
+                                        <input type="submit" class="btn btn-warning change" value="変更する">
+                                    </div>
+                            </form>
+                            <form action="{% url 'GroupConnect:groupdelete' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="nav-item active d-inline">
+                                    <input type="button" class="btn closure" data-toggle="modal" data-target="#basicModal" value="閉鎖する">
+                                    <div class="modal fade"id="basicModal"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <h3>この操作は元に戻せません。<br>閉鎖してもよろしいですか？</h3>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary" name="delete" value="{{group.pk}}">はい</button>
+                                                    <button type="button" class="btn btn-default"data-dismiss="modal">いいえ</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            </div>
+
+
+
                     </div>
+
+
+
 
                     <div id="tab2" class="tab-pane">
             
@@ -229,7 +247,7 @@
 
                                 <div class="withdrawal">
                                     <input type="button" class="btn" data-toggle="modal" data-target="#basicModal2" value="脱退する">
-                                    <form method="POST">
+                                    <form action="{% url 'GroupConnect:groupsecession' %}" method="POST">
                                         {% csrf_token %}
                                         <div class="modal fade"id="basicModal2"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
                                             <div class="modal-dialog">

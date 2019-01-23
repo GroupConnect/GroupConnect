@@ -18,4 +18,6 @@ urlpatterns = [
 
 
     path('user_update/<int:pk>/', views.UserUpdate.as_view(), name='user_update'),
+    path('groupdel/', views.groupdelete, name='groupdelete'),
+    path('secession/', views.groupsecession, name='groupsecession'),
 ]

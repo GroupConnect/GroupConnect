@@ -12,7 +12,7 @@ from django.shortcuts import redirect, resolve_url
 from django.template.loader import get_template
 from django.views import generic
 from .forms import (
-    LoginForm, UserCreateForm, GroupCreateForm, UserUpdateForm
+    LoginForm, UserCreateForm, GroupCreateForm, UserUpdateForm,GroupUpdateForm
 )
 from .models import (
     Notice, Group, Member, GroupIcon
@@ -194,8 +194,9 @@ class GroupTop(generic.DetailView):
         })
         return context
 
-class GroupSet(generic.DetailView):
+class GroupSet(generic.UpdateView):
     template_name = 'GroupConnect/group_setting.html'
+    form_class = GroupUpdateForm
     model = Group
 
     def get_context_data(self, **kwargs):
@@ -213,17 +214,29 @@ class GroupSet(generic.DetailView):
         })
         return context
 
-    def post(self, request, pk):
-        if 'delete' in request.POST: #閉鎖するボタンを押下した場合
-            group_pks = request.POST['delete']
-            Group.objects.filter(id=group_pks).delete()
-        elif 'secession' in request.POST: #脱退するボタンを押下した場合
-            ID = self.request.user.id
-            group_pks = request.POST['secession']
-            Member.objects.filter(user_id=ID, group_id=group_pks).delete()
+    def get_success_url(self):
+        return resolve_url('GroupConnect:group_setting', pk=self.kwargs['pk'])
 
 
-        return redirect('GroupConnect:mypage')
+def groupdelete(request):
+    """
+    グループの閉鎖
+    """
+    group_pk = request.POST['delete']
+    Group.objects.filter(id=group_pk).delete()
+    return redirect('GroupConnect:mypage')
+
+def groupsecession(request):
+    """
+    グループからの脱退
+    """
+    ID = request.user.id
+    group_pks = request.POST['secession']
+    Member.objects.filter(user_id=ID, group_id=group_pks).delete()
+    return redirect('GroupConnect:mypage')
+
+
+
 
 
 class MemberList(generic.DetailView):

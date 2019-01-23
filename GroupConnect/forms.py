@@ -64,5 +64,16 @@ class UserUpdateForm(forms.ModelForm):
             field.widget.attrs['class'] = 'form-control'
 
 
+class GroupUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Group
+        fields = ('group_name','icon','notice')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+
 class MailSendForm(forms.Form):
     email = forms.CharField()
