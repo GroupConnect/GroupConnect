@@ -205,12 +205,15 @@ class GroupSet(generic.UpdateView):
         参加メンバー数取得
         (ナビバーに使う参加グループ一覧がいるかも)
         """
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
         member_list = Member.objects.filter(group_id=self.kwargs.get('pk'))
         membercount = Member.objects.filter(group_id=self.kwargs.get('pk')).count()
         context = super().get_context_data(**kwargs)
         context.update({
             'count' : membercount,
-            'members' : member_list
+            'members' : member_list,
+            'groups' : members
         })
         return context
 
