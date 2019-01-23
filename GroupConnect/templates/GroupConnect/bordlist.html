@@ -202,15 +202,17 @@
                                         <form method="POST">
                                         {% csrf_token %}
                                         <tr>
-                                            <th scope="row">1
+                                            <th scope="row"><input type="checkbox" name="checkbox" value="{{ message.id }}"></th>
                                             <td><a href="#">{{ message.title }}</a></td>
                                             <td>{{ message.text }}</td>
                                             <td>{{ message.updated_at }}</td>
                                             <td><button type="submit" class="btn-primary" name="delete" value="{{ message.id }}">削除</button></td>
-                                            </th>
+                                            
                                         </tr>
+                                        
                                         </form>
                                         {% endfor %}
+                                        <!-- <button type="submit"class="btn-primary" name="alldelete" value="{{ message.id }}">削除</button> -->
                                        </tbody>
                                    </table>
                                </div>
