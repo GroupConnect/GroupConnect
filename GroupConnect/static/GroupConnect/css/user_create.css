@@ -1,0 +1,89 @@
+.area {
+    background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
+}
+
+h1 {
+    font-size: 90px;
+    font-family: Times New Roman;
+    text-align: center;
+}
+
+.shinki {
+    width: 25%;
+    font-size: 30px;
+    text-align: center;
+    margin: 20px 0px 0px 0px;
+    border-bottom: 2px solid #5f9644;
+}
+
+form {
+    text-align: center;
+}
+.label_name {
+    text-align: left;
+    margin: 0px 0px -15px 0px;
+}
+.warning {
+    text-align: left;
+}
+.field{
+    text-align: left;
+}
+
+/*.entryform1 {
+    font-size: 18px;
+    margin: 0px 0px 0px 0px;
+    text-align: right;
+}
+
+.entryform2 {
+    margin: 0px 0px 0px 0px;
+    text-align: left;
+}*/
+
+label {
+    margin: 0px 0px 13px 0px;
+}
+
+span {
+    color: #ff0000;
+}
+
+/*.last_name, .first_name, .rome_last_name, .rome_first_name, .email, .password1, .password2 {
+    width: 500px;
+    margin: 0px 0px 10px 0px;
+}*/
+
+#id_last_name, #id_first_name, #id_rome_last_name, #id_rome_first_name, #id_email, #id_password1, #id_password2 {
+    width: 500px;
+    margin: 0px 0px 10px 0px;
+}
+
+img {
+    width: 25px;
+    height: 25px;
+}
+
+.submit {
+    width: 180px;
+    height: 35px;
+    font-size: 20px;
+    margin: 0px 0px 20px 0px;
+    background-color: #ffda37;
+}
+
+/*.nameblank, .romajiblank, .mailblank, .passblank, .passconfblank, .passformatcheck, .passconfformatcheck, .passconfdifferent {
+    color: #ff0000;
+    font-size: 15px;
+    display: none;
+}*/
+.errorlist {
+    font-size: 15px;
+}
+ul {
+    list-style: none;
+}
+li {
+    color: #ff0000;
+}
+

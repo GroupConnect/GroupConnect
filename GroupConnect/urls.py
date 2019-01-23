@@ -25,7 +25,10 @@ urlpatterns = [
     path('password_reset/done/', views.PasswordResetDone.as_view(), name='password_reset_done'),
     path('password_reset/confirm/<uidb64>/<token>/', views.PasswordResetConfirm.as_view(), name='password_reset_confirm'),
     path('password_reset/complete/', views.PasswordResetComplete.as_view(), name='password_reset_complete'),
-    path('user_delete/', views.user_delete, name='user_delete')
+    path('user_delete/', views.user_delete, name='user_delete'),
+    path('user_data_input/', views.UserDataInput.as_view(), name='user_data_input'),
+    path('user_data_confirm/', views.UserDataConfirm.as_view(), name='user_data_confirm'),
+    path('user_data_create/', views.UserDataCreate.as_view(), name='user_data_create'),
 
 ]
 

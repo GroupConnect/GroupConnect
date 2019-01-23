@@ -17,11 +17,36 @@
             <h1>GroupConnect</h1>
         </div>
         <p class="shinki">新規登録</p>
-        <form action="{% url 'GroupConnect:user_create' %}" method="post">
+        <form action="{% url 'GroupConnect:user_data_confirm' %}" method="post">
             {% csrf_token %}
             <div class="container">
                 <div class="row">
-                        <div class="col-md-4 entryform1">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        {{ form.non_field_errors }}
+                        {% for field in form %}
+                            <div class="form-group">
+                                <div class="label_name">
+                                    <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                                </div>
+                                <div class="field">
+                                    {% if field.name == "password1"%}
+                                        {{ field }}<img src="{% static 'GroupConnect/img/icon_eye.jpg' %}" id="passcheck">
+                                    {% elif field.name == "password2" %}
+                                        {{ field }}<img src="{% static 'GroupConnect/img/icon_eye.jpg' %}" id="passcheck2">
+                                    {% else %}
+                                        {{ field }}
+                                    {% endif %}
+                                </div>
+                                <div class="warning">
+                                    {{ field.errors }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+                        <!--<div class="col-md-4 entryform1">
                             <div class="form-group">
                                 <label for="last_name">苗字<span>[必須]</span></label>
                                 <p class="nameblank"></p>
@@ -50,8 +75,8 @@
                             <div class="form-group">
                                 <label for="password2">パスワード(確認用)<span>[必須]</span></label>
                             </div>
-                        </div>
-                        <div class="col-md-8 entryform2">
+                        </div>-->
+                        <!--<div class="col-md-8 entryform2">
                             <div class="form-group">
                                 <input type="text" name="last_name" class="last_name">
                                 <p class="nameblank">苗字を入力してください。</p>
@@ -83,8 +108,8 @@
                                 <p class="passconfformatcheck">半角英数字を8文字以上32文字以下で入力してください。</p>
                                 <p class="passconfdifferent">パスワードとパスワード(確認用)が異なります</p>
                             </div>
-                        </div>
-                </div>　
+                        </div>-->
+                <!--</div>-->　
             </div>
             <input type="submit" class="submit" value="確認画面へ">
         </form>
