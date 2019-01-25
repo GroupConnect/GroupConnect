@@ -94,9 +94,9 @@
 
                     <!-- 参加グループ一覧 -->
                     <div class="sidebarmenu">
-                        {% for group in group_list %}
+                        {% for member in members %}
                         <p>
-                            <a href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_name}}</a>
+                            <a href="{% url 'GroupConnect:group_top' member.group_id.pk %}">{{member.group_id.group_name}}</a>
 
                         </p>
                         {% endfor %}

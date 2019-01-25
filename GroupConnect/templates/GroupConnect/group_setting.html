@@ -196,38 +196,33 @@
                     </div>
 
                     <div id="tab2" class="tab-pane">
-                            <div>
-                                <form action="{% url 'GroupConnect:mailsend' %}" method="POST">
-                                {% csrf_token %}
-                                メールアドレス:<input type="text" name="mailaddress">
-                                <button type="submit" name="invite" value="{{group.pk}}">招待</button>
-                                </form>
+                            <div>                                    
                                 <div class="invitation">
                                     <!-- <input type="button" class="btn btn-warning" value="招待する"> -->
                                     <input type="button" class="btn btn-warning" id="btn2" value="招待する">
                                         <!-- modal content -->
-
-                                            <div class="modal fade" id="modal">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <!-- モーダルヘッダー -->
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">招待する</h5>
-                                                        </div>
-                                                        <!-- モーダルボディ -->
-                                                        <div class="modal-body2">
-                                                            メールアドレス:<input type="text" name="mailaddress">
-                                                            
-                                                        </div>
-                                                        <!-- モーダルフッター -->
-                                                        <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-primary" data-dismiss="modal" name="invite" value="{{group.pk}}">招待</button>
-                                                            <button type="button" class="btn btn-secondary" id="close">キャンセル</button>
-                                                        </div>
+                                        <form action="{% url 'GroupConnect:mailsend' %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="modal fade" id="modal">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <!-- モーダルヘッダー -->
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">招待する</h5>
+                                                    </div>
+                                                    <!-- モーダルボディ -->
+                                                    <div class="modal-body2">
+                                                        メールアドレス:<input type="text" name="mailaddress">                                
+                                                    </div>
+                                                    <!-- モーダルフッター -->
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary" name="invite" value="{{group.pk}}">招待</button>
+                                                        <button type="button" class="btn btn-secondary" id="close">キャンセル</button>
                                                     </div>
                                                 </div>
                                             </div>
-
+                                        </div>
+                                        </form>
                                 </div>
                                 <div class="withdrawal">
                                     <input type="button" class="btn" data-toggle="modal" data-target="#basicModal2" value="脱退する">

@@ -1,12 +1,9 @@
 {% extends "GroupConnect/base.html" %}
 {% block content %}
 
-{% for users in user_list %}
-    {{users.last_name}}{{users.first_name}}
-    {{users.email}}
-{% endfor %}
-
 {% for member in members %}
+    {{member.user_id.last_name}}{{member.user_id.first_name}}
+    {{member.user_id.email}}
     {% if member.authority == True %}
         <p>管理者</p>
     {% else %}

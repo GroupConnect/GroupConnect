@@ -86,8 +86,8 @@
                             <h1 class="navbar-brand grlist">参加メンバー</h1>
                         </div>
                         <div class="col-lg-12 left-down">
-                            {% for users in user_list %}
-                                <a class="d-block" href="#">{{users.last_name}}{{users.first_name}}</a>
+                            {% for member in members %}
+                                <a class="d-block" href="#">{{member.user_id.last_name}}{{member.user_id.first_name}}</a>
                             {% endfor %}
                         </div>
                     </div>

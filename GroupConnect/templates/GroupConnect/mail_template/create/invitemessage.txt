@@ -3,6 +3,6 @@
 下記URLより参加してね。
 
 URL
-{{ protocol}}://{{ domain }}{% url 'GroupConnect:groupinvitecomplete' inviteuser.pk group.id %}
+{{ protocol}}://{{ domain }}{% url 'GroupConnect:groupinvite' inviteuser.pk group.id %}
 
 ほにゃらら

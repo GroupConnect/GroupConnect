@@ -21,6 +21,6 @@ urlpatterns = [
     path('group_list/', views.GroupList.as_view(), name='group_list'),
 
     path('mailsend/', views.mailsend, name='mailsend'),
-    path('groupinvitecomplete/(?P<pk>[0-9]+)/<int:id>', views.GroupInvite, name='groupinvitecomplete')
+    path('groupinvite/(?P<pk>[0-9]+)/(?P<id>[0-9]+)/', views.GroupInvite, name='groupinvite')
 
 ]
