@@ -18,8 +18,9 @@ urlpatterns = [
     path('user_update/<int:pk>/', views.UserUpdate.as_view(), name='user_update'),
     path('groupdel/', views.groupdelete, name='groupdelete'),
     path('secession/', views.groupsecession, name='groupsecession'),
-
-
     path('group_list/', views.GroupList.as_view(), name='group_list'),
+
+    path('mailsend/', views.mailsend, name='mailsend'),
+    path('groupinvitecomplete/(?P<pk>[0-9]+)/<int:id>', views.GroupInvite, name='groupinvitecomplete')
 
 ]

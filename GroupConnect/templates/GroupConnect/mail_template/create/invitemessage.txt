@@ -1,0 +1,8 @@
+﻿{{user.last_name}}{{ user.first_name }} から グループ「{{group.group_name}}」に招待されています。
+
+下記URLより参加してね。
+
+URL
+{{ protocol}}://{{ domain }}{% url 'GroupConnect:groupinvitecomplete' inviteuser.pk group.id %}
+
+ほにゃらら

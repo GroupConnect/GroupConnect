@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
+from django.core.mail import send_mail, EmailMessage
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import (
     LoginView, LogoutView
@@ -239,6 +240,47 @@ def groupsecession(request):
     return redirect('GroupConnect:mypage')
 
 
+def mailsend(request):
+    ID = request.user.id
+    email = request.POST['mailaddress']
+    group_pk = request.POST['invite']
+    user = User.objects.get(id=ID)
+    inviteuser = User.objects.get(email=email)
+    group = Group.objects.get(id=group_pk)
+    current_site = get_current_site(request)
+    domain = current_site.domain
+    from_email = "GroupConnect@hoge.moge"
+    context = {
+        'protocol': request.scheme,
+        'domain': domain,
+        'user': user,
+        'inviteuser': inviteuser,
+        'group': group,
+    }
+
+    subject_template = get_template('GroupConnect/mail_template/create/invitesubject.txt')
+    subject = subject_template.render(context)
+
+    message_template = get_template('GroupConnect/mail_template/create/invitemessage.txt')
+    message = message_template.render(context)
+
+    inviteuser.email_user(subject, message, from_email)
+
+    return redirect('GroupConnect:group_setting', group_pk)
+
+def GroupInvite(request, **kwargs):
+    ID = request.user.id
+    user = User.objects.get(pk=kwargs.get('pk'))
+    group = Group.objects.get(id=kwargs.get('id'))
+    name = user.last_name + user.first_name
+
+
+    if ID == user.id:
+        Member(user_id=user, group_id=group, name=name, authority=False).save()
+    else:
+        return HttpResponseBadRequest()
+
+    return redirect('GroupConnect:mypage')
 
 
 

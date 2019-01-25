@@ -40,7 +40,7 @@
                             アカウント
                             </a>
                             <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="profile">プロフィール設定</a>
+                                <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
                                 <a class="dropdown-item" href="mail_setting">メール設定</a>
                                 <a class="dropdown-item" href="pass_setting">パスワード設定</a>
                                 <a class="dropdown-item" href="#">ログアウト</a>
@@ -53,7 +53,7 @@
                             グループメニュー
                             </a>
                             <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item d-inline grname" href="grouptop">(グループ名)</a>
+                            <a class="dropdown-item d-inline grname" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_name}}</a>
                             <a class="dropdown-item d-inline" href="bordlist">掲示板</a>
                             <a class="dropdown-item d-inline" href="#">メンバー一覧</a>
                             <a class="dropdown-item d-inline" href="group_setting">設定</a>
@@ -173,7 +173,7 @@
                             <form action="{% url 'GroupConnect:groupdelete' %}" method="POST">
                                 {% csrf_token %}
                                 <div class="nav-item active d-inline">
-                                    <input type="button" class="btn closure" data-toggle="modal" data-target="#basicModal" value="閉鎖する">
+                                    <input type="button" class="btn closure" data-toggle="modal" data-target="#basicModal" value="閉鎖する">                                                                        
                                     <div class="modal fade"id="basicModal"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -189,23 +189,24 @@
                                     </div>
                                 </div>
                             </form>
-
                             </div>
 
 
 
                     </div>
 
-
-
-
                     <div id="tab2" class="tab-pane">
-            
                             <div>
+                                <form action="{% url 'GroupConnect:mailsend' %}" method="POST">
+                                {% csrf_token %}
+                                メールアドレス:<input type="text" name="mailaddress">
+                                <button type="submit" name="invite" value="{{group.pk}}">招待</button>
+                                </form>
                                 <div class="invitation">
                                     <!-- <input type="button" class="btn btn-warning" value="招待する"> -->
                                     <input type="button" class="btn btn-warning" id="btn2" value="招待する">
                                         <!-- modal content -->
+
                                             <div class="modal fade" id="modal">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -215,36 +216,19 @@
                                                         </div>
                                                         <!-- モーダルボディ -->
                                                         <div class="modal-body2">
-                                                            <table id="tbl1">
-                                                                <tr><td>河原たろう</td></tr>
-                                                                <tr><td>河原たろう</td></tr>
-                                                                <tr><td>河原たろう河原たろう河原たろう河原たろう河原たろう</td></tr>
-                                                                <tr><td>河原たろう</td></tr>
-                                                                <tr><td>河原たろう</td></tr>
-                                                                <tr><td>河原たろう</td></tr>
-                                                                <tr><td>河原たろう</td></tr>
-                                                                <tr><td>河原たろう</td></tr>
-                                                                <tr><td>河原たろう</td></tr>
-                                                                <tr><td>河原たろう</td></tr>
-                                                                <tr><td>河原たろう</td></tr>
-                                                                <tr><td>河原たろう</td></tr>
-                                                                <tr><td>河原たろう</td></tr>
-                                                                <tr><td>河原たろう</td></tr>
-                                                            </table>
+                                                            メールアドレス:<input type="text" name="mailaddress">
+                                                            
                                                         </div>
-                                                        <form method="POST">
-                                                        {% csrf_token %}
                                                         <!-- モーダルフッター -->
                                                         <div class="modal-footer">
-                                                            <input type="submit" class="btn btn-primary" data-dismiss="modal" value="招待">
+                                                            <button type="submit" class="btn btn-primary" data-dismiss="modal" name="invite" value="{{group.pk}}">招待</button>
                                                             <button type="button" class="btn btn-secondary" id="close">キャンセル</button>
                                                         </div>
-                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
-                                </div>
 
+                                </div>
                                 <div class="withdrawal">
                                     <input type="button" class="btn" data-toggle="modal" data-target="#basicModal2" value="脱退する">
                                     <form action="{% url 'GroupConnect:groupsecession' %}" method="POST">
