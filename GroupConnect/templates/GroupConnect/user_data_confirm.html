@@ -1,21 +1,112 @@
-{% extends "GroupConnect/base.html" %}
-{% block content %}
-    {% for field in form %}
-    <div class="form-group">
-        <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
-        {{ field.value }}
-    </div>
-    {% endfor %}
+{% load static %}
 
-    <form action="{% url 'GroupConnect:user_data_input' %}" method="POST">
-        <button type="submit" class="btn btn-primary btn-lg">戻る</button>
-        {% for field in form %}{{ field.as_hidden }}{% endfor %}
-        {% csrf_token %}
-    </form>
-    <hr>
-    <form action="{% url 'GroupConnect:user_data_create' %}" method="POST">
-        <button type="submit" class="btn btn-primary btn-lg">送信</button>
-        {% for field in form %}{{ field.as_hidden }}{% endfor %}
-        {% csrf_token %}
-    </form>
-{% endblock %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> 新規登録(本登録) </title>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, inital-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'GroupConnect/css/user_confirm.css' %}" />
+    </head>
+    <body>
+        <div class="rounded p-2 area">
+            <h1>GroupConnect</h1>
+        </div>
+        <p class="shinki">登録内容確認</p>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 entryform">
+                    {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-6 entryform2">
+                    {% for field in form %}
+                    <div class="form-group">
+                        <label>{{ field.value }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+                
+                <p class="conf">この内容で登録してもよろしいですか？</p>
+
+                <div class="form_conf">
+                    <form action="{% url 'GroupConnect:user_data_create' %}" method="POST">
+                        <button type="submit" class="submit btn-warning">送信</button>
+                        {% for field in form %}{{ field.as_hidden }}{% endfor %}
+                        {% csrf_token %}
+                    </form>
+                    <form action="{% url 'GroupConnect:user_data_input' %}" method="POST">
+                        <button type="submit" class="cancel">戻る</button>
+                        {% for field in form %}{{ field.as_hidden }}{% endfor %}
+                        {% csrf_token %}
+                    </form>
+                </div>
+
+        <!--<form action="{% url 'GroupConnect:user_data_create' %}" method="post">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row">
+                        <div class="col-md-6 entryform">
+                            <div class="form-group">
+                                <label for="name">名前：</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="romaji">名前(ローマ字)：</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="mail">メールアドレス：</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="pass">パスワード：</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 entryform2">
+                            <div class="form-group">
+                                <label>{{ field.as.last_name }}</label>
+                            </div>
+                            <div class="form-group">
+                                <label>kawahara tarou</label>
+                            </div>
+                            <div class="form-group">
+                                <label>****@stu.kawahara.ac.jp</label>
+                            </div>
+                            <div class="form-group">
+                                <label>********</label>
+                            </div>
+                        </div>
+                </div>　
+            </div>
+            <p class="conf">この内容で登録してもよろしいですか？</p>
+            <input type="submit" class="submit btn-warning" value="登録">
+            <input type="button" class="cancel" data-toggle="modal" data-target="#basicModal" value="キャンセル">
+            <div class="modal fade"id="basicModal"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h3>入力内容が破棄されますが<br>よろしいですか？</h3>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"class="btn btn-primary">はい</button>
+                            <button type="button"class="btn btn-default"data-dismiss="modal">いいえ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>-->
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    </body>
+</html>
