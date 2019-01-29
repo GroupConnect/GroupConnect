@@ -91,19 +91,23 @@ class UserCreateComplete(generic.TemplateView):
 
         return HttpResponseBadRequest()
 
+class OnlyYouMixin(UserPassesTestMixin):
+    raise_exception = True
 
+    def test_func(self):
+        user = self.request.user
+        return user.pk == self.kwargs['pk'] or user.is_superuser
 
-class Mypage(generic.TemplateView): #マイページ
+class Mypage(LoginRequiredMixin, generic.TemplateView): #マイページ
     template_name = 'GroupConnect/mypage.html'
 
     def get_context_data(self, **kwargs):
         """
         参加グループの一覧取得
         お知らせ一覧の取得。
-        """
+        """        
         ID = self.request.user.id
         members = Member.objects.filter(user_id=ID)
-
         context = super().get_context_data(**kwargs)
         context.update({
             'members': members,
@@ -227,6 +231,14 @@ def mailsend(request):
     """
     ID = request.user.id
     email = request.POST['mailaddress']
+    """
+    member = Member.objects.filter(user_id.email=email, group_id=group_pk)
+    if member == None:
+	    登録
+
+    else:
+	    既に参加しているユーザのメールアドレス
+    """
     group_pk = request.POST['invite']
     user = User.objects.get(id=ID)
     inviteuser = User.objects.get(email=email)
@@ -240,6 +252,7 @@ def mailsend(request):
         'user': user,
         'inviteuser': inviteuser,
         'group': group,
+        'token': dumps(inviteuser.pk),
     }
 
     subject_template = get_template('GroupConnect/mail_template/create/invitesubject.txt')
@@ -257,17 +270,36 @@ def GroupInvite(request, **kwargs):
     メンバー招待
         招待メールのリンクをクリックした後
     """
-    ID = request.user.id
-    user = User.objects.get(pk=kwargs.get('pk'))
+    # ID = request.user.id
+    # メールの有効期限 (60*60*24)は1日
+    timeout_seconds = getattr(settings, 'ACTIVATION_TIMEOUT_SECONDS', 60*60*24)
+    # user = User.objects.get(pk=kwargs.get('pk'))
+    token = kwargs.get('token')
     group = Group.objects.get(id=kwargs.get('id'))
-    name = user.last_name + user.first_name
-
+    # name = user.last_name + user.first_name
+    """
     if ID == user.id:
         Member(user_id=user, group_id=group, name=name, authority=False).save()
     else:
         return HttpResponseBadRequest()
 
     return redirect('GroupConnect:mypage')
+    """
+    try:
+        user_pk = loads(token,max_age=timeout_seconds)
+
+    except SignatureExpired: # 有効期限が切れていた場合
+        return HttpResponseBadRequest()
+
+    except BadSignature: # トークンが間違っている場合
+        return HttpResponseBadRequest()
+
+    else:
+        user = User.objects.get(pk=user_pk)
+        name = user.last_name + user.first_name
+        Member(user_id=user, group_id=group, name=name, authority=False).save()
+        return redirect('GroupConnect:mypage')
+
 
 
 
@@ -287,12 +319,7 @@ class MemberList(generic.DetailView): #メンバー一覧ページ
         })
         return context
 
-class OnlyYouMixin(UserPassesTestMixin):
-    raise_exception = True
 
-    def test_func(self):
-        user = self.request.user
-        return user.pk == self.kwargs['pk'] or user.is_superuser
 
 
 class UserUpdate(OnlyYouMixin, generic.UpdateView):
