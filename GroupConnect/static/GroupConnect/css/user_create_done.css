@@ -32,6 +32,8 @@ p {
 
 .back {
     text-align: center;
+    font-size: 30px;
+    margin: 70px 0px 0px 0px;
 }
 
 .cancel {
