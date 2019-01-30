@@ -70,3 +70,21 @@ $(function(){
         });
     });
 })(jQuery);
+
+
+// 複数選択
+var countUpValue = 0;
+$(function () {
+    $('#multi-btn').click(function countUp() {
+        countUpValue++;
+        if ( ( countUpValue % 2 ) != 0  ) {
+            $('[id=checkbox]').show();
+            $('[id=delete]').hide('slow');
+            $('#alldelete').show();
+        } else {
+            $('[id=checkbox]').hide();
+            $('[id=delete]').show();
+            $('#alldelete').hide();
+        }
+    });
+});
