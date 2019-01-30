@@ -53,6 +53,7 @@ class bordlist(generic.CreateView) :
     def form_valid(self,form):
         """ 掲示板作成 """
         groupid = Group.objects.get(id='1')
+        categoryid = Category.objects.get(category_id=request.post['category_id'])
         signboard = form.save(commit = False)
         signboard.group_id= groupid
         signboard.save()
@@ -69,6 +70,7 @@ class bordlist(generic.CreateView) :
         context = super().get_context_data(**kwargs)
         context.update({
             'messages' : Signboard.objects.all()
+            'categorys' : Category.objects.filter(group_id='1')
         })
         return context
 
@@ -114,4 +116,6 @@ class SignboardView(generic.DetailView):
 class SignboardDelete(generic.DeleteView):
     model = Signboard
     success_url = 'GroupConnect:bordlist'
+
+    
     
