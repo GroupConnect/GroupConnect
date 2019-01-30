@@ -82,24 +82,26 @@
                                </div>
 
                                <!-- サイドバーカテゴリー追加 -->
-                               <form class="d-inline" method="POST">
+                               <form class="d-inline" method="POST" action="{% url 'GroupConnect:categoryget' %}">
                                 <div class="modal fade" id="modal">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <!-- モーダルヘッダー -->
                                             <div class="modal-header">
-                                                <h5 class="modal-title">カテゴリの作成</h5>
-                                            </div>
-                                            <!-- モーダルボディ -->
-                                            <div class="modal-body">
-                                                <p class="modal-category">カテゴリ名</p>
-                                                <input type="text" class="form-control" id="input-1" placeholder="タイトルを入力">
-                                            </div>
-                                            <!-- モーダルフッター -->
-                                            <div class="modal-footer">
-                                                <input type="submit" class="btn btn-primary" data-dismiss="modal" value="追加">
-                                                <button type="button" class="btn btn-secondary" id="close">キャンセル</button>
-                                            </div>
+                                                    <h5 class="modal-title">カテゴリー追加</h5>
+                                                </div>
+                                                <!-- モーダルボディ -->
+                                                <div class="modal-body">
+                                                        <p class="modal-category2">カテゴリ</p>
+                                                        <input type="text" class="form-control" id="input-1" placeholder="カテゴリを入力" name="add">
+                                                     {% csrf_token %}
+                                                     <div class="modal-footer">
+                                                            <input type="submit" class="btn btn-primary" value="作成">
+                                                            <button type="button" class="btn btn-secondary" id="close">キャンセル</button>
+                                                    </div>
+            
+                                                 </div>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -112,9 +114,9 @@
                                         </tr>
                                     </thead>
                                     <tbody class="side-tbody">
-                                        {% for message in messages %}
+                                        {% for category in categorys %}
                                         <tr>
-                                            <th><a href="#">{{ message.category_id }}</a></th>
+                                            <th><a href="#">{{ category.name }}</a></th>
                                         </tr>
                                         {% endfor %}
                                     </tbody>
@@ -135,7 +137,7 @@
                                    <div class="nav-item active d-inline">
                                        <button class="btn bord-create" id="btn2" href="#">掲示板を作成</button>
                                        <!-- modal content -->
-                                        <form class="d-inline" method="POST">
+                                        <form class="d-inline" method="POST" action="{% url 'GroupConnect:Signboardform' %}">
                                        <div class="modal fade" id="modal2">
                                            <div class="modal-dialog" role="document">
                                                <div class="modal-content">
@@ -145,28 +147,25 @@
                                                    </div>
                                                    <!-- モーダルボディ -->
                                                    <div class="modal-body">
-                                                    {{ form.non_field_errors}}
-                                                    {% for field in form%}
-                                                    <div class="form-group">
-                                                            <label for="{{ field.id_for_label}}">{{ field.label_tag }}</label>
-                                                            {{ field }}
-                                                            {{ field.errors }}
-                                                        </div>
-                                                        {% endfor%}
-                                                        {% csrf_token %}
+                                                        <p class="modal-title2">タイトル</p>
+                                                        <input type="text" class="form-control" id="input-1" placeholder="タイトルを入力" name="title">
+                                                         <!-- カテゴリー名を取ってくる。 -->
+                                                         <p class="modal-category2">カテゴリー</p>
+                                                         <select name="category" value="{{ category.id }}">
+                                                         <option name="カテゴリー一覧">カテゴリー一覧</option>
+                                                         {% for category in categorys %}
+                                                        <option name="category" value="{{ category.id }}">{{category.name}}</option>
+                                                         {% endfor%}
+                                                        </select>
+                                                         {% csrf_token %}
+                                                         <!-- カテゴリー名終わり -->
+                                                        <p class="modal-description">説明</p>
+                                                        <textarea class="form-control" id="input-1" rows="7" placeholder="説明を入力" name="textarea"></textarea>
+                                                        
 
-                                                        <!-- カテゴリー名を取ってくる。 -->
-                                                        {% for category in categorys %}
-                                                        <div class="dropdown show">
-                                                        <div class="dropdown-menu">
-                                                            <a class="active dropdown-item" href="#">{{ category.name }}</a>
-                                                        </div><!-- /.dropdown-menu -->
-                                                        </div><!-- /.dropdown -->
-                                                        {% endfor%}
-                                                        {% csrf_token %}
-                                                        <!-- カテゴリー名終わり -->
+                                                       
                                                         <div class="modal-footer">
-                                                            <input type="submit" class="btn btn-primary" value="作成">
+                                                            <input type="submit" class="btn btn-primary" value="作成" >
                                                             <button type="button" class="btn btn-secondary" id="close">キャンセル</button>
                                                         </div>
                                                     </div>
@@ -178,7 +177,7 @@
 
                                    </div>
                                    <div class="nav-item active d-inline">
-                                       <button class="btn choice" href="#">複数選択</button>
+                                       <button class="btn choice" href="#" id="multi-btn">複数選択</button>
                                    </div>
                                    <div class="nav-item active dropdown d-inline sort1">
                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">昇順</button>

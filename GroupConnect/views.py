@@ -33,10 +33,10 @@ from django.shortcuts import redirect
 from django.template.loader import get_template
 from django.views import generic
 from .forms import (
-    LoginForm, UserCreateForm, GroupCreateForm , CreateSignboardForm
+    LoginForm, UserCreateForm, GroupCreateForm
 )
 from .models import (
-    Notice, Group, Member, GroupIcon,Signboard,Post,Situation
+    Notice, Group, Member, GroupIcon,Signboard,Post,Situation,Category
 )
 
 from django.views.generic.edit import ModelFormMixin
@@ -44,33 +44,22 @@ from django.views.generic.edit import ModelFormMixin
 
 User = get_user_model()
 
-class bordlist(generic.CreateView) :
+class bordlist(generic.ListView) :
     template_name = 'GroupConnect/bordlist.html'
-    form_class = CreateSignboardForm
+    model = Signboard
     context_object_name='group_list'
-
-
-    def form_valid(self,form):
-        """ 掲示板作成 """
-        groupid = Group.objects.get(id='1')
-        categoryid = Category.objects.get(category_id=request.post['category_id'])
-        signboard = form.save(commit = False)
-        signboard.group_id= groupid
-        signboard.save()
-
-
-        return redirect('GroupConnect:bordlist')
 
 
     
     def get_context_data(self, **kwargs):
 
         
-
+        group =Group.objects.get(id='1')
         context = super().get_context_data(**kwargs)
+
         context.update({
-            'messages' : Signboard.objects.all()
-            'categorys' : Category.objects.filter(group_id='1')
+            'messages' : Signboard.objects.all(),
+            'categorys' : Category.objects.filter(group_id=group)
         })
         return context
 
@@ -104,6 +93,22 @@ class bordlist(generic.CreateView) :
 
         return g
 
+
+def categoryget(request):
+    """ カテゴリーを取得 """
+    category_get = request.POST['add']
+    group =Group.objects.get(id='1')     
+    Category(group_id=group, name=category_get).save()
+    return redirect('GroupConnect:bordlist')
+
+def Signboardform(request):
+    """ form """
+    Signboard_title = request.POST['title']
+    Signboard_textarea = request.POST['textarea']
+    Signboard_category = Category.objects.get(id=request.POST['category'])
+    group = Group.objects.get(id='1')
+    Signboard(group_id=group, title=Signboard_title , category_id=Signboard_category , text=Signboard_textarea ).save()
+    return redirect('GroupConnect:bordlist')
 
 
 

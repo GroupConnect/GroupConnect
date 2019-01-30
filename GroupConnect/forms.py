@@ -39,26 +39,3 @@ class GroupCreateForm(forms.Form):
     group_name = forms.CharField(max_length=100, required=True)
     icon = forms.ImageField()
 
-class CreateSignboardForm(forms.ModelForm):
-
-    class Meta:
-        model = Signboard
-        fields = ('title','text',)
-        
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
-
-
-
-class CreateCategoryForm(forms.ModelForm):
-
-    class Meta:
-        model = Category
-        fields = ('name',)
-        
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
