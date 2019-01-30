@@ -39,7 +39,21 @@
                                     {% endif %}
                                 </div>
                                 <div class="warning">
-                                    {{ field.errors }}
+                                    {% if field.name == "last_name" %}
+                                        <p class="last_nameblank">苗字を入力してください。</p>
+                                        <p class="last_namecheck">全角文字のみを入力してください。</p>
+                                    {% elif field.name == "first_name"%}
+                                        <p class="first_nameblank">名前を入力してください。</p>
+                                        <p class="first_namecheck">全角文字のみを入力してください。</p>
+                                    {% elif field.name == "rome_last_name"%}
+                                        <p class="rome_last_nameblank">苗字(ローマ字)を入力してください。</p>
+                                        <p class="rome_last_namecheck">半角英字のみを入力してください。</p>
+                                    {% elif field.name == "rome_first_name"%}
+                                        <p class="rome_first_nameblank">名前(ローマ字)を入力してください。</p>
+                                        <p class="rome_first_namecheck">半角英字のみを入力してください。</p>
+                                    {% else %}
+                                        {{ field.errors }}
+                                    {% endif %}
                                 </div>
                             </div>
                         {% endfor %}
