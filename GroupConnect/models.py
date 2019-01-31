@@ -207,9 +207,22 @@ class Post(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
     signboard_id = models.ForeignKey(Signboard, on_delete=models.CASCADE, db_column='signboard_id')
     text = models.TextField(db_column='text')
+    attached_file = models.FileField(
+        upload_to='files/',
+        db_column='attached_file',
+        blank=True,
+        null=True
+    )
     contributer = models.ForeignKey(Member, on_delete=models.CASCADE, db_column='contributer')
     created_at = models.DateTimeField(db_column='created_at', default=timezone.now)
     read_number = models.IntegerField(db_column='read_number')
+    reply = models.ForeignKey(
+        'Post',
+        on_delete=models.CASCADE,
+        db_column='reply',
+        blank=True,
+        null=True
+    )
 
 class Situation(models.Model):
     """

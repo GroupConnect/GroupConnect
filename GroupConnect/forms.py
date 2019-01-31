@@ -47,9 +47,11 @@ class PostCreateForm(forms.ModelForm):
             'id',
             'signboard_id',
             'text',
+            'attached_file',
             'contributer',
             'created_at',
-            'read_number'
+            'read_number',
+            'reply'
         ]
 
     def __init__(self, *args, **kwargs):

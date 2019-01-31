@@ -56,7 +56,16 @@ class SignboardAdmin(admin.ModelAdmin):
 admin.site.register(Signboard, SignboardAdmin)
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'signboard_id', 'text', 'contributer', 'created_at', 'read_number')
+    list_display = (
+        'id',
+        'signboard_id',
+        'text',
+        'attached_file',
+        'contributer',
+        'created_at',
+        'read_number',
+        'reply'
+    )
 
 admin.site.register(Post, PostAdmin)
 
