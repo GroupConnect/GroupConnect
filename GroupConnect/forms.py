@@ -4,7 +4,7 @@ from django.contrib.auth.forms import (
 )
 from django.contrib.auth import get_user_model
 from .models import (
-    Group
+    Group, Post
 )
 
 User = get_user_model()
@@ -38,3 +38,21 @@ class UserCreateForm(UserCreationForm):
 class GroupCreateForm(forms.Form):
     group_name = forms.CharField(max_length=100, required=True)
     icon = forms.ImageField()
+
+class PostCreateForm(forms.ModelForm):
+    
+    class Meta:
+        model = Post
+        fields = [
+            'id',
+            'signboard_id',
+            'text',
+            'contributer',
+            'created_at',
+            'read_number'
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'

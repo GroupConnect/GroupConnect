@@ -199,7 +199,7 @@ class Post(models.Model):
         対象の投稿の本文
     contributer : str
         対象のUserクラスのemailを参照する外部キー
-    posted : datetime.datetime
+    created_at : datetime.datetime
         対象の投稿日時をPython標準のdatetime型で保存する
     read_number : int
         対象の自クラスに結び付くSituationクラスのユーザ数を格納する
@@ -208,7 +208,7 @@ class Post(models.Model):
     signboard_id = models.ForeignKey(Signboard, on_delete=models.CASCADE, db_column='signboard_id')
     text = models.TextField(db_column='text')
     contributer = models.ForeignKey(Member, on_delete=models.CASCADE, db_column='contributer')
-    created_at = models.DateTimeField(db_column='created_at')
+    created_at = models.DateTimeField(db_column='created_at', default=timezone.now)
     read_number = models.IntegerField(db_column='read_number')
 
 class Situation(models.Model):
