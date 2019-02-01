@@ -65,7 +65,7 @@ $(function(){
         });
 
         // Close(手動)ボタン
-        $('#close', content).on('click', () => {
+        $('#title-close', content).on('click', () => {
             content.modal('hide');
         });
     });
@@ -88,3 +88,60 @@ $(function () {
         }
     });
 });
+
+
+//カテゴリエラー
+$(function() {
+    $("form").submit(function(){
+        if ($("input[name='add']").val() == '' ) {
+            //カテゴリ名が入力されていなかった場合
+            $('.category-error').show();
+            
+            return false;
+            
+            
+        } else {
+          $("form").submit();
+        }
+    });
+}); 
+
+//タイトルエラー
+$(function() {
+    $("form").submit(function(){
+        if ($("input[name='title']").val() == '' ) {
+            //タイトル名が入力されていなかった場合
+            $('.title-error').show();
+            
+            return false;
+            
+            
+        } else {
+          $("form").submit();
+        }
+    });
+}); 
+//キャンセル押してエラーを隠す
+(function($) {
+    $('#close').on('click',function(){
+        $('.category-error').hide();
+        $('.title-error').hide();
+    });
+})(jQuery);
+
+
+(function($) {
+    $('#title-close').on('click',function(){
+        $('.category-error').hide();
+        $('.title-error').hide();
+        
+    });
+})(jQuery);
+
+
+
+
+
+
+
+    

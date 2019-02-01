@@ -104,8 +104,19 @@ body {
 }
 /* モーダル */
 .modal-title {
-    margin: 0px 0px 0px 180px;
+    margin: 0px 0px 0px 0px;
 }
+
+.title-error {
+    color: #ff0000;
+    display: none;
+}
+
+.category-error {
+    color: #ff0000;
+    display: none;
+}
+
 .modal-category {
     float: left;
 }
