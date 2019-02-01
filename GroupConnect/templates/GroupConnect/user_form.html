@@ -57,7 +57,7 @@
                     <a class="setting" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
                     <a class="setting" href="{% url 'GroupConnect:password_change' %}">パスワード設定</a>
                     <a class="setting" href="{% url 'GroupConnect:user_mailaddress_update' user.id %}">メール設定</a>
-                    <a class="setting" href="{% url 'GroupConnect:user_delete' %}">退会</a>
+                    <a class="setting" href="{% url 'GroupConnect:user_delete' user.pk %}">退会</a>
                 </div>
 
                 <!-- メインコンテンツ -->
