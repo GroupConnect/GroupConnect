@@ -1,0 +1,56 @@
+body {
+    padding-top:4.0rem;
+}
+
+.navbar {
+    border:solid 2px #5f9644;
+    background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
+}
+
+.groupconnect {
+    font-size: 25px;
+    font-family: Times New Roman;
+}
+
+/* サイドバー */
+.left {
+    height: 593px;
+    text-align: left;
+    border:solid 2px #5f9644;
+}
+
+.setting {
+    font-size: 20px;
+    margin: 12px 0px 0px 0px;
+    display: block;
+}
+
+/* メインコンテンツ */
+.right {
+    height: 593px;
+    text-align: center;
+    border: solid 2px #5f9644;
+}
+
+p {
+    font-size: 40px;
+    font-weight:bold;
+}
+
+.top {
+    margin: 70px 0px 0px 0px;
+}
+
+span {
+    color: #ff0000;
+}
+
+.withdraw {
+    width: 250px;
+    height: 70px;
+    border-radius: 60px;
+    font-size: 25px;
+    margin: 80px 0px 0px 0px;
+    color: #fff;
+    background-color: #ff0000;
+}

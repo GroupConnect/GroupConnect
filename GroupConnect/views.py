@@ -352,18 +352,17 @@ class UserDataCreate(generic.CreateView):
         return render(self.request, 'GroupConnect/user_data_input.html', {'form': form})
 
 
+class UserDeleteView(OnlyYouMixin, generic.DeleteView):
+    '''
+        ユーザ退会用のビュー
+        今回は再登録する際に同じメールアドレスが使えなくなることを理由に
+        is_activeをfalseにするのではなくデータそのものを削除することにした   
+    '''
+    template_name = "GroupConnect/user_delete.html"
+    success_url = reverse_lazy("GroupConnect:user_delete_done")
+    model = User
+    slug_field = 'pk'
+    slug_url_kwarg = 'pk'
 
-
-def user_delete(request):
-    if request.method == 'POST':
-        form = DeleteUserForm(request.POST)
-        if form.is_valid(): # フォームデータの形式が正しいかどうかチェック
-            if request.user.check_password(form.cleaned_data['password']): # フォームデータを取得
-                user = User.objects.get(email=request.user.email)
-                user.is_active = False
-                user.save() # saveをしないと上のuser.is_active = Falseは反映されない
-                #messages.success(request, '退会処理が完了しました。')
-                return redirect('GroupConnect:top') # 他のメソッドを実行
-    else:
-        form = DeleteUserForm()
-    return render(request, 'GroupConnect/user_delete.html', {'form': form})
+class UserDeleteDone(generic.TemplateView):
+    template_name = 'GroupConnect/user_delete_done.html'

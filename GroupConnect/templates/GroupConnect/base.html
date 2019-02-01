@@ -41,7 +41,7 @@
             <a class="nav-item nav-link" href="{% url 'GroupConnect:password_change_test' %}">パスワードの変更(testversion)</a>
           </li>-->
           <li>
-            <a class="nav-item nav-link" href="{% url 'GroupConnect:user_delete' %}">退会</a>
+            <a class="nav-item nav-link" href="{% url 'GroupConnect:user_delete' user.pk %}">退会</a>
           </li>
           <li>
             <a class="nav-item nav-link" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
