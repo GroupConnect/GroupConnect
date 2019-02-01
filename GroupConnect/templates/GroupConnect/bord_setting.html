@@ -1,0 +1,334 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> 掲示板設定 </title>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, inital-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'GroupConnect/css/bord_setting.css' %}" />
+    </head>
+    <body>
+        <div  class="nav-bar fixed-top">
+            <!-- ナビゲーションバー -->
+            <nav class="navbar navbar-expand-sm navbar-light bar">
+                <a class="navbar-brand groupconnect" href="mypage">GroupConnect</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="Navber">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            グループ
+                            </a>
+                            <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="grouptop">グループ名</a>
+                                <a class="dropdown-item" href="grouptop">グループ名</a>
+                                <a class="dropdown-item" href="grouptop">グループ名</a>
+                                <a class="dropdown-item" href="grouptop">グループ名</a>
+                                <a class="dropdown-item" href="grouplist">グループ一覧へ</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item active dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            アカウント
+                            </a>
+                            <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="profile">プロフィール設定</a>
+                                <a class="dropdown-item" href="mail_setting">メール設定</a>
+                                <a class="dropdown-item" href="pass_setting">パスワード設定</a>
+                                <a class="dropdown-item" href="#">ログアウト</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item active dropdown mega-dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            グループメニュー
+                            </a>
+                            <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item d-inline grname" href="grouptop">(グループ名)</a>
+                            <a class="dropdown-item d-inline" href="bordlist">掲示板</a>
+                            <a class="dropdown-item d-inline" href="#">メンバー一覧</a>
+                            <a class="dropdown-item d-inline" href="group_setting">設定</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="p-3">
+            <div>
+                <p class="group-setting">掲示板設定</p>
+                <!-- タブボタン部分 -->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a href="#tab1" type="button" class="nav-link active" data-toggle="tab">情報編集</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#tab2" type="button" class="nav-link" data-toggle="tab">メンバー管理</a>
+                    </li>
+                </ul>
+
+                <!--タブのコンテンツ部分-->
+                <div class="tab-content">
+                    <div id="tab1" class="tab-pane active">
+                        <form method="GET">
+                            {% csrf_token %}
+                            <div class="title-enclosure">
+                                <p class="d-inline title">タイトル<span>[必須]</span></p>
+                                <input type="text" class="title-form" name="title-form">
+                            </div>
+                            <div class="category-enclosure">
+                                <p class="d-inline category">カテゴリ</p>
+                                <select id="category">
+                                    <option value="未分類">未分類</option>
+                                    <option value="授業">授業</option>
+                                    <option value="スポフェス">スポフェス</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <p class="bord-expo">掲示板説明</p>
+                                </div>
+                                <div class="col-md-9">
+                                    <textarea class="d-inline expo-area" rows="7"></textarea>
+                                </div>
+                            </div>
+                            <input type="button" class="btn cancel" data-toggle="modal" data-target="#basicModal" value="キャンセル">
+                            <div class="modal fade"id="basicModal"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <h3>変更内容が破棄されますが<br>よろしいですか？</h3>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button"class="btn btn-primary">はい</button>
+                                            <button type="button"class="btn btn-default"data-dismiss="modal">いいえ</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-warning input-btn" value="変更">
+                        </form>
+                    </div>
+
+                    <div id="tab2" class="tab-pane">
+            
+                            <div>
+                                <div class="invitation">
+                                    <!-- <input type="button" class="btn btn-warning" value="招待する"> -->
+                                    <input type="button" class="btn btn-warning" id="btn2" value="招待する">
+                                        <!-- modal content -->
+                                            <div class="modal fade" id="modal">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <!-- モーダルヘッダー -->
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">招待する</h5>
+                                                        </div>
+                                                        <!-- モーダルボディ -->
+                                                        <div class="modal-body2">
+                                                            <table id="tbl1">
+                                                                <tr><td>河原たろう</td></tr>
+                                                                <tr><td>河原たろう</td></tr>
+                                                                <tr><td>河原たろう河原たろう河原たろう河原たろう河原たろう</td></tr>
+                                                                <tr><td>河原たろう</td></tr>
+                                                                <tr><td>河原たろう</td></tr>
+                                                                <tr><td>河原たろう</td></tr>
+                                                                <tr><td>河原たろう</td></tr>
+                                                                <tr><td>河原たろう</td></tr>
+                                                                <tr><td>河原たろう</td></tr>
+                                                                <tr><td>河原たろう</td></tr>
+                                                                <tr><td>河原たろう</td></tr>
+                                                                <tr><td>河原たろう</td></tr>
+                                                                <tr><td>河原たろう</td></tr>
+                                                                <tr><td>河原たろう</td></tr>
+                                                            </table>
+                                                        </div>
+                                                        <form method="POST">
+                                                        {% csrf_token %}
+                                                        <!-- モーダルフッター -->
+                                                        <div class="modal-footer">
+                                                            <input type="submit" class="btn btn-primary" data-dismiss="modal" value="招待">
+                                                            <button type="button" class="btn btn-secondary" id="close">キャンセル</button>
+                                                        </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                </div>
+                                <div class="withdrawal">
+                                    <input type="button" class="btn" data-toggle="modal" data-target="#basicModal2" value="脱退する">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div class="modal fade"id="basicModal2"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <h3 class="bord-withdrawal">掲示板の内容が閲覧できなくなります。<br>脱退してもよろしいですか？</h3>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="submit" class="btn btn-primary" value="はい">
+                                                        <button type="button" class="btn btn-default"data-dismiss="modal">いいえ</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                            <div class="list">
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>名前</th>
+                                            <th scope="col">メールアドレス</th>
+                                            <th scope="col">ステータス</th>
+                                            <th scope="col">操作</th>
+                                        </tr>
+                                　  </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">河原たろう</th>
+                                            <td>******@stu.kawahara.ac.jp</td>
+                                            <td>管理者</td>
+                                            <td class="status"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">河原たろう</th>
+                                            <td>******@stu.kawahara.ac.jp</td>
+                                            <td></td>
+                                            <td class="status">
+                                                <input type="button" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" value="権限付与">
+                                                <form class="d-inline" method="POST">
+                                                    {% csrf_token %}
+                                                    <div class="modal fade"id="basicModal3"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-body">
+                                                                    <h3>権限を付与しますがよろしいですか？</h3>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="submit" class="btn btn-primary" value="はい">
+                                                                    <button type="button" class="btn btn-default"data-dismiss="modal">いいえ</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <input type="button" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" value="除名">
+                                                <form class="d-inline" method="POST">
+                                                    {% csrf_token %}
+                                                    <div class="modal fade"id="basicModal4"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-body">
+                                                                    <h3>この操作は元に戻せません。<br>除名してもよろしいですか？</h3>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="submit" class="btn btn-primary" value="はい">
+                                                                    <button type="button" class="btn btn-default"data-dismiss="modal">いいえ</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">河原たろう</th>
+                                            <td>******@stu.kawahara.ac.jp</td>
+                                            <td>管理者</td>
+                                            <td class="status">
+                                                <input type="button" class="btn btn-primary authority-deprivation" data-toggle="modal" data-target="#basicModal5" value="権限剥奪">
+                                                <form class="d-inline" method="POST">
+                                                    {% csrf_token %}
+                                                    <div class="modal fade"id="basicModal5"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-body">
+                                                                    <h3>権限を剥奪しますがよろしいですか？</h3>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="submit" class="btn btn-primary" value="はい">
+                                                                    <button type="button" class="btn btn-default"data-dismiss="modal">いいえ</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">河原たろう</th>
+                                            <td>******@stu.kawahara.ac.jp</td>
+                                            <td></td>
+                                            <td class="status">
+                                                <input type="button" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" value="権限付与">
+                                                <input type="button" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" value="除名">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">河原たろう</th>
+                                            <td>******@stu.kawahara.ac.jp</td>
+                                            <td></td>
+                                            <td class="status">
+                                                <input type="button" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" value="権限付与">
+                                                <input type="button" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" value="除名">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">河原たろう</th>
+                                            <td>******@stu.kawahara.ac.jp</td>
+                                            <td></td>
+                                            <td class="status">
+                                                <input type="button" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" value="権限付与">
+                                                <input type="button" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" value="除名">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">河原たろう</th>
+                                            <td>******@stu.kawahara.ac.jp</td>
+                                            <td></td>
+                                            <td class="status">
+                                                <input type="button" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" value="権限付与">
+                                                <input type="button" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" value="除名">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">河原たろう</th>
+                                            <td>******@stu.kawahara.ac.jp</td>
+                                            <td></td>
+                                            <td class="status">
+                                                <input type="button" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" value="権限付与">
+                                                <input type="button" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" value="除名">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="{% static 'GroupConnect/js/bord_setting.js' %}"></script>
+    </body>
+</html>
