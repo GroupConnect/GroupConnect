@@ -158,6 +158,9 @@ LOGIN_URL = 'GroupConnect:top'
 LOGIN_REDIRECT_URL = 'GroupConnect:mypage'
 LOGOUT_REDIRECT_URL = 'GroupConnect:top'
 
+# SESSION_COOKIE_AGE = 600 # 保持期間10分
+# SESSION_SAVE_EVENT_REQUEST = True # 1リクエストごとにセッション情報を更新
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

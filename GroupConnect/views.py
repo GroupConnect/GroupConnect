@@ -192,13 +192,16 @@ class GroupSet(generic.UpdateView): #グループの設定ページ
         """
         ID = self.request.user.id
         members = Member.objects.filter(user_id=ID)
+        mymember = Member.objects.get(user_id=ID, group_id=self.kwargs.get('pk'))
         member_list = Member.objects.filter(group_id=self.kwargs.get('pk'))
         membercount = Member.objects.filter(group_id=self.kwargs.get('pk')).count()
         context = super().get_context_data(**kwargs)
         context.update({
             'count' : membercount,
             'members' : member_list,
-            'groups' : members
+            'groups' : members,
+            'myid' : ID,
+            'mymember' : mymember
         })
         return context
 
@@ -223,6 +226,11 @@ def groupsecession(request):
     Member.objects.filter(user_id=ID, group_id=group_pks).delete()
     return redirect('GroupConnect:mypage')
 
+def operation(request):
+    group_pk = request.POST['group_pk']
+    expulsion = request.POST['expulsion']
+    Member.objects.filter(id=expulsion).delete()
+    return redirect('GroupConnect:group_setting', group_pk)
 
 def mailsend(request):
     """
@@ -231,39 +239,39 @@ def mailsend(request):
     """
     ID = request.user.id
     email = request.POST['mailaddress']
-    """
-    member = Member.objects.filter(user_id.email=email, group_id=group_pk)
-    if member == None:
-	    登録
-
-    else:
-	    既に参加しているユーザのメールアドレス
-    """
     group_pk = request.POST['invite']
-    user = User.objects.get(id=ID)
-    inviteuser = User.objects.get(email=email)
-    group = Group.objects.get(id=group_pk)
-    current_site = get_current_site(request)
-    domain = current_site.domain
-    from_email = "GroupConnect@hoge.moge"
-    context = {
-        'protocol': request.scheme,
-        'domain': domain,
-        'user': user,
-        'inviteuser': inviteuser,
-        'group': group,
-        'token': dumps(inviteuser.pk),
-    }
+    useruser = User.objects.get(email=email)
+    try: # 既にメンバーだった場合は送信しない
+        member = Member.objects.get(user_id=useruser, group_id=group_pk)
 
-    subject_template = get_template('GroupConnect/mail_template/create/invitesubject.txt')
-    subject = subject_template.render(context)
+    except: # メンバーではなかった場合にメール送信
+        user = User.objects.get(id=ID)
+        inviteuser = User.objects.get(email=email)
+        group = Group.objects.get(id=group_pk)
+        current_site = get_current_site(request)
+        domain = current_site.domain
+        from_email = "GroupConnect@hoge.moge"
+        context = {
+            'protocol': request.scheme,
+            'domain': domain,
+            'user': user,
+            'inviteuser': inviteuser,
+            'group': group,
+            'token': dumps(inviteuser.pk),
+        }
 
-    message_template = get_template('GroupConnect/mail_template/create/invitemessage.txt')
-    message = message_template.render(context)
+        subject_template = get_template('GroupConnect/mail_template/create/invitesubject.txt')
+        subject = subject_template.render(context)
 
-    inviteuser.email_user(subject, message, from_email)
+        message_template = get_template('GroupConnect/mail_template/create/invitemessage.txt')
+        message = message_template.render(context)
+
+        inviteuser.email_user(subject, message, from_email)
+
+        return redirect('GroupConnect:group_setting', group_pk)
 
     return redirect('GroupConnect:group_setting', group_pk)
+
 
 def GroupInvite(request, **kwargs):
     """
@@ -300,10 +308,7 @@ def GroupInvite(request, **kwargs):
         Member(user_id=user, group_id=group, name=name, authority=False).save()
         return redirect('GroupConnect:mypage')
 
-
-
-
-class MemberList(generic.DetailView): #メンバー一覧ページ
+class MemberList(LoginRequiredMixin, generic.DetailView): #メンバー一覧ページ
     template_name = 'GroupConnect/member_list.html'
     model = Group
     
