@@ -89,18 +89,33 @@ $(function () {
     });
 });
 
+
 //カテゴリー削除
-var countcategory = 0;
-$(function () {
-    $('#Categorydelete').click(function() {
-        countcategory++;
-        if ((countcategory % 2) !=0) {
+function myEnter(){
+    myRet = confirm("カテゴリを消す前に中に掲示板が残っているか確認してください。")
+    if(myRet ==true){
+        myconfirm = confirm("カテゴリを消すと中身も消えますがよろしいですか？")
+        if(myconfirm == true){
             $('[id=category-delete]').show();
-        } else {
+        }else{
             $('[id=category-delete]').hide();
         }
-    });
-});
+    }else{
+        $('[id=category-delete]').hide();
+    }
+}
+
+// var countcategory = 0;
+// $(function () {
+//     $('#Categorydelete').click(function() {
+//         countcategory++;
+//         if ((countcategory % 2) !=0) {
+//             $('[id=category-delete]').show();
+//         } else {
+//             $('[id=category-delete]').hide();
+//         }
+//     });
+// });
 
 
 
