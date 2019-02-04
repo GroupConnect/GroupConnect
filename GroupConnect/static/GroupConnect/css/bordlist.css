@@ -82,6 +82,10 @@ body {
     float: right;
     margin: 15px 0px 0px 0px;
 }
+
+#category-delete {
+    display: none;
+}
 /* メインコンテンツ */
 .right {
     height: 593px;
@@ -99,7 +103,7 @@ body {
     margin: 0px 0px 0px 50px;
     background-color: #e5eee6;
 }
-.alldelete {
+#alldelete {
     display: none;
 }
 

@@ -75,12 +75,15 @@
                                </div>
                                <div class="col-lg-12 side-up">
                                    <p class="d-inline navbar-brand bordlist">掲示板</p>
+                                   <div class="d-inline">
+                                        <button class="btn btn-danger" id="Categorydelete">削除</button>
+                                   </div>
                                </div>
-                               <form class="d-inline category-add" id="category-add" method="POST" action="{% url 'GroupConnect:categoryget' %}">
-                               <div class="col-lg-12 side-middle">
+                               <form class="d-inline category-add"  method="POST" action="{% url 'GroupConnect:categoryget' %}">
+                               <div class="col-lg-12 side-middle d-inline">
                                    <p class="d-inline ctgr">カテゴリ</p>
                                    <a id="btn" href="#"><addr title="カテゴリーの追加" class="d- inline create-ctgr">追加</addr></a>
-                                   
+                                    
                                </div>
 
                                <!-- サイドバーカテゴリー追加 -->
@@ -124,7 +127,7 @@
                                         {% csrf_token %}
                                         <tr>
                                             <th><a href="#">{{ category.name }}</a></th>
-                                            <td><button type="submit" class="btn-primary" name="category-delete" value="{{ category.id }}">削除</button></td>
+                                            <td><button type="submit" class="btn-primary" id="category-delete" name="category-delete" value="{{ category.id }}">削除</button></td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>
@@ -232,7 +235,7 @@
                                             <td><a href="#">{{ message.title }}</a></td>
                                             <td>{{ message.text }}</td>
                                             <td>{{ message.updated_at }}</td>
-                                            <td><button type="submit" class="btn-primary" name="delete" value="{{ message.id }}">削除</button></td>
+                                            <td><button type="submit" class="btn-primary" id="delete" name="delete" value="{{ message.id }}">削除</button></td>
                                             
                                         </tr>
                                         {% endfor %}

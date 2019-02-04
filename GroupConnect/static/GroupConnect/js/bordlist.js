@@ -79,12 +79,25 @@ $(function () {
         countUpValue++;
         if ( ( countUpValue % 2 ) != 0  ) {
             $('[id=checkbox]').show();
-            $('[id=delete]').hide('slow');
+            $('[id=delete]').hide();
             $('#alldelete').show();
         } else {
             $('[id=checkbox]').hide();
             $('[id=delete]').show();
             $('#alldelete').hide();
+        }
+    });
+});
+
+//カテゴリー削除
+var countcategory = 0;
+$(function () {
+    $('#Categorydelete').click(function() {
+        countcategory++;
+        if ((countcategory % 2) !=0) {
+            $('[id=category-delete]').show();
+        } else {
+            $('[id=category-delete]').hide();
         }
     });
 });
