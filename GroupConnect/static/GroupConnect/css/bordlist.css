@@ -102,6 +102,7 @@ body {
 .alldelete {
     display: none;
 }
+
 /* モーダル */
 .modal-title {
     margin: 0px 0px 0px 0px;
@@ -124,15 +125,15 @@ body {
     margin: 0px 0px 0px 0px;
 }
 .form-control {
-    margin: 0px 0px 20px 0px;
+    margin: 0px 0px 40px 0px;
 }
 .sort1 {
     float: right;
-    margin: 0px 70px 0px 0px;
+    margin: 0px 70px 0px 30px;
 }
 .sort2 {
     float: right;
-    margin: 0px 20px 0px 0px;
+    margin: 0px 20px 0px 30px;
 }
 .ctgr-content {
     margin: 20px 0px 10px 30px;
@@ -159,3 +160,4 @@ th, td {
     margin: 10px 10px 10px 0px;
     display: none;
 }
+

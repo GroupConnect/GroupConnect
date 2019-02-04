@@ -90,9 +90,10 @@ $(function () {
 });
 
 
+
 //カテゴリエラー
 $(function() {
-    $("form").submit(function(){
+    $("#category-add").submit(function(){
         if ($("input[name='add']").val() == '' ) {
             //カテゴリ名が入力されていなかった場合
             $('.category-error').show();
@@ -101,14 +102,14 @@ $(function() {
             
             
         } else {
-          $("form").submit();
+          $("#category-add").submit();
         }
     });
 }); 
 
 //タイトルエラー
 $(function() {
-    $("form").submit(function(){
+    $("#mainform").submit(function(){
         if ($("input[name='title']").val() == '' ) {
             //タイトル名が入力されていなかった場合
             $('.title-error').show();
@@ -117,7 +118,7 @@ $(function() {
             
             
         } else {
-          $("form").submit();
+          $("#mainform").submit();
         }
     });
 }); 

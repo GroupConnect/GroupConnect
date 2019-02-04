@@ -67,10 +67,18 @@ class bordlist(generic.ListView) :
         if 'delete' in request.POST: 
             Signboard_pk = request.POST['delete']
             Signboard.objects.filter(id=Signboard_pk).delete()
+            
 
         elif 'alldelete' in request.POST:
-            Signboard_pk = request.POST.getlist('alldelete')
-            Post.objects.filter(id__in=Signboard_pk).delete()
+            Signboard_pk = request.POST.getlist('SinboardAlldelete')
+            for signboardall_pk in Signboard_pk:
+                Signboard.objects.filter(id=signboardall_pk).delete()
+
+        elif 'category-delete' in request.POST:
+            Category_pk = request.POST['category-delete']
+            Category.objects.filter(id=Category_pk).delete()
+
+
 
         return redirect('GroupConnect:bordlist')  
 
@@ -122,5 +130,8 @@ class SignboardDelete(generic.DeleteView):
     model = Signboard
     success_url = 'GroupConnect:bordlist'
 
+class CategoryDelete(generic.DeleteView):
+    model = Signboard
+    success_url ='GroupConnect:bordlist'
     
     

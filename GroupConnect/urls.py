@@ -8,4 +8,5 @@ urlpatterns = [
     path('signboard/<int:pk>/', views.SignboardView.as_view(), name='Signboard'),
     path('signboardcategory/' , views.categoryget , name="categoryget"),
     path('signboardform/' , views.Signboardform , name="Signboardform"),
+    path('Category/<int:pk>/', views.SignboardView.as_view() , name="Category" ),
 ]
