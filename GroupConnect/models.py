@@ -156,6 +156,20 @@ class Member(models.Model):
     name = models.CharField(max_length=100, db_column='name')
     authority = models.BooleanField(db_column='authority')
 
+class Category(models.Model):
+    id = models.AutoField(primary_key=True, db_column='id')
+    group_id = models.ForeignKey(Group, on_delete=models.CASCADE, db_column='group_id')
+    name = models.CharField(_('カテゴリー名'),max_length=100, db_column='name')
+
+    def __str__(self):
+        """
+        Returns
+        -------
+        __str__ : str
+            対象のnameを返す
+        """
+        return self.name
+
 class Signboard(models.Model):
     """
     掲示板のクラス
@@ -174,9 +188,10 @@ class Signboard(models.Model):
     """
     id = models.AutoField(primary_key=True, db_column='id')
     group_id = models.ForeignKey(Group, on_delete=models.CASCADE, db_column='group_id')
-    title = models.CharField(max_length=100, db_column='title')
-    category = models.CharField(max_length=100, db_column='category')
-    text = models.TextField(db_column='text')
+    title = models.CharField(_('タイトル'), max_length=100, db_column='title')
+    category_id = models.ForeignKey(Category, on_delete=models.CASCADE, db_column='category_id')
+    text = models.TextField(_('説明'), db_column='text')
+    updated_at = models.DateTimeField(db_column='updated_at', default=timezone.now)
 
     def __str__(self):
         """

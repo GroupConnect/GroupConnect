@@ -16,7 +16,7 @@ from .forms import (
     LoginForm, UserCreateForm, GroupCreateForm, UserUpdateForm,GroupUpdateForm
 )
 from .models import (
-    Notice, Group, Member, GroupIcon
+    Notice, Group, Member, GroupIcon,Signboard,Post,Situation,Category
 )
 
 
@@ -227,6 +227,9 @@ def groupsecession(request):
     return redirect('GroupConnect:mypage')
 
 def operation(request):
+    """
+    メンバー除名
+    """
     group_pk = request.POST['group_pk']
     expulsion = request.POST['expulsion']
     Member.objects.filter(id=expulsion).delete()
@@ -363,3 +366,74 @@ class GroupList(generic.ListView):
             'groups' : members
         })
         return context
+
+
+
+class bordlist(generic.ListView) :
+    template_name = 'GroupConnect/bordlist.html'
+    model = Signboard
+    
+    def get_context_data(self, **kwargs):
+        group =Group.objects.get(id=self.kwargs.get('pk'))
+        context = super().get_context_data(**kwargs)
+
+        context.update({
+            'messages' : Signboard.objects.filter(group_id=group),
+            'categorys' : Category.objects.filter(group_id=group),
+            'group' : group
+        })
+        return context
+
+    def post(self,request):
+        if 'delete' in request.POST: 
+            Signboard_pk = request.POST['delete']
+            Signboard.objects.filter(id=Signboard_pk).delete()
+            
+
+        elif 'alldelete' in request.POST:
+            Signboard_pk = request.POST.getlist('SinboardAlldelete')
+            for signboardall_pk in Signboard_pk:
+                Signboard.objects.filter(id=signboardall_pk).delete()
+
+        elif 'category-delete' in request.POST:
+            Category_pk = request.POST['category-delete']
+            Category.objects.filter(id=Category_pk).delete()
+
+
+
+        return redirect('GroupConnect:bordlist')  
+
+
+
+
+def categoryget(request):
+    """ カテゴリーを取得 """
+    category_get = request.POST['add']
+    group =Group.objects.get(id=request.POST['group_pk'])     
+    Category(group_id=group, name=category_get).save()
+    return redirect('GroupConnect:bordlist', group.id)
+
+def Signboardform(request):
+    """ form """
+    Signboard_title = request.POST['title']
+    Signboard_textarea = request.POST['textarea']
+    Signboard_category = Category.objects.get(id=request.POST['category'])
+    group = Group.objects.get(id=request.POST['group_pk'])
+    Signboard(group_id=group, title=Signboard_title , category_id=Signboard_category , text=Signboard_textarea ).save()
+    return redirect('GroupConnect:bordlist', group.id)
+
+
+
+
+        
+class SignboardView(generic.DetailView):
+    model = Signboard
+    template_name = 'GroupConnect/signboard_detail.html'
+
+class SignboardDelete(generic.DeleteView):
+    model = Signboard
+    success_url = 'GroupConnect:bordlist'
+
+class CategoryDelete(generic.DeleteView):
+    model = Signboard
+    success_url ='GroupConnect:bordlist'
