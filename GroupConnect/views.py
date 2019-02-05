@@ -159,6 +159,30 @@ class GroupCreate(generic.CreateView): #グループ作成ページ
 
         Member(user_id=userid, group_id=groupid, name=name, authority=True).save()
         
+        if 'mailaddress' in self.request.POST:
+            emails = self.request.POST.getlist('mailaddress')
+
+            for email in emails:
+                user = User.objects.get(id=ID)
+                inviteuser = User.objects.get(email=email)
+                group = Group.objects.get(id=group_id)
+                current_site = get_current_site(self.request)
+                domain = current_site.domain
+                from_email = "GroupConnect@hoge.moge"
+                context = {
+                    'protocol': self.request.scheme,
+                    'domain': domain,
+                    'user': user,
+                    'inviteuser': inviteuser,
+                    'group': group,
+                    'token': dumps(inviteuser.pk),
+                }
+                subject_template = get_template('GroupConnect/mail_template/create/invitesubject.txt')
+                subject = subject_template.render(context)
+                message_template = get_template('GroupConnect/mail_template/create/invitemessage.txt')
+                message = message_template.render(context)
+
+                inviteuser.email_user(subject, message, from_email)
 
 
         return redirect('GroupConnect:mypage')
@@ -250,9 +274,9 @@ def mailsend(request):
     ID = request.user.id
     email = request.POST['mailaddress']
     group_pk = request.POST['invite']
-    useruser = User.objects.get(email=email)
+    membercheck = User.objects.get(email=email)
     try: # 既にメンバーだった場合は送信しない
-        member = Member.objects.get(user_id=useruser, group_id=group_pk)
+        member = Member.objects.get(user_id=membercheck, group_id=group_pk)
 
     except: # メンバーではなかった場合にメール送信
         user = User.objects.get(id=ID)
