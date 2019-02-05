@@ -26,8 +26,9 @@
                             グループ
                             </a>
                             <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="">グループ名</a>
-
+                                {% for group in groups %}
+                                    <a class="dropdown-item" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_id.group_name}}</a>
+                                {% endfor %}
                                 <a class="dropdown-item" href="{% url 'GroupConnect:group_list' %}">グループ一覧へ</a>
                             </div>
                         </li>
@@ -38,11 +39,11 @@
                             アカウント
                             </a>
                             <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="">プロフィール設定</a>
-                                <a class="dropdown-item" href="#">メール設定</a>
-                                <a class="dropdown-item" href="#">パスワード設定</a>
-                                <a class="dropdown-item" href="#">ログアウト</a>
-                                <a class="dropdown-item" href="#">ヘルプ</a>
+                                    <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
+                                    <a class="dropdown-item" href="#">メール設定</a>
+                                    <a class="dropdown-item" href="#">パスワード設定</a>
+                                    <a class="dropdown-item" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
+                                    <a class="dropdown-item" href="#">ヘルプ</a>
                             </div>
                         </li>
                     </ul>

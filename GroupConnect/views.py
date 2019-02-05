@@ -130,9 +130,12 @@ class GroupCreate(generic.CreateView): #グループ作成ページ
         """
         アイコン一覧の取得
         """
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
         context = super().get_context_data(**kwargs)
         context.update({
-            'icon_list' : GroupIcon.objects.all()
+            'icon_list' : GroupIcon.objects.all(),
+            'groups' : members,
         })
         return context
 
@@ -171,11 +174,15 @@ class GroupTop(generic.DetailView): #グループのトップページ
         """
         参加メンバー一覧の取得
         """
+
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
         member_list = Member.objects.filter(group_id=self.kwargs.get('pk'))
 
         context = super().get_context_data(**kwargs)
         context.update({
-            'members' : member_list
+            'members' : member_list,
+            'groups' : members
         })
         return context
 
