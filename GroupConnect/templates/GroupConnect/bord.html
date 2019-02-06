@@ -238,13 +238,13 @@
 
                             <div class="headline">
                                 <div class="history">
-                                    <a href="grouptop">(グループ名)</a><span>　>　</span>
-                                    <a href="bordlist">掲示板</a><span>　>　</span>
-                                    <a href="bord">(掲示板名)</a>
+                                    <a href="grouptop">{{ signboard.group_id.group_name }}</a><span>　>　</span>
+                                    <a href="bordlist">掲示板一覧</a><span>　>　</span>
+                                    <a href="bord">{{ signboard.title }}</a>
                                 </div>
 
                                 <nav class="navbar navbar-expand-md navbar-light bar3">
-                                    <p class="bord-name">(掲示板名)</p>
+                                    <p class="bord-name">{{ signboard.title }}</p>
                                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
                                         <span class="navbar-toggler-icon"></span>
                                     </button>
@@ -301,6 +301,30 @@
                                 </div>
 
                                 <div id="large-frame">
+
+                                    {% for post in post_list %}
+                                        <div id="post-frame1">
+                                            <div class="post-outside" id="post-outside1">
+                                                <div class="post">
+                                                    <p class="Contributor">{{ post.contributer }}</p><p class="time">{{ post.created_at }}</p><p class="read">既読：<a data-toggle="modal" data-target="#basicModal2" href="#">2件</a></p><a class="post-delete" data-toggle="modal" data-target="#basicModal3" href="">投稿を削除</a>
+                                                    <p class="letter-body">こんにちは。</p>
+                                                    <a class="filename" href="#">minion.jpg</a><img src="{% static 'GroupConnect/img/ダウンロードアイコン.jpg' %}" id="passcheck2" class="download-icon">
+                                                </div>
+                                                
+                                                <img src="{% static 'GroupConnect/img/返信アイコン.jpg' %}" id="passcheck2" class="reply-icon"><a class="reply" id="reply1" href="#">返信する</a>
+                                                
+                                            </div>
+                                            <form action="bord" class="post-form" method="get" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <div class="form-group d-inline">
+                                                        <textarea class="form-control" id="UserInput" rows="6"></textarea>
+                                                        <input type="file" name="s_file" accept="image/png, image/jpeg, image/gif" class="file-select"　multiple>
+                                                        <input type="button" id="button" class="btn btn-warning reply-button" value="返信">
+                                                </div>       
+                                            </form>
+                                        </div>
+                                    {% endfor %}
+
                                     <div id="post-frame2">
                                         <div class="post-outside" id="post-outside2">
                                             <div class="post">

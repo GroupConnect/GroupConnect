@@ -22,14 +22,14 @@ def SignboardPage(request, pk):
     form = forms.PostCreateForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        return render(request, 'GroupConnect/signboard_detail.html', context= {
+        return render(request, 'GroupConnect/boad.html', context= {
             'signboard': signboard,
             'post_list' : post_list,
             'form': form
         })
     
     else:
-        return render(request, 'GroupConnect/signboard_detail.html', context= {
+        return render(request, 'GroupConnect/bord.html', context= {
             'signboard': signboard,
             'post_list' : post_list,
             'form': form
