@@ -34,3 +34,11 @@ def SignboardPage(request, pk):
             'post_list' : post_list,
             'form': form
         })
+class MypageView(generic.TemplateView):
+    template_name = 'GroupConnect/mypage.html'
+
+class GrouptopView(generic.TemplateView):
+    template_name = 'GroupConnect/grouptop.html'
+
+class BordView(generic.TemplateView):
+    template_name = 'GroupConnect/bord.html'
