@@ -283,37 +283,49 @@ def mailsend(request):
     ID = request.user.id
     email = request.POST['mailaddress']
     group_pk = request.POST['invite']
-    membercheck = User.objects.get(email=email)
-    try: # 既にメンバーだった場合は送信しない
-        member = Member.objects.get(user_id=membercheck, group_id=group_pk)
 
-    except: # メンバーではなかった場合にメール送信
-        user = User.objects.get(id=ID)
-        inviteuser = User.objects.get(email=email)
-        group = Group.objects.get(id=group_pk)
-        current_site = get_current_site(request)
-        domain = current_site.domain
-        from_email = "GroupConnect@hoge.moge"
-        context = {
-            'protocol': request.scheme,
-            'domain': domain,
-            'user': user,
-            'inviteuser': inviteuser,
-            'group': group,
-            'token': dumps(inviteuser.pk),
-        }
 
-        subject_template = get_template('GroupConnect/mail_template/create/invitesubject.txt')
-        subject = subject_template.render(context)
 
-        message_template = get_template('GroupConnect/mail_template/create/invitemessage.txt')
-        message = message_template.render(context)
+    try:
+        membercheck = User.objects.get(email=email)
+        usercheck = True
+    except:
+        usercheck = False
 
-        inviteuser.email_user(subject, message, from_email)
+    if usercheck:
+        try: # 既にメンバーだった場合は送信しない
+            member = Member.objects.get(user_id=membercheck, group_id=group_pk)
+
+        except: # メンバーではなかった場合にメール送信
+            user = User.objects.get(id=ID)
+            inviteuser = User.objects.get(email=email)
+            group = Group.objects.get(id=group_pk)
+            current_site = get_current_site(request)
+            domain = current_site.domain
+            from_email = "GroupConnect@hoge.moge"
+            context = {
+                'protocol': request.scheme,
+                'domain': domain,
+                'user': user,
+                'inviteuser': inviteuser,
+                'group': group,
+                'token': dumps(inviteuser.pk),
+            }
+
+            subject_template = get_template('GroupConnect/mail_template/create/invitesubject.txt')
+            subject = subject_template.render(context)
+
+            message_template = get_template('GroupConnect/mail_template/create/invitemessage.txt')
+            message = message_template.render(context)
+
+            inviteuser.email_user(subject, message, from_email)
+
+            return redirect('GroupConnect:group_setting', group_pk)
 
         return redirect('GroupConnect:group_setting', group_pk)
 
-    return redirect('GroupConnect:group_setting', group_pk)
+    else:
+        return redirect('GroupConnect:group_setting', group_pk)
 
 
 def GroupInvite(request, **kwargs):

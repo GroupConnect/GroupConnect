@@ -118,7 +118,7 @@
                                     <thead class="table-dark">
                                         <tr>
                                             <th>カテゴリー一覧</th>
-                                            <th scope="col-lg-2">#</th>
+                                            <th scope="col-lg-2"></th>
                                         </tr>
                                     </thead>
                                     <tbody class="side-tbody">
@@ -127,7 +127,7 @@
                                         {% csrf_token %}
                                         <tr>
                                             <th><a href="#">{{ category.name }}</a></th>
-                                            <td><button type="submit" class="btn-primary" id="category-delete" name="category-delete" value="{{ category.name }}">削除</button></td>
+                                            <td><button type="submit" class="btn-primary" id="category-delete" name="category-delete" value="{{ category.id }}">削除</button></td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>
@@ -206,7 +206,7 @@
                                    <table class="table">
                                        <thead class="thead-dark">
                                            <tr>
-                                                <th>#</th>
+                                                <th></th>
                                                 <th scope="col">タイトル</th>
                                                 <th>掲示板の説明</th>
                                                 <th>最終更新日</th>
