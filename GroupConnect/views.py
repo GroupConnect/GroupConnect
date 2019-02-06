@@ -116,5 +116,3 @@ class SignboardDelete(generic.DeleteView):
 class CategoryDelete(generic.DeleteView):
     model = Signboard
     success_url ='GroupConnect:bordlist'
-    
-    
