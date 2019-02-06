@@ -96,18 +96,33 @@
                             <div class="col-lg-12 right-middle">
                                 <div class="middle">
                                     <div class="middle-up">
-                                        <p class="d-inline name">名前<span class="text-danger required">[必須]</span></p>
-                                        <p class="d-inline lastname1">姓: <input type="text" name="last_name" value="{{ user.last_name }}"></p>
-                                        <p class="d-inline firstname1">名: <input type="text"  name="first_name" value="{{ user.first_name }}"></p><br>
-                                        <!-- <p class="d-inline nameblank1">※姓を入力してください。</p>
-                                        <p class="d-inline nameblank2">※名を入力してください。</p><br> -->
+                                        <!--<p class="d-inline name">名前<span class="text-danger required">[必須]</span></p>-->
+                                        <div class="row test">
+                                            <div class="col-md-5 last_name">
+                                                <p class="last_name1">苗字 <span class="text-danger required">[必須]</span><input type="text" name="last_name" value="{{ user.last_name }}"></p>
+                                                <p class="last_nameblank">※苗字を入力してください。</p>
+                                                <p class="last_namecheck">全角文字のみを入力してください。</p>
+                                            </div>
+                                            <div class="col-md-6 col-md-offset-1 first_name">
+                                                <p class="first_name1">名前 <span class="text-danger required">[必須]</span><input type="text"  name="first_name" value="{{ user.first_name }}"></p>
+                                                <p class="first_nameblank">※名前を入力してください。</p>
+                                                <p class="first_namecheck">全角文字のみを入力してください。</p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="middle-down">
-                                        <p class="d-inline romaji">名前[ローマ字]<span class="text-danger required">[必須]</span></p>
-                                        <p class="d-inline romajilastname2">姓[ローマ字]: <input type="text" name="rome_last_name" value="{{ user.rome_last_name }}"></p>
-                                        <p class="d-inline romajifirstname2">名[ローマ字]: <input type="text"  name="rome_first_name" value="{{ user.rome_first_name}}"></p><br>
-                                        <!-- <p class="d-inline romajiblank1">※姓[ローマ字]を入力してください。</p>
-                                        <p class="d-inline romajiblank2">※名[ローマ字]を入力してください。</p> -->
+                                            <div class="row test">
+                                                <div class="col-md-5 rome_last_name">
+                                                    <p class="last_name2">苗字[ローマ字] <span class="text-danger required">[必須]</span><input type="text" name="rome_last_name" value="{{ user.rome_last_name }}"></p>
+                                                    <p class="rome_last_nameblank">※苗字[ローマ字]を入力してください。</p>
+                                                    <p class="rome_last_namecheck">半角英字のみを入力してください。</p>
+                                                </div>
+                                                <div class="col-md-6 col-md-offset-1 rome_first_name">
+                                                    <p class="first_name2">名前[ローマ字] <span class="text-danger required">[必須]</span><input type="text"  name="rome_first_name" value="{{ user.rome_first_name }}"></p>
+                                                    <p class="rome_first_nameblank">※名前[ローマ字]を入力してください。</p>
+                                                    <p class="rome_first_namecheck">半角英字のみを入力してください。</p>
+                                                </div>
+                                            </div>
                                     </div>
                                 </div>
                             </div>

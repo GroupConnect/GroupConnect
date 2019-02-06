@@ -90,9 +90,9 @@ img {
     margin: 0px 0px 0px 78px;
 }
 
-.lastname1, .firstname1 {
+/*.lastname1, .firstname1 {
     margin: 0px 0px 0px 109px;
-}
+}*/
 
 .romajilastname2, .romajifirstname2 {
     margin: 0px 0px 0px 30px;
@@ -125,3 +125,38 @@ h2 {
 h3 {
     text-align: center;
 }
+
+/* --------------苗字と名前のcss -----------------*/
+/*.test{
+    margin: 0px 0px -50px 0px;
+}*/
+
+.last_name, .rome_last_name {
+    text-align: right;
+}
+
+/*.last_name1, .last_name2 {
+    margin: 0px 0px 0px 0px;
+}*/
+
+.first_name, .rome_first_name {
+    text-align: left;
+}
+
+/*.first_name1, .first_name2 {
+    margin: 0px 0px 0px 0px;
+}*/
+
+.last_nameblank, .last_namecheck, .rome_last_nameblank, .rome_last_namecheck {
+    color: #ff0000;
+    font-size: 15px;
+    display: none;
+}
+
+.first_nameblank, .first_namecheck, .rome_first_nameblank, .rome_first_namecheck {
+    color: #ff0000;
+    font-size: 15px;
+    display: none;
+    margin: 0px 0px 0px 80px;
+}
+/* ----------------------------------------------*/
