@@ -2,8 +2,8 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.utils.translation import ugettext_lazy as _
-from .models import User
 
+from .models import User, Signboard
 
 class MyUserChangeForm(UserChangeForm):
     class Meta:
@@ -40,3 +40,5 @@ class MyUserAdmin(UserAdmin):
 
 
 admin.site.register(User, MyUserAdmin)
+
+admin.site.register(Signboard)
