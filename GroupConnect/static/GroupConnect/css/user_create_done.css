@@ -1,0 +1,44 @@
+.area {
+    background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
+}
+
+h1 {
+    font-size: 90px;
+    font-family: Times New Roman;
+    text-align: center;
+}
+
+.shinki {
+    width: 25%;
+    font-size: 30px;
+    text-align: center;
+    margin: 20px 0px 0px 0px;
+    border-bottom: 2px solid #5f9644;
+}
+
+p {
+    text-align: center;
+    font-size: 30px;
+    margin: 40px 0px 0px 0px;
+}
+
+.attention {
+    color: #ff0000;
+}
+
+.main {
+    margin: 0px 0px 0px 0px;
+}
+
+.back {
+    text-align: center;
+    font-size: 30px;
+    margin: 70px 0px 0px 0px;
+}
+
+.cancel {
+    width: 200px;
+    height: 35px;
+    font-size: 20px;
+    margin: 60px 0px 0px 0px;
+}

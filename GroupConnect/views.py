@@ -6,6 +6,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import (
     LoginView, LogoutView
 )
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.views import (
+    LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView,
+    PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+)
+from django.urls import reverse_lazy
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.signing import BadSignature, SignatureExpired, loads, dumps
 from django.http import Http404, HttpResponseBadRequest
@@ -17,6 +23,8 @@ from .forms import (
 )
 from .models import (
     Notice, Group, Member, GroupIcon
+    LoginForm, UserCreateForm, UserUpdateForm, UserMailaddressUpdateForm, MyPasswordChangeForm,
+    MyPasswordResetForm, MySetPasswordForm, DeleteUserForm, UserCreateForm
 )
 
 
@@ -57,6 +65,9 @@ class UserCreate(generic.CreateView):
 
         user.email_user(subject, message)
         return redirect('GroupConnect:user_create_done')
+        
+    def form_valid(self, form):
+        return render(self.request, 'GroupConnect/user_create.html', {'form': form})
 
 
 class UserCreateDone(generic.TemplateView):
@@ -311,23 +322,131 @@ class UserUpdate(OnlyYouMixin, generic.UpdateView):
 
         return user
 
-class GroupList(generic.ListView):
+class PasswordChange(PasswordChangeView):
+    """パスワード変更ビュー"""
+    form_class = MyPasswordChangeForm
+    success_url = reverse_lazy('GroupConnect:password_change_done')
+    template_name = 'GroupConnect/password_change.html'
+
+class PasswordChangeTest(PasswordChangeView):
+    """パスワード変更ビュー(テスト用)"""
+    form_class = MyPasswordChangeForm
+    success_url = reverse_lazy('GroupConnect:password_change_done')
+    template_name = 'GroupConnect/password_change_test.html'
+
+class PasswordChangeDone(PasswordChangeDoneView):
+    """パスワード変更しました"""
+    template_name = 'GroupConnect/password_change_done.html'
+
+
+class PasswordReset(PasswordResetView):
+    """パスワード変更用URLの送付ページ"""
+    subject_template_name = 'GroupConnect/mail_template/password_reset/subject.txt'
+    email_template_name = 'GroupConnect/mail_template/password_reset/message.txt'
+    template_name = 'GroupConnect/password_reset_form.html'
+    form_class = MyPasswordResetForm
+    success_url = reverse_lazy('GroupConnect:password_reset_done')
+
+
+class PasswordResetDone(PasswordResetDoneView):
+    """パスワード変更用URLを送りましたページ"""
+    template_name = 'GroupConnect/password_reset_done.html'
+
+
+class PasswordResetConfirm(PasswordResetConfirmView):
+    """新パスワード入力ページ"""
+    form_class = MySetPasswordForm
+    success_url = reverse_lazy('GroupConnect:password_reset_complete')
+    template_name = 'GroupConnect/password_reset_confirm.html'
+
+
+class PasswordResetComplete(PasswordResetCompleteView):
+    """新パスワード設定しましたページ"""
+    template_name = 'GroupConnect/password_reset_complete.html'
+
+
+class UserList(generic.ListView):
+    template_name = 'GroupConnect/user_list.html'  # デフォルトUserだと、authアプリケーションのuser_list.htmlを探すため、明示的に書いておく
+    model = User
+
+class UserDataInput(generic.FormView):
+    """ユーザー情報の入力
+
+    このビューが呼ばれるのは、以下の2箇所です。
+    ・初回の入力欄表示(aタグでの遷移)
+    ・確認画面から戻るを押した場合(これはPOSTで飛んできます)
+
+    初回の入力欄表示の際は、空のフォームをuser_data_input.htmlに渡し、
+    戻る場合は、POSTで飛んできたフォームデータをそのままuser_data_input.htmlに渡します。
+
     """
-    グループ一覧ページ
+    template_name = 'GroupConnect/user_data_input.html'
+    form_class = UserCreateForm
+
+    def form_valid(self, form):
+        return render(self.request, 'GroupConnect/user_data_input.html', {'form': form})
+
+class UserDataConfirm(generic.FormView):
+    """ユーザー情報の確認
+
+    ユーザー情報入力後、「送信」を押すとこのビューが呼ばれます。(user_data_input.htmlのform action属性がこのビュー)
+    データが問題なければuser_data_confirm.html(確認ページ)を、入力内容に不備があればuser_data_input.html(入力ページ)に
+    フォームデータを渡します。
+
     """
-    model = Group
-    template_name = 'GroupConnect/grouplist.html'
+    form_class = UserCreateForm
 
-    def get_context_data(self, **kwargs):
-        """
-        参加中のグループ一覧取得
-        """
+    def form_valid(self, form):
+        return render(self.request, 'GroupConnect/user_data_confirm.html', {'form': form})
 
-        ID = self.request.user.id
-        members = Member.objects.filter(user_id=ID)
+    def form_invalid(self, form):
+        return render(self.request, 'GroupConnect/user_data_input.html', {'form': form})
 
-        context = super().get_context_data(**kwargs)
-        context.update({
-            'groups' : members
-        })
-        return context
+class UserDataCreate(generic.CreateView):
+    """ユーザーデータの登録ビュー。ここ以外では、CreateViewを使わないでください"""
+    form_class = UserCreateForm
+    success_url = reverse_lazy('GroupConnect:user_create_done')
+    
+    def form_valid(self, form):
+
+        user = form.save(commit=False)
+        user.is_active = False
+        user.save()
+
+        current_site = get_current_site(self.request)
+        domain = current_site.domain
+        context = {
+            'protocol': 'https' if self.request.is_secure() else 'http',
+            'domain': domain,
+            'token': dumps(user.pk),
+            'user': user,
+        }
+
+        subject_template = get_template('GroupConnect/mail_template/create/subject.txt')
+        subject = subject_template.render(context)
+
+        message_template = get_template('GroupConnect/mail_template/create/message.txt')
+        message = message_template.render(context)
+
+        user.email_user(subject, message)
+        return redirect('GroupConnect:user_create_done')
+
+    def form_invalid(self, form):
+        """基本的にはここに飛んでこないはずです。UserDataConfrimでバリデーションは済んでるため"""
+        return render(self.request, 'GroupConnect/user_data_input.html', {'form': form})
+
+
+class UserDeleteView(OnlyYouMixin, generic.DeleteView):
+    '''
+        ユーザ退会用のビュー
+        今回は再登録する際に同じメールアドレスが使えなくなることを理由に
+        is_activeをfalseにするのではなくデータそのものを削除することにした   
+    '''
+    template_name = "GroupConnect/user_delete.html"
+    success_url = reverse_lazy("GroupConnect:user_delete_done")
+    model = User
+    slug_field = 'pk'
+    slug_url_kwarg = 'pk'
+
+class UserDeleteDone(generic.TemplateView):
+    template_name = 'GroupConnect/user_delete_done.html'
