@@ -261,9 +261,18 @@ def operation(request):
     """
     メンバー除名
     """
-    group_pk = request.POST['group_pk']
-    expulsion = request.POST['expulsion']
-    Member.objects.filter(id=expulsion).delete()
+    if 'grant' in request.POST:
+        group_pk = request.POST['group_pk']
+        grant = request.POST['grant']
+        member = Member.objects.get(id=grant)
+        member.authority = True
+        member.save()
+
+    elif 'expulsion' in request.POST:
+        group_pk = request.POST['group_pk']
+        expulsion = request.POST['expulsion']
+        Member.objects.filter(id=expulsion).delete()
+
     return redirect('GroupConnect:group_setting', group_pk)
 
 def mailsend(request):

@@ -60,25 +60,6 @@
                     <div class="col-lg-12 left-middle">
                         <a class="navbar-brand creategr" href="{% url 'GroupConnect:group_create' %}">⊕グループを作成</a>
                     </div>
-                    <div class="col-lg-12 left-down">
-                        <div class="dropdown d-inline">
-                            <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">名前</button>
-                            <ul class="dropdown-menu">
-                                <li><button class="dropdown-item" value="名前">名前</button></li>
-                                <li><button class="dropdown-item" value="最終日更新順">最終日更新順</button></li>
-                                <li><button class="dropdown-item" value="新着順">新着順</button></li>
-                            </ul>
-                        </div>
-        
-                        <div class="dropdown d-inline">
-                            <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">昇順</button>
-                            <ul class="dropdown-menu">
-                                <li><button class="dropdown-item" value="昇順">昇順</button></li>
-                                <li><button class="dropdown-item" value="降順">降順</button></li>
-                            </ul>
-                        </div>
-
-                    </div>
 
                     <!-- 参加グループ一覧 -->
                     <div class="sidebarmenu">
@@ -100,19 +81,12 @@
             <div class="col-lg-10 right">
                 <div class="row row3">
                     <div class="col-lg-12 up">
-                            <h1>カレンダー</h1>
-                            
-                            
-                            
-                        
-                    </div>
-                    <div class="col-lg-12 middle">
                             <h1>★新着情報</h1>
                             <p>・あいうえおかきくけこさしすせそ</p>
                             <p>・あいうえおかきくけこさしすせそ</p>
                     </div>
                     
-                    <div class="col-lg-12 down">
+                    <div class="col-lg-12 middle">
                             <h1>✉お知らせ</h1>
                             {% for notice in notice_list %}
                             <p>
@@ -120,7 +94,8 @@
                                 <a href="{% url 'GroupConnect:notice_detail' notice.pk %}">{{notice.title}}</a>
                             </p>
                             {% endfor %}
-                        
+                    </div>
+                    <div class="col-lg-12 down">
                     </div>
                 </div>    
             </div>

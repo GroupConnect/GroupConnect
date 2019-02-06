@@ -170,7 +170,9 @@
                                 <div class="row">
                                     <div class="col-lg-2">
                                         <div class="nav-item active d-inline">
-                                            <input type="submit" class="btn btn-warning change" value="変更する">
+                                            {% if mymenber.authority == True %}
+                                                <input type="submit" class="btn btn-warning change" value="変更する">
+                                            {% endif %}
                                         </div>
                                     </div>
                             </form>
@@ -178,7 +180,9 @@
                                 {% csrf_token %}
                                 <div class="nav-item active d-inline">
                                     <div class="col-lg-2">
-                                        <input type="button" class="btn closure" data-toggle="modal" data-target="#basicModal" value="閉鎖する">                                                                        
+                                        {% if mymenber.authority == True %}
+                                            <input type="button" class="btn closure" data-toggle="modal" data-target="#basicModal" value="閉鎖する">
+                                        {% endif %}
                                     </div>
                                     <div class="modal fade"id="basicModal"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
                                         <div class="modal-dialog">
@@ -277,12 +281,20 @@
                                             <td class="status">
                                                 {% if mymember.authority == True %}
                                                     {% if member.user_id.id != myid %}
+                                                        {% if member.authority == True %}
+                                                        <form action="{% url 'GroupConnect:operation' %}" method="POST">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="group_pk" value="{{group.pk}}">
+                                                                <button type="submit" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" name="expulsion" value="{{member.id}}">除名</button>
+                                                        </form>
+                                                        {% else %}
                                                         <form action="{% url 'GroupConnect:operation' %}" method="POST">
                                                             {% csrf_token %}
                                                             <input type="hidden" name="group_pk" value="{{group.pk}}">
-                                                            <button type="button" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" value="{{member.id}}">権限付与</button>
+                                                            <button type="submit" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" name="grant" value="{{member.id}}">権限付与</button>
                                                             <button type="submit" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" name="expulsion" value="{{member.id}}">除名</button>
                                                         </form>
+                                                        {% endif %}
                                                     {% endif %}
                                                 {% endif %}
                                             </td>

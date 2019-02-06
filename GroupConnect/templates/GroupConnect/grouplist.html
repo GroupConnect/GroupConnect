@@ -55,26 +55,12 @@
             <a href="{% url 'GroupConnect:group_list' %}">グループ一覧</a>
         </div>
         <h1 class="d-inline grouplist">グループ一覧</h1>
-        <div class="nav-item active dropdown d-inline sort1">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">昇順</button>
-            <ul class="dropdown-menu">
-                <li><button class="dropdown-item" value="昇順">昇順</button></li>
-                <li><button class="dropdown-item" value="降順">降順</button></li>
-            </ul>
-        </div>
-        <div class="nav-item active dropdown d-inline sort2">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">名前</button>
-            <ul class="dropdown-menu">
-                <li><button class="dropdown-item" value="名前">名前</button></li>
-                <li><button class="dropdown-item" value="新着順">新着順</button></li>
-                <li><button class="dropdown-item" value="最終更新日">最終更新日</button></li>
-            </ul>
-        </div>
+
         <div class="list">
             <table class="table">
                 {% for group in groups %}
                 <tr>
-                    <td scope="row"><a href="">{{group.group_id.group_name}}</a></td>
+                    <td scope="row"><a href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_id.group_name}}</a></td>
                     <td class="day">作成日：{{group.group_id.created_at}}</td>
                 </tr>
 
