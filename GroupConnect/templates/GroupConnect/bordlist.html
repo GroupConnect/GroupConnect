@@ -103,10 +103,8 @@
                                                      <div class="modal-footer">
                                                             <input type="submit" class="btn btn-primary" value="作成">
                                                             <button type="button" class="btn btn-secondary" id="close">キャンセル</button>
-                                                    </div>
-            
+                                                    </div>            
                                                  </div>
-                                           
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +124,7 @@
                                         {% csrf_token %}
                                         <tr>
                                             <th><a href="#">{{ category.name }}</a></th>
-                                            <td><button type="submit" class="btn-primary" id="category-delete" name="category-delete" value="{{ category.name }}">削除</button></td>
+                                            <td><button type="submit" class="btn-primary" id="category-delete" name="category-delete" value="{{ category.id }}">削除</button></td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>
@@ -195,20 +193,7 @@
                                     <div class="nav-item active d-inline">
                                         <input type="submit" class="btn alldelete" id="alldelete" name="alldelete" value="一括削除">
                                    </div>
-                                   <div class="nav-item active dropdown d-inline sort1">
-                                       <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">昇順</button>
-                                       <ul class="dropdown-menu">
-                                           <li><button class="dropdown-item" value="昇順">昇順</button></li>
-                                           <li><button class="dropdown-item" value="降順">降順</button></li>
-                                       </ul>
-                                   </div>
-                                   <div class="nav-item active dropdown d-inline sort2">
-                                       <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">名前</button>
-                                       <ul class="dropdown-menu">
-                                           <li><button class="dropdown-item" value="名前">名前</button></li>
-                                           <li><button class="dropdown-item" value="最終更新日">最終更新日</button></li>
-                                       </ul>
-                                   </div>
+                                   
                                </div>
                                </div>
                                <p class="ctgr-content">カテゴリー：すべて</p>

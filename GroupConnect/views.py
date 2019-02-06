@@ -1,25 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
 
-# # Create your views here.
-
-# class IndexView(generic.TemplateView):
-#     template_name = 'GroupConnect/index.html'
-# from .models import Signboard
-
-
-
-# class MypageView(generic.TemplateView):
-#     template_name = 'GroupConnect/mypage.html'
-
-# class GrouptopView(generic.TemplateView):
-#     template_name = 'GroupConnect/grouptop.html'
-
-# class BordlistView(generic.TemplateView):
-#     template_name = 'GroupConnect/bordlist.html'
-
-# class BordView(generic.TemplateView):
-#     template_name = 'GroupConnect/bord.html'
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -58,10 +39,12 @@ class bordlist(generic.ListView) :
         context = super().get_context_data(**kwargs)
 
         context.update({
-            'messages' : Signboard.objects.all(),
+            'messages' : Signboard.objects.filter(group_id=group),
             'categorys' : Category.objects.filter(group_id=group)
         })
         return context
+
+# html側のname属性に設定しているボタンの名前に応じて削除する
 
     def post(self,request):
         if 'delete' in request.POST: 
