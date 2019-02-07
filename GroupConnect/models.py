@@ -201,10 +201,18 @@ class Signboard(models.Model):
             対象のタイトルを返す
         """
         return self.title
+<<<<<<< HEAD
+=======
+
+>>>>>>> 掲示板一覧ページ作成
 
 class Post(models.Model):
     """
     投稿のクラス
+<<<<<<< HEAD
+=======
+
+>>>>>>> 掲示板一覧ページ作成
     Parameters
     ----------
     id : int
@@ -230,6 +238,10 @@ class Post(models.Model):
 class Situation(models.Model):
     """
     既読状況のクラス
+<<<<<<< HEAD
+=======
+
+>>>>>>> 掲示板一覧ページ作成
     Parameters
     ----------
     id : int

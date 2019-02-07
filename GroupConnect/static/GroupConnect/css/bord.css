@@ -1,166 +1,143 @@
 body {
     padding-top:4.0rem;
 }
+
 .bar {
     font-size: 18px;
     border:solid 2px #5f9644;
     background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
 }
+
 .bar2 {
     font-size: 20px;
     height: 55px;
     background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
 }
+
 .mega-dropdown { 
     position: static;
 }
+
 .dropdown-menu.mega-dropdown-menu.show { 
     font-size: 20px;
     width: 100%;
     background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
 }
+
 .menu, .dropdown-menu {
     background: linear-gradient(-90deg, #dee6e0, #d0e2d0);
 }
+
 .grbar {
     
     border:solid 2px #5f9644;
 }
+
 .groupconnect {
     font-size: 25px;
     font-family: Times New Roman;
 }
+
 .grname {
     font-size: 25px;
     font-family: Times New Roman;
     margin: 0px 0px 0px 40px;
 }
-/* サイドバー */
-.side {
-    height: 593px;
+
+.left {
     border:solid 2px #5f9644;
     text-align: center;
-    /* overflow-y: auto; */
 }
-.side-top {
+
+.left-top {
     background-color: #bae1a7;
 }
-.side-grname {
+
+.left-grname {
     margin: 0px 0px 0px 20px;
     font-family: Times New Roman;
     color: #000000;
 }
-.side-up {
+
+.left-up {
     margin: 10px 0px 10px 0px;
-    padding: 0px 0px 10px 0px;
     border-bottom: 2px solid #5f9644;
 }
+
 .bordlist {
     font-size: 20px;
     margin: 0px 20px 0px 20px;
 }
+
+.quantity {
+    font-size: 15px;
+    float: right;
+    margin: 4px 0px 9px 0px;
+}
+
+
 .ctgr {
     font-size: 20px;
     margin: 0px 0px 0px 10px;
 }
+
 .create-ctgr {
     float: right;
     margin: 4px 0px 0px 0px;
+
 }
-.side-down {
-    height: 440px;
-    overflow-y: auto;
-}
+
 .sidebar-dropdown {
     float: left;
     margin: 10px 0px 0px 0px;
 }
+
 .sidebtn {
     background-color: #fff;
 }
-.quantity {
+
+.subquantity {
     float: right;
     margin: 15px 0px 0px 0px;
 }
 
-#category-delete {
-    display: none;
-}
-/* メインコンテンツ */
 .right {
-    height: 593px;
-    max-height: 593px;
+    min-height: 593px;
+    max-height: none;
     border:solid 2px #5f9644;
 }
+
 .history {
-    margin: 13px 0px 10px 0px;
+    margin: 13px 0px 0px 0px;
 }
+
+.bar3 {
+    background-color: #fff;
+    margin: 0px -15px 0px -15px;
+    border-bottom: 2px solid #5f9644;
+}
+
+.bord-name {
+    font-size: 30px;
+    margin: 3px 0px 0px 0px;
+}
+
+.configuration, .borddelete {
+    margin: 0px 0px 0px 10px;
+}
+
+.file-select {
+    margin: 15px 0px 0px 15px;
+}
+
+.btn-warning {
+    width: 95px;
+    height: 35px;
+    float: right;
+    margin: 15px 30px 0px 0px;
+}
+
 .area {
-    margin: 30px 0px 0px 0px; 
+    margin: 10px 0px 0px 0px; 
     background-color: #a6e288;
-}
-.bord-create, .choice, .alldelete {
-    margin: 0px 0px 0px 50px;
-    background-color: #e5eee6;
-}
-#alldelete {
-    display: none;
-}
-
-/* モーダル */
-.modal-title {
-    margin: 0px 0px 0px 0px;
-}
-
-.title-error {
-    color: #ff0000;
-    display: none;
-}
-
-.category-error {
-    color: #ff0000;
-    display: none;
-}
-
-.modal-category {
-    float: left;
-}
-.modal-title2, .modal-category2, .modal-description {
-    margin: 0px 0px 0px 0px;
-}
-.form-control {
-    margin: 0px 0px 40px 0px;
-}
-.sort1 {
-    float: right;
-    margin: 0px 70px 0px 30px;
-}
-.sort2 {
-    float: right;
-    margin: 0px 20px 0px 30px;
-}
-.ctgr-content {
-    margin: 20px 0px 10px 30px;
-}
-.list {
-    width: 93%;
-    height: 385px;
-    margin: 0px 0px 0px 30px;
-}
-thead, tbody {
-    display: block;
-}
-tbody {
-    height: 334px;
-    overflow-y: auto;
-}
-th, td {
-    width: 319px;
-}
-.th, .td {
-    width: 80px;
-} 
-#checkbox {
-    margin: 10px 10px 10px 0px;
-    display: none;
 }

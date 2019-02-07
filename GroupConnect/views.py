@@ -536,11 +536,11 @@ class UserDeleteView(OnlyYouMixin, generic.DeleteView):
 
 class UserDeleteDone(generic.TemplateView):
     template_name = 'GroupConnect/user_delete_done.html'
-        context = super().get_context_data(**kwargs)
-        context.update({
-            'groups' : members
-        })
-        return context
+    # context = super().get_context_data(**kwargs)
+    # context.update({
+    #     'groups' : members
+    # })
+    # return context
 
 
 

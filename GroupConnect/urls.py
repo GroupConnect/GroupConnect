@@ -34,7 +34,7 @@ urlpatterns = [
     path('Category/<int:pk>/', views.SignboardView.as_view() , name="Category" ),
 
 ]
-    path('<int:notice_id>/', views.NoticeDetail.as_view(), name='notice_detail'),
+   
     path('user_testupdate/<int:pk>/', views.UserTestUpdate.as_view(), name='user_testupdate'),
     path('user_mailaddress_update/<int:pk>/', views.UserMailaddressUpdate.as_view(), name='user_mailaddress_update'),
     path('user_testmailaddress_update/<int:pk>/', views.UserTestMailaddressUpdate.as_view(), name='user_testmailaddress_update'),
