@@ -50,8 +50,18 @@ class MemberAdmin(admin.ModelAdmin):
 
 admin.site.register(Member, MemberAdmin)
 
+class SituationAdmin(admin.ModelAdmin):
+    list_display = ('id', 'post_id', 'user_id', 'read_situation')
+
+admin.site.register(Situation, SituationAdmin)
+
+class SituationInline(admin.TabularInline):
+    model = Situation
+    extra = 0
+
 class PostAdmin(admin.ModelAdmin):
     list_display = ('id', 'signboard_id', 'text', 'contributer', 'created_at', 'read_number')
+    inlines = [SituationInline]
 
 admin.site.register(Post, PostAdmin)
 
@@ -69,8 +79,3 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'group_id', 'name')
 
 admin.site.register(Category, CategoryAdmin)
-
-class SituationAdmin(admin.ModelAdmin):
-    list_display = ('id', 'post_id', 'user_id', 'read_situation')
-
-admin.site.register(Situation, SituationAdmin)

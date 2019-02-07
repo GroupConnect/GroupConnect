@@ -1,4 +1,5 @@
-import datetime
+import datetime, math
+
 from django.conf import settings
 from django.db import models
 from django.core.mail import send_mail
@@ -207,8 +208,8 @@ class Signboard(models.Model):
 
         now = timezone.now()
         diff_date = now - self.updated_at()
-        diff_hours = diff_date.seconds / 60 / 60
-        diff_minutes = diff_date.seconds / 60
+        diff_hours = math.floor(diff_date.seconds / 60 / 60)
+        diff_minutes = math.floor(diff_date.seconds / 60)
 
         if (6 < diff_date.days):
             return self.updated_at.date()
@@ -220,6 +221,8 @@ class Signboard(models.Model):
             return str(diff_minutes) + diff_words[2]
         elif (0 < diff_date.seconds):
             return str(diff_date.seconds) + diff_words[3]
+        else:
+            return '今'
 
 class Post(models.Model):
     """
@@ -254,8 +257,8 @@ class Post(models.Model):
 
         now = timezone.now()
         diff_date = now - self.created_at
-        diff_hours = diff_date.seconds / 60 / 60
-        diff_minutes = diff_date.seconds / 60
+        diff_hours = math.floor(diff_date.seconds / 60 / 60)
+        diff_minutes = math.floor(diff_date.seconds / 60)
 
         if (6 < diff_date.days):
             return self.created_at.date()
@@ -267,6 +270,8 @@ class Post(models.Model):
             return str(diff_minutes) + diff_words[2]
         elif (0 < diff_date.seconds):
             return str(diff_date.seconds) + diff_words[3]
+        else:
+            return '今'
 
 class Situation(models.Model):
     """
