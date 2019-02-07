@@ -152,6 +152,9 @@ class Member(models.Model):
     name = models.CharField(max_length=100, db_column='name')
     authority = models.BooleanField(db_column='authority')
 
+    def __str__(self):
+        return self.name
+
 class Category(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
     group_id = models.ForeignKey(Group, on_delete=models.CASCADE, db_column='group_id')
@@ -222,9 +225,30 @@ class Post(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
     signboard_id = models.ForeignKey(Signboard, on_delete=models.CASCADE, db_column='signboard_id')
     text = models.TextField(db_column='text')
+    #attached_file = models.FileField()
     contributer = models.ForeignKey(Member, on_delete=models.CASCADE, db_column='contributer')
     created_at = models.DateTimeField(db_column='created_at', default=timezone.now)
-    read_number = models.IntegerField(db_column='read_number')
+    read_number = models.IntegerField(db_column='read_number', default=0)
+
+
+    def diff_date(self):
+        diff_words = ['日前', '時間前', '分前', '秒前']
+
+        now = timezone.now()
+        diff_date = now - self.created_at
+        diff_hours = diff_date.seconds / 60 / 60
+        diff_minutes = diff_date.seconds / 60
+
+        if (6 < diff_date.days):
+            return self.updated_at.date()
+        elif (0 < diff_date.days):
+            return str(diff_date.days) + diff_words[0]
+        elif (0 < diff_hours):
+            return str(diff_hours) + diff_words[1]
+        elif (0 < diff_minutes):
+            return str(diff_minutes) + diff_words[2]
+        elif (0 < diff_date.seconds):
+            return str(diff_date.seconds) + diff_words[3]
 
 class Situation(models.Model):
     """

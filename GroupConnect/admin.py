@@ -50,8 +50,18 @@ class MemberAdmin(admin.ModelAdmin):
 
 admin.site.register(Member, MemberAdmin)
 
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('id', 'signboard_id', 'text', 'contributer', 'created_at', 'read_number')
+
+admin.site.register(Post, PostAdmin)
+
+class PostInline(admin.TabularInline):
+    model = Post
+    extra = 0
+
 class SignboardAdmin(admin.ModelAdmin):
     list_display = ('id', 'group_id', 'title', 'category_id', 'text', 'updated_at')
+    inlines = [PostInline]
 
 admin.site.register(Signboard, SignboardAdmin)
 
@@ -59,11 +69,6 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'group_id', 'name')
 
 admin.site.register(Category, CategoryAdmin)
-
-class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'signboard_id', 'text', 'contributer', 'created_at', 'read_number')
-
-admin.site.register(Post, PostAdmin)
 
 class SituationAdmin(admin.ModelAdmin):
     list_display = ('id', 'post_id', 'user_id', 'read_situation')
