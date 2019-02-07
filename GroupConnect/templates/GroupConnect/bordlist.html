@@ -288,7 +288,7 @@
                                             <tr>
                                                 <td scope="row"><a href="#">{{ message.title }}</a></td>
                                                 <td>{{ message.text }}</td>
-                                                <td>最終更新：6月28日　山口</td>
+                                                <td>最終更新：{{ message.updated_at }}</td>
                                                 <td class="td"><button class="btn-primary">削除</button></td>
                                             </tr>
                                             {% endfor %}
