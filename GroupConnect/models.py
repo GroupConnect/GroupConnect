@@ -225,10 +225,11 @@ class Post(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
     signboard_id = models.ForeignKey(Signboard, on_delete=models.CASCADE, db_column='signboard_id')
     text = models.TextField(db_column='text')
-    #attached_file = models.FileField()
+    attached_file = models.FileField(upload_to='files/', blank=True, null=True, db_column='file')
     contributer = models.ForeignKey(Member, on_delete=models.CASCADE, db_column='contributer')
     created_at = models.DateTimeField(db_column='created_at', default=timezone.now)
     read_number = models.IntegerField(db_column='read_number', default=0)
+    reply = models.ForeignKey('Post', on_delete=models.CASCADE, blank=True, null=True, db_column='reply')
 
     def diff_date(self):
         diff_words = ['日前', '時間前', '分前', '秒前']
