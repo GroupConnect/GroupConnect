@@ -230,7 +230,6 @@ class Post(models.Model):
     created_at = models.DateTimeField(db_column='created_at', default=timezone.now)
     read_number = models.IntegerField(db_column='read_number', default=0)
 
-
     def diff_date(self):
         diff_words = ['日前', '時間前', '分前', '秒前']
 
