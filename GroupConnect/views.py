@@ -19,12 +19,11 @@ from django.shortcuts import redirect, resolve_url
 from django.template.loader import get_template
 from django.views import generic
 from .forms import (
-    LoginForm, UserCreateForm, GroupCreateForm, UserUpdateForm,GroupUpdateForm
-)
-from .models import (
-    Notice, Group, Member, GroupIcon
     LoginForm, UserCreateForm, UserUpdateForm, UserMailaddressUpdateForm, MyPasswordChangeForm,
     MyPasswordResetForm, MySetPasswordForm, DeleteUserForm, UserCreateForm
+)
+from .models import (
+    Notice, Group, Member, GroupIcon,Signboard,Post,Situation,Category
 )
 
 
@@ -102,19 +101,23 @@ class UserCreateComplete(generic.TemplateView):
 
         return HttpResponseBadRequest()
 
+class OnlyYouMixin(UserPassesTestMixin):
+    raise_exception = True
 
+    def test_func(self):
+        user = self.request.user
+        return user.pk == self.kwargs['pk'] or user.is_superuser
 
-class Mypage(generic.TemplateView): #マイページ
+class Mypage(LoginRequiredMixin, generic.TemplateView): #マイページ
     template_name = 'GroupConnect/mypage.html'
 
     def get_context_data(self, **kwargs):
         """
         参加グループの一覧取得
         お知らせ一覧の取得。
-        """
+        """        
         ID = self.request.user.id
         members = Member.objects.filter(user_id=ID)
-
         context = super().get_context_data(**kwargs)
         context.update({
             'members': members,
@@ -137,9 +140,12 @@ class GroupCreate(generic.CreateView): #グループ作成ページ
         """
         アイコン一覧の取得
         """
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
         context = super().get_context_data(**kwargs)
         context.update({
-            'icon_list' : GroupIcon.objects.all()
+            'icon_list' : GroupIcon.objects.all(),
+            'groups' : members,
         })
         return context
 
@@ -163,6 +169,30 @@ class GroupCreate(generic.CreateView): #グループ作成ページ
 
         Member(user_id=userid, group_id=groupid, name=name, authority=True).save()
         
+        if 'mailaddress' in self.request.POST:
+            emails = self.request.POST.getlist('mailaddress')
+
+            for email in emails:
+                user = User.objects.get(id=ID)
+                inviteuser = User.objects.get(email=email)
+                group = Group.objects.get(id=group_id)
+                current_site = get_current_site(self.request)
+                domain = current_site.domain
+                from_email = "GroupConnect@hoge.moge"
+                context = {
+                    'protocol': self.request.scheme,
+                    'domain': domain,
+                    'user': user,
+                    'inviteuser': inviteuser,
+                    'group': group,
+                    'token': dumps(inviteuser.pk),
+                }
+                subject_template = get_template('GroupConnect/mail_template/create/invitesubject.txt')
+                subject = subject_template.render(context)
+                message_template = get_template('GroupConnect/mail_template/create/invitemessage.txt')
+                message = message_template.render(context)
+
+                inviteuser.email_user(subject, message, from_email)
 
 
         return redirect('GroupConnect:mypage')
@@ -178,11 +208,15 @@ class GroupTop(generic.DetailView): #グループのトップページ
         """
         参加メンバー一覧の取得
         """
+
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
         member_list = Member.objects.filter(group_id=self.kwargs.get('pk'))
 
         context = super().get_context_data(**kwargs)
         context.update({
-            'members' : member_list
+            'members' : member_list,
+            'groups' : members
         })
         return context
 
@@ -199,13 +233,16 @@ class GroupSet(generic.UpdateView): #グループの設定ページ
         """
         ID = self.request.user.id
         members = Member.objects.filter(user_id=ID)
+        mymember = Member.objects.get(user_id=ID, group_id=self.kwargs.get('pk'))
         member_list = Member.objects.filter(group_id=self.kwargs.get('pk'))
         membercount = Member.objects.filter(group_id=self.kwargs.get('pk')).count()
         context = super().get_context_data(**kwargs)
         context.update({
             'count' : membercount,
             'members' : member_list,
-            'groups' : members
+            'groups' : members,
+            'myid' : ID,
+            'mymember' : mymember
         })
         return context
 
@@ -230,6 +267,23 @@ def groupsecession(request):
     Member.objects.filter(user_id=ID, group_id=group_pks).delete()
     return redirect('GroupConnect:mypage')
 
+def operation(request):
+    """
+    メンバー除名
+    """
+    if 'grant' in request.POST:
+        group_pk = request.POST['group_pk']
+        grant = request.POST['grant']
+        member = Member.objects.get(id=grant)
+        member.authority = True
+        member.save()
+
+    elif 'expulsion' in request.POST:
+        group_pk = request.POST['group_pk']
+        expulsion = request.POST['expulsion']
+        Member.objects.filter(id=expulsion).delete()
+
+    return redirect('GroupConnect:group_setting', group_pk)
 
 def mailsend(request):
     """
@@ -239,50 +293,87 @@ def mailsend(request):
     ID = request.user.id
     email = request.POST['mailaddress']
     group_pk = request.POST['invite']
-    user = User.objects.get(id=ID)
-    inviteuser = User.objects.get(email=email)
-    group = Group.objects.get(id=group_pk)
-    current_site = get_current_site(request)
-    domain = current_site.domain
-    from_email = "GroupConnect@hoge.moge"
-    context = {
-        'protocol': request.scheme,
-        'domain': domain,
-        'user': user,
-        'inviteuser': inviteuser,
-        'group': group,
-    }
 
-    subject_template = get_template('GroupConnect/mail_template/create/invitesubject.txt')
-    subject = subject_template.render(context)
 
-    message_template = get_template('GroupConnect/mail_template/create/invitemessage.txt')
-    message = message_template.render(context)
 
-    inviteuser.email_user(subject, message, from_email)
+    try:
+        membercheck = User.objects.get(email=email)
+        usercheck = True
+    except:
+        usercheck = False
 
-    return redirect('GroupConnect:group_setting', group_pk)
+    if usercheck:
+        try: # 既にメンバーだった場合は送信しない
+            member = Member.objects.get(user_id=membercheck, group_id=group_pk)
+
+        except: # メンバーではなかった場合にメール送信
+            user = User.objects.get(id=ID)
+            inviteuser = User.objects.get(email=email)
+            group = Group.objects.get(id=group_pk)
+            current_site = get_current_site(request)
+            domain = current_site.domain
+            from_email = "GroupConnect@hoge.moge"
+            context = {
+                'protocol': request.scheme,
+                'domain': domain,
+                'user': user,
+                'inviteuser': inviteuser,
+                'group': group,
+                'token': dumps(inviteuser.pk),
+            }
+
+            subject_template = get_template('GroupConnect/mail_template/create/invitesubject.txt')
+            subject = subject_template.render(context)
+
+            message_template = get_template('GroupConnect/mail_template/create/invitemessage.txt')
+            message = message_template.render(context)
+
+            inviteuser.email_user(subject, message, from_email)
+
+            return redirect('GroupConnect:group_setting', group_pk)
+
+        return redirect('GroupConnect:group_setting', group_pk)
+
+    else:
+        return redirect('GroupConnect:group_setting', group_pk)
+
 
 def GroupInvite(request, **kwargs):
     """
     メンバー招待
         招待メールのリンクをクリックした後
     """
-    ID = request.user.id
-    user = User.objects.get(pk=kwargs.get('pk'))
+    # ID = request.user.id
+    # メールの有効期限 (60*60*24)は1日
+    timeout_seconds = getattr(settings, 'ACTIVATION_TIMEOUT_SECONDS', 60*60*24)
+    # user = User.objects.get(pk=kwargs.get('pk'))
+    token = kwargs.get('token')
     group = Group.objects.get(id=kwargs.get('id'))
-    name = user.last_name + user.first_name
-
+    # name = user.last_name + user.first_name
+    """
     if ID == user.id:
         Member(user_id=user, group_id=group, name=name, authority=False).save()
     else:
         return HttpResponseBadRequest()
 
     return redirect('GroupConnect:mypage')
+    """
+    try:
+        user_pk = loads(token,max_age=timeout_seconds)
 
+    except SignatureExpired: # 有効期限が切れていた場合
+        return HttpResponseBadRequest()
 
+    except BadSignature: # トークンが間違っている場合
+        return HttpResponseBadRequest()
 
-class MemberList(generic.DetailView): #メンバー一覧ページ
+    else:
+        user = User.objects.get(pk=user_pk)
+        name = user.last_name + user.first_name
+        Member(user_id=user, group_id=group, name=name, authority=False).save()
+        return redirect('GroupConnect:mypage')
+
+class MemberList(LoginRequiredMixin, generic.DetailView): #メンバー一覧ページ
     template_name = 'GroupConnect/member_list.html'
     model = Group
     
@@ -298,12 +389,7 @@ class MemberList(generic.DetailView): #メンバー一覧ページ
         })
         return context
 
-class OnlyYouMixin(UserPassesTestMixin):
-    raise_exception = True
 
-    def test_func(self):
-        user = self.request.user
-        return user.pk == self.kwargs['pk'] or user.is_superuser
 
 
 class UserUpdate(OnlyYouMixin, generic.UpdateView):
@@ -450,3 +536,79 @@ class UserDeleteView(OnlyYouMixin, generic.DeleteView):
 
 class UserDeleteDone(generic.TemplateView):
     template_name = 'GroupConnect/user_delete_done.html'
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'groups' : members
+        })
+        return context
+
+
+
+class bordlist(generic.ListView) :
+    template_name = 'GroupConnect/bordlist.html'
+    model = Signboard
+    
+    def get_context_data(self, **kwargs):
+        group =Group.objects.get(id=self.kwargs.get('pk'))
+        context = super().get_context_data(**kwargs)
+
+        context.update({
+            'messages' : Signboard.objects.filter(group_id=group),
+            'categorys' : Category.objects.filter(group_id=group),
+            'group' : group
+        })
+        return context
+
+    def post(self,request):
+        if 'delete' in request.POST: 
+            Signboard_pk = request.POST['delete']
+            Signboard.objects.filter(id=Signboard_pk).delete()
+            
+
+        elif 'alldelete' in request.POST:
+            Signboard_pk = request.POST.getlist('SinboardAlldelete')
+            for signboardall_pk in Signboard_pk:
+                Signboard.objects.filter(id=signboardall_pk).delete()
+
+        elif 'category-delete' in request.POST:
+            Category_pk = request.POST['category-delete']
+            Category.objects.filter(id=Category_pk).delete()
+
+
+
+        return redirect('GroupConnect:bordlist')  
+
+
+
+
+def categoryget(request):
+    """ カテゴリーを取得 """
+    category_get = request.POST['add']
+    group =Group.objects.get(id=request.POST['group_pk'])     
+    Category(group_id=group, name=category_get).save()
+    return redirect('GroupConnect:bordlist', group.id)
+
+def Signboardform(request):
+    """ form """
+    Signboard_title = request.POST['title']
+    Signboard_textarea = request.POST['textarea']
+    Signboard_category = Category.objects.get(id=request.POST['category'])
+    group = Group.objects.get(id=request.POST['group_pk'])
+    Signboard(group_id=group, title=Signboard_title , category_id=Signboard_category , text=Signboard_textarea ).save()
+    return redirect('GroupConnect:bordlist', group.id)
+
+
+
+
+        
+class SignboardView(generic.DetailView):
+    model = Signboard
+    template_name = 'GroupConnect/signboard_detail.html'
+
+class SignboardDelete(generic.DeleteView):
+    model = Signboard
+    success_url = 'GroupConnect:bordlist'
+
+class CategoryDelete(generic.DeleteView):
+    model = Signboard
+    success_url ='GroupConnect:bordlist'

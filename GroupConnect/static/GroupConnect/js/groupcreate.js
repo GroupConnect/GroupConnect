@@ -54,3 +54,20 @@ function tr_click(trID){
       $(this).css("background-color","#b4eeff") .css("cursor","normal")
     });
 }
+
+var number=0;
+function add(){
+  number ++;
+  var mail = document.getElementById('mail').value;
+  var div_element = document.createElement("div");
+  div_element.id='item' + number;
+  div_element.className="range"
+  div_element.innerHTML = '<p class="d-inline mail-address">'+ mail +'</p><input type="hidden" name="mailaddress" value="'+mail+'"><button onclick="del('+number+')" type="button" class="btn mail-delete">削除</button>';
+  var parent_object = document.getElementById('mail-range')
+  parent_object.appendChild(div_element);
+}
+
+function del(index){
+  var div_element = document.getElementById('item' + index);
+  div_element.parentNode.removeChild(div_element);
+}

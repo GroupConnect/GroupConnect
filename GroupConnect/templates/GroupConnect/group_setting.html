@@ -41,9 +41,9 @@
                             </a>
                             <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
-                                <a class="dropdown-item" href="mail_setting">メール設定</a>
-                                <a class="dropdown-item" href="pass_setting">パスワード設定</a>
-                                <a class="dropdown-item" href="#">ログアウト</a>
+                                <a class="dropdown-item" href="">メール設定</a>
+                                <a class="dropdown-item" href="">パスワード設定</a>
+                                <a class="dropdown-item" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
                             </div>
                         </li>
                     </ul>
@@ -54,9 +54,10 @@
                             </a>
                             <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item d-inline grname" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_name}}</a>
-                            <a class="dropdown-item d-inline" href="bordlist">掲示板</a>
-                            <a class="dropdown-item d-inline" href="#">メンバー一覧</a>
-                            <a class="dropdown-item d-inline" href="group_setting">設定</a>
+                            <a class="dropdown-item d-inline" href="{% url 'GroupConnect:bordlist' group.pk %}">掲示板</a>
+                            <a class="dropdown-item d-inline" href="#">共有フォルダ</a>
+                            <a class="dropdown-item d-inline" href="{% url 'GroupConnect:member_list' group.pk %}">メンバー一覧</a>
+                            <a class="dropdown-item d-inline" href="{% url 'GroupConnect:group_setting' group.pk %}">設定</a>
                             </div>
                         </li>
                     </ul>
@@ -89,7 +90,11 @@
                                         <p class="item">グループ名</p>
                                     </div>
                                     <div class="col-lg-10">
-                                        <input type="text" name="group_name" class="name-form" value="{{group.group_name}}">
+                                        {% if mymember.authority == True %}
+                                            <input type="text" name="group_name" class="name-form" value="{{group.group_name}}">
+                                        {% else %}
+                                            <input type="text" name="group_name" class="name-form" value="{{group.group_name}}" readonly="readonly">
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -99,17 +104,21 @@
                                     <div class="col-lg-2">
                                         <p class="item">グループアイコン</p>
                                     </div>
-                                    <div class="col-lg-10">
-                                        <img class="rounded border" src="{{ group.icon.url }}" alt="foo" />
+                                    <div class="col-lg-3">
+                                        <img class="rounded border" src="{{ group.icon.url }}">
                                     </div>
-                                    <div class="col-lg-15">
+                                    <div class="col-lg-7">
                                         <div class="d-inline">
-                                            <label class="input-group-btn">
-                                                <span class="btn btn-primary">
-                                                    画像の選択<input type="file" name="icon" style="display:none">
-                                                </span>
-                                            </label>
-                                            <input type="text" class="form-control d-inline form" readonly="">
+                                            {% if mymember.authority == True %}
+                                                <label class="input-group-btn">
+                                                    <span class="btn btn-primary">
+                                                        画像の選択<input type="file" name="icon" style="display:none">
+                                                    </span>
+                                                </label>
+                                                <input type="text" class="form-control d-inline form" readonly="">
+                                            {% else %}
+    
+                                            {% endif %}
 
                                         </div>
                                     </div>
@@ -158,7 +167,11 @@
                                         <div class="textarea">  
                                             <div class="rounded p-4">
                                                 <div class="form-group d-inline">
-                                                    <textarea name="notice" class="border border-dark form-control" id="exampleFormControlTextarea1" rows="7">{{group.notice}}</textarea>
+                                                        {% if mymember.authority == True %}
+                                                            <textarea name="notice" class="border border-dark form-control" id="exampleFormControlTextarea1" rows="7">{{group.notice}}</textarea>
+                                                        {% else %}
+                                                            <textarea name="notice" class="border border-dark form-control" id="exampleFormControlTextarea1" readonly="readonly" rows="7">{{group.notice}}</textarea>
+                                                        {% endif %}
                                                 </div>
                                             </div>  
                                         </div>
@@ -166,14 +179,24 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 right7">
-                                    <div class="nav-item active d-inline">
-                                        <input type="submit" class="btn btn-warning change" value="変更する">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        {% if mymember.authority == True %}
+                                            <div class="nav-item active d-inline">
+                                                <input type="submit" class="btn btn-warning change" value="変更する">
+                                            
+                                            </div>
+                                        {% endif %}
                                     </div>
                             </form>
                             <form action="{% url 'GroupConnect:groupdelete' %}" method="POST">
                                 {% csrf_token %}
                                 <div class="nav-item active d-inline">
-                                    <input type="button" class="btn closure" data-toggle="modal" data-target="#basicModal" value="閉鎖する">                                                                        
+                                    <div class="col-lg-2">
+                                        {% if mymember.authority == True %}
+                                            <input type="button" class="btn closure" data-toggle="modal" data-target="#basicModal" value="閉鎖する">
+                                        {% endif %}
+                                    </div>
                                     <div class="modal fade"id="basicModal"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -189,6 +212,7 @@
                                     </div>
                                 </div>
                             </form>
+                                </div>
                             </div>
 
 
@@ -201,7 +225,7 @@
                                     <!-- <input type="button" class="btn btn-warning" value="招待する"> -->
                                     <input type="button" class="btn btn-warning" id="btn2" value="招待する">
                                         <!-- modal content -->
-                                        <form action="{% url 'GroupConnect:mailsend' %}" method="POST">
+                                        <form action="{% url 'GroupConnect:mailsend' %}" method="POST" id="invite">
                                         {% csrf_token %}
                                         <div class="modal fade" id="modal">
                                             <div class="modal-dialog" role="document">
@@ -212,7 +236,9 @@
                                                     </div>
                                                     <!-- モーダルボディ -->
                                                     <div class="modal-body2">
-                                                        メールアドレス:<input type="text" name="mailaddress">                                
+                                                        <p>メールアドレス</p>
+                                                        <input type="email" class="form-control d-inline form" name="mailaddress">
+                                                        <p class="email-error">メールアドレスが入力されていません</p>                          
                                                     </div>
                                                     <!-- モーダルフッター -->
                                                     <div class="modal-footer">
@@ -257,22 +283,37 @@
                                 　</thead>
                                     <tbody>
                                         {% for member in members %}
-                                        <tr>
-                                        <th scope="row">{{member.name}}</th>
-                                        <td>{{member.user_id.email}}</td>
-                                        {% if member.authority == True %}
-                                            <td>管理者</td>
-                                        {% else %}
-                                            <td></td>
-                                        {% endif %}
-                                                <td class="status">
-                                                    <input type="button" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" value="権限付与">
-                                                    <input type="button" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" value="除名">
-                                                </td>
-                                        </tr>
+                                            <tr>
+                                            <th scope="row">{{member.name}}</th>
+                                            <td>{{member.user_id.email}}</td>
+                                            {% if member.authority == True %}
+                                                <td>管理者</td>
+                                            {% else %}
+                                                <td></td>
+                                            {% endif %}
+                                            <td class="status">
+                                                {% if mymember.authority == True %}
+                                                    {% if member.user_id.id != myid %}
+                                                        {% if member.authority == True %}
+                                                        <form action="{% url 'GroupConnect:operation' %}" method="POST">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="group_pk" value="{{group.pk}}">
+                                                                <button type="submit" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" name="expulsion" value="{{member.id}}">除名</button>
+                                                        </form>
+                                                        {% else %}
+                                                        <form action="{% url 'GroupConnect:operation' %}" method="POST">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="group_pk" value="{{group.pk}}">
+                                                            <button type="submit" class="btn btn-primary Authorization" data-toggle="modal" data-target="#basicModal3" name="grant" value="{{member.id}}">権限付与</button>
+                                                            <button type="submit" class="btn btn-primary member-expulsion" data-toggle="modal" data-target="#basicModal4" name="expulsion" value="{{member.id}}">除名</button>
+                                                        </form>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endif %}
+                                            </td>
+                                            </tr>
+                                        
                                         {% endfor %}
-
-
                                     </tbody>
                                 </table>
                             </div>

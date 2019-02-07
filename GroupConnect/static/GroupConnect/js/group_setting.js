@@ -79,3 +79,13 @@ function tr_click(trID){
       $(this).css("background-color","#b4eeff") .css("cursor","normal")
     });
 }
+$(function(){
+    $("#invite").submit(function(){
+	    if($("input[name='mailaddress']").val() == ""){
+            $('.email-error').show();
+		    return false;
+	    }else{
+            $('form').submit()
+        }
+    });
+});

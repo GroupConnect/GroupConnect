@@ -103,6 +103,12 @@ img {
     margin: 0px 0px 0px 120px;
 }
 
+.email-error {
+    color: #ff0000;
+    display: none;
+}
+
+
 #tbl1 {
     width: 70%;
 }

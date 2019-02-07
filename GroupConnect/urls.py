@@ -23,7 +23,15 @@ urlpatterns = [
     path('group_list/', views.GroupList.as_view(), name='group_list'),
 
     path('mailsend/', views.mailsend, name='mailsend'),
-    path('groupinvite/(?P<pk>[0-9]+)/(?P<id>[0-9]+)/', views.GroupInvite, name='groupinvite')
+    path('groupinvite/<token>/(?P<id>[0-9]+)/', views.GroupInvite, name='groupinvite'),
+    path('operation/', views.operation, name='operation'),
+
+
+    path('bordlist/(<?P<pk>[0-9]+)/', views.bordlist.as_view(), name='bordlist'),
+    path('signboard/<int:pk>/', views.SignboardView.as_view(), name='Signboard'),
+    path('signboardcategory/' , views.categoryget , name="categoryget"),
+    path('signboardform/' , views.Signboardform , name="Signboardform"),
+    path('Category/<int:pk>/', views.SignboardView.as_view() , name="Category" ),
 
 ]
     path('<int:notice_id>/', views.NoticeDetail.as_view(), name='notice_detail'),

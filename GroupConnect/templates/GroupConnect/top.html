@@ -34,10 +34,6 @@
                                     {% endfor %}                              {{ form.non_field_errors }}
 
                             </div>
-                            <div>
-                                <input type="checkbox" name="save" class="save">
-                                <label for="save" class="save">ログイン状態を保持する</label>
-                            </div>
                             <input type="submit" class="submit" value="ログイン">
                             <p><a href="{% url 'GroupConnect:password_reset' %}" class="forget">パスワードを忘れた場合はこちら</a></p>
                         </form>
