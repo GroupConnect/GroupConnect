@@ -50,7 +50,7 @@ if settings.AUTH_USER_MODEL == 'GroupConnect.User':
         rome_first_name = models.CharField(_('名前(ローマ字)'), max_length=100, blank=True, null=True)
         password = models.CharField(_('パスワード'), max_length=250)
         icon = models.ImageField(_('icon'), upload_to='static/images/', blank=True, null=True, default='static/images/real-egg.jpg')
-        introduction = models.TextField(_('introduction'), blank=True, null=True)
+        introduction = models.TextField(_('introduction'), blank=True, null=True, default='')
         plan_mail_time = models.TimeField(_('plan_time'), default=datetime.time(7,0,0))
         new_mail_stop_time = models.TimeField(_('mail_stop_time'), default=datetime.time(1,0,0))
         new_mail_start_time = models.TimeField(_('mail_start_time'), default=datetime.time(6,0,0))
@@ -125,7 +125,7 @@ class Group(models.Model):
     group_name = models.CharField(_('グループ名'),max_length=100, db_column='group_name')
     icon = models.ImageField(upload_to='static/images/', db_column='icon', blank=True, null=True)
     created_at = models.DateTimeField(_('created_at'), default=timezone.now)
-    notice = models.TextField(db_column='notice', default='')
+    notice = models.TextField(db_column='notice', null=True ,default='')
     author = models.CharField(max_length=100, db_column='author')
 
     def __str__(self):
