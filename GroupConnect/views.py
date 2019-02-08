@@ -77,26 +77,41 @@ def signboard_page_view(request, pk):
 
     situation_list = {'read_counter': 0, 'read_members': []}
     for post in post_list:
-        pass
+        read_list = situation_counter(post)
+        situation_list['read_counter'] = read_list[0]
+        situation_list['read_members'] = read_list[1]
 
     # form = forms.PostCreateForm(request.POST or None)
     if request.method == 'POST':
         form.save()
         return render(request, 'GroupConnect/boad.html', context= {
             'signboard': signboard,
-            'post_list' : post_list
-            # 'form': form
+            'post_list': post_list,
+            'situation_list': situation_list
         })
     
     else:
         return render(request, 'GroupConnect/bord.html', context= {
             'signboard': signboard,
-            'post_list' : post_list
-            # 'form': form
+            'post_list': post_list,
+            'situation_list': situation_list
         })
     
-    def situation_counter(post):
-        post = post.prefetch_related('situation_set')
+def situation_counter(post):
+    read_counter = 0
+    read_members = []
+
+    for post in Post.objects.filter(pk=post.id).prefetch_related('situation_set'):
+        for situation in post.situation_set.all():
+            if situation.read_situation:
+                read_counter += 1
+                read_members.append(situation.user_id)
+        else:
+            if post.read_number != read_counter:
+                post.read_number = read_counter
+                post.save()
+
+    return read_counter, read_members
 
 class MypageView(generic.TemplateView):
     template_name = 'GroupConnect/mypage.html'

@@ -241,3 +241,20 @@ body {
 .post-form {
     display: none;
 }
+
+.reply-hide {
+    display: none;
+}
+
+.btn .btn-reply:hover, .btn-reply:focus, 
+.btn-reply:active, .btn-reply:active:focus, .btn-reply:active:hover, .btn-reply:active.focus,
+.btn-reply.active, .btn-reply.active:focus, .btn-reply.active:hover, .btn-reply.active.focus,
+.open > .dropdown-toggle.btn-reply, 
+.open > .dropdown-toggle.btn-reply:hover,
+.open > .dropdown-toggle.btn-reply:focus, 
+.open > .dropdown-toggle.btn-reply.focus,
+.btn-reply.disabled:hover, .btn-reply[disabled]:hover, fieldset[disabled] .btn-reply:hover,
+.btn-reply.disabled:focus, .btn-reply[disabled]:focus, fieldset[disabled] .btn-reply:focus,
+.btn-reply.disabled.focus, .btn-reply[disabled].focus, fieldset[disabled] .btn-reply.focus {
+    border-color: #5f9644;
+}

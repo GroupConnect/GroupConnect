@@ -40,15 +40,6 @@ class MyUserAdmin(UserAdmin):
 
 admin.site.register(User, MyUserAdmin)
 
-class GroupAdmin(admin.ModelAdmin):
-    list_display = ('id', 'group_name', 'icon', 'created_at')
-
-admin.site.register(Group, GroupAdmin)
-
-class MemberAdmin(admin.ModelAdmin):
-    list_display = ('user_id', 'group_id', 'name', 'authority')
-
-admin.site.register(Member, MemberAdmin)
 
 class SituationAdmin(admin.ModelAdmin):
     list_display = ('id', 'post_id', 'user_id', 'read_situation')
@@ -58,6 +49,7 @@ admin.site.register(Situation, SituationAdmin)
 class SituationInline(admin.TabularInline):
     model = Situation
     extra = 0
+
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ('id', 'signboard_id', 'text', 'contributer', 'created_at', 'read_number')
@@ -69,13 +61,36 @@ class PostInline(admin.TabularInline):
     model = Post
     extra = 0
 
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'group_id', 'name')
+
+admin.site.register(Category, CategoryAdmin)
+
+
 class SignboardAdmin(admin.ModelAdmin):
     list_display = ('id', 'group_id', 'title', 'category_id', 'text', 'updated_at')
     inlines = [PostInline]
 
 admin.site.register(Signboard, SignboardAdmin)
 
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'group_id', 'name')
+class SignboardInline(admin.TabularInline):
+    model = Signboard
+    extra = 0
 
-admin.site.register(Category, CategoryAdmin)
+
+class MemberAdmin(admin.ModelAdmin):
+    list_display = ('user_id', 'group_id', 'name', 'authority')
+
+admin.site.register(Member, MemberAdmin)
+
+class MemberInline(admin.TabularInline):
+    model = Member
+    extra = 0
+
+
+class GroupAdmin(admin.ModelAdmin):
+    list_display = ('id', 'group_name', 'icon', 'created_at')
+    inlines = [SignboardInline, MemberInline]
+
+admin.site.register(Group, GroupAdmin)

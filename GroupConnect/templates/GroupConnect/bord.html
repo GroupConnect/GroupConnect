@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="viewport" content="width=device-width, inital-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="{% static 'GroupConnect/css/bord.css' %}" />
     </head>
@@ -290,7 +290,7 @@
 
                             <div class="post-area">
                                 <div class="rounded p-4 background area">
-                                    <form action="bord" method="get" enctype="multipart/form-data">
+                                    <form action="{% url 'GroupConnect:signboard' signboard.id %}" method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="form-group d-inline">
                                             <textarea class="form-control" id="UserInput" rows="6"></textarea>
@@ -303,7 +303,7 @@
                                 <div id="large-frame">
 
                                     {% for post in post_list %}
-                                        <div id="post-frame1">
+                                        <div class="post-frame" id="post-frame{{ forloop.counter0 }}">
                                             <div class="post-outside" id="post-outside1">
                                                 <div class="post">
                                                     <p class="Contributor">{{ post.contributer }}</p><p class="time">{{ post.diff_date }}</p><p class="read">既読：<a data-toggle="modal" data-target="#basicModal2" href="#">2件</a></p><a class="post-delete" data-toggle="modal" data-target="#basicModal3" href="">投稿を削除</a>
@@ -311,10 +311,12 @@
                                                     <a class="filename" href="#">minion.jpg</a><img src="{% static 'GroupConnect/img/ダウンロードアイコン.jpg' %}" id="passcheck2" class="download-icon">
                                                 </div>
                                                 
-                                                <img src="{% static 'GroupConnect/img/返信アイコン.jpg' %}" id="passcheck2" class="reply-icon"><a class="reply" id="reply1" href="#">返信する</a>
-                                                
+                                                {% comment %} <img src="{% static 'GroupConnect/img/返信アイコン.jpg' %}" class="reply-icon"><a class="reply" id="reply1" href="#">返信する</a> {% endcomment %}
+                                                <button type="button" class="btn btn-light rounded-pill" id="reply-show{{ forloop.counter0 }}">返信フォームを表示</button>
+                                                <button type="button" class="btn btn-light rounded-pill reply-hide" id="reply-hide{{ forloop.counter0 }}">返信フォームを隠す</button>
+
                                             </div>
-                                            <form action="bord" class="post-form" method="get" enctype="multipart/form-data">
+                                            <form action="bord" class="post-form" id="post-form{{ forloop.counter0 }}" method="POST" enctype="multipart/form-data">
                                                 {% csrf_token %}
                                                 <div class="form-group d-inline">
                                                         <textarea class="form-control" id="UserInput" rows="6"></textarea>
@@ -418,9 +420,9 @@
         </div>
         
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
         <script type="text/javascript" src="{% static 'GroupConnect/js/bord.js' %}"></script>
     </body>
 </html>
