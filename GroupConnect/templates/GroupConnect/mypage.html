@@ -65,6 +65,7 @@
                     <div class="sidebarmenu">
                         {% for member in members %}
                         <p>
+                            <a href="{% url 'GroupConnect:group_top' member.group_id.pk %}"><img class="rounded border" src="{{ member.group_id.icon.url }}"></a>
                             <a href="{% url 'GroupConnect:group_top' member.group_id.pk %}">{{member.group_id.group_name}}</a>
 
                         </p>
