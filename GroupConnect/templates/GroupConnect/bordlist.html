@@ -128,7 +128,9 @@
                                         {% csrf_token %}
                                         <tr>
                                             <th><a href="#">{{ category.name }}</a></th>
-                                            {% if category.check !=True  %}
+                                            {% if category.check == True  %}
+                                            <td></td>
+                                            {% else %}
                                             <td><button type="submit" class="btn-primary" id="category-delete" name="category-delete" value="{{ category.id }}">削除</button></td>
                                             {% endif %}
                                         </tr>
