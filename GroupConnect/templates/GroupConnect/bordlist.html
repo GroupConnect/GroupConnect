@@ -223,7 +223,7 @@
                                             <td><a href="#">{{ message.title }}</a></td>
                                             <td>{{ message.text }}</td>
                                             <td>{{ message.updated_at }}</td>
-                                            <td><button type="submit" class="btn-primary" id="delete" name="delete" value="{{ message.id }}">削除</button></td>
+                                            <td><button type="submit" class="btn-primary" id="delete" name="delete" value="{{ message.id }}">削除</button><input type="hidden" name="group_pk" value="{{group.pk}}"></td>
                                             
                                         </tr>
                                         {% endfor %}
