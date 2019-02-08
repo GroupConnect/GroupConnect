@@ -9,6 +9,9 @@ class IndexView(generic.TemplateView):
 class MypageView(generic.TemplateView):
     template_name = 'GroupConnect/mypage.html'
 
+class NoticeView(generic.TemplateView):
+    template_name = 'GroupConnect/notice.html'
+
 class LogoutView(generic.TemplateView):
     template_name = 'GroupConnect/logout.html'
 

@@ -7,37 +7,38 @@ body {
     background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
 }
 
-.GroupConnect {
+.groupconnect {
     font-size: 25px;
     font-family: Times New Roman;
 }
 
 .left {
     border:solid 2px #5f9644;
-    text-align: center;
 }
 
 .left-up {
+    text-align: center;
     border-bottom: 2px solid #5f9644;
     background: #bae1a7;
 }
 
 .left-middle {
-    border-bottom: 2px solid #5f9644;
-    margin: 0px 0px 10px 0px;
+    text-align: center;
 }
 
 .left-down {
+    text-align: center;
     border-bottom: 2px solid #5f9644;
+}
+
+.sidebarmenu {
+    text-align: center;
 }
 
 .up{
     border:solid 2px #5f9644;
     min-height: 157px;
     max-height: none;
-  /*   height: 33.33333% ; /* 
-  /* height: -webkit-calc(100% / 3) ; */
-  /* height: calc(100% / 3) ; */
 }
 
 .up h1 {
@@ -49,10 +50,6 @@ body {
     min-height: 218px;
     border:solid 2px #5f9644;
     max-height: none;
-    /* border-bottom: 1px solid; */ 
-  /*   height: 33.33333% ; /* 
-  /* height: -webkit-calc(100% / 3) ;
-  height: calc(100% / 3) ; */
 }
 
 .middle h1 {
@@ -64,10 +61,6 @@ body {
     min-height: 218px;
     border:solid 2px #5f9644;
     max-height: none;
-  /* height: 33.33333% ; 
-  height: -webkit-calc(100% / 3) ;
-  height: calc(100% / 3) ;
-   */
 }
 
 .down h1 {

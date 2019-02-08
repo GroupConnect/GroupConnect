@@ -1,0 +1,36 @@
+body {
+    padding-top:4.0rem;
+}
+
+.navbar {
+    border:solid 2px #5f9644;
+    background: linear-gradient(-90deg, #d5e8d4, #bae1a7);
+}
+
+.groupconnect {
+    font-size: 25px;
+    font-family: Times New Roman;
+}
+
+/* メインコンテンツ */
+.center {
+    height: 593px;
+    border: solid 2px #5f9644;
+    overflow-y: auto;
+}
+
+.headline {
+    font-size: 50px;
+    margin: 20px 0px 0px 20px;
+    display: inline-block;
+}
+
+.content {
+    font-size: 25px;
+    margin: 30px 0px 0px 80px;
+}
+
+.contents {
+    font-size: 25px;
+    margin: 0px 0px 0px 80px;
+}

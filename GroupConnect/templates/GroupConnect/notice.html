@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> マイページ </title>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, inital-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'GroupConnect/css/notice.css' %}" />
+    </head>
+    <body>
+        <!-- ナビゲーションバー -->
+        <nav class="navbar navbar-expand-sm navbar-light fixed-top">
+            <a class="navbar-brand groupconnect" href="mypage">GroupConnect</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="Navber">
+                <ul class="navbar-nav">
+                    <li class="nav-item active dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        グループ
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="grouptop">グループ名</a>
+                            <a class="dropdown-item" href="grouptop">グループ名</a>
+                            <a class="dropdown-item" href="grouptop">グループ名</a>
+                            <a class="dropdown-item" href="grouptop">グループ名</a>
+                            <a class="dropdown-item" href="grouplist">グループ一覧へ</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item active dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        アカウント
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="profile">プロフィール設定</a>
+                        <a class="dropdown-item" href="mail_setting">メール設定</a>
+                        <a class="dropdown-item" href="pass_setting">パスワード設定</a>
+                        <a class="dropdown-item" href="logout">ログアウト</a>
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+
+        <!-- メインコンテンツ -->
+        <div class="center">
+            <nav aria-label="パンくずリスト">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="mypage">マイページ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">お知らせ</li>
+                </ol>
+            </nav>
+            <div>
+                <p class="headline">・白方丈晴ボンのお知らせ</p>
+                <p class="content">白方丈晴がコンビニのおでんをツンツンしたのでボンします。</p>
+                <p class="contents">お疲れさまでした。</p>
+            </div>
+        </div>
+    
+            
+            
+            
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'GroupConnect/js/notice.js' %}"></script>
+    </body>
+</html>
