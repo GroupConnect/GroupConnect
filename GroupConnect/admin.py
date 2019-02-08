@@ -3,7 +3,12 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 
-from .models import User, Group, Member, Signboard, Post, Situation,Category
+from .models import User, Group, Member, Signboard, Post, Situation,Category,GroupIcon
+
+class GroupIconAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(GroupIcon)
 
 class MyUserChangeForm(UserChangeForm):
     class Meta:

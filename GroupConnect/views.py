@@ -20,7 +20,7 @@ from django.template.loader import get_template
 from django.views import generic
 from .forms import (
     LoginForm, UserCreateForm, UserUpdateForm, UserMailaddressUpdateForm, MyPasswordChangeForm,
-    MyPasswordResetForm, MySetPasswordForm, DeleteUserForm, UserCreateForm
+    MyPasswordResetForm, MySetPasswordForm, DeleteUserForm, UserCreateForm,GroupCreateForm,GroupUpdateForm
 )
 from .models import (
     Notice, Group, Member, GroupIcon,Signboard,Post,Situation,Category
@@ -391,6 +391,37 @@ class MemberList(LoginRequiredMixin, generic.DetailView): #メンバー一覧ペ
 
 
 
+class UserMailaddressUpdate(OnlyYouMixin, generic.UpdateView):
+    model = User
+    form_class = UserMailaddressUpdateForm
+    template_name = 'GroupConnect/user_mailaddress_update.html'
+
+    def get_success_url(self):
+        return resolve_url('GroupConnect:user_mailaddress_update', pk=self.kwargs['pk'])
+
+    context_object_name = 'rogin_user'
+
+    def get_queryset(self):
+        ID = self.request.user.id
+        user = User.objects.filter(id = ID)
+
+        return user
+
+class UserTestMailaddressUpdate(OnlyYouMixin, generic.UpdateView):
+    model = User
+    form_class = UserMailaddressUpdateForm
+    template_name = 'GroupConnect/user_testmailaddress_update.html'
+
+    def get_success_url(self):
+        return resolve_url('GroupConnect:user_testmailaddress_update', pk=self.kwargs['pk'])
+
+    context_object_name = 'rogin_user'
+
+    def get_queryset(self):
+        ID = self.request.user.id
+        user = User.objects.filter(id = ID)
+
+        return user
 
 class UserUpdate(OnlyYouMixin, generic.UpdateView):
     model = User
@@ -407,6 +438,33 @@ class UserUpdate(OnlyYouMixin, generic.UpdateView):
         user = User.objects.filter(id = ID)
 
         return user
+
+class UserTestUpdate(OnlyYouMixin, generic.UpdateView):
+    model = User
+    form_class = UserUpdateForm
+    template_name = 'GroupConnect/user_testform.html'
+
+
+class GroupList(generic.ListView):
+    """
+    グループ一覧ページ
+    """
+    model = Group
+    template_name = 'GroupConnect/grouplist.html'
+
+    def get_context_data(self, **kwargs):
+        """
+        参加中のグループ一覧取得
+        """
+
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
+
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'groups' : members
+        })
+        return context        
 
 class PasswordChange(PasswordChangeView):
     """パスワード変更ビュー"""

@@ -21,20 +21,14 @@ urlpatterns = [
     path('groupdel/', views.groupdelete, name='groupdelete'),
     path('secession/', views.groupsecession, name='groupsecession'),
     path('group_list/', views.GroupList.as_view(), name='group_list'),
-
     path('mailsend/', views.mailsend, name='mailsend'),
     path('groupinvite/<token>/(?P<id>[0-9]+)/', views.GroupInvite, name='groupinvite'),
     path('operation/', views.operation, name='operation'),
-
-
     path('bordlist/(<?P<pk>[0-9]+)/', views.bordlist.as_view(), name='bordlist'),
     path('signboard/<int:pk>/', views.SignboardView.as_view(), name='Signboard'),
     path('signboardcategory/' , views.categoryget , name="categoryget"),
     path('signboardform/' , views.Signboardform , name="Signboardform"),
-    path('Category/<int:pk>/', views.SignboardView.as_view() , name="Category" ),
-
-]
-   
+    path('Category/<int:pk>/', views.SignboardView.as_view() , name="Category" ),   
     path('user_testupdate/<int:pk>/', views.UserTestUpdate.as_view(), name='user_testupdate'),
     path('user_mailaddress_update/<int:pk>/', views.UserMailaddressUpdate.as_view(), name='user_mailaddress_update'),
     path('user_testmailaddress_update/<int:pk>/', views.UserTestMailaddressUpdate.as_view(), name='user_testmailaddress_update'),
