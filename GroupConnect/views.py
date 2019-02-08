@@ -168,7 +168,7 @@ class GroupCreate(generic.CreateView): #グループ作成ページ
         groupid = Group.objects.get(id=group_id)
 
         Member(user_id=userid, group_id=groupid, name=name, authority=True).save()
-        Category(group_id=groupid,name='未分類').save()
+        Category(group_id=groupid,name='未分類' ,check=True).save()
         
         if 'mailaddress' in self.request.POST:
             emails = self.request.POST.getlist('mailaddress')
@@ -639,7 +639,7 @@ class bordlist(generic.ListView) :
         elif 'category-add' in request.POST:
             category_get = request.POST['add']
             group =Group.objects.get(id=pk)     
-            Category(group_id=group, name=category_get).save()
+            Category(group_id=group, name=category_get,check=False).save()
 
 
 
