@@ -121,6 +121,10 @@ body {
     color: #ff0000;
     display: none;
 }
+.category-error1 {
+    color: #ff0000;
+    display: none;
+}
 
 .modal-category {
     float: left;

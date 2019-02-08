@@ -122,13 +122,17 @@ function myEnter(){
 //カテゴリエラー
 $(function() {
     $("#category-add").submit(function(){
-        if ($("input[name='add']").val() == '' ) {
+        if ($("input[name='add']").val() == '') {
             //カテゴリ名が入力されていなかった場合
             $('.category-error').show();
             
             return false;
             
             
+        }else if($("input[name='add']").val()== '未分類') {
+            $('.category-error1').show();
+
+            return false;
         } else {
           $("#category-add").submit();
         }
@@ -154,6 +158,7 @@ $(function() {
 (function($) {
     $('#close').on('click',function(){
         $('.category-error').hide();
+        $('.category-error1').hide();
         $('.title-error').hide();
     });
 })(jQuery);

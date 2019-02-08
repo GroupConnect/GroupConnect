@@ -75,18 +75,20 @@
                                </div>
                                <div class="col-lg-12 side-up">
                                    <p class="d-inline navbar-brand bordlist">掲示板</p>
-                                   <div class="d-inline">
+                                   <!-- <div class="d-inline Category-delete">
                                         <button class="btn btn-danger" id="Categorydelete" onclick="myEnter()" >削除</button>
-                                   </div>
+                                   </div> -->
                                </div>
-                               <form class="d-inline category-add"  method="POST" action="{% url 'GroupConnect:categoryget' %}">
+                               
                                <div class="col-lg-12 side-middle d-inline">
                                    <p class="d-inline ctgr">カテゴリ</p>
-                                   <a id="btn" href="#"><addr title="カテゴリーの追加" class="d- inline create-ctgr">追加</addr></a>            
+                                   <button class="btn btn-danger" id="Categorydelete" onclick="myEnter()" >削除</button>
+                                   <form class="d-inline" id="category-add" method="POST">  
+                                   <a class="btn btn-primary" id="btn" href="#"><addr title="カテゴリーの追加" class="d- inline create-ctgr">追加</addr></a>
+                                             
                                </div>
 
                                <!-- サイドバーカテゴリー追加 -->
-                               
                                 <div class="modal fade" id="modal">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -98,16 +100,15 @@
                                                 <div class="modal-body">
                                                         <p class="modal-category2">カテゴリ</p>
                                                         <p class="category-error">カテゴリ名が入力されていません。</p>
+                                                        <p class="category-error1">未分類は追加できません。</p>
                                                         <input type="text" class="form-control" id="input-1" placeholder="カテゴリを入力" name="add">
                                                      {% csrf_token %}
                                                      <div class="modal-footer">
                                                             <input type="hidden" name="group_pk" value="{{group.pk}}">
-                                                            <input type="submit" class="btn btn-primary" value="作成">
+                                                            <input type="submit" class="btn btn-primary" id="category-add" name="category-add" value="作成">
                                                             <button type="button" class="btn btn-secondary" id="close">キャンセル</button>
                                                     </div>
-            
                                                  </div>
-                                           
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +128,9 @@
                                         {% csrf_token %}
                                         <tr>
                                             <th><a href="#">{{ category.name }}</a></th>
+                                            {% if category.name!=未分類 %}
                                             <td><button type="submit" class="btn-primary" id="category-delete" name="category-delete" value="{{ category.id }}">削除</button></td>
+                                            {% endif %}
                                         </tr>
                                         {% endfor %}
                                     </tbody>

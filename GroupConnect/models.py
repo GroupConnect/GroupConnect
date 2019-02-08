@@ -157,9 +157,15 @@ class Member(models.Model):
     authority = models.BooleanField(db_column='authority')
 
 class Category(models.Model):
+    """ 
+    checkは未分類にTrueをセットして他のカテゴリーをFalseにする 
+    
+    """
+
     id = models.AutoField(primary_key=True, db_column='id')
     group_id = models.ForeignKey(Group, on_delete=models.CASCADE, db_column='group_id')
     name = models.CharField(_('カテゴリー名'),max_length=100, db_column='name')
+    check = models.BooleanField(db_column='check')
 
     def __str__(self):
         """

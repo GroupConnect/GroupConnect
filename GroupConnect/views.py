@@ -635,6 +635,12 @@ class bordlist(generic.ListView) :
         elif 'category-delete' in request.POST:
             Category_pk = request.POST['category-delete']
             Category.objects.filter(id=Category_pk).delete()
+        
+        elif 'category-add' in request.POST:
+            category_get = request.POST['add']
+            group =Group.objects.get(id=pk)     
+            Category(group_id=group, name=category_get).save()
+
 
 
 
