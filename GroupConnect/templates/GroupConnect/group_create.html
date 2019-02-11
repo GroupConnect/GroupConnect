@@ -56,7 +56,7 @@
     <p class="d-block conf">作成するグループの情報を設定してください。</p>
     <p class="d-block conf2">※作成後にいつでも変更できます。</p>
     <div class="rounded p-3 area">
-        <form action="" method="POST">
+        <form name="groupcreate" id="lengthcheck" action="" method="POST" >
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -71,7 +71,7 @@
                     {% csrf_token %}
                     <!-- アイコン -->
                     <div>
-                        <label class="gr-icon">グループアイコン</p>
+                        <label class="gr-icon">グループアイコン<span class="hissu">[必須]</span></label>
                         <div class="icon-area">
                             {% for icon in icon_list %}
                             <ul class="image_list">
@@ -114,7 +114,7 @@
                         </div>
                     </div>
                     <div class="create">
-                        <input type="submit" class="submit btn-warning" value="作成する">
+                        <button onclick="create();" type="submit" class="submit btn-warning" value="">作成する</button>
                         <input type="button" class="cancel" data-toggle="modal" data-target="#basicModal" value="キャンセル">
                         <div class="modal fade"id="basicModal"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
                             <div class="modal-dialog">
