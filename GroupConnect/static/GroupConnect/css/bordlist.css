@@ -86,6 +86,10 @@ body {
 #category-delete {
     display: none;
 }
+#element_to_pop_up {
+    display: none;
+}
+
 /* メインコンテンツ */
 .right {
     height: 593px;

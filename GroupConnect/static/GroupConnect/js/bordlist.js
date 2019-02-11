@@ -91,19 +91,59 @@ $(function () {
 
 
 //カテゴリー削除
-function myEnter(){
-    myRet = confirm("カテゴリを消す前に中に掲示板が残っているか確認してください。")
-    if(myRet ==true){
-        myconfirm = confirm("カテゴリを消すと中身も消えますがよろしいですか？")
-        if(myconfirm == true){
-            $('[id=category-delete]').show();
-        }else{
+// function myEnter(){
+//     myRet = confirm("カテゴリを消す前に中に掲示板が残っているか確認してください。")
+//     if(myRet ==true){
+//         myconfirm = confirm("カテゴリを消すと中身も消えますがよろしいですか？")
+//         if(myconfirm == true){
+//             $('[id=category-delete]').show();
+//         }else{
+//             $('[id=category-delete]').hide();
+//         }
+//     }else{
+//         $('[id=category-delete]').hide();
+//     }
+// }
+
+(function($){
+    
+    $('#Categorydelete').on('click', function(){
+
+        const content = $('#modal-delete-category');
+        content
+        // モーダル開始前の処理
+        .on('show.bs.modal', () => {
+            console.log('modal open start');
+        })
+        // モーダル開始後の処理
+        .on('shown.bs.modal', () => {
+            console.log('modal open complete');
+        })
+        // モーダル終了後の処理
+        .on('hidden.bs.modal', () => {
+            console.log('modal hidden complete');
+
+        // 後片付け
+            $('.form-control', content).val('');
+        })
+        .modal({
+            backdrop: 'static',
+            keyboard: true
+        });
+
+        // Close(手動)ボタン
+        $('#category-close', content).on('click', () => {
             $('[id=category-delete]').hide();
-        }
-    }else{
-        $('[id=category-delete]').hide();
-    }
-}
+            content.modal('hide');
+        });
+
+        // OK(削除ボタン)
+        $('#category-delete-submit', content).on('click', () => {
+            $('[id=category-delete]').show();
+            content.modal('hide');
+        });
+    });
+})(jQuery);
 
 
 
