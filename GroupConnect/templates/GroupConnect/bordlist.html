@@ -75,16 +75,13 @@
                                </div>
                                <div class="col-lg-12 side-up">
                                    <p class="d-inline navbar-brand bordlist">掲示板</p>
-                                   <!-- <div class="d-inline Category-delete">
-                                        <button class="btn btn-danger" id="Categorydelete" onclick="myEnter()" >削除</button>
-                                   </div> -->
                                </div>
                                
                                <div class="col-lg-12 side-middle d-inline">
                                    <p class="d-inline ctgr">カテゴリ</p>
-                                   <button class="btn btn-danger" id="Categorydelete" onclick="myEnter()" >削除</button>
-                                   <form class="d-inline" id="category-add" method="POST">  
-                                   <button class="btn btn-primary" id="btn" href="#"><addr title="カテゴリーの追加" class="d- inline create-ctgr">追加</addr></button>
+                                   <a class="btn btn-danger" id="Categorydelete" onclick="myEnter()" >削除</a>
+                                   <form class="d-inline" id="category-add-errorcheck" method="POST">  
+                                   <a class="btn btn-primary" id="btn" href="#"><addr title="カテゴリーの追加" class="d- inline create-ctgr">追加</addr></a>
                                              
                                </div>
 
@@ -105,7 +102,7 @@
                                                      {% csrf_token %}
                                                      <div class="modal-footer">
                                                             <input type="hidden" name="group_pk" value="{{group.pk}}">
-                                                            <input type="submit" class="btn btn-primary" id="category-add" name="category-add" value="作成">
+                                                            <input type="submit" class="btn btn-primary" id="category-add-errorcheck" name="category-add" value="作成">
                                                             <button type="button" class="btn btn-secondary" id="close">キャンセル</button>
                                                     </div>
                                                  </div>

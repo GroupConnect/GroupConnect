@@ -105,36 +105,25 @@ function myEnter(){
     }
 }
 
-// var countcategory = 0;
-// $(function () {
-//     $('#Categorydelete').click(function() {
-//         countcategory++;
-//         if ((countcategory % 2) !=0) {
-//             $('[id=category-delete]').show();
-//         } else {
-//             $('[id=category-delete]').hide();
-//         }
-//     });
-// });
-
 
 
 //カテゴリエラー
 $(function() {
-    $("#category-add").submit(function(){
+    $("#category-add-errorcheck").submit(function(){
         if ($("input[name='add']").val() == '') {
             //カテゴリ名が入力されていなかった場合
             $('.category-error').show();
             
+            
             return false;
             
             
-        }else if($("input[name='add']").val()== '未分類') {
+        }else if($("input[name='add']").val() == '未分類') {
             $('.category-error1').show();
 
             return false;
         } else {
-          $("#category-add").submit();
+          $("#category-add-errorcheck").submit();
         }
     });
 }); 
