@@ -122,7 +122,7 @@ class Group(models.Model):
         対象のグループの作成者名
     """
     id = models.AutoField(primary_key=True, db_column='id')
-    group_name = models.CharField(_('グループ名'),max_length=100, db_column='group_name')
+    group_name = models.CharField(_('グループ名'),max_length=12, db_column='group_name')
     icon = models.ImageField(upload_to='static/images/', db_column='icon', blank=True, null=True)
     created_at = models.DateTimeField(_('created_at'), default=timezone.now)
     notice = models.TextField(db_column='notice', default='')

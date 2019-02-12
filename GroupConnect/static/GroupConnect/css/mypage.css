@@ -74,3 +74,12 @@ body {
     font-size: 30px;
     margin: 10px 0px 0px 0px;
 }
+
+.group_listul{
+    list-style: none;
+}
+
+ul li .name_limit{
+    visibility: hidden;
+
+}
