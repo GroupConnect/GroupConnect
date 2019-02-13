@@ -42,6 +42,7 @@ $(function(){
 $('.custom-file-input').on('change', handleFileSelect);
 function handleFileSelect(evt) {
     $('#preview').remove();// 繰り返し実行時の処理
+    $(this).next('.custom-file-label').html('ファイル選択...');
     $(this).parents('.input-group').after('<div id="preview"></div>');
     var files = evt.target.files;
 
@@ -64,14 +65,14 @@ function handleFileSelect(evt) {
         reader.readAsDataURL(f);
     }
 
-    $(this).next('.custom-file-label').html(+ files.length + '個のファイルを選択しました');
+    $(this).next('.custom-file-label').html(files[0].name);
 }
 
 //ファイルの取消
 $('.reset').click(function(){
     $(this).parent().prev().children('.custom-file-label').html('ファイル選択...');
     $('.custom-file-input').val('');
-    $('#preview').remove('');
+    $('#preview').remove();
 })
 
 $("#button").on("click", function(){

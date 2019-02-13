@@ -110,8 +110,7 @@ body {
 
 /* メインコンテンツ */
 .right {
-    min-height: 593px;
-    max-height: none;
+    height: 593px;
     border:solid 2px #5f9644;
 }
 
@@ -173,7 +172,7 @@ body {
 }
 
 .post-area {
-    height: 485px;
+    height: 477px;
     margin:0px -10px 0px 0px;
     overflow-y: auto;
 }
