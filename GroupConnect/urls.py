@@ -45,6 +45,9 @@ urlpatterns = [
     path('user_data_confirm/', views.UserDataConfirm.as_view(), name='user_data_confirm'),
     path('user_data_create/', views.UserDataCreate.as_view(), name='user_data_create'),
 
+    path('bordlist/(<?P<pk>[0-9]+)/(<?P<id>[0-9]+)/', views.CategoryView.as_view(), name='bordlist'),
+
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -172,3 +172,8 @@ th, td {
     margin: 10px 10px 10px 0px;
     display: none;
 }
+
+.name_limit{
+    visibility: hidden;
+
+}

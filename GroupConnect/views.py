@@ -646,6 +646,42 @@ class bordlist(generic.ListView) :
 
         return redirect('GroupConnect:bordlist', pk)  
 
+class CategoryView(bordlist):
+
+    def get_context_data(self, **kwargs):
+        category_id = self.kwargs.get('id')
+        category = Category.objects.get(id=category_id)
+        group =Group.objects.get(id=self.kwargs.get('pk'))
+        context = super().get_context_data(**kwargs)
+
+        context.update({
+            'messages' : Signboard.objects.filter(category_id=category),
+            'categorys' : Category.objects.filter(group_id=group),
+            'group' : group
+        })
+        return context
+
+    def post(self,request,pk,id):
+        if 'delete' in request.POST: 
+            Signboard_pk = request.POST['delete']
+            Signboard.objects.filter(id=Signboard_pk).delete()
+            
+
+        elif 'alldelete' in request.POST:
+            Signboard_pk = request.POST.getlist('SinboardAlldelete')
+            for signboardall_pk in Signboard_pk:
+                Signboard.objects.filter(id=signboardall_pk).delete()
+
+        elif 'category-delete' in request.POST:
+            Category_pk = request.POST['category-delete']
+            Category.objects.filter(id=Category_pk).delete()
+        
+        elif 'category-add' in request.POST:
+            category_get = request.POST['add']
+            group =Group.objects.get(id=pk)     
+            Category(group_id=group, name=category_get,check=False).save()
+
+        return redirect('GroupConnect:bordlist', pk, id)  
 
 
 

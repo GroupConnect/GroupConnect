@@ -144,7 +144,7 @@
 
                                         {% csrf_token %}
                                         <tr>
-                                            <th><a href="#">{{ category.name }}</a></th>
+                                            <th><a class="name_limit" href="{% url 'GroupConnect:bordlist' group.pk category.id %}">{{ category.name }}</a></th>
                                             {% if category.check == True  %}
                                             <td></td>
                                             {% else %}
@@ -242,8 +242,8 @@
                                         {% csrf_token %}
                                         <tr>
                                             <th scope="row"><input type="checkbox" class="disable_checkbox" id="checkbox" name="SinboardAlldelete" value="{{ message.id }}"><a href="bord"></a></th>
-                                            <td><a href="#">{{ message.title }}</a></td>
-                                            <td>{{ message.text }}</td>
+                                            <td><a class="name_limit" href="#">{{ message.title }}</a></td>
+                                            <td class="name_limit">{{ message.text }}</td>
                                             <td>{{ message.updated_at }}</td>
                                             <td><button type="submit" class="btn-primary" id="delete" name="delete" value="{{ message.id }}">削除</button><input type="hidden" name="group_pk" value="{{group.pk}}"></td>
                                             
