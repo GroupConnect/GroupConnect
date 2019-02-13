@@ -78,8 +78,13 @@
                                 <li class="image_lists">
                                     <div class="image_box">
                                     <label class="icon_check">
+                                        {% if icon.id == 1 %}
+                                        <img class="thumbnail checked" src="{{ icon.icon.url }}" alt="foo" />
+                                        <input class="disabled_checkbox" name="icon" type="checkbox" value="{{icon.icon}}" checked>
+                                        {% else %}
                                         <img class="thumbnail" src="{{ icon.icon.url }}" alt="foo" />
                                         <input class="disabled_checkbox" name="icon" type="checkbox" value="{{icon.icon}}">
+                                        {% endif %}
                                     </label>
                                     </div>
                                 </li>
