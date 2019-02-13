@@ -52,20 +52,20 @@
 <!-- サイドバー -->
     <div class="container-fluid">
         <div class="row row1">    
-            <div class="col-lg-2 left">
+            <div class="col-md-3 left">
                 <div class="row row2">
-                    <div class="col-lg-12 left-up">
+                    <div class="col-md-12 left-up">
                         <h1 class="navbar-brand grlist">グループ一覧</h1>
                     </div>
-                    <div class="col-lg-12 left-middle">
+                    <div class="col-md-12 left-middle">
                         <a class="navbar-brand creategr" href="{% url 'GroupConnect:group_create' %}">⊕グループを作成</a>
                     </div>
 
                     <!-- 参加グループ一覧 -->
-                    <div class="sidebarmenu">
+                    <div class="col-md-12 sidebarmenu">
                         <ul class="group_listul">
                             {% for member in members %}
-                            <li>
+                            <li class="group">
                                 <a href="{% url 'GroupConnect:group_top' member.group_id.pk %}"><img class="rounded border" src="{{ member.group_id.icon.url }}"></a>
                                 <a class="name_limit" href="{% url 'GroupConnect:group_top' member.group_id.pk %}">{{member.group_id.group_name}}</a>
                             </li>
@@ -80,15 +80,15 @@
             
             
             <!-- メインコンテンツ -->
-            <div class="col-lg-10 right">
+            <div class="col-md-9 right">
                 <div class="row row3">
-                    <div class="col-lg-12 up">
+                    <div class="col-md-12 up">
                             <h1>★新着情報</h1>
                             <p>・あいうえおかきくけこさしすせそ</p>
                             <p>・あいうえおかきくけこさしすせそ</p>
                     </div>
                     
-                    <div class="col-lg-12 middle">
+                    <div class="col-md-12 middle">
                             <h1>✉お知らせ</h1>
                             {% for notice in notice_list %}
                             <p>
@@ -96,8 +96,6 @@
                                 <a href="{% url 'GroupConnect:notice_detail' notice.pk %}">{{notice.title}}</a>
                             </p>
                             {% endfor %}
-                    </div>
-                    <div class="col-lg-12 down">
                     </div>
                 </div>    
             </div>
