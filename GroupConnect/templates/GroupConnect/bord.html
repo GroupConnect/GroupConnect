@@ -251,7 +251,7 @@
                                     
                                     <div class="collapse navbar-collapse justify-content-end" id="navbarNav4">
                                     
-                                        <div class="nav-item active dropdown">
+                                        <div class="nav-item active dropdown signboard-setting">
                                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">昇順</button>
                                             <ul class="dropdown-menu">
                                                 <li><button class="dropdown-item" value="昇順">昇順</button></li>
@@ -259,7 +259,7 @@
                                             </ul>
                                         </div>
 
-                                        <div class="nav-item active configuration">
+                                        <div class="nav-item active configuration signboard-setting">
                                             <a href="bord_setting"><button class="btn btn-secondary">掲示板設定</button></a>
                                         </div>
 
@@ -293,9 +293,9 @@
                                     <form action="{% url 'GroupConnect:signboard' signboard.id %}" method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="form-group d-inline">
-                                            <textarea class="form-control" id="UserInput" rows="6"></textarea>
+                                            <textarea class="form-control" id="UserInput" name="post_text" rows="6"></textarea>
                                             <input type="file" name="s_file" accept="image/png, image/jpeg, image/gif" class="file-select"　multiple>
-                                            <input type="button" id="button" class="btn btn-warning post-button" value="投稿">
+                                            <input type="submit" id="button" class="btn btn-warning post-button" value="投稿">
                                         </div>         
                                     </form>
                                 </div>
@@ -316,12 +316,13 @@
                                                 <button type="button" class="btn btn-light rounded-pill reply-hide" id="reply-hide{{ forloop.counter0 }}">返信フォームを隠す</button>
 
                                             </div>
-                                            <form action="bord" class="post-form" id="post-form{{ forloop.counter0 }}" method="POST" enctype="multipart/form-data">
+                                            <form action="{% url 'GroupConnect:signboard' signboard.id %}" class="post-form" id="post-form{{ forloop.counter0 }}" method="POST" enctype="multipart/form-data">
                                                 {% csrf_token %}
                                                 <div class="form-group d-inline">
-                                                        <textarea class="form-control" id="UserInput" rows="6"></textarea>
-                                                        <input type="file" name="s_file" accept="image/png, image/jpeg, image/gif" class="file-select"　multiple>
-                                                        <input type="button" id="button" class="btn btn-warning reply-button" value="返信">
+                                                    <textarea class="form-control" id="UserInput" name="reply_text" rows="6"></textarea>
+                                                    <input type="file" name="s_file" accept="image/png, image/jpeg, image/gif" class="file-select"　multiple>
+                                                    <input type="hidden" name="reply_source" value="{{ post.id }}"></input>
+                                                    <input type="submit" id="button" class="btn btn-warning reply-button" value="返信">
                                                 </div>       
                                             </form>
                                         </div>

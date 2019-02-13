@@ -246,6 +246,10 @@ body {
     display: none;
 }
 
+.signboard-setting {
+    display: none;
+}
+
 .btn .btn-reply:hover, .btn-reply:focus, 
 .btn-reply:active, .btn-reply:active:focus, .btn-reply:active:hover, .btn-reply:active.focus,
 .btn-reply.active, .btn-reply.active:focus, .btn-reply.active:hover, .btn-reply.active.focus,

@@ -3,6 +3,23 @@ $(function(){
         var visibleItem = $('.dropdown-toggle', $(this).closest('.dropdown'));
         visibleItem.text($(this).attr('value'));
     });
+
+
+    var post_length = $('#large-frame .post-frame').length;
+    for (cnt = 0; cnt < post_length; cnt++) {
+        (function(count) {
+            $(document).on('click', '#reply-show' + count, function() {
+                $('#reply-show' + count).addClass('reply-hide');
+                $('#reply-hide' + count).removeClass('reply-hide');
+                $('#post-form' + count).removeClass('post-form');
+            });
+            $(document).on('click', '#reply-hide' + count, function() {
+                $('#reply-show' + count).removeClass('reply-hide');
+                $('#reply-hide' + count).addClass('reply-hide');
+                $('#post-form' + count).addClass('post-form');
+            });
+        })(cnt);
+    };
 });
 
 (function($) {
@@ -39,24 +56,24 @@ $(function(){
 })(jQuery);
 
 
-$(function() {
+// $(function() {
 
-    var post_length = $('#large-frame .post-frame').length
-    for (cnt = 0; cnt < post_length; cnt++) {
-        $('#reply-show' + cnt).on('click', function() {
-            $('#post-form' + cnt).removeClass('post-form');
-            $('#reply-show' + cnt).addClass('reply-hide');
-            $('#reply-hide' + cnt).removeClass('reply-hide');
-        });
-        $('#reply-hide' + cnt).on('click', function() {
-            $('#post-form' + cnt).addClass('post-form');
-            $('#reply-show' + cnt).removeClass('reply-hide');
-            $('#reply-hide' + cnt).addClass('reply-hide');
-        });
-    }
+//     var post_length = $('#large-frame .post-frame').length;
+//     for (cnt = 0; cnt < post_length; cnt++) {
+//         $(document).on('click', '#reply-show' + cnt, function() {
+//             $('#post-form' + cnt).removeClass('post-form');
+//             $('#reply-show' + cnt).addClass('reply-hide');
+//             $('#reply-hide' + cnt).removeClass('reply-hide');
+//         });
+//         $(document).on('click', '#reply-hide' + cnt, function() {
+//             $('#post-form' + cnt).addClass('post-form');
+//             $('#reply-show' + cnt).removeClass('reply-hide');
+//             $('#reply-hide' + cnt).addClass('reply-hide');
+//         });
+//     };
 
     
-});
+// });
 
 // $("#button").on("click", function(){
 //     $("#large-frame").prepend('<div class="post-frame"><div class="post-outside"><div class="post"><p class="Contributor">白方丈晴</p><p class="time"></p><p class="read">既読：<a data-toggle="modal" data-target="#basicModal2" href="#">0件</a></p><a class="post-delete" data-toggle="modal" data-target="#basicModal3" href="">投稿を削除</a><p class="letter-body"></p><a class="filename" href="#"></a></div><img src="{% static &ldquo;GroupConnect/img/返信アイコン.jpg&rdquo; %}" id="passcheck2" class="reply-icon"><a class="reply" href="#">返信する</a></div><form action="bord" class="post-form" method="get" enctype="multipart/form-data"><div class="form-group d-inline"><textarea class="form-control" id="UserInput" rows="6"></textarea><input type="file" name="s_file" accept="image/png, image/jpeg, image/gif" class="file-select"　multiple><input type="button" class="btn btn-warning reply-button" value="返信"></div></form></div>');

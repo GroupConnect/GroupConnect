@@ -69,28 +69,64 @@ class SignboardView(generic.DetailView):
     model = Signboard
     template_name = 'GroupConnect/signboard_detail.html'
 
-def signboard_page_view(request, pk):
+def signboard_page_view(request, pk, selected_id):
     signboard = get_object_or_404(Signboard, pk=pk)
-    
-    for query in Signboard.objects.filter(pk=pk).prefetch_related('post_set'):
-        post_list = query.post_set.all()
-
-    situation_list = {'read_counter': 0, 'read_members': []}
-    for post in post_list:
-        read_list = situation_counter(post)
-        situation_list['read_counter'] = read_list[0]
-        situation_list['read_members'] = read_list[1]
 
     # form = forms.PostCreateForm(request.POST or None)
     if request.method == 'POST':
-        form.save()
-        return render(request, 'GroupConnect/boad.html', context= {
+        # form.save()
+        
+        if 'reply_text' in request.POST:
+            reply_source_id = int(request.POST['reply_source'])
+            new_post = Post(
+                signboard_id=signboard,
+                text=request.POST['reply_text'],
+                contributer=get_object_or_404(Member, pk=1),
+                reply=get_object_or_404(Post, pk=reply_source_id)
+            )
+        else:    
+            new_post = Post(
+                signboard_id=signboard,
+                text=request.POST['post_text'],
+                contributer=get_object_or_404(Member, pk=1)
+            )
+
+        new_post.save()
+
+        for query in Signboard.objects.filter(pk=pk).prefetch_related('post_set'):
+            if selected_id:
+                post_list = query.post_set.filter(pk=int(selected_id)).order_by('-created_at')
+            else:
+                post_list = query.post_set.all().order_by('-created_at')
+
+        situation_list = {}
+        situation_list['read_counter'] = 0
+        situation_list['read_members'] = []
+        for post in post_list:
+            read_list = situation_counter(post)
+            situation_list['read_counter'] = read_list[0]
+            situation_list['read_members'] = read_list[1]
+
+        return render(request, 'GroupConnect/bord.html', context= {
             'signboard': signboard,
             'post_list': post_list,
             'situation_list': situation_list
         })
     
     else:
+
+        for query in Signboard.objects.filter(pk=pk).prefetch_related('post_set'):
+            if selected_id:
+                post_list = query.post_set.filter(pk=int(selected_id)).order_by('-created_at')
+            else:
+                post_list = query.post_set.all().order_by('-created_at')
+
+        situation_list = {'read_counter': 0, 'read_members': []}
+        for post in post_list:
+            read_list = situation_counter(post)
+            situation_list['read_counter'] = read_list[0]
+            situation_list['read_members'] = read_list[1]
+
         return render(request, 'GroupConnect/bord.html', context= {
             'signboard': signboard,
             'post_list': post_list,
