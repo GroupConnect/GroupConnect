@@ -12,7 +12,9 @@ body {
     font-family: Times New Roman;
 }
 
+/* サイドバー */
 .left {
+    height: 593px;
     border:solid 2px #5f9644;
     text-align: center;
 }
@@ -27,17 +29,22 @@ body {
     margin: 0px 0px 10px 0px;
 }
 
-.left-down {
-    border-bottom: 2px solid #5f9644;
+.sidebarmenu {
+    height: 497px;
+    margin: -10px 0px 0px 0px;
+    text-align: left;
+    overflow-y: scroll;
 }
 
+.group {
+    margin: 0px 0px 0px -55px;
+}
+
+/* メイン */
 .up{
     border:solid 2px #5f9644;
-    min-height: 157px;
+    min-height: 296px;
     max-height: none;
-  /*   height: 33.33333% ; /* 
-  /* height: -webkit-calc(100% / 3) ; */
-  /* height: calc(100% / 3) ; */
 }
 
 .up h1 {
@@ -46,13 +53,9 @@ body {
 }
 
 .middle {
-    min-height: 218px;
+    min-height: 297px;
     border:solid 2px #5f9644;
     max-height: none;
-    /* border-bottom: 1px solid; */ 
-  /*   height: 33.33333% ; /* 
-  /* height: -webkit-calc(100% / 3) ;
-  height: calc(100% / 3) ; */
 }
 
 .middle h1 {
@@ -60,20 +63,6 @@ body {
     margin: 10px 0px 0px 0px;
 }
 
-.down {
-    min-height: 218px;
-    border:solid 2px #5f9644;
-    max-height: none;
-  /* height: 33.33333% ; 
-  height: -webkit-calc(100% / 3) ;
-  height: calc(100% / 3) ;
-   */
-}
-
-.down h1 {
-    font-size: 30px;
-    margin: 10px 0px 0px 0px;
-}
 img {
     width: 50px;
     height: 50px;

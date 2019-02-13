@@ -71,13 +71,3 @@ function del(index){
   var div_element = document.getElementById('item' + index);
   div_element.parentNode.removeChild(div_element);
 }
-
-function create(){
-	var name = document.groupcreate.id_group_name.value;
-	if (name.length > 12){
-    alert("dasafaffa");
-    return false;
-  }
-
-
-} 
