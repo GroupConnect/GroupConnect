@@ -132,6 +132,19 @@ class NoticeDetail(generic.DetailView): #お知らせの詳細ページ
     """
     model = Notice
 
+    def get_context_data(self, **kwargs):
+        """
+        参加グループの一覧取得
+        お知らせ一覧の取得。
+        """        
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'members': members
+        })
+        return context
+
 class GroupCreate(generic.CreateView): #グループ作成ページ
     template_name = 'GroupConnect/group_create.html'
     form_class = GroupCreateForm
