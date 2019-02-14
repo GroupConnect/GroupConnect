@@ -626,8 +626,13 @@ class bordlist(generic.ListView) :
     def get_context_data(self, **kwargs):
         group =Group.objects.get(id=self.kwargs.get('pk'))
         context = super().get_context_data(**kwargs)
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
+        category_name = "すべて"
 
         context.update({
+            'category_name' : category_name,
+            'members' : members,
             'messages' : Signboard.objects.filter(group_id=group),
             'categorys' : Category.objects.filter(group_id=group),
             'group' : group
@@ -664,16 +669,21 @@ class CategoryView(bordlist):
     def get_context_data(self, **kwargs): 
         group =Group.objects.get(id=self.kwargs.get('pk'))
         category_id = self.kwargs.get('id')
-
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
         
         try:
             category = Category.objects.get(id=category_id)
             messages = Signboard.objects.filter(category_id=category)
+            category_name = category.name
         except:
             messages = Signboard.objects.filter(group_id=group)
+            category_name = "すべて"
         
         context = super().get_context_data(**kwargs)
         context.update({
+            'category_name' : category_name,
+            'members' : members,
             'messages' : messages,
             'categorys' : Category.objects.filter(group_id=group),
             'group' : group
