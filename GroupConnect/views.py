@@ -665,13 +665,7 @@ class CategoryView(bordlist):
         group =Group.objects.get(id=self.kwargs.get('pk'))
         category_id = self.kwargs.get('id')
 
-        """
-        if category_id == 0:
-            messages = Signboard.objects.filter(group_id=group)
-        elif category_id != 0:
-            category = Category.objects.get(id=category_id)
-            messages = Signboard.objects.filter(category_id=category)
-        """
+        
         try:
             category = Category.objects.get(id=category_id)
             messages = Signboard.objects.filter(category_id=category)
