@@ -69,7 +69,7 @@ class SignboardView(generic.DetailView):
     model = Signboard
     template_name = 'GroupConnect/signboard_detail.html'
 
-def signboard_page_view(request, pk, selected_id):
+def signboard_page_view(request, pk, selected_id=None):
     signboard = get_object_or_404(Signboard, pk=pk)
 
     # form = forms.PostCreateForm(request.POST or None)
@@ -93,10 +93,12 @@ def signboard_page_view(request, pk, selected_id):
 
         new_post.save()
 
-        for query in Signboard.objects.filter(pk=pk).prefetch_related('post_set'):
-            if selected_id:
-                post_list = query.post_set.filter(pk=int(selected_id)).order_by('-created_at')
-            else:
+        if selected_id:
+            for query in Signboard.objects.filter(pk=pk).prefetch_related('post_set'):
+                post = query.post_set.get(pk=int(selected_id))
+                post_list = collect_reply(post)
+        else:
+            for query in Signboard.objects.filter(pk=pk).prefetch_related('post_set'):
                 post_list = query.post_set.all().order_by('-created_at')
 
         situation_list = {}
@@ -115,10 +117,12 @@ def signboard_page_view(request, pk, selected_id):
     
     else:
 
-        for query in Signboard.objects.filter(pk=pk).prefetch_related('post_set'):
-            if selected_id:
-                post_list = query.post_set.filter(pk=int(selected_id)).order_by('-created_at')
-            else:
+        if selected_id:
+            for query in Signboard.objects.filter(pk=pk).prefetch_related('post_set'):
+                post = query.post_set.get(pk=int(selected_id))
+                post_list = collect_reply(post)
+        else:
+            for query in Signboard.objects.filter(pk=pk).prefetch_related('post_set'):
                 post_list = query.post_set.all().order_by('-created_at')
 
         situation_list = {'read_counter': 0, 'read_members': []}
@@ -148,6 +152,31 @@ def situation_counter(post):
                 post.save()
 
     return read_counter, read_members
+
+def collect_reply(post):
+    post_list = []
+    reply_from = []
+    reply = []
+
+    post_list.append(post)
+    
+    for post_related in Post.objects.filter(pk=post.id).prefetch_related('post_set'):
+        reply = post_related.post_set.all().order_by('-created_at')
+
+    post_list.extend(reply)
+
+    while True:
+        if post.reply:
+            reply_from.append(post.reply)
+            post = post.reply
+        else:
+            break
+    
+    reply_from.extend(post_list)
+
+    post_list = reply_from
+
+    return post_list
 
 class MypageView(generic.TemplateView):
     template_name = 'GroupConnect/mypage.html'

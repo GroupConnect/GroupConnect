@@ -307,7 +307,7 @@
                                             <div class="post-outside" id="post-outside1">
                                                 <div class="post">
                                                     <p class="Contributor">{{ post.contributer }}</p><p class="time">{{ post.diff_date }}</p><p class="read">既読：<a data-toggle="modal" data-target="#basicModal2" href="#">2件</a></p><a class="post-delete" data-toggle="modal" data-target="#basicModal3" href="">投稿を削除</a>
-                                                    <p class="letter-body">{{ post.text|linebreaks }}</p>
+                                                    <p class="letter-body"><a href="{% url 'GroupConnect:signboard' signboard.id post.id %}" class="post-text">{{ post.text|linebreaks }}</a></p>
                                                     <a class="filename" href="#">minion.jpg</a><img src="{% static 'GroupConnect/img/ダウンロードアイコン.jpg' %}" id="passcheck2" class="download-icon">
                                                 </div>
                                                 
