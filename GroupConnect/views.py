@@ -648,14 +648,26 @@ class bordlist(generic.ListView) :
 
 class CategoryView(bordlist):
 
-    def get_context_data(self, **kwargs):
-        category_id = self.kwargs.get('id')
-        category = Category.objects.get(id=category_id)
+    def get_context_data(self, **kwargs): 
         group =Group.objects.get(id=self.kwargs.get('pk'))
-        context = super().get_context_data(**kwargs)
+        category_id = self.kwargs.get('id')
 
+        """
+        if category_id == 0:
+            messages = Signboard.objects.filter(group_id=group)
+        elif category_id != 0:
+            category = Category.objects.get(id=category_id)
+            messages = Signboard.objects.filter(category_id=category)
+        """
+        try:
+            category = Category.objects.get(id=category_id)
+            messages = Signboard.objects.filter(category_id=category)
+        except:
+            messages = Signboard.objects.filter(group_id=group)
+        
+        context = super().get_context_data(**kwargs)
         context.update({
-            'messages' : Signboard.objects.filter(category_id=category),
+            'messages' : messages,
             'categorys' : Category.objects.filter(group_id=group),
             'group' : group
         })

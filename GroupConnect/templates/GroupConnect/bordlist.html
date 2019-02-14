@@ -140,6 +140,10 @@
                                         </tr>
                                     </thead>
                                     <tbody class="side-tbody">
+                                        <tr>
+                                            <th><a href="{% url 'GroupConnect:bordlist' group.pk 0%}">すべて</a></th>
+                                        </tr>
+
                                         {% for category in categorys %}
 
                                         {% csrf_token %}
