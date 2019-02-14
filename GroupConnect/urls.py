@@ -25,7 +25,6 @@ urlpatterns = [
     path('groupinvite/<token>/(?P<id>[0-9]+)/', views.GroupInvite, name='groupinvite'),
     path('operation/', views.operation, name='operation'),
     path('bordlist/(<?P<pk>[0-9]+)/', views.bordlist.as_view(), name='bordlist'),
-    path('signboard/<int:pk>/', views.SignboardView.as_view(), name='Signboard'),
     path('signboardcategory/' , views.categoryget , name="categoryget"),
     path('signboardform/' , views.Signboardform , name="Signboardform"),
     path('Category/<int:pk>/', views.SignboardView.as_view() , name="Category" ),   
@@ -46,8 +45,11 @@ urlpatterns = [
     path('user_data_create/', views.UserDataCreate.as_view(), name='user_data_create'),
 
     path('bordlist/(<?P<pk>[0-9]+)/(<?P<id>[0-9]+)/', views.CategoryView.as_view(), name='bordlist'),
+    path('bord', views.BordView.as_view(), name='bord'),
+    path('signboard/<int:pk>/', views.signboard_page_view, name='signboard'),
+    path('signboard/<int:pk>/<int:serected_id>/', views.signboard_page_view, name='signboard'),
+
 
 
 ]
-
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

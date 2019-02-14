@@ -5,7 +5,7 @@ from django.contrib.auth.forms import (
 )
 from django.contrib.auth import get_user_model
 from .models import (
-    Group , Signboard
+    Group , Signboard, Post
 )
  
 User = get_user_model()
@@ -122,3 +122,21 @@ class UserCreateForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = ''
+
+# class PostCreateForm(forms.ModelForm):
+    
+#     class Meta:
+#         model = Post
+#         fields = [
+#             'id',
+#             'signboard_id',
+#             'text',
+#             'contributer',
+#             'created_at',
+#             'read_number'
+#         ]
+
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         for field in self.fields.values():
+#             field.widget.attrs['class'] = 'form-control'

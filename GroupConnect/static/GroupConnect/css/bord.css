@@ -44,23 +44,27 @@ body {
     margin: 0px 0px 0px 40px;
 }
 
-.left {
+/* サイドバー */
+.side {
+    height: 593px;
     border:solid 2px #5f9644;
     text-align: center;
+    /* overflow-y: auto; */
 }
 
-.left-top {
+.side-top {
     background-color: #bae1a7;
 }
 
-.left-grname {
+.side-grname {
     margin: 0px 0px 0px 20px;
     font-family: Times New Roman;
     color: #000000;
 }
 
-.left-up {
+.side-up {
     margin: 10px 0px 10px 0px;
+    padding: 0px 0px 10px 0px;
     border-bottom: 2px solid #5f9644;
 }
 
@@ -69,11 +73,6 @@ body {
     margin: 0px 20px 0px 20px;
 }
 
-.quantity {
-    font-size: 15px;
-    float: right;
-    margin: 4px 0px 9px 0px;
-}
 
 
 .ctgr {
@@ -87,6 +86,16 @@ body {
 
 }
 
+/* カテゴリモーダル */
+.modal-category {
+    float: left;
+}
+
+.side-down {
+    height: 440px;
+    overflow-y: auto;
+}
+
 .sidebar-dropdown {
     float: left;
     margin: 10px 0px 0px 0px;
@@ -96,11 +105,12 @@ body {
     background-color: #fff;
 }
 
-.subquantity {
+.quantity {
     float: right;
     margin: 15px 0px 0px 0px;
 }
 
+/* メインコンテンツ */
 .right {
     min-height: 593px;
     max-height: none;
@@ -126,18 +136,131 @@ body {
     margin: 0px 0px 0px 10px;
 }
 
+.text {
+    width: 800px;
+    height: 200px;
+    display: block;
+}
+
 .file-select {
     margin: 15px 0px 0px 15px;
 }
 
-.btn-warning {
+.post-button, .reply-button {
     width: 95px;
     height: 35px;
     float: right;
     margin: 15px 30px 0px 0px;
 }
 
+.post-area {
+    height: 485px;
+    margin:0px -10px 0px 0px;
+    overflow-y: auto;
+}
+
 .area {
     margin: 10px 0px 0px 0px; 
     background-color: #a6e288;
+}
+
+.post-outside {
+    margin: 10px 0px 10px 0px;
+}
+
+.post {
+    border-top: solid 1px #5f9644;
+    border-bottom: solid 1px #5f9644;
+}
+
+.Contributor, .time, .time2 {
+    margin: 5px 0px 0px 20px;
+    display: inline-block;
+}
+
+.read {
+    margin: 5px 0px 0px 200px;
+    display: inline-block;
+}
+
+/* 既読モーダル */
+.modal-header {
+    margin: 0px 0px 0px 190px;
+}
+
+.modal-body {
+    text-align: center;
+}
+
+.modal-read, .modal-notread {
+    margin: 10px 0px 0px 0px;
+}
+
+.tbl {
+    height: 150px;
+    overflow-y: auto;
+    display: block;
+    border: solid 2px #616161;
+}
+
+.ok {
+    width: 100px;
+    margin: 0px 180px 0px 0px;
+}
+
+.letter-body {
+    margin: 10px 20px 0px 25px;
+}
+
+.filename {
+    margin: 5px 0px 5px 25px;
+    display: inline-block;
+}
+
+.download-icon {
+    width: 20px;
+    height: 20px;
+    margin: 0px 0px 0px 5px;
+}
+
+.reply-icon {
+    width: 25px;
+    height: 20px;
+    margin: -5px 0px 0px 20px;
+}
+
+.reply {
+    margin: 10px 0px 0px 5px;
+    color: #000;
+    display: inline-block;
+}
+
+.post-delete {
+    margin: 5px 20px 0px 0px;
+    float: right;
+}
+
+.post-form {
+    display: none;
+}
+
+.reply-hide {
+    display: none;
+}
+
+.signboard-setting {
+    display: none;
+}
+
+.btn .btn-reply:hover, .btn-reply:focus, 
+.btn-reply:active, .btn-reply:active:focus, .btn-reply:active:hover, .btn-reply:active.focus,
+.btn-reply.active, .btn-reply.active:focus, .btn-reply.active:hover, .btn-reply.active.focus,
+.open > .dropdown-toggle.btn-reply, 
+.open > .dropdown-toggle.btn-reply:hover,
+.open > .dropdown-toggle.btn-reply:focus, 
+.open > .dropdown-toggle.btn-reply.focus,
+.btn-reply.disabled:hover, .btn-reply[disabled]:hover, fieldset[disabled] .btn-reply:hover,
+.btn-reply.disabled:focus, .btn-reply[disabled]:focus, fieldset[disabled] .btn-reply:focus,
+.btn-reply.disabled.focus, .btn-reply[disabled].focus, fieldset[disabled] .btn-reply.focus {
+    border-color: #5f9644;
 }

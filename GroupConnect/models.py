@@ -1,4 +1,5 @@
-import datetime
+import datetime, math
+
 from django.conf import settings
 from django.db import models
 from django.core.mail import send_mail
@@ -156,6 +157,9 @@ class Member(models.Model):
     name = models.CharField(max_length=100, db_column='name')
     authority = models.BooleanField(db_column='authority')
 
+    def __str__(self):
+        return self.name
+
 class Category(models.Model):
     """ 
     checkは未分類にTrueをセットして他のカテゴリーをFalseにする 
@@ -208,6 +212,27 @@ class Signboard(models.Model):
         """
         return self.title
 
+    def diff_date(self):
+        diff_words = ['日前', '時間前', '分前', '秒前']
+
+        now = timezone.now()
+        diff_date = now - self.updated_at()
+        diff_hours = math.floor(diff_date.seconds / 60 / 60)
+        diff_minutes = math.floor(diff_date.seconds / 60)
+
+        if (6 < diff_date.days):
+            return self.updated_at.date()
+        elif (0 < diff_date.days):
+            return str(diff_date.days) + diff_words[0]
+        elif (0 < diff_hours):
+            return str(diff_hours) + diff_words[1]
+        elif (0 < diff_minutes):
+            return str(diff_minutes) + diff_words[2]
+        elif (0 < diff_date.seconds):
+            return str(diff_date.seconds) + diff_words[3]
+        else:
+            return '今'
+
 class Post(models.Model):
     """
     投稿のクラス
@@ -221,7 +246,7 @@ class Post(models.Model):
         対象の投稿の本文
     contributer : str
         対象のUserクラスのemailを参照する外部キー
-    posted : datetime.datetime
+    created_at : datetime.datetime
         対象の投稿日時をPython標準のdatetime型で保存する
     read_number : int
         対象の自クラスに結び付くSituationクラスのユーザ数を格納する
@@ -229,9 +254,32 @@ class Post(models.Model):
     id = models.AutoField(primary_key=True, db_column='id')
     signboard_id = models.ForeignKey(Signboard, on_delete=models.CASCADE, db_column='signboard_id')
     text = models.TextField(db_column='text')
+    attached_file = models.FileField(upload_to='files/', blank=True, null=True, db_column='file')
     contributer = models.ForeignKey(Member, on_delete=models.CASCADE, db_column='contributer')
-    created_at = models.DateTimeField(db_column='created_at')
-    read_number = models.IntegerField(db_column='read_number')
+    created_at = models.DateTimeField(db_column='created_at', default=timezone.now)
+    read_number = models.IntegerField(db_column='read_number', default=0)
+    reply = models.ForeignKey('Post', on_delete=models.CASCADE, blank=True, null=True, db_column='reply')
+
+    def diff_date(self):
+        diff_words = ['日前', '時間前', '分前', '秒前']
+
+        now = timezone.now()
+        diff_date = now - self.created_at
+        diff_hours = math.floor(diff_date.seconds / 60 / 60)
+        diff_minutes = math.floor(diff_date.seconds / 60)
+
+        if (6 < diff_date.days):
+            return self.created_at.date()
+        elif (0 < diff_date.days):
+            return str(diff_date.days) + diff_words[0]
+        elif (0 < diff_hours):
+            return str(diff_hours) + diff_words[1]
+        elif (0 < diff_minutes):
+            return str(diff_minutes) + diff_words[2]
+        elif (0 < diff_date.seconds):
+            return str(diff_date.seconds) + diff_words[3]
+        else:
+            return '今'
 
 class Situation(models.Model):
     """

@@ -1,23 +1,135 @@
 [
     {
-        "model": "GroupConnect.account",
+        "model": "GroupConnect.user",
         "pk": 1,
         "fields": {
-            "last_name": "髙橋",
-            "first_name": "くん",
-            "rome_last_name": "takahashi",
-            "rome_first_name": "kun",
-            "mail_address": "takahashi@groupconnect.hoge",
-            "password": "takahashi",
+            "last_login": "2019-02-06T05:52:38.183Z",
+            "is_superuser": true,
+            "email": "kbc16a07@stu.kawahara.ac.jp",
+            "last_name": null,
+            "first_name": null,
+            "rome_last_name": null,
+            "rome_first_name": null,
+            "password": "pbkdf2_sha256$100000$to1j2A3dXQmw$DqqP3Tywdt4tM9dgyHS9hmU84BIgMeQgbtp8sq7fJEU=",
             "icon": "",
-            "introduction": "",
-            "plan_mail_time": "08:00:00",
-            "new_mail_stop_time": "00:00:00",
-            "new_mail_start_time": "08:00:00",
+            "introduction": null,
+            "plan_mail_time": "07:00:00",
+            "new_mail_stop_time": "01:00:00",
+            "new_mail_start_time": "06:00:00",
             "notice_signboard": true,
             "notice_chat": true,
             "notice_calendar": true,
-            "notice_group": true
+            "notice_group": true,
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2019-02-06T05:52:32.784Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "GroupConnect.group",
+        "pk": 1,
+        "fields": {
+            "group_name": "ゴブリン村",
+            "icon": "",
+            "created_at": "2019-02-06T05:53:03Z"
+        }
+    },
+    {
+        "model": "GroupConnect.member",
+        "pk": 1,
+        "fields": {
+            "user_id": 1,
+            "group_id": 1,
+            "name": "リムル",
+            "authority": true
+        }
+    },
+    {
+        "model": "GroupConnect.member",
+        "pk": 2,
+        "fields": {
+            "user_id": 1,
+            "group_id": 1,
+            "name": "ヴェルドラ",
+            "authority": false
+        }
+    },
+    {
+        "model": "GroupConnect.category",
+        "pk": 1,
+        "fields": {
+            "group_id": 1,
+            "name": "イベント"
+        }
+    },
+    {
+        "model": "GroupConnect.signboard",
+        "pk": 1,
+        "fields": {
+            "group_id": 1,
+            "title": "暴風竜との出会い",
+            "category_id": 1,
+            "text": "暴風竜ヴェルドラと最初に目覚めた洞窟にて出会う。",
+            "updated_at": "2019-02-06T06:07:01Z"
+        }
+    },
+    {
+        "model": "GroupConnect.post",
+        "pk": 1,
+        "fields": {
+            "signboard_id": 1,
+            "text": "目が覚めたら知らない洞窟",
+            "attached_file": "",
+            "contributer": 1,
+            "created_at": "2019-02-07T05:00:58Z",
+            "read_number": 1,
+            "reply": null
+        }
+    },
+    {
+        "model": "GroupConnect.post",
+        "pk": 2,
+        "fields": {
+            "signboard_id": 1,
+            "text": "なんかスライムになってる",
+            "attached_file": "",
+            "contributer": 1,
+            "created_at": "2019-02-07T05:03:15Z",
+            "read_number": 0,
+            "reply": 1
+        }
+    },
+    {
+        "model": "GroupConnect.post",
+        "pk": 3,
+        "fields": {
+            "signboard_id": 1,
+            "text": "大賢者とか言ってるやつが\r\n「捕食者」というスキルを教えてくれた",
+            "attached_file": "files/twico_puppet_obli.png",
+            "contributer": 1,
+            "created_at": "2019-02-07T05:11:25Z",
+            "read_number": 0,
+            "reply": null
+        }
+    },
+    {
+        "model": "GroupConnect.situation",
+        "pk": 1,
+        "fields": {
+            "post_id": 1,
+            "user_id": 1,
+            "read_situation": true
+        }
+    },
+    {
+        "model": "GroupConnect.situation",
+        "pk": 2,
+        "fields": {
+            "post_id": 1,
+            "user_id": 2,
+            "read_situation": false
         }
     }
 ]

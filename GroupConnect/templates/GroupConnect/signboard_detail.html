@@ -15,6 +15,27 @@
 <p>
     {{ signboard.text }}
 </p>
-<p>
-    {{ message.updated_at }}
-</p>
+
+<form action="{% url 'GroupConnect:signboard' signboard.id %}" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">送信</button>
+</form>
+
+{% for post in post_list %}
+    <p>
+        {{ post.id }}
+    </p>
+    <p>
+        {{ post.text }}
+    </p>
+    <p>
+        {{ post.contributer }}
+    </p>
+    <p>
+        {{ post.created_at }}
+    </p>
+    <p>
+        {{ post.read_number }}
+    </p>
+{% endfor %}
