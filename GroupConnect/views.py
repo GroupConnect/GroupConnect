@@ -35,7 +35,7 @@ class Top(LoginView): #トップページ
 
 
 class Logout(LoginRequiredMixin, LogoutView):
-    template_name = 'GroupConnect/top.html'
+    template_name = 'GroupConnect/logout.html'
 
 class UserCreate(generic.CreateView):
     template_name = 'GroupConnect/user_create.html'
