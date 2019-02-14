@@ -1,16 +1,5 @@
-<<<<<<< HEAD
-=======
-from django.shortcuts import render, get_object_or_404
-from django.views import generic
-
-from .models import Signboard
-from . import forms
-
-
-
->>>>>>> origin/掲示板個別ページ機能
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail, EmailMessage
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
