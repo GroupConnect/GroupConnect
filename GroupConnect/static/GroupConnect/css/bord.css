@@ -244,6 +244,15 @@ body {
     display: none;
 }
 
+.post-text {
+    text-decoration: none;
+    color: black;
+}
+
+.post-text:hover {
+    text-decoration: underline;
+}
+
 .reply-hide {
     display: none;
 }

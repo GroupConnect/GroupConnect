@@ -139,7 +139,6 @@ AUTH_USER_MODEL = 'GroupConnect.User'
 
 LOGIN_URL = 'GroupConnect:top'
 LOGIN_REDIRECT_URL = 'GroupConnect:mypage'
-LOGOUT_REDIRECT_URL = 'GroupConnect:logout'
 
 # Email Settings
 
