@@ -1,4 +1,4 @@
-{% load static %}
+{% load static filename %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -308,7 +308,13 @@
                                                 <div class="post">
                                                     <p class="Contributor">{{ post.contributer }}</p><p class="time">{{ post.diff_date }}</p><a class="post-delete" data-toggle="modal" data-target="#basicModal3" href="">投稿を削除</a>
                                                     <p class="letter-body"><a href="{% url 'GroupConnect:signboard' signboard.id post.id %}" class="post-text">{{ post.text|linebreaks }}</a></p>
-                                                    <a class="filename" href="#">minion.jpg</a><img src="{% static 'GroupConnect/img/ダウンロードアイコン.jpg' %}" id="passcheck2" class="download-icon">
+                                                    {% if post.attached_file %}
+                                                        <a class="filename" href="{{ post.attached_file.url }}">{{ post.attached_file|get_filename }}
+                                                            {% if post.is_image_type %}
+                                                                <img src="{{ post.attached_file.url }}" id="passcheck2" class="download-icon">
+                                                            {% endif %}
+                                                        </a>
+                                                    {% endif %}
                                                 </div>
                                                 
                                                 {% comment %} <img src="{% static 'GroupConnect/img/返信アイコン.jpg' %}" class="reply-icon"><a class="reply" id="reply1" href="#">返信する</a> {% endcomment %}
