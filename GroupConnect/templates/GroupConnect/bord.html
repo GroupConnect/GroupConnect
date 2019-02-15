@@ -1,4 +1,4 @@
-{% load static %}
+{% load static filename %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,7 +11,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="{% static 'GroupConnect/css/bord.css' %}" />
     </head>
-
     <body>
         <div  class="nav-bar fixed-top">
             <!-- ナビゲーションバー -->
@@ -64,9 +63,10 @@
                 </div>
             </nav>
         </div>
-        <div class="container-fluid" id="container">
+        </nav>
+    </div>
+    <div class="container-fluid" id="container">
             <div class="row">
-
                 <!-- サイドバー -->
                 <div class="col-lg-2 side">
                     <div class="row">
@@ -75,7 +75,6 @@
                                 <a class="navbar-brand side-grname" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_name}}</a>
                             </nav>
                         </div>
-
                         <div class="col-lg-12 side-up">
                             <p class="d-inline navbar-brand bordlist">掲示板</p>
                         </div>
@@ -162,20 +161,17 @@
                         </form>
                     </div>
                 </div>
-
-
                 <!-- メインコンテンツ -->
                 <div class="col-lg-10 right">
                     <div class="row row3">
                         <div class="col-lg-12 up">
-
                             <div class="headline">
-                                <div class="history">
-                                    <a href="grouptop">{{ signboard.group_id.group_name }}</a><span>　>　</span>
-                                    <a href="bordlist">掲示板一覧</a><span>　>　</span>
-                                    <a href="bord">{{ signboard.title }}</a>
-                                </div>
-
+                                <nav aria-label="パンくずリスト">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="bordlist">掲示板一覧</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">{{ signboard.title }}</li>
+                                    </ol>
+                                </nav>
                                 <nav class="navbar navbar-expand-md navbar-light bar3">
                                     <p class="bord-name">{{ signboard.title }}</p>
                                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
@@ -195,7 +191,6 @@
                                         <div class="nav-item active configuration signboard-setting">
                                             <a href="bord_setting"><button class="btn btn-secondary">掲示板設定</button></a>
                                         </div>
-
                                         <div class="nav-item active borddelete">
                                             <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal" value="掲示板削除">
                                             <form class="d-inline" method="GET">
@@ -215,20 +210,28 @@
                                                 </div>
                                             </form>
                                         </div>
-
                                     </div>
-
                                 </nav> 
                             </div>
-
                             <div class="post-area">
                                 <div class="rounded p-4 background area">
-                                    <form action="{% url 'GroupConnect:signboard' signboard.id %}" method="POST" enctype="multipart/form-data">
+                                    <form action="bord" id="post-form" method="get" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="form-group d-inline">
-                                            <textarea class="form-control" id="UserInput" name="post_text" rows="6"></textarea>
-                                            <input type="file" name="s_file" accept="image/png, image/jpeg, image/gif" class="file-select"　multiple>
-                                            <input type="submit" id="button" class="btn btn-warning post-button" value="投稿">
+                                                <textarea class="form-control" id="UserInput" rows="6"></textarea>
+                                                <!-- <input type="file" name="s_file" class="file-select"> -->
+                                                <div class="form-group file-choice">
+                                                    <div id="file" class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" id="cutomfile" class="custom-file-input" name="cutomfile[]" lang="ja" />
+                                                            <label class="custom-file-label" for="customfile">ファイル選択...</label>
+                                                        </div>
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn btn-outline-secondary reset">取消</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="button" id="button" class="btn btn-warning post-button" value="投稿">
                                         </div>         
                                     </form>
                                 </div>
@@ -239,9 +242,15 @@
                                         <div class="post-frame" id="post-frame{{ forloop.counter0 }}">
                                             <div class="post-outside" id="post-outside1">
                                                 <div class="post">
-                                                    <p class="Contributor">{{ post.contributer }}</p><p class="time">{{ post.diff_date }}</p><p class="read">既読：<a data-toggle="modal" data-target="#basicModal2" href="#">2件</a></p><a class="post-delete" data-toggle="modal" data-target="#basicModal3" href="">投稿を削除</a>
+                                                    <p class="Contributor">{{ post.contributer }}</p><p class="time">{{ post.diff_date }}</p><a class="post-delete" data-toggle="modal" data-target="#basicModal3" href="">投稿を削除</a>
                                                     <p class="letter-body"><a href="{% url 'GroupConnect:signboard' signboard.id post.id %}" class="post-text">{{ post.text|linebreaks }}</a></p>
-                                                    <a class="filename" href="#">minion.jpg</a><img src="{% static 'GroupConnect/img/ダウンロードアイコン.jpg' %}" id="passcheck2" class="download-icon">
+                                                    {% if post.attached_file %}
+                                                        <a class="filename" href="{{ post.attached_file.url }}">{{ post.attached_file|get_filename }}
+                                                            {% if post.is_image_type %}
+                                                                <img src="{{ post.attached_file.url }}" id="passcheck2" class="download-icon">
+                                                            {% endif %}
+                                                        </a>
+                                                    {% endif %}
                                                 </div>
                                                 
                                                 {% comment %} <img src="{% static 'GroupConnect/img/返信アイコン.jpg' %}" class="reply-icon"><a class="reply" id="reply1" href="#">返信する</a> {% endcomment %}
@@ -249,7 +258,7 @@
                                                 <button type="button" class="btn btn-light rounded-pill reply-hide" id="reply-hide{{ forloop.counter0 }}">返信フォームを隠す</button>
 
                                             </div>
-                                            <form action="{% url 'GroupConnect:signboard' signboard.id %}" class="post-form" id="post-form{{ forloop.counter0 }}" method="POST" enctype="multipart/form-data">
+                                            <form action="{% url 'GroupConnect:signboard' signboard.id %}" class="reply-form" id="post-form{{ forloop.counter0 }}" method="POST" enctype="multipart/form-data">
                                                 {% csrf_token %}
                                                 <div class="form-group d-inline">
                                                     <textarea class="form-control" id="UserInput" name="reply_text" rows="6"></textarea>
@@ -351,7 +360,11 @@
                     </div>
                 </div>         
             </div>
-        </div>
+    </div>
+    
+            
+            
+            
         
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>

@@ -281,6 +281,20 @@ class Post(models.Model):
         else:
             return '今'
 
+    def is_image_type(self):
+        if not self.attached_file:
+            return None
+
+        file_path = self.attached_file.url
+        period = file_path.rfind('.')
+        file_type = file_path[period + 1:]
+        compare_list = ['jpg', 'jpeg', 'png', 'gif']
+
+        if file_type in compare_list:
+            return True
+        else:
+            return False
+
 class Situation(models.Model):
     """
     既読状況のクラス
