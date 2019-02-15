@@ -14,7 +14,7 @@
     <body>
         <!-- ナビゲーションバー -->
     <nav class="navbar navbar-expand-sm navbar-light fixed-top">
-        <a class="navbar-brand groupconnect" href="#">GroupConnect</a>
+        <a class="navbar-brand groupconnect" href="mypage">GroupConnect</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,11 +26,11 @@
                     グループ
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">グループ名</a>
-                    <a class="dropdown-item" href="#">グループ名</a>
-                    <a class="dropdown-item" href="#">グループ名</a>
-                    <a class="dropdown-item" href="#">グループ名</a>
-                    <a class="dropdown-item" href="#">グループ一覧へ</a>
+                    <a class="dropdown-item" href="grouptop">グループ名</a>
+                    <a class="dropdown-item" href="grouptop">グループ名</a>
+                    <a class="dropdown-item" href="grouptop">グループ名</a>
+                    <a class="dropdown-item" href="grouptop">グループ名</a>
+                    <a class="dropdown-item" href="grouplist">グループ一覧へ</a>
                     </div>
                 </li>
             </ul>
@@ -40,10 +40,10 @@
                     アカウント
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
-                    <a class="dropdown-item" href="{% url 'GroupConnect:user_mailaddress_update' user.id %}">メール設定</a>
-                    <a class="dropdown-item" href="{% url 'GroupConnect:password_change' %}">パスワード設定</a>
-                    <a class="dropdown-item" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
+                    <a class="dropdown-item" href="profile">プロフィール設定</a>
+                    <a class="dropdown-item" href="mail_setting">メール設定</a>
+                    <a class="dropdown-item" href="pass_setting">パスワード設定</a>
+                    <a class="dropdown-item" href="logout">ログアウト</a>
                     </div>
                 </li>
             </ul>
@@ -53,35 +53,19 @@
             <div class="row">
                 <!-- サイドバー -->
                 <div class="col-md-2 left">
-                    <a class="setting" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
-                    <a class="setting" href="{% url 'GroupConnect:password_change' %}">パスワード設定</a>
-                    <a class="setting" href="{% url 'GroupConnect:user_mailaddress_update' user.id %}">メール設定</a>
-                    <a class="setting" href="{% url 'GroupConnect:user_delete' user.pk %}">退会</a>
+                    <a class="setting" href="profile">プロフィール設定</a>
+                    <a class="setting" href="pass_setting">パスワード設定</a>
+                    <a class="setting" href="mail_setting">メール設定</a>
+                    <a class="setting" href="withdraw">退会</a>
                 </div>
 
                 <div class="col-md-10 right">
                     <div class="row">
-                        <div class="col-md-12 up">
-                            <form>
-                                {% csrf_token %}
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class="col-md-12 up">
                                 <p class="d-inline">予定メール通知設定</p>
-                                <!--<div class="form-check d-inline">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                    <label class="form-check-label" for="exampleRadios1">
-                                        通知する
-                                    </label>
-                                </div>
-                                <div class="form-check d-inline">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                    <label class="form-check-label" for="exampleRadios2">
-                                        通知しない
-                                    </label>
-                                </div>-->
                                 <div class="plans">
-                                    <!--<div class="notification">
-                                        <label class="d-inline">通知先</label>
-                                        <input type="email" name="mail" class="d-inline mail">
-                                    </div>-->
                                     <div class="notificationtime">
                                         <div class="row">
                                             <div class="col-md-2">
@@ -90,61 +74,43 @@
                                             <div class="col-md-10">
                                                 <div class="input-group">
                                                     <div class="input-group-append">
-                                                        <select id="time">
-                                                            <option value="0:00">0:00</option>
-                                                            <option value="1:00">1:00</option>
-                                                            <option value="2:00">2:00</option>
-                                                            <option value="3:00">3:00</option>
-                                                            <option value="4:00">4:00</option>
-                                                            <option value="5:00">5:00</option>
-                                                            <option value="6:00">6:00</option>
-                                                            <option value="7:00">7:00</option>
-                                                            <option value="8:00">8:00</option>
-                                                            <option value="9:00">9:00</option>
-                                                            <option value="10:00">10:00</option>
-                                                            <option value="11:00">11:00</option>
-                                                            <option value="12:00">12:00</option>
-                                                            <option value="13:00">13:00</option>
-                                                            <option value="14:00">14:00</option>
-                                                            <option value="15:00">15:00</option>
-                                                            <option value="16:00">16:00</option>
-                                                            <option value="17:00">17:00</option>
-                                                            <option value="18:00">18:00</option>
-                                                            <option value="19:00">19:00</option>
-                                                            <option value="20:00">20:00</option>
-                                                            <option value="21:00">21:00</option>
-                                                            <option value="22:00">22:00</option>
-                                                            <option value="23:00">23:00</option>->
-                                                        </select>
+
+                                                        <!--<select id="time">
+                                                            <option value="0:00" id="0:00">0:00</option>
+                                                            <option value="1:00" id="1:00">1:00</option>
+                                                            <option value="2:00" id="2:00">2:00</option>
+                                                            <option value="3:00" id="3:00">3:00</option>
+                                                            <option value="4:00" id="4:00">4:00</option>
+                                                            <option value="5:00" id="5:00">5:00</option>
+                                                            <option value="6:00" id="6:00">6:00</option>
+                                                            <option value="7:00" id="7:00">7:00</option>
+                                                            <option value="8:00" id="8:00">8:00</option>
+                                                            <option value="9:00" id="9:00">9:00</option>
+                                                            <option value="10:00" id="10:00">10:00</option>
+                                                            <option value="11:00" id="11:00">11:00</option>
+                                                            <option value="12:00" id="12:00">12:00</option>
+                                                            <option value="13:00" id="13:00">13:00</option>
+                                                            <option value="14:00" id="14:00">14:00</option>
+                                                            <option value="15:00" id="15:00">15:00</option>
+                                                            <option value="16:00" id="16:00">16:00</option>
+                                                            <option value="17:00" id="17:00">17:00</option>
+                                                            <option value="18:00" id="18:00">18:00</option>
+                                                            <option value="19:00" id="19:00">19:00</option>
+                                                            <option value="20:00" id="20:00">20:00</option>
+                                                            <option value="21:00" id="21:00">21:00</option>
+                                                            <option value="22:00" id="22:00">22:00</option>
+                                                            <option value="23:00" id="23:00">23:00</option>
+                                                        </select>-->
                                                     </div><!-- /.input-group-append -->
                                                 </div><!-- /.input-group -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col-md-12 down">
-                            <form>
-                                {% csrf_token %}
+                            </div>
+                            <div class="col-md-12 down">
                                 <p class="d-inline">新着メール通知設定</p>
-                                <!--<div class="form-check d-inline">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" checked>
-                                    <label class="form-check-label" for="exampleRadios3">
-                                        通知する
-                                    </label>
-                                </div>
-                                <div class="form-check d-inline">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4">
-                                    <label class="form-check-label" for="exampleRadios4">
-                                        通知しない
-                                    </label>
-                                </div>-->
                                 <div class="plans">
-                                    <!--<div class="notification">
-                                        <label class="d-inline">通知先</label>
-                                        <input type="email" name="mail" class="d-inline mail">
-                                    </div>-->
                                     <div class="notificationtime">
                                         <div class="row">
                                             <div class="col-md-3">
@@ -154,30 +120,30 @@
                                                 <div class="input-group">
                                                     <div class="input-group-append">
                                                         <select id="time">
-                                                            <option value="0:00">0:00</option>
-                                                            <option value="1:00">1:00</option>
-                                                            <option value="2:00">2:00</option>
-                                                            <option value="3:00">3:00</option>
-                                                            <option value="4:00">4:00</option>
-                                                            <option value="5:00">5:00</option>
-                                                            <option value="6:00">6:00</option>
-                                                            <option value="7:00">7:00</option>
-                                                            <option value="8:00">8:00</option>
-                                                            <option value="9:00">9:00</option>
-                                                            <option value="10:00">10:00</option>
-                                                            <option value="11:00">11:00</option>
-                                                            <option value="12:00">12:00</option>
-                                                            <option value="13:00">13:00</option>
-                                                            <option value="14:00">14:00</option>
-                                                            <option value="15:00">15:00</option>
-                                                            <option value="16:00">16:00</option>
-                                                            <option value="17:00">17:00</option>
-                                                            <option value="18:00">18:00</option>
-                                                            <option value="19:00">19:00</option>
-                                                            <option value="20:00">20:00</option>
-                                                            <option value="21:00">21:00</option>
-                                                            <option value="22:00">22:00</option>
-                                                            <option value="23:00">23:00</option>
+                                                            <option value="0:00" id="0:00">0:00</option>
+                                                            <option value="1:00" id="1:00">1:00</option>
+                                                            <option value="2:00" id="2:00">2:00</option>
+                                                            <option value="3:00" id="3:00">3:00</option>
+                                                            <option value="4:00" id="4:00">4:00</option>
+                                                            <option value="5:00" id="5:00">5:00</option>
+                                                            <option value="6:00" id="6:00">6:00</option>
+                                                            <option value="7:00" id="7:00">7:00</option>
+                                                            <option value="8:00" id="8:00">8:00</option>
+                                                            <option value="9:00" id="9:00">9:00</option>
+                                                            <option value="10:00" id="10:00">10:00</option>
+                                                            <option value="11:00" id="11:00">11:00</option>
+                                                            <option value="12:00" id="12:00">12:00</option>
+                                                            <option value="13:00" id="13:00">13:00</option>
+                                                            <option value="14:00" id="14:00">14:00</option>
+                                                            <option value="15:00" id="15:00">15:00</option>
+                                                            <option value="16:00" id="16:00">16:00</option>
+                                                            <option value="17:00" id="17:00">17:00</option>
+                                                            <option value="18:00" id="18:00">18:00</option>
+                                                            <option value="19:00" id="19:00">19:00</option>
+                                                            <option value="20:00" id="20:00">20:00</option>
+                                                            <option value="21:00" id="21:00">21:00</option>
+                                                            <option value="22:00" id="22:00">22:00</option>
+                                                            <option value="23:00" id="23:00">23:00</option>
                                                         </select>
                                                     </div><!-- /.input-group-append -->
                                                 </div><!-- /.input-group -->
@@ -189,30 +155,30 @@
                                                 <div class="input-group">
                                                     <div class="input-group-append">
                                                         <select id="time">
-                                                            <option value="0:00">0:00</option>
-                                                            <option value="1:00">1:00</option>
-                                                            <option value="2:00">2:00</option>
-                                                            <option value="3:00">3:00</option>
-                                                            <option value="4:00">4:00</option>
-                                                            <option value="5:00">5:00</option>
-                                                            <option value="6:00">6:00</option>
-                                                            <option value="7:00">7:00</option>
-                                                            <option value="8:00">8:00</option>
-                                                            <option value="9:00">9:00</option>
-                                                            <option value="10:00">10:00</option>
-                                                            <option value="11:00">11:00</option>
-                                                            <option value="12:00">12:00</option>
-                                                            <option value="13:00">13:00</option>
-                                                            <option value="14:00">14:00</option>
-                                                            <option value="15:00">15:00</option>
-                                                            <option value="16:00">16:00</option>
-                                                            <option value="17:00">17:00</option>
-                                                            <option value="18:00">18:00</option>
-                                                            <option value="19:00">19:00</option>
-                                                            <option value="20:00">20:00</option>
-                                                            <option value="21:00">21:00</option>
-                                                            <option value="22:00">22:00</option>
-                                                            <option value="23:00">23:00</option>
+                                                            <option value="0:00" id="0:00">0:00</option>
+                                                            <option value="1:00" id="1:00">1:00</option>
+                                                            <option value="2:00" id="2:00">2:00</option>
+                                                            <option value="3:00" id="3:00">3:00</option>
+                                                            <option value="4:00" id="4:00">4:00</option>
+                                                            <option value="5:00" id="5:00">5:00</option>
+                                                            <option value="6:00" id="6:00">6:00</option>
+                                                            <option value="7:00" id="7:00">7:00</option>
+                                                            <option value="8:00" id="8:00">8:00</option>
+                                                            <option value="9:00" id="9:00">9:00</option>
+                                                            <option value="10:00" id="10:00">10:00</option>
+                                                            <option value="11:00" id="11:00">11:00</option>
+                                                            <option value="12:00" id="12:00">12:00</option>
+                                                            <option value="13:00" id="13:00">13:00</option>
+                                                            <option value="14:00" id="14:00">14:00</option>
+                                                            <option value="15:00" id="15:00">15:00</option>
+                                                            <option value="16:00" id="16:00">16:00</option>
+                                                            <option value="17:00" id="17:00">17:00</option>
+                                                            <option value="18:00" id="18:00">18:00</option>
+                                                            <option value="19:00" id="19:00">19:00</option>
+                                                            <option value="20:00" id="20:00">20:00</option>
+                                                            <option value="21:00" id="21:00">21:00</option>
+                                                            <option value="22:00" id="22:00">22:00</option>
+                                                            <option value="23:00" id="23:00">23:00</option>
                                                         </select>
                                                     </div><!-- /.input-group-append -->
                                                 </div><!-- /.input-group -->
@@ -231,10 +197,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                        <form action="" method="get">
-                            {% csrf_token %}
+                            </div>
+                            {{ form.non_field_errors }}
+                                {% for field in form %}
+                                    {{ field }} {{ field.errors }}
+                                {% endfor %}
                             <input type="submit" class="submit change" value="変更">
                         </form>
                     </div>
@@ -247,5 +214,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'GroupConnect/js/mail_setting.js' %}"></script>
     </body>
 </html>
