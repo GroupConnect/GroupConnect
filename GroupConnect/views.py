@@ -6,7 +6,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import (
     LoginView, LogoutView
 )
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import (
     LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView,
     PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
@@ -34,7 +33,7 @@ class Top(LoginView): #トップページ
     template_name = 'GroupConnect/top.html'
 
 
-class Logout(LoginRequiredMixin, LogoutView):
+class Logout(LoginRequiredMixin,LogoutView):
     template_name = 'GroupConnect/logout.html'
 
 class UserCreate(generic.CreateView):

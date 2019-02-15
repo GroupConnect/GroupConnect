@@ -26,11 +26,10 @@
                        グループ
                        </a>
                        <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="grouptop">グループ名</a>
-                           <a class="dropdown-item" href="grouptop">グループ名</a>
-                           <a class="dropdown-item" href="grouptop">グループ名</a>
-                           <a class="dropdown-item" href="grouptop">グループ名</a>
-                           <a class="dropdown-item" href="grouplist">グループ一覧へ</a>
+                        {% for group in members %}
+                            <a class="dropdown-item" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_id.group_name}}</a>
+                        {% endfor %}
+                        <a class="dropdown-item" href="{% url 'GroupConnect:group_list'%}">グループ一覧へ</a>
                        </div>
                    </li>
                </ul>
@@ -40,10 +39,10 @@
                        アカウント
                        </a>
                        <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="profile">プロフィール設定</a>
-                           <a class="dropdown-item" href="mail_setting">メール設定</a>
-                           <a class="dropdown-item" href="pass_setting">パスワード設定</a>
-                           <a class="dropdown-item" href="#">ログアウト</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
+                        <a class="dropdown-item" href="#">メール設定</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:password_change' %}">パスワード設定</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
                        </div>
                    </li>
                </ul>
@@ -53,10 +52,10 @@
                        グループメニュー
                        </a>
                        <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
-                       <a class="dropdown-item d-inline grname" href="grouptop">{{group.group_name}}</a>
-                       <a class="dropdown-item d-inline" href="bordlist">掲示板</a>
-                       <a class="dropdown-item d-inline" href="#">メンバー一覧</a>
-                       <a class="dropdown-item d-inline" href="group_setting">設定</a>
+                        <a class="dropdown-item d-inline grname" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_name}}</a>
+                        <a class="dropdown-item d-inline" href="{% url 'GroupConnect:bordlist' group.pk %}">掲示板</a>
+                        <a class="dropdown-item d-inline" href="{% url 'GroupConnect:member_list' group.pk %}">メンバー一覧</a>
+                        <a class="dropdown-item d-inline" href="{% url 'GroupConnect:group_setting' group.pk %}">設定</a>
                        </div>
                    </li>
                </ul>
@@ -247,7 +246,7 @@
                                         {% csrf_token %}
                                         <tr>
                                             <th scope="row"><input type="checkbox" class="disable_checkbox" id="checkbox" name="SinboardAlldelete" value="{{ message.id }}"><a href="bord"></a></th>
-                                            <td><a class="name_limit" href="#">{{ message.title }}</a></td>
+                                            <td><a class="name_limit" href="{% url 'GroupConnect:signboard' message.id %}">{{ message.title }}</a></td>
                                             <td class="name_limit">{{ message.text }}</td>
                                             <td>{{ message.updated_at }}</td>
                                             <td><button type="submit" class="btn-primary" id="delete" name="delete" value="{{ message.id }}">削除</button><input type="hidden" name="group_pk" value="{{group.pk}}"></td>
