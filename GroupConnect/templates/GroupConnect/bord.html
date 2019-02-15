@@ -16,7 +16,7 @@
         <div  class="nav-bar fixed-top">
             <!-- ナビゲーションバー -->
             <nav class="navbar navbar-expand-sm navbar-light bar">
-                <a class="navbar-brand groupconnect" href="mypage">GroupConnect</a>
+                <a class="navbar-brand groupconnect" href="{% url 'GroupConnect:mypage' %}">GroupConnect</a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -28,11 +28,10 @@
                             グループ
                             </a>
                             <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="grouptop">グループ名</a>
-                                <a class="dropdown-item" href="grouptop">グループ名</a>
-                                <a class="dropdown-item" href="grouptop">グループ名</a>
-                                <a class="dropdown-item" href="grouptop">グループ名</a>
-                                <a class="dropdown-item" href="grouplist">グループ一覧へ</a>
+                            {% for group in members %}
+                                <a class="dropdown-item" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_id.group_name}}</a>
+                            {% endfor %}
+                            <a class="dropdown-item" href="{% url 'GroupConnect:group_list'%}">グループ一覧へ</a>
                             </div>
                         </li>
                     </ul>
@@ -42,10 +41,10 @@
                             アカウント
                             </a>
                             <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="profile">プロフィール設定</a>
-                                <a class="dropdown-item" href="mail_setting">メール設定</a>
-                                <a class="dropdown-item" href="pass_setting">パスワード設定</a>
-                                <a class="dropdown-item" href="#">ログアウト</a>
+                                <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
+                                <a class="dropdown-item" href="#">メール設定</a>
+                                <a class="dropdown-item" href="{% url 'GroupConnect:password_change' %}">パスワード設定</a>
+                                <a class="dropdown-item" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
                             </div>
                         </li>
                     </ul>
@@ -55,10 +54,10 @@
                                 グループメニュー
                             </a>
                             <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item d-inline grname" href="grouptop">(グループ名)</a>
-                                <a class="dropdown-item d-inline" href="bordlist">掲示板</a>
-                                <a class="dropdown-item d-inline" href="#">メンバー一覧</a>
-                                <a class="dropdown-item d-inline" href="group_setting">設定</a>
+                                <a class="dropdown-item d-inline grname" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_name}}</a>
+                                <a class="dropdown-item d-inline" href="{% url 'GroupConnect:bordlist' group.pk %}">掲示板</a>
+                                <a class="dropdown-item d-inline" href="{% url 'GroupConnect:member_list' group.pk %}">メンバー一覧</a>
+                                <a class="dropdown-item d-inline" href="{% url 'GroupConnect:group_setting' group.pk %}">設定</a>
                             </div>
                         </li>
                     </ul>
@@ -73,7 +72,7 @@
                     <div class="row">
                         <div class="col-lg-12 side-top">
                             <nav class="navbar navbar-light">
-                                <a class="navbar-brand side-grname" href="grouptop">(グループ名)</a>
+                                <a class="navbar-brand side-grname" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_name}}</a>
                             </nav>
                         </div>
 
@@ -81,155 +80,86 @@
                             <p class="d-inline navbar-brand bordlist">掲示板</p>
                         </div>
 
-                        <div class="col-lg-12 side-middle">
-                            <p class="d-inline ctgr">カテゴリ</p>
-                            <a id="category-btn" href="#"><addr title="カテゴリーの追加" class="d- inline create-ctgr">追加</addr></a>
-                            <!-- modal content -->
-                            <form class="d-inline" method="POST">
-                                <div class="modal fade" id="modal">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <!-- モーダルヘッダー -->
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">カテゴリの作成</h5>
-                                            </div>
-                                            <!-- モーダルボディ -->
-                                            <div class="modal-body">
-                                                <p class="modal-category">カテゴリ名</p>
-                                                <input type="text" class="form-control" id="input-1" placeholder="タイトルを入力">
-                                            </div>
-                                            <!-- モーダルフッター -->
-                                            <div class="modal-footer">
-                                                <input type="submit" class="btn btn-primary" data-dismiss="modal" value="作成">
-                                                <button type="button" class="btn btn-secondary" id="close">キャンセル</button>
-                                            </div>
+                        <div class="col-lg-12 side-middle d-inline">
+                                <p class="d-inline ctgr">カテゴリ</p><br>
+                                <a class="btn btn-danger float-right" id="Categorydelete">削除</a>
+                               <!-- 削除モーダル -->
+                                 <div class="modal fade" id="modal-delete-category">
+                                 <div class="modal-dialog" role="document">
+                                     <div class="modal-content">
+                                         <!-- モーダルヘッダー -->
+                                         <div class="modal-header">
+                                             <p>カテゴリ削除</p>
+                                         </div>
+                                         <!-- モーダルボディ -->
+                                         <div class="modal-body">
+                                             <p>カテゴリを消す前に中に掲示板が残っているか<br>
+                                                 確認してください。</p>
+                                         </div>
+                                         <div class="modal-footer">
+                                             <button class="btn btn-primary" id="category-delete-submit">OK</button>
+                                             <button class="btn btn-secondary" id="category-close">キャンセル</button>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 </div>
+                               <!-- 削除モーダル終わり -->
+                                <form class="d-inline" id="category-add-errorcheck" method="POST">  
+                                <a class="btn btn-primary float-left" id="btn" href="#"><addr title="カテゴリーの追加" class="d- inline create-ctgr">追加</addr></a>
+                        </div>
+
+                        <!-- サイドバーカテゴリー追加 -->
+                        <div class="modal fade" id="modal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <!-- モーダルヘッダー -->
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">カテゴリー追加</h5>
+                                    </div>
+                                    <!-- モーダルボディ -->
+                                    <div class="modal-body">
+                                        <p class="modal-category2">カテゴリ</p>
+                                        <p class="category-error">カテゴリ名が入力されていません。</p>
+                                        <p class="category-error1">未分類は追加できません。</p>
+                                        <input type="text" class="form-control" id="input-1" placeholder="カテゴリを入力" name="add">
+                                        {% csrf_token %}
+                                        <div class="modal-footer">
+                                            <input type="hidden" name="group_pk" value="{{group.pk}}">
+                                            <input type="submit" class="btn btn-primary" id="category-add-errorcheck" name="category-add" value="作成">
+                                            <button type="button" class="btn btn-secondary" id="close">キャンセル</button>
                                         </div>
                                     </div>
                                 </div>
-                            </form> 
-                        </div>
-
-                        <div class="col-lg-12 side-down">
-                            <!-- サイドバードロップダウンメニュー -->
-                            <div class="sidebar-dropdown">
-
-                                <div class="sidebar-dropdown">
-                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">未分類１</a>
-                                        <a class="dropdown-item" href="#">未分類２</a>
-                                        <a class="dropdown-item" href="#">Python</a>
-                                        <a class="dropdown-item" href="#">セキュリティ</a>
-                                        <a class="dropdown-item" href="#">リレー</a>
-                                        <a class="dropdown-item" href="#">ダンス</a>
-                                    </div>
-                                    <p class="d-inline">　すべて</p>
-                                </div>
-                                <p class="d-inline quantity">(6)</p>
-
-                                <div class="sidebar-dropdown">
-                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">未分類１</a>
-                                        <a class="dropdown-item" href="#">未分類２</a>
-                                        <a class="dropdown-item" href="#">Python</a>
-                                        <a class="dropdown-item" href="#">セキュリティ</a>
-                                        <a class="dropdown-item" href="#">リレー</a>
-                                        <a class="dropdown-item" href="#">ダンス</a>
-                                    </div>
-                                    <p class="d-inline">　すべて</p>
-                                </div>
-                                <p class="d-inline quantity">(6)</p>
-                                <div class="sidebar-dropdown">
-                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">未分類1</a>
-                                        <a class="dropdown-item" href="#">未分類2</a>
-                                    </div>
-                                    <p class="d-inline">　未分類</p>
-                                        
-                                </div>
-                                <p class="d-inline quantity">(2)</p>
-                                <div class="sidebar-dropdown">
-                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Python</a>
-                                        <a class="dropdown-item" href="#">セキュリティ</a>
-                                    </div>
-                                    <p class="d-inline">　授業</p>
-                                </div>
-                                <p class="d-inline quantity">(2)</p>
-                                <div class="sidebar-dropdown">
-                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">リレー</a>
-                                        <a class="dropdown-item" href="#">ダンス</a>
-                                    </div>
-                                    <p class="d-inline">　スポフェス</p>
-                                </div>
-                                <p class="d-inline quantity">(2)</p>
-                                <div class="sidebar-dropdown">
-                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">てきとー</a>
-                                        <a class="dropdown-item" href="#">てきとー</a>
-                                    </div>
-                                    <p class="d-inline">　てきとー</p>
-                                </div>
-
-                                <p class="d-inline quantity">(2)</p>
-
-                                <div class="sidebar-dropdown">
-                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">てきとー</a>
-                                        <a class="dropdown-item" href="#">てきとー</a>
-                                    </div>
-                                    <p class="d-inline">　てきとー</p>
-                                </div>
-
-                                <p class="d-inline quantity">(2)</p>
-
-                                <div class="sidebar-dropdown">
-                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">てきとー</a>
-                                        <a class="dropdown-item" href="#">てきとー</a>
-                                    </div>
-                                    <p class="d-inline">　てきとー</p>
-                                </div>
-
-                                <p class="d-inline quantity">(2)</p>
-
-                                <div class="sidebar-dropdown">
-                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">てきとー</a>
-                                        <a class="dropdown-item" href="#">てきとー</a>
-                                    </div>
-                                    <p class="d-inline">　てきとー</p>
-                                </div>
-                                <p class="d-inline quantity">(2)</p>
-                                <div class="sidebar-dropdown">
-                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">てきとー</a>
-                                        <a class="dropdown-item" href="#">てきとー</a>
-                                    </div>
-                                    <p class="d-inline">　てきとー</p>
-                                </div>
-                                <p class="d-inline quantity">(2)</p>
-                                <div class="sidebar-dropdown">
-                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split sidebtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">てきとー</a>
-                                        <a class="dropdown-item" href="#">てきとー</a>
-                                    </div>
-                                    <p class="d-inline">　てきとー</p>
-                                </div>
-                                <p class="d-inline quantity">(2)</p>
                             </div>
                         </div>
+                                </form>
+                        <!-- カテゴリーコンテンツ -->
+                        <form method="POST">
+                        <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>カテゴリー一覧</th>
+                                <th scope="col-lg-2"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="side-tbody">
+                            <tr>
+                                <th><a href="{% url 'GroupConnect:bordlist' group.pk 0%}">すべて</a></th>
+                            </tr>
+                            {% for category in categorys %}
+                            {% csrf_token %}
+                                <tr>
+                                    <th><a class="name_limit" href="{% url 'GroupConnect:bordlist' group.pk category.id %}">{{ category.name }}</a></th>
+                                    {% if category.check == True  %}
+                                    <td></td>
+                                    {% else %}
+                                    <td><button type="submit" class="btn-primary" id="category-delete" name="category-delete" value="{{ category.id }}">削除</button></td>
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}
+                        </tbody>
+                        </table>
+                        </form>
                     </div>
                 </div>
 

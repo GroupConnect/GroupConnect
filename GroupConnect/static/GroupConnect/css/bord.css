@@ -261,6 +261,15 @@ body {
     display: none;
 }
 
+.name_limit{
+    visibility: hidden;
+
+}
+
+#category-delete {
+    display: none;
+}
+
 .btn .btn-reply:hover, .btn-reply:focus, 
 .btn-reply:active, .btn-reply:active:focus, .btn-reply:active:hover, .btn-reply:active.focus,
 .btn-reply.active, .btn-reply.active:focus, .btn-reply.active:hover, .btn-reply.active.focus,

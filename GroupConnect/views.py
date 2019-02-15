@@ -747,6 +747,9 @@ class CategoryDelete(generic.DeleteView):
 
 def signboard_page_view(request, pk, selected_id=None):
     signboard = get_object_or_404(Signboard, pk=pk)
+    group = Group.objects.get(id = signboard.group_id.id)
+    ID = request.user.id
+    members = Member.objects.filter(user_id=ID)
 
     # form = forms.PostCreateForm(request.POST or None)
     if request.method == 'POST':
@@ -787,6 +790,9 @@ def signboard_page_view(request, pk, selected_id=None):
 
         return render(request, 'GroupConnect/bord.html', context= {
             'signboard': signboard,
+            'group' : group,
+            'members' : members,
+            'categorys' : Category.objects.filter(group_id=group),
             'post_list': post_list,
             'situation_list': situation_list
         })
@@ -809,6 +815,9 @@ def signboard_page_view(request, pk, selected_id=None):
 
         return render(request, 'GroupConnect/bord.html', context= {
             'signboard': signboard,
+            'group' : group,
+            'members' : members,
+            'categorys' : Category.objects.filter(group_id=group),
             'post_list': post_list,
             'situation_list': situation_list
         })

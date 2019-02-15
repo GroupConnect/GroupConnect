@@ -73,6 +73,11 @@ body {
     font-size: 25px;
 }
 
+.area {
+    text-align: center;
+    margin: 0px -15px 0px -15px;
+    background-color: #d8ffc3;
+}
 
 @media screen and (max-width: 640px) {
 
