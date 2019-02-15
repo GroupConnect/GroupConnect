@@ -19,12 +19,14 @@ from django.template.loader import get_template
 from django.views import generic
 from .forms import (
     LoginForm, UserCreateForm, UserUpdateForm, UserMailaddressUpdateForm, MyPasswordChangeForm,
-    MyPasswordResetForm, MySetPasswordForm, DeleteUserForm, UserCreateForm,GroupCreateForm,GroupUpdateForm
+    MyPasswordResetForm, MySetPasswordForm, DeleteUserForm, UserCreateForm,GroupCreateForm,GroupUpdateForm,
+    TimeForm
 )
 from .models import (
-    Notice, Group, Member, GroupIcon,Signboard,Post,Situation,Category
+    Notice, Group, Member, GroupIcon,Signboard,Post,Situation,Category,Time
 )
-
+from django.forms import ModelChoiceField
+from GroupConnect.models import Time
 
 User = get_user_model()
 
@@ -481,6 +483,32 @@ class GroupList(generic.ListView):
             'groups' : members
         })
         return context        
+
+class UserTest2MailaddressUpdate(OnlyYouMixin, generic.UpdateView, ModelChoiceField):
+    model = User
+    model = Time
+    form_class = TimeForm
+    template_name = 'GroupConnect/user_testmailaddress_update.html'
+
+    '''def get_queryset(self):
+        form = TimeForm(initial = {'time': Time.objects.filter(id = 6) })
+        
+        return form
+    '''
+
+    def get_success_url(self):
+        return resolve_url('GroupConnect:user_test2mailaddress_update', pk=self.kwargs['pk'])
+
+    context_object_name = 'rogin_user'
+
+    def get_queryset(self):
+        ID = self.request.user.id
+        user = User.objects.filter(id = ID)
+
+        return user
+    
+    #def label_from_instance(self, obj):
+     #   return "My Object #%i" % obj.id
 
 class PasswordChange(PasswordChangeView):
     """パスワード変更ビュー"""

@@ -55,10 +55,10 @@ if settings.AUTH_USER_MODEL == 'GroupConnect.User':
         plan_mail_time = models.TimeField(_('plan_time'), default=datetime.time(7,0,0))
         new_mail_stop_time = models.TimeField(_('mail_stop_time'), default=datetime.time(1,0,0))
         new_mail_start_time = models.TimeField(_('mail_start_time'), default=datetime.time(6,0,0))
-        notice_signboard = models.BooleanField(_('notice_signboard'), default=True)
+        notice_signboard = models.BooleanField(_('掲示板'), default=True)
         notice_chat = models.BooleanField(_('notice_chat'), default=True)
         notice_calendar = models.BooleanField(_('notice_calendar'), default=True)
-        notice_group = models.BooleanField(_('notice_group'), default=True)   
+        notice_group = models.BooleanField(_('グループ'), default=True)   
 
         is_staff = models.BooleanField(
             _('staff status'),
@@ -375,6 +375,13 @@ class Notice(models.Model):
 class GroupIcon(models.Model):
 	id = models.AutoField(primary_key=True, db_column='id')
 	icon = models.ImageField(upload_to='static/images/', db_column='icon')
+
+class Time(models.Model):
+    id = models.AutoField(primary_key=True, db_column='id')
+    plan_mail_time = models.TimeField(db_column='plan_mail_time')
+
+    def __str__(self):
+         return str(self.plan_mail_time)
 
 
 
