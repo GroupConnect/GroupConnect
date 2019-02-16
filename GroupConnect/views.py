@@ -276,6 +276,11 @@ def groupdelete(request):
     Group.objects.filter(id=group_pk).delete()
     return redirect('GroupConnect:mypage')
 
+def boarddelete(request):
+    board_pk = request.POST['delete']
+    Signboard.objects.filter(id=board_pk).delete()
+    return redirect('GroupConnect:bordlist', request.POST['group_pk']) 
+
 def groupsecession(request):
     """
     グループからの脱退
@@ -414,6 +419,17 @@ class UserMailaddressUpdate(OnlyYouMixin, generic.UpdateView):
     form_class = UserMailaddressUpdateForm
     template_name = 'GroupConnect/user_mailaddress_update.html'
 
+    def get_context_data(self, **kwargs):
+
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
+
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'groups' : members
+        })
+        return context
+
     def get_success_url(self):
         return resolve_url('GroupConnect:user_mailaddress_update', pk=self.kwargs['pk'])
 
@@ -445,6 +461,17 @@ class UserUpdate(OnlyYouMixin, generic.UpdateView):
     model = User
     form_class = UserUpdateForm
     template_name = 'GroupConnect/user_form.html'
+
+    def get_context_data(self, **kwargs):
+
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
+
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'groups' : members
+        })
+        return context
 
     def get_success_url(self):
         return resolve_url('GroupConnect:user_update', pk=self.kwargs['pk'])
@@ -515,6 +542,20 @@ class PasswordChange(PasswordChangeView):
     form_class = MyPasswordChangeForm
     success_url = reverse_lazy('GroupConnect:password_change_done')
     template_name = 'GroupConnect/password_change.html'
+
+    def get_context_data(self, **kwargs):
+        """
+        参加中のグループ一覧取得
+        """
+
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
+
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'groups' : members
+        })
+        return context  
 
 class PasswordChangeTest(PasswordChangeView):
     """パスワード変更ビュー(テスト用)"""
