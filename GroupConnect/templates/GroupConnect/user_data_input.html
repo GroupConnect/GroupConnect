@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-6" >
-                        <form action="{% url 'GroupConnect:user_data_confirm' %}" method="post">
+                        <form action="{% url 'GroupConnect:user_data_confirm' %}" method="post" class="create">
                         {% csrf_token %}
                         {{ form.non_field_errors }}
                         {% for field in form %}

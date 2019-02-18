@@ -23,7 +23,7 @@ $(function() {
 });
 
 $(function() {
-    $("form").submit(function(){
+    $(".create").submit(function(){
         if ($("input[name='last_name']").val() == '' && $("input[name='first_name']").val() == '' && $("input[name='rome_last_name']").val() == '' && $("input[name='rome_first_name']").val() == '') {
             //苗字、名前、苗字(ローマ字)、名前(ローマ字)が入力されていない場合
             $('.last_nameblank').show();
