@@ -836,6 +836,7 @@ def signboard_page_view(request, pk, selected_id=None):
     group = Group.objects.get(id = signboard.group_id.id)
     ID = request.user.id
     members = Member.objects.filter(user_id=ID)
+    member = Member.objects.get(user_id=ID,group_id=group)
 
     # form = forms.PostCreateForm(request.POST or None)
     if request.method == 'POST':
@@ -846,7 +847,7 @@ def signboard_page_view(request, pk, selected_id=None):
             
         new_post = Post(
             signboard_id = signboard,
-            contributer = get_object_or_404(Member, pk=ID)
+            contributer = get_object_or_404(Member, pk=member.id)
         )
         if 'post_text' in request.POST:
             new_post.text = request.POST['post_text']
