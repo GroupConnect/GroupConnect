@@ -86,20 +86,20 @@ def signboard_page_view(request, pk, selected_id=None):
         if 'post_text' in request.POST:
             new_post.text = request.POST['post_text']
 
-            if 'attached_file' in request.FILES:
-                new_post.attached_file = request.FILES['attached_file']
+        if 'attached_file' in request.FILES:
+            new_post.attached_file = request.FILES['attached_file']
 
         elif 'reply_text' in request.POST:
             reply_source_id = int(request.POST['reply_source'])
             new_post.reply = get_object_or_404(Post, pk=reply_source_id)
             new_post.text = request.POST['reply_text']
 
-            for signboard_prefetch in Signboard.objects.filter(pk=signboard.id).prefetch_related('post_set'):
-                post_count = signboard_prefetch.post_set.all().count()
+            # for signboard_prefetch in Signboard.objects.filter(pk=signboard.id).prefetch_related('post_set'):
+            #     post_count = signboard_prefetch.post_set.all().count()
 
-                for i in range(post_count):
-                    if 'attached_file' + str(i) in request.FILES:
-                        new_post.attached_file = request.FILES['attached_file' + str(i)]
+            #     for i in range(post_count):
+            #         if 'attached_file' + str(i) in request.FILES:
+            #             new_post.attached_file = request.FILES['attached_file' + str(i)]
 
         # if 'attached_file' in request.POST:
         #     for attached_file in request.POST['attached_file']:
