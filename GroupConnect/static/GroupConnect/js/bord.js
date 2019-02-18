@@ -184,24 +184,24 @@ $('.reset').click(function(){
     $('#preview').remove();
 })
 
-$("#button").on("click", function(){
-    $("#large-frame").prepend('<div class="post-frame"><div class="post-outside"><div class="post"><p class="Contributor">白方丈晴</p><p class="time"></p><p class="read">既読：<a data-toggle="modal" data-target="#basicModal2" href="#">0件</a></p><a class="post-delete" data-toggle="modal" data-target="#basicModal3" href="">投稿を削除</a><p class="letter-body"></p><a class="filename" href="#"></a></div><img src="{% static &ldquo;GroupConnect/img/返信アイコン.jpg&rdquo; %}" id="passcheck2" class="reply-icon"><a class="reply" href="#">返信する</a></div><form action="bord" class="reply-form" method="get" enctype="multipart/form-data"><div class="form-group d-inline"><textarea class="form-control" id="UserInput" rows="6"></textarea><input type="file" name="s_file" accept="image/png, image/jpeg, image/gif" class="file-select"　multiple><input type="button" class="btn btn-warning reply-button" value="返信"></div></form></div>');
-    $($('.post-frame').get().reverse()).each(function(i){
-        $(this).attr('id','post-frame' + (i+1));
-    });
-    $($('.post-outside').get().reverse()).each(function(i){
-        $(this).attr('id','post-outside' + (i+1));
-    });
-    $($('.reply').get().reverse()).each(function(i){
-        $(this).attr('id','reply' + (i+1));
-    });
-    $($('.letter-body').get().reverse()).each(function(i){
-        var a = $(this).attr('id','letter-body' + (i+1));
-    });
-    $($('.reply-form').get().reverse()).each(function(i){
-        $(this).attr('id','reply-form' + (i+1));
-    });
-    $($('.reply-button').get().reverse()).each(function(i){
-        $(this).attr('id','reply-button' + (i+1));
-    });
-});
+// $("#button").on("click", function(){
+//     $("#large-frame").prepend('<div class="post-frame"><div class="post-outside"><div class="post"><p class="Contributor">白方丈晴</p><p class="time"></p><p class="read">既読：<a data-toggle="modal" data-target="#basicModal2" href="#">0件</a></p><a class="post-delete" data-toggle="modal" data-target="#basicModal3" href="">投稿を削除</a><p class="letter-body"></p><a class="filename" href="#"></a></div><img src="{% static &ldquo;GroupConnect/img/返信アイコン.jpg&rdquo; %}" id="passcheck2" class="reply-icon"><a class="reply" href="#">返信する</a></div><form action="bord" class="reply-form" method="get" enctype="multipart/form-data"><div class="form-group d-inline"><textarea class="form-control" id="UserInput" rows="6"></textarea><input type="file" name="s_file" accept="image/png, image/jpeg, image/gif" class="file-select"　multiple><input type="button" class="btn btn-warning reply-button" value="返信"></div></form></div>');
+//     $($('.post-frame').get().reverse()).each(function(i){
+//         $(this).attr('id','post-frame' + (i+1));
+//     });
+//     $($('.post-outside').get().reverse()).each(function(i){
+//         $(this).attr('id','post-outside' + (i+1));
+//     });
+//     $($('.reply').get().reverse()).each(function(i){
+//         $(this).attr('id','reply' + (i+1));
+//     });
+//     $($('.letter-body').get().reverse()).each(function(i){
+//         var a = $(this).attr('id','letter-body' + (i+1));
+//     });
+//     $($('.reply-form').get().reverse()).each(function(i){
+//         $(this).attr('id','reply-form' + (i+1));
+//     });
+//     $($('.reply-button').get().reverse()).each(function(i){
+//         $(this).attr('id','reply-button' + (i+1));
+//     });
+// });
