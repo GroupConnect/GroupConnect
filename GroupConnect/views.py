@@ -680,6 +680,20 @@ class UserDeleteView(OnlyYouMixin, generic.DeleteView):
     slug_field = 'pk'
     slug_url_kwarg = 'pk'
 
+    def get_context_data(self, **kwargs):
+        """
+        参加中のグループ一覧取得
+        """
+
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
+
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'groups' : members
+        })
+        return context  
+
 class UserDeleteDone(generic.TemplateView):
     template_name = 'GroupConnect/user_delete_done.html'
     # context = super().get_context_data(**kwargs)

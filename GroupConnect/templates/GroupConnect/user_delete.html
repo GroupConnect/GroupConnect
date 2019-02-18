@@ -26,11 +26,10 @@
                     グループ
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="">グループ名</a>
-                    <a class="dropdown-item" href="">グループ名</a>
-                    <a class="dropdown-item" href="">グループ名</a>
-                    <a class="dropdown-item" href="">グループ名</a>
-                    <a class="dropdown-item" href="">グループ一覧へ</a>
+                        {% for group in groups %}
+                            <a class="dropdown-item" href="{% url 'GroupConnect:group_top' group.group_id.pk %}">{{group.group_id.group_name}}</a>
+                        {% endfor %}
+                        <a class="dropdown-item" href="{% url 'GroupConnect:group_list'%}">グループ一覧へ</a>
                     </div>
                 </li>
             </ul>
