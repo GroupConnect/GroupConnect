@@ -75,20 +75,35 @@ def signboard_page_view(request, pk, selected_id=None):
     # form = forms.PostCreateForm(request.POST or None)
     if request.method == 'POST':
         # form.save()
+        import pprint
+        pprint.pprint(request.POST)
             
         new_post = Post(
-            signboard_id=signboard,
-            contributer=get_object_or_404(Member, pk=1)
+            signboard_id = signboard,
+            contributer = get_object_or_404(Member, pk=1)
         )
         if 'post_text' in request.POST:
             new_post.text = request.POST['post_text']
+
+            if 'attached_file' in request.POST:
+                new_post.attached_file = request.POST['attached_file']
+
         elif 'reply_text' in request.POST:
             reply_source_id = int(request.POST['reply_source'])
             new_post.reply = get_object_or_404(Post, pk=reply_source_id)
             new_post.text = request.POST['reply_text']
 
-        if 'attached_file' in request.POST:
-            new_post.attached_file = request.POST['attached_file']
+            for signboard_prefetch in Signboard.objects.filter(pk=signboard.id).prefetch_related('post_set'):
+                post_count = signboard_prefetch.post_set.all().count()
+
+                for i in range(post_count):
+                    if request.POST['attached_file' + str(i)]:
+                        new_post.attached_file = request.POST['attached_file' + str(i)]
+
+        # if 'attached_file' in request.POST:
+        #     for attached_file in request.POST['attached_file']:
+        #         if attached_file:
+        #             new_post.attached_file = attached_file
 
         new_post.save()
 
