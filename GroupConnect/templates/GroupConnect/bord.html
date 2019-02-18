@@ -41,7 +41,7 @@
                             </a>
                             <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
-                                <a class="dropdown-item" href="#">メール設定</a>
+                                <a class="dropdown-item" href="{% url 'GroupConnect:user_mailaddress_update' user.id %}">メール設定</a>
                                 <a class="dropdown-item" href="{% url 'GroupConnect:password_change' %}">パスワード設定</a>
                                 <a class="dropdown-item" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
                             </div>
@@ -55,7 +55,6 @@
                             <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item d-inline grname" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_name}}</a>
                                 <a class="dropdown-item d-inline" href="{% url 'GroupConnect:bordlist' group.pk %}">掲示板</a>
-                                <a class="dropdown-item d-inline" href="{% url 'GroupConnect:member_list' group.pk %}">メンバー一覧</a>
                                 <a class="dropdown-item d-inline" href="{% url 'GroupConnect:group_setting' group.pk %}">設定</a>
                             </div>
                         </li>
@@ -63,9 +62,7 @@
                 </div>
             </nav>
         </div>
-        </nav>
-    </div>
-    <div class="container-fluid" id="container">
+        <div class="container-fluid" id="container">
             <div class="row">
                 <!-- サイドバー -->
                 <div class="col-lg-2 side">
@@ -81,66 +78,17 @@
 
                         <div class="col-lg-12 side-middle d-inline">
                                 <p class="d-inline ctgr">カテゴリ</p><br>
-                                <a class="btn btn-danger float-right" id="Categorydelete">削除</a>
-                               <!-- 削除モーダル -->
-                                 <div class="modal fade" id="modal-delete-category">
-                                 <div class="modal-dialog" role="document">
-                                     <div class="modal-content">
-                                         <!-- モーダルヘッダー -->
-                                         <div class="modal-header">
-                                             <p>カテゴリ削除</p>
-                                         </div>
-                                         <!-- モーダルボディ -->
-                                         <div class="modal-body">
-                                             <p>カテゴリを消す前に中に掲示板が残っているか<br>
-                                                 確認してください。</p>
-                                         </div>
-                                         <div class="modal-footer">
-                                             <button class="btn btn-primary" id="category-delete-submit">OK</button>
-                                             <button class="btn btn-secondary" id="category-close">キャンセル</button>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 </div>
-                               <!-- 削除モーダル終わり -->
-                                <form class="d-inline" id="category-add-errorcheck" method="POST">  
-                                <a class="btn btn-primary float-left" id="btn" href="#"><addr title="カテゴリーの追加" class="d- inline create-ctgr">追加</addr></a>
-                        </div>
 
-                        <!-- サイドバーカテゴリー追加 -->
-                        <div class="modal fade" id="modal">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <!-- モーダルヘッダー -->
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">カテゴリー追加</h5>
-                                    </div>
-                                    <!-- モーダルボディ -->
-                                    <div class="modal-body">
-                                        <p class="modal-category2">カテゴリ</p>
-                                        <p class="category-error">カテゴリ名が入力されていません。</p>
-                                        <p class="category-error1">未分類は追加できません。</p>
-                                        <input type="text" class="form-control" id="input-1" placeholder="カテゴリを入力" name="add">
-                                        {% csrf_token %}
-                                        <div class="modal-footer">
-                                            <input type="hidden" name="group_pk" value="{{group.pk}}">
-                                            <input type="submit" class="btn btn-primary" id="category-add-errorcheck" name="category-add" value="作成">
-                                            <button type="button" class="btn btn-secondary" id="close">キャンセル</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                                </form>
+                    
                         <!-- カテゴリーコンテンツ -->
                         <form method="POST">
                         <table class="table table-hover">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>カテゴリー一覧</th>
-                                <th scope="col-lg-2"></th>
-                            </tr>
-                        </thead>
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>カテゴリー一覧</th>
+                                </tr>
+                            </thead>
                         <tbody class="side-tbody">
                             <tr>
                                 <th><a href="{% url 'GroupConnect:bordlist' group.pk 0%}">すべて</a></th>
@@ -149,13 +97,8 @@
                             {% csrf_token %}
                                 <tr>
                                     <th><a class="name_limit" href="{% url 'GroupConnect:bordlist' group.pk category.id %}">{{ category.name }}</a></th>
-                                    {% if category.check == True  %}
-                                    <td></td>
-                                    {% else %}
-                                    <td><button type="submit" class="btn-primary" id="category-delete" name="category-delete" value="{{ category.id }}">削除</button></td>
-                                    {% endif %}
                                 </tr>
-                                {% endfor %}
+                            {% endfor %}
                         </tbody>
                         </table>
                         </form>
@@ -166,12 +109,6 @@
                     <div class="row row3">
                         <div class="col-lg-12 up">
                             <div class="headline">
-                                <nav aria-label="パンくずリスト">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="bordlist">掲示板一覧</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">{{ signboard.title }}</li>
-                                    </ol>
-                                </nav>
                                 <nav class="navbar navbar-expand-md navbar-light bar3">
                                     <p class="bord-name">{{ signboard.title }}</p>
                                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
@@ -179,21 +116,10 @@
                                     </button>
                                     
                                     <div class="collapse navbar-collapse justify-content-end" id="navbarNav4">
-                                    
-                                        <div class="nav-item active dropdown signboard-setting">
-                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">昇順</button>
-                                            <ul class="dropdown-menu">
-                                                <li><button class="dropdown-item" value="昇順">昇順</button></li>
-                                                <li><button class="dropdown-item" value="降順">降順</button></li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="nav-item active configuration signboard-setting">
-                                            <a href="bord_setting"><button class="btn btn-secondary">掲示板設定</button></a>
-                                        </div>
+                                
                                         <div class="nav-item active borddelete">
                                             <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal" value="掲示板削除">
-                                            <form class="d-inline" method="GET">
+                                            <form action="{% url 'GroupConnect:boarddel' %}" class="d-inline" method="POST">
                                                 {% csrf_token %}
                                                 <div class="modal fade"id="basicModal"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
                                                     <div class="modal-dialog">
@@ -202,7 +128,8 @@
                                                                 <h3>この操作は元に戻せません。<br>掲示板を削除してもよろしいですか？</h3>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <input type="submit" class="btn btn-primary" value="はい">
+                                                                <button type="submit" class="btn btn-primary" name="delete" value="{{signboard.pk}}">はい</button>
+                                                                <input type="hidden" name="group_pk" value="{{group.pk}}">
                                                                 <button type="button" class="btn btn-default"data-dismiss="modal">いいえ</button>
                                                             </div>
                                                         </div>
@@ -360,7 +287,7 @@
                     </div>
                 </div>         
             </div>
-    </div>
+        </div>
     
             
             

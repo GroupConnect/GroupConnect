@@ -40,7 +40,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
-                        <a class="dropdown-item" href="#">メール設定</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:user_mailaddress_update' user.id %}">メール設定</a>
                         <a class="dropdown-item" href="{% url 'GroupConnect:password_change' %}">パスワード設定</a>
                         <a class="dropdown-item" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
                         </div>

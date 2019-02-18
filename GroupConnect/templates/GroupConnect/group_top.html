@@ -40,7 +40,7 @@
                     </a>
                     <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
-                        <a class="dropdown-item" href="#">メール設定</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:user_mailaddress_update' user.id %}#">メール設定</a>
                         <a class="dropdown-item" href="{% url 'GroupConnect:password_change' %}">パスワード設定</a>
                         <a class="dropdown-item" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
                     </div>
@@ -54,7 +54,6 @@
                     <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item d-inline grname" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_name}}</a>
                     <a class="dropdown-item d-inline" href="{% url 'GroupConnect:bordlist' group.pk %}">掲示板</a>
-                    <a class="dropdown-item d-inline" href="{% url 'GroupConnect:member_list' group.pk %}">メンバー一覧</a>
                     <a class="dropdown-item d-inline" href="{% url 'GroupConnect:group_setting' group.pk %}">設定</a>
                     </div>
                 </li>
@@ -71,9 +70,14 @@
                             <h1 class="navbar-brand grlist">参加メンバー</h1>
                         </div>
                         <div class="col-lg-12 left-down">
+                            <ul class="memberlist">
                             {% for member in members %}
-                                <a class="d-block" href="#">{{member.user_id.last_name}}{{member.user_id.first_name}}</a>
+                            <li class="member">
+                                <a href="#"><img class="rounded border" src="{{ member.user_id.icon.url }}"></a>
+                                <a  href="#">{{member.user_id.last_name}}{{member.user_id.first_name}}</a>
+                            </li>
                             {% endfor %}
+                            </ul>
                         </div>
                     </div>
                 </div>

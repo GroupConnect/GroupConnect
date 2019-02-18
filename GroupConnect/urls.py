@@ -44,7 +44,7 @@ urlpatterns = [
     path('user_data_input/', views.UserDataInput.as_view(), name='user_data_input'),
     path('user_data_confirm/', views.UserDataConfirm.as_view(), name='user_data_confirm'),
     path('user_data_create/', views.UserDataCreate.as_view(), name='user_data_create'),
-
+    path('boarddel/', views.boarddelete, name='boarddel'),
     path('bordlist/(<?P<pk>[0-9]+)/(<?P<id>[0-9]+)/', views.CategoryView.as_view(), name='bordlist'),
     path('bord', views.BordView.as_view(), name='bord'),
     path('signboard/<int:pk>/', views.signboard_page_view, name='signboard'),

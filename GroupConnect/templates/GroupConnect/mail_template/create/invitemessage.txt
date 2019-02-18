@@ -1,8 +1,6 @@
 ﻿{{user.last_name}}{{ user.first_name }} から グループ「{{group.group_name}}」に招待されています。
 
-下記URLより参加してね。
+下記URLより参加してください。
 
 URL
 {{ protocol}}://{{ domain }}{% url 'GroupConnect:groupinvite' token group.id %}
-
-ほにゃらら
