@@ -784,7 +784,7 @@ $(function() {
             $('.rome_first_namecheck').show();
             return false;
         } else {
-            $("form").submit();
+            $(".create").submit();
         }
     });
 });
