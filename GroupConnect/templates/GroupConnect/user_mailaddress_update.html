@@ -64,91 +64,21 @@
                         <form action="" method="POST">
                             {% csrf_token %}
                             <div class="col-md-12 up">
-                                <p class="d-inline">予定メール通知設定</p>
+                                <p class="d-inline">メールアドレス変更</p>
                                 <div class="plans">
                                     <div class="notificationtime">
                                         <div class="row">
-                                            <div class="col-md-2">
-                                                <label class="d-inline">通知時刻</label>
+                                            <div class="col-md-1">
+                                                <label class="d-inline"></label>
                                             </div>
                                             <div class="col-md-10 d-inline">
                                                 {{ form.non_field_errors }}
                                                 {% for field in form %}
-                                                    {% if field.name == "plan_mail_time" %}
-                                                        {{ field }}{{ field.errors }}
-                                                    {% endif %}
+                                                    {{ field }}{{ field.errors }}
                                                 {% endfor %}
                                             </div>
-                                                <!--<div class="input-group">
-                                                    <div class="d-inline input-group-append" >
-                                                        {{ form.non_field_errors }}
-                                                            {% for field in form %}
-                                                                {% if field.name == "plan_mail_time" %}
-                                                                    <th><label for="{{ field.id_for_label }}">{{ field.label }}</label></th>
-                                                                    {{ field }}{{ field.errors }}
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                    </div>
-                                                </div> -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 down">
-                                <p class="d-inline">新着メール通知設定</p>
-                                <div class="plans">
-                                    <div class="notificationtime">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label class="d-inline">通知停止時刻</label>
-                                            </div>
-                                            <div class="col-md-9 d-inline">
-                                                <div class="new_mail_stop_time">
-                                                    {{ form.non_field_errors }}
-                                                    {% for field in form %}
-                                                        {% if field.name == "new_mail_stop_time" %}
-                                                            {{ field }}{{ field.errors }}
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </div>
-                                                <div class="middle d-inline">
-                                                    <p class="kara">から</p><p class="error"></p>
-                                                </div>
-                                                <div class="new_mail_start_time d-inline">
-                                                    {{ form.non_field_errors }}
-                                                    {% for field in form %}
-                                                        {% if field.name == "new_mail_start_time" %}
-                                                            {{ field }}{{ field.errors }}
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="notificationitem">
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <label>通知項目</label>
-                                            </div>
-                                            <div class="col-md-10">
-                                                <div class="row">
-                                                <div class="col-md-3 col-md-offset-3">    
-                                                    {{ form.non_field_errors }}
-                                                    {% for field in form %}
-                                                        {% if field.name == "notice_signboard" %}
-                                                            <th><label class="d-inline" for="{{ field.id_for_label }}">{{ field.label }}</label></th>
-                                                            {{ field }}{{ field.errors }}
-                                                </div>
-                                                <div class="col-md-3">
-                                                        {% elif field.name == "notice_group"%}
-                                                            <th><label class="d-inline" for="{{ field.id_for_label }}">{{ field.label }}</label></th>
-                                                            {{ field }}{{ field.errors }}
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </div>
-                                                <!--<label class="checkbox-inline"><input type="checkbox">グループ</label>
-                                                <label class="checkbox-inline bordcheck"><input type="checkbox">掲示板</label>-->
-                                                </div>
+                                            <div class="col-md-1">
+                                                    <label class="d-inline"></label>
                                             </div>
                                         </div>
                                     </div>
