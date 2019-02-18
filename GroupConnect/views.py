@@ -846,7 +846,7 @@ def signboard_page_view(request, pk, selected_id=None):
             
         new_post = Post(
             signboard_id = signboard,
-            contributer = get_object_or_404(Member, pk=1)
+            contributer = get_object_or_404(Member, pk=ID)
         )
         if 'post_text' in request.POST:
             new_post.text = request.POST['post_text']
@@ -856,18 +856,7 @@ def signboard_page_view(request, pk, selected_id=None):
 
         elif 'reply_text' in request.POST:
             reply_source_id = int(request.POST['reply_source'])
-            new_post = Post(
-                signboard_id=signboard,
-                text=request.POST['reply_text'],
-                contributer=get_object_or_404(Member, pk=ID), 
-                reply=get_object_or_404(Post, pk=reply_source_id)
-            )
-        else:    
-            new_post = Post(
-                signboard_id=signboard,
-                text=request.POST['post_text'],
-                contributer=get_object_or_404(Member, pk=ID)
-            )
+        
             new_post.reply = get_object_or_404(Post, pk=reply_source_id)
             new_post.text = request.POST['reply_text']
 
