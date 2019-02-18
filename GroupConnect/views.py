@@ -75,21 +75,20 @@ def signboard_page_view(request, pk, selected_id=None):
     # form = forms.PostCreateForm(request.POST or None)
     if request.method == 'POST':
         # form.save()
-        
-        if 'reply_text' in request.POST:
+            
+        new_post = Post(
+            signboard_id=signboard,
+            contributer=get_object_or_404(Member, pk=1)
+        )
+        if 'post_text' in request.POST:
+            new_post.text = request.POST['post_text']
+        elif 'reply_text' in request.POST:
             reply_source_id = int(request.POST['reply_source'])
-            new_post = Post(
-                signboard_id=signboard,
-                text=request.POST['reply_text'],
-                contributer=get_object_or_404(Member, pk=1), 
-                reply=get_object_or_404(Post, pk=reply_source_id)
-            )
-        else:    
-            new_post = Post(
-                signboard_id=signboard,
-                text=request.POST['post_text'],
-                contributer=get_object_or_404(Member, pk=1)
-            )
+            new_post.reply = get_object_or_404(Post, pk=reply_source_id)
+            new_post.text = request.POST['reply_text']
+
+        if 'attached_file' in request.POST:
+            new_post.attached_file = request.POST['attached_file']
 
         new_post.save()
 
