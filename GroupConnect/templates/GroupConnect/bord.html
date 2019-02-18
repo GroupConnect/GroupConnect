@@ -259,11 +259,10 @@
                             </div>
                             <div class="post-area">
                                 <div class="rounded p-4 background area">
-                                    <form action="bord" id="post-form" method="get" enctype="multipart/form-data">
+                                    <form action="{% url 'GroupConnect:signboard' signboard.id %}" id="post-form" method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="form-group d-inline">
-                                                <textarea class="form-control" id="UserInput" rows="6"></textarea>
-                                                <!-- <input type="file" name="s_file" class="file-select"> -->
+                                                <textarea class="form-control" name="post_text" id="UserInput" rows="6"></textarea>
                                                 <div class="form-group file-choice">
                                                     <div id="file" class="input-group">
                                                         <div class="custom-file">
@@ -275,7 +274,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="button" id="button" class="btn btn-warning post-button" value="投稿">
+                                                <input type="submit" id="button" class="btn btn-warning post-button" value="投稿">
                                         </div>         
                                     </form>
                                 </div>
@@ -297,7 +296,6 @@
                                                     {% endif %}
                                                 </div>
                                                 
-                                                {% comment %} <img src="{% static 'GroupConnect/img/返信アイコン.jpg' %}" class="reply-icon"><a class="reply" id="reply1" href="#">返信する</a> {% endcomment %}
                                                 <button type="button" class="btn btn-light rounded-pill" id="reply-show{{ forloop.counter0 }}">返信フォームを表示</button>
                                                 <button type="button" class="btn btn-light rounded-pill reply-hide" id="reply-hide{{ forloop.counter0 }}">返信フォームを隠す</button>
 
@@ -306,96 +304,21 @@
                                                 {% csrf_token %}
                                                 <div class="form-group d-inline">
                                                     <textarea class="form-control" id="UserInput" name="reply_text" rows="6"></textarea>
-                                                    <input type="file" name="s_file" accept="image/png, image/jpeg, image/gif" class="file-select"　multiple>
+                                                    <div id="file" class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" id="cutomfile" class="custom-file-input" name="cutomfile[]" lang="ja" />
+                                                            <label class="custom-file-label" for="customfile">ファイル選択...</label>
+                                                        </div>
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn btn-outline-secondary reset">取消</button>
+                                                        </div>
+                                                    </div>
                                                     <input type="hidden" name="reply_source" value="{{ post.id }}"></input>
                                                     <input type="submit" id="button" class="btn btn-warning reply-button" value="返信">
                                                 </div>       
                                             </form>
                                         </div>
                                     {% endfor %}
-
-                                    {% comment %} <div id="post-frame2">
-                                        <div class="post-outside" id="post-outside2">
-                                            <div class="post">
-                                                <p class="Contributor">白方丈晴</p><p class="time">2時間前</p>
-                                                <p class="read">既読：<a data-toggle="modal" data-target="#basicModal2" href="#">2件</a></p>
-                                                
-                                                <div class="modal fade"id="basicModal2"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">既読状況</h5>
-                                                            </div>
-                                                            
-                                                            <div class="modal-body">
-                                                                <div>
-                                                                    <p class="modal-read">既読者</p>
-                                                                    <table class="tbl">
-                                                                        <tr><td>河原たろう</td></tr>
-                                                                        <tr><td>河原たろう</td></tr>
-                                                                    </table>
-                                                                </div>
-                                                                <div>
-                                                                    <p class="modal-notread">未読者</p>
-                                                                    <table class="tbl">
-                                                                        <tr><td>河原たろう</td></tr>
-                                                                        <tr><td>河原たろう</td></tr>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                            
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary ok" id="close" data-dismiss="modal">OK</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <a class="post-delete" data-toggle="modal" data-target="#basicModal3" href="">投稿を削除</a>
-                                                <form class="d-inline" method="GET">
-                                                    {% csrf_token %}
-                                                    <div class="modal fade"id="basicModal3"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-body">
-                                                                    <h3>投稿を削除してもよろしいですか？</h3>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <input type="submit" class="btn btn-primary" value="はい">
-                                                                    <button type="button" class="btn btn-default"data-dismiss="modal">いいえ</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                                <p class="letter-body">こんにちは。</p>
-                                                <a class="filename" href="#">minion.jpg</a><img src="{% static 'GroupConnect/img/ダウンロードアイコン.jpg' %}" id="passcheck2" class="download-icon">
-                                            </div>
-                                            <img src="{% static 'GroupConnect/img/返信アイコン.jpg' %}" id="passcheck2" class="reply-icon"><a class="reply" id="reply2" href="#">返信する</a>
-                                            
-                                            
-                                        </div>
-                                    </div>
-                                    <div id="post-frame1">
-                                        <div class="post-outside" id="post-outside1">
-                                            <div class="post">
-                                                <p class="Contributor">白方丈晴</p><p class="time">2時間前</p><p class="read">既読：<a data-toggle="modal" data-target="#basicModal2" href="#">2件</a></p><a class="post-delete" data-toggle="modal" data-target="#basicModal3" href="">投稿を削除</a>
-                                                <p class="letter-body">こんにちは。</p>
-                                                <a class="filename" href="#">minion.jpg</a><img src="{% static 'GroupConnect/img/ダウンロードアイコン.jpg' %}" id="passcheck2" class="download-icon">
-                                            </div>
-                                            
-                                            <img src="{% static 'GroupConnect/img/返信アイコン.jpg' %}" id="passcheck2" class="reply-icon"><a class="reply" id="reply1" href="#">返信する</a>
-                                            
-                                        </div>
-                                        <form action="bord" class="post-form" method="get" enctype="multipart/form-data">
-                                            {% csrf_token %}
-                                            <div class="form-group d-inline">
-                                                    <textarea class="form-control" id="UserInput" rows="6"></textarea>
-                                                    <input type="file" name="s_file" accept="image/png, image/jpeg, image/gif" class="file-select"　multiple>
-                                                    <input type="button" id="button" class="btn btn-warning reply-button" value="返信">
-                                            </div>       
-                                        </form>
-                                    </div> {% endcomment %}
 
                                 </div>
                                 
