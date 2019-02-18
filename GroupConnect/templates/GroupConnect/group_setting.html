@@ -28,7 +28,7 @@
                             <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
                                 <!-- 参加グループ一覧 -->
                                 {% for group in groups %}
-                                    <a class="dropdown-item" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_id.group_name}}</a>
+                                    <a class="dropdown-item" href="{% url 'GroupConnect:group_top' group.group_id.pk %}">{{group.group_id.group_name}}</a>
                                 {% endfor %}
                                 <a class="dropdown-item" href="{% url 'GroupConnect:group_list'%}">グループ一覧へ</a>
                             </div>
