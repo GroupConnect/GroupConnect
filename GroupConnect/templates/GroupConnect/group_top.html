@@ -54,7 +54,6 @@
                     <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item d-inline grname" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_name}}</a>
                     <a class="dropdown-item d-inline" href="{% url 'GroupConnect:bordlist' group.pk %}">掲示板</a>
-                    <a class="dropdown-item d-inline" href="{% url 'GroupConnect:member_list' group.pk %}">メンバー一覧</a>
                     <a class="dropdown-item d-inline" href="{% url 'GroupConnect:group_setting' group.pk %}">設定</a>
                     </div>
                 </li>
