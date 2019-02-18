@@ -145,19 +145,20 @@
                                     <form action="{% url 'GroupConnect:signboard' signboard.id %}" id="post-form" method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="form-group d-inline">
-                                                <textarea class="form-control" name="post_text" id="UserInput" rows="6"></textarea>
-                                                <div class="form-group file-choice">
-                                                    <div id="file" class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" id="cutomfile" class="custom-file-input" name="cutomfile[]" lang="ja" />
-                                                            <label class="custom-file-label" for="customfile">ファイル選択...</label>
-                                                        </div>
-                                                        <div class="input-group-append">
-                                                            <button type="button" class="btn btn-outline-secondary reset">取消</button>
-                                                        </div>
+                                            <textarea class="form-control" name="post_text" id="UserInput" rows="6"></textarea>
+                                            <div class="form-group file-choice">
+                                                {% comment %} <div id="file" class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" id="customfile" class="custom-file-input" name="attached_file[]" lang="ja" />
+                                                        <label class="custom-file-label" for="customfile">ファイル選択...</label>
                                                     </div>
-                                                </div>
-                                                <input type="submit" id="button" class="btn btn-warning post-button" value="投稿">
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-outline-secondary reset">取消</button>
+                                                    </div>
+                                                </div> {% endcomment %}
+                                                <input type="file" name="attached_file">
+                                            </div>
+                                            <input type="submit" id="button" class="btn btn-warning post-button" value="投稿">
                                         </div>         
                                     </form>
                                 </div>
@@ -187,16 +188,17 @@
                                                 {% csrf_token %}
                                                 <div class="form-group d-inline">
                                                     <textarea class="form-control" id="UserInput" name="reply_text" rows="6"></textarea>
-                                                    <div id="file" class="input-group">
+                                                    {% comment %} <div id="file" class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="cutomfile" class="custom-file-input" name="cutomfile[]" lang="ja" />
+                                                            <input type="file" id="customfile" class="custom-file-input" name="attached_file[]" lang="ja" />
                                                             <label class="custom-file-label" for="customfile">ファイル選択...</label>
                                                         </div>
                                                         <div class="input-group-append">
                                                             <button type="button" class="btn btn-outline-secondary reset">取消</button>
                                                         </div>
-                                                    </div>
-                                                    <input type="hidden" name="reply_source" value="{{ post.id }}"></input>
+                                                    </div> {% endcomment %}
+                                                    <input type="file" name="attached_file{{ forloop.counter0 }}">
+                                                    <input type="hidden" name="reply_source" value="{{ post.id }}">
                                                     <input type="submit" id="button" class="btn btn-warning reply-button" value="返信">
                                                 </div>       
                                             </form>
