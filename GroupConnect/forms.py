@@ -8,6 +8,9 @@ from .models import (
     Group , Signboard, Post
 )
  
+from . import models
+from GroupConnect.models import Time
+
 User = get_user_model()
 
 
@@ -58,7 +61,7 @@ class UserMailaddressUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         if User.USERNAME_FIELD == 'email':
-            fields = ('email','plan_mail_time','new_mail_stop_time','new_mail_start_time')
+            fields = ('plan_mail_time','new_mail_stop_time','new_mail_start_time','notice_signboard','notice_group')
         else:
             fields = ('username', 'email', 'first_name', 'last_name')
 
@@ -140,3 +143,17 @@ class UserCreateForm(UserCreationForm):
 #         super().__init__(*args, **kwargs)
 #         for field in self.fields.values():
 #             field.widget.attrs['class'] = 'form-control'
+
+class TimeForm(forms.ModelForm):
+    plan_mail_time = forms.ModelChoiceField(models.Time.objects, to_field_name='plan_mail_time', empty_label=None, initial=0)
+
+    class Meta:
+        model = Time
+        model = User
+        fields = ('plan_mail_time','new_mail_stop_time','new_mail_start_time')
+        
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'

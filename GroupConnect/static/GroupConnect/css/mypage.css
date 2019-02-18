@@ -33,7 +33,7 @@ body {
     height: 497px;
     margin: -10px 0px 0px 0px;
     text-align: left;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .group {

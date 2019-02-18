@@ -19,12 +19,14 @@ from django.template.loader import get_template
 from django.views import generic
 from .forms import (
     LoginForm, UserCreateForm, UserUpdateForm, UserMailaddressUpdateForm, MyPasswordChangeForm,
-    MyPasswordResetForm, MySetPasswordForm, DeleteUserForm, UserCreateForm,GroupCreateForm,GroupUpdateForm
+    MyPasswordResetForm, MySetPasswordForm, DeleteUserForm, UserCreateForm,GroupCreateForm,GroupUpdateForm,
+    TimeForm
 )
 from .models import (
-    Notice, Group, Member, GroupIcon,Signboard,Post,Situation,Category
+    Notice, Group, Member, GroupIcon,Signboard,Post,Situation,Category,Time
 )
-
+from django.forms import ModelChoiceField
+from GroupConnect.models import Time
 
 User = get_user_model()
 
@@ -274,6 +276,11 @@ def groupdelete(request):
     Group.objects.filter(id=group_pk).delete()
     return redirect('GroupConnect:mypage')
 
+def boarddelete(request):
+    board_pk = request.POST['delete']
+    Signboard.objects.filter(id=board_pk).delete()
+    return redirect('GroupConnect:bordlist', request.POST['group_pk']) 
+
 def groupsecession(request):
     """
     グループからの脱退
@@ -412,6 +419,17 @@ class UserMailaddressUpdate(OnlyYouMixin, generic.UpdateView):
     form_class = UserMailaddressUpdateForm
     template_name = 'GroupConnect/user_mailaddress_update.html'
 
+    def get_context_data(self, **kwargs):
+
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
+
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'groups' : members
+        })
+        return context
+
     def get_success_url(self):
         return resolve_url('GroupConnect:user_mailaddress_update', pk=self.kwargs['pk'])
 
@@ -443,6 +461,17 @@ class UserUpdate(OnlyYouMixin, generic.UpdateView):
     model = User
     form_class = UserUpdateForm
     template_name = 'GroupConnect/user_form.html'
+
+    def get_context_data(self, **kwargs):
+
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
+
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'groups' : members
+        })
+        return context
 
     def get_success_url(self):
         return resolve_url('GroupConnect:user_update', pk=self.kwargs['pk'])
@@ -482,11 +511,51 @@ class GroupList(generic.ListView):
         })
         return context        
 
+class UserTest2MailaddressUpdate(OnlyYouMixin, generic.UpdateView, ModelChoiceField):
+    model = User
+    model = Time
+    form_class = TimeForm
+    template_name = 'GroupConnect/user_testmailaddress_update.html'
+
+    '''def get_queryset(self):
+        form = TimeForm(initial = {'time': Time.objects.filter(id = 6) })
+        
+        return form
+    '''
+
+    def get_success_url(self):
+        return resolve_url('GroupConnect:user_test2mailaddress_update', pk=self.kwargs['pk'])
+
+    context_object_name = 'rogin_user'
+
+    def get_queryset(self):
+        ID = self.request.user.id
+        user = User.objects.filter(id = ID)
+
+        return user
+    
+    #def label_from_instance(self, obj):
+     #   return "My Object #%i" % obj.id
+
 class PasswordChange(PasswordChangeView):
     """パスワード変更ビュー"""
     form_class = MyPasswordChangeForm
     success_url = reverse_lazy('GroupConnect:password_change_done')
     template_name = 'GroupConnect/password_change.html'
+
+    def get_context_data(self, **kwargs):
+        """
+        参加中のグループ一覧取得
+        """
+
+        ID = self.request.user.id
+        members = Member.objects.filter(user_id=ID)
+
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'groups' : members
+        })
+        return context  
 
 class PasswordChangeTest(PasswordChangeView):
     """パスワード変更ビュー(テスト用)"""
@@ -747,6 +816,9 @@ class CategoryDelete(generic.DeleteView):
 
 def signboard_page_view(request, pk, selected_id=None):
     signboard = get_object_or_404(Signboard, pk=pk)
+    group = Group.objects.get(id = signboard.group_id.id)
+    ID = request.user.id
+    members = Member.objects.filter(user_id=ID)
 
     # form = forms.PostCreateForm(request.POST or None)
     if request.method == 'POST':
@@ -757,7 +829,7 @@ def signboard_page_view(request, pk, selected_id=None):
             new_post = Post(
                 signboard_id=signboard,
                 text=request.POST['reply_text'],
-                contributer=get_object_or_404(Member, pk=1),
+                contributer=get_object_or_404(Member, pk=1), 
                 reply=get_object_or_404(Post, pk=reply_source_id)
             )
         else:    
@@ -787,6 +859,9 @@ def signboard_page_view(request, pk, selected_id=None):
 
         return render(request, 'GroupConnect/bord.html', context= {
             'signboard': signboard,
+            'group' : group,
+            'members' : members,
+            'categorys' : Category.objects.filter(group_id=group),
             'post_list': post_list,
             'situation_list': situation_list
         })
@@ -809,6 +884,9 @@ def signboard_page_view(request, pk, selected_id=None):
 
         return render(request, 'GroupConnect/bord.html', context= {
             'signboard': signboard,
+            'group' : group,
+            'members' : members,
+            'categorys' : Category.objects.filter(group_id=group),
             'post_list': post_list,
             'situation_list': situation_list
         })

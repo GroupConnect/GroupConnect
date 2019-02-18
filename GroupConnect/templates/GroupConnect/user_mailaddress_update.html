@@ -1,18 +1,170 @@
-{% extends "GroupConnect/base.html" %}
-{% block content %}
-<form action="" method="POST" >
-    {{ form.non_field_errors }}
-    <table class="table">
-        <tbody>
-            {% for field in form %}
-                <tr>
-                    <th><label for="{{ field.id_for_label }}">{{ field.label }}</label></th>
-                    <td>{{ field }} {{ field.errors }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% csrf_token %}
-    <button type="submit" class="btn btn-success btn-lg" >送信</button>
-</form>
-{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> メール設定 </title>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, inital-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'GroupConnect/css/user_mailaddress_update.css' %}" />
+    </head>
+    <body>
+        <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-expand-sm navbar-light fixed-top">
+        <a class="navbar-brand groupconnect" href="{% url 'GroupConnect:mypage' %}">GroupConnect</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="Navber">
+            <ul class="navbar-nav">
+                <li class="nav-item active dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    グループ
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for group in groups %}
+                            <a class="dropdown-item" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_id.group_name}}</a>
+                        {% endfor %}
+                        <a class="dropdown-item" href="{% url 'GroupConnect:group_list'%}">グループ一覧へ</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item active dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    アカウント
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:user_mailaddress_update' user.id %}">メール設定</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:password_change' %}">パスワード設定</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
+                    </div>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- サイドバー -->
+                <div class="col-md-2 left">
+                    <a class="setting" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
+                    <a class="setting" href="{% url 'GroupConnect:password_change' %}">パスワード設定</a>
+                    <a class="setting" href="{% url 'GroupConnect:user_mailaddress_update' user.id %}">メール設定</a>
+                    <a class="setting" href="{% url 'GroupConnect:user_delete' user.pk %}">退会</a>
+                </div>
+
+                <div class="col-md-10 right">
+                    <div class="row">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class="col-md-12 up">
+                                <p class="d-inline">予定メール通知設定</p>
+                                <div class="plans">
+                                    <div class="notificationtime">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label class="d-inline">通知時刻</label>
+                                            </div>
+                                            <div class="col-md-10 d-inline">
+                                                {{ form.non_field_errors }}
+                                                {% for field in form %}
+                                                    {% if field.name == "plan_mail_time" %}
+                                                        {{ field }}{{ field.errors }}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                                <!--<div class="input-group">
+                                                    <div class="d-inline input-group-append" >
+                                                        {{ form.non_field_errors }}
+                                                            {% for field in form %}
+                                                                {% if field.name == "plan_mail_time" %}
+                                                                    <th><label for="{{ field.id_for_label }}">{{ field.label }}</label></th>
+                                                                    {{ field }}{{ field.errors }}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                    </div>
+                                                </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 down">
+                                <p class="d-inline">新着メール通知設定</p>
+                                <div class="plans">
+                                    <div class="notificationtime">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label class="d-inline">通知停止時刻</label>
+                                            </div>
+                                            <div class="col-md-9 d-inline">
+                                                <div class="new_mail_stop_time">
+                                                    {{ form.non_field_errors }}
+                                                    {% for field in form %}
+                                                        {% if field.name == "new_mail_stop_time" %}
+                                                            {{ field }}{{ field.errors }}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="middle d-inline">
+                                                    <p class="kara">から</p><p class="error"></p>
+                                                </div>
+                                                <div class="new_mail_start_time d-inline">
+                                                    {{ form.non_field_errors }}
+                                                    {% for field in form %}
+                                                        {% if field.name == "new_mail_start_time" %}
+                                                            {{ field }}{{ field.errors }}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="notificationitem">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label>通知項目</label>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="row">
+                                                <div class="col-md-3 col-md-offset-3">    
+                                                    {{ form.non_field_errors }}
+                                                    {% for field in form %}
+                                                        {% if field.name == "notice_signboard" %}
+                                                            <th><label class="d-inline" for="{{ field.id_for_label }}">{{ field.label }}</label></th>
+                                                            {{ field }}{{ field.errors }}
+                                                </div>
+                                                <div class="col-md-3">
+                                                        {% elif field.name == "notice_group"%}
+                                                            <th><label class="d-inline" for="{{ field.id_for_label }}">{{ field.label }}</label></th>
+                                                            {{ field }}{{ field.errors }}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                                <!--<label class="checkbox-inline"><input type="checkbox">グループ</label>
+                                                <label class="checkbox-inline bordcheck"><input type="checkbox">掲示板</label>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="submit" class="submit btn-warning" value="変更">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'GroupConnect/js/user_mailaddress_update.js' %}"></script>
+    </body>
+</html>

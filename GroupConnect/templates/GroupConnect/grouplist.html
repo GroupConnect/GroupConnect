@@ -40,7 +40,7 @@
                             </a>
                             <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
-                                    <a class="dropdown-item" href="#">メール設定</a>
+                                    <a class="dropdown-item" href="{% url 'GroupConnect:user_mailaddress_update' user.id %}">メール設定</a>
                                     <a class="dropdown-item" href="{% url 'GroupConnect:password_change' %}">パスワード設定</a>
                                     <a class="dropdown-item" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
                             </div>
@@ -56,21 +56,23 @@
         <h1 class="d-inline grouplist">グループ一覧</h1>
 
         <div class="list">
-            <table class="table">
-                {% for group in groups %}
-                <tr>
-                    <td scope="row"><a href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_id.group_name}}</a></td>
-                    <td class="day">作成日：{{group.group_id.created_at}}</td>
-                </tr>
-
-                {% endfor %}
-            </table>
+                <table class="table">
+                    {% for group in groups %}
+                    <tr>
+                        <td scope="row">
+                            <a href="{% url 'GroupConnect:group_top' group.group_id.pk %}"><img class="rounded border" src="{{ group.group_id.icon.url }}"></a>
+                            <a class="grlist_name" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_id.group_name}}</a>
+                        </td>
+                        <td class="day">作成日：{{group.group_id.created_at}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
         </div>
                
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script type="text/javascript" src="static/GroupConnect/js/grouplist.js"></script>
+        <script type="text/javascript" src="{% static 'GroupConnect/js/grouplist.js' %}"></script>
     </body>
 </html>

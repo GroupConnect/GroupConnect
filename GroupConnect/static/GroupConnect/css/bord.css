@@ -72,7 +72,14 @@ body {
     font-size: 20px;
     margin: 0px 20px 0px 20px;
 }
+th, td {
+    width: 319px;
+}
 
+
+thead, tbody {
+    display: block;
+}
 
 
 .ctgr {
@@ -87,6 +94,9 @@ body {
 }
 
 /* カテゴリモーダル */
+.modal-title {
+    margin: 0px 0px 0px 0px;
+}
 .modal-category {
     float: left;
 }
@@ -112,13 +122,12 @@ body {
 
 /* メインコンテンツ */
 .right {
-    min-height: 593px;
-    max-height: none;
+    height: 593px;
     border:solid 2px #5f9644;
 }
 
-.history {
-    margin: 13px 0px 0px 0px;
+.breadcrumb {
+    margin: 0px -15px 0px -15px;
 }
 
 .bar3 {
@@ -136,6 +145,27 @@ body {
     margin: 0px 0px 0px 10px;
 }
 
+/* ファイル選択 */
+.file-choice {
+    width: 700px;
+    margin: 10px 0px 0px 0px;
+    display: inline-block;
+}
+
+.custom-file-input:lang(ja) ~ .custom-file-label::after {
+    content: "参照";
+}
+       
+.custom-file {
+    max-width: 20rem;
+    overflow: hidden;
+}
+
+.custom-file-label {
+    white-space: nowrap;
+  
+}
+
 .text {
     width: 800px;
     height: 200px;
@@ -146,7 +176,7 @@ body {
     margin: 15px 0px 0px 15px;
 }
 
-.post-button, .reply-button {
+.btn-warning, .post-button, .reply-button {
     width: 95px;
     height: 35px;
     float: right;
@@ -154,7 +184,7 @@ body {
 }
 
 .post-area {
-    height: 485px;
+    height: 477px;
     margin:0px -10px 0px 0px;
     overflow-y: auto;
 }
@@ -240,7 +270,7 @@ body {
     float: right;
 }
 
-.post-form {
+.reply-form {
     display: none;
 }
 
@@ -258,6 +288,15 @@ body {
 }
 
 .signboard-setting {
+    display: none;
+}
+
+.name_limit{
+    visibility: hidden;
+
+}
+
+#category-delete {
     display: none;
 }
 

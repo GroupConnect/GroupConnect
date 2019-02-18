@@ -40,7 +40,7 @@
                        </a>
                        <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
-                        <a class="dropdown-item" href="#">メール設定</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:user_mailaddress_update' user.id %}">メール設定</a>
                         <a class="dropdown-item" href="{% url 'GroupConnect:password_change' %}">パスワード設定</a>
                         <a class="dropdown-item" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
                        </div>
@@ -54,7 +54,6 @@
                        <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item d-inline grname" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_name}}</a>
                         <a class="dropdown-item d-inline" href="{% url 'GroupConnect:bordlist' group.pk %}">掲示板</a>
-                        <a class="dropdown-item d-inline" href="{% url 'GroupConnect:member_list' group.pk %}">メンバー一覧</a>
                         <a class="dropdown-item d-inline" href="{% url 'GroupConnect:group_setting' group.pk %}">設定</a>
                        </div>
                    </li>
@@ -69,7 +68,7 @@
                            <div class="row">
                                <div class="col-lg-12 side-top">
                                    <nav class="navbar navbar-light">
-                                       <a class="navbar-brand side-grname" href="grouptop">{{group.group_name}}</a>
+                                       <a class="navbar-brand side-grname" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_name}}</a>
                                    </nav>
                                </div>
                                <div class="col-lg-12 side-up">
@@ -80,30 +79,29 @@
                                    <p class="d-inline ctgr">カテゴリ</p><br>
                                    <a class="btn btn-danger float-right" id="Categorydelete">削除</a>
                                   <!-- 削除モーダル -->
-                                  <div class="modal fade" id="modal-delete-category">
+                                    <div class="modal fade" id="modal-delete-category">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <!-- モーダルヘッダー -->
                                             <div class="modal-header">
                                                 <p>カテゴリ削除</p>
-                                                </div>
-                                                <!-- モーダルボディ -->
-                                                <div class="modal-body">
-                                                    <p>カテゴリを消す前に中に掲示板が残っているか<br>
-                                                        確認してください。</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-primary" id="category-delete-submit">OK</button>
-                                                    <button class="btn btn-secondary" id="category-close">キャンセル</button>
-                                                </div>
-                                                </div>
+                                            </div>
+                                            <!-- モーダルボディ -->
+                                            <div class="modal-body">
+                                                <p>カテゴリを消す前に中に掲示板が残っているか<br>
+                                                    確認してください。</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-primary" id="category-delete-submit">OK</button>
+                                                <button class="btn btn-secondary" id="category-close">キャンセル</button>
+                                            </div>
                                         </div>
+                                    </div>
                                     </div>
                                   <!-- 削除モーダル終わり -->
                                    <form class="d-inline" id="category-add-errorcheck" method="POST">  
                                    <a class="btn btn-primary float-left" id="btn" href="#"><addr title="カテゴリーの追加" class="d- inline create-ctgr">追加</addr></a>
-                                             
-                               </div>
+                                </div>
 
                                <!-- サイドバーカテゴリー追加 -->
                                 <div class="modal fade" id="modal">
@@ -136,7 +134,6 @@
                                     <thead class="table-dark">
                                         <tr>
                                             <th>カテゴリー一覧</th>
-                                            <th scope="col-lg-2"></th>
                                         </tr>
                                     </thead>
                                     <tbody class="side-tbody">
@@ -167,10 +164,7 @@
                    <div class="col-lg-10 right">
                        <div class="row row3">
                            <div class="col-lg-12 up">
-                               <div class="history">
-                                   <a href="grouptop">(グループ名)</a><span>　>　</span>
-                                   <a href="bordlist">掲示板</a>
-                               </div>
+
                                <div class="rounded p-2 background area">
                                    <div class="nav-item active d-inline">
                                        <button class="btn bord-create" id="btn2" href="#">掲示板を作成</button>

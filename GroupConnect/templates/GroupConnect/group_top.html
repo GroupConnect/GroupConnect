@@ -40,7 +40,7 @@
                     </a>
                     <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'GroupConnect:user_update' user.pk %}">プロフィール設定</a>
-                        <a class="dropdown-item" href="#">メール設定</a>
+                        <a class="dropdown-item" href="{% url 'GroupConnect:user_mailaddress_update' user.id %}#">メール設定</a>
                         <a class="dropdown-item" href="{% url 'GroupConnect:password_change' %}">パスワード設定</a>
                         <a class="dropdown-item" href="{% url 'GroupConnect:logout' %}">ログアウト</a>
                     </div>
@@ -54,7 +54,6 @@
                     <div class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item d-inline grname" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_name}}</a>
                     <a class="dropdown-item d-inline" href="{% url 'GroupConnect:bordlist' group.pk %}">掲示板</a>
-                    <a class="dropdown-item d-inline" href="{% url 'GroupConnect:member_list' group.pk %}">メンバー一覧</a>
                     <a class="dropdown-item d-inline" href="{% url 'GroupConnect:group_setting' group.pk %}">設定</a>
                     </div>
                 </li>
@@ -71,18 +70,26 @@
                             <h1 class="navbar-brand grlist">参加メンバー</h1>
                         </div>
                         <div class="col-lg-12 left-down">
+                            <ul class="memberlist">
                             {% for member in members %}
-                                <a class="d-block" href="#">{{member.user_id.last_name}}{{member.user_id.first_name}}</a>
+                            <li class="member">
+                                <a href="#"><img class="rounded border" src="{{ member.user_id.icon.url }}"></a>
+                                <a  href="#">{{member.user_id.last_name}}{{member.user_id.first_name}}</a>
+                            </li>
                             {% endfor %}
+                            </ul>
                         </div>
                     </div>
                 </div>
                 <!-- メインコンテンツ -->
                 <div class="col-lg-10 right">
-                    <div class="headline">
-                        <h1>連絡事項</h1>
-                    </div>
-                    <p>・{{group.notice}}</p>
+                        <div class="rounded p-2 area">
+                            <h2 class="main_grname">{{group.group_name}}</h1>
+                        </div>
+                        <div class="headline">
+                            <h1>連絡事項</h1>
+                        </div>
+                        <p>・{{group.notice}}</p>
                 </div>
             </div>
         </div>
@@ -96,7 +103,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script type="text/javascript" src="static/GroupConnect/js/grouptop.js"></script>
+        <script type="text/javascript" src="{% static 'GroupConnect/js/group_top.js' %}"></script>
     </body>
 </html>
 

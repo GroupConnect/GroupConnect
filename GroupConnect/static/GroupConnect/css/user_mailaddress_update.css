@@ -83,7 +83,43 @@ p {
     margin: 0px 0px 0px 30px;
 }
 
-.change {
+.btn-warning {
     width: 100px;
     margin: 30px 0px 0px 600px;
+}
+
+form {
+    width: 1200px;
+}
+
+.form-control {
+    width: 90px;
+}
+
+.warning {
+    font-size: 15px;
+    margin: 0px 0px 0px 0px;
+}
+.errorlist{
+    text-align: left;
+    display: inline;
+}
+.form-control{
+    display: inline;
+}
+ul {
+    list-style: none;
+}
+li {
+    color: #ff0000;
+    display: inline;
+}
+.kara {
+    margin: 0px 0px 0px 30px;
+    /*transform: rotate(90deg);*/
+}
+
+input[type="checkbox"] {
+    width:			16px;
+	height:			16px;
 }
