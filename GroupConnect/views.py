@@ -77,6 +77,7 @@ def signboard_page_view(request, pk, selected_id=None):
         # form.save()
         import pprint
         pprint.pprint(request.POST)
+        pprint.pprint(request.FILES)
             
         new_post = Post(
             signboard_id = signboard,
@@ -85,8 +86,8 @@ def signboard_page_view(request, pk, selected_id=None):
         if 'post_text' in request.POST:
             new_post.text = request.POST['post_text']
 
-            if 'attached_file' in request.POST:
-                new_post.attached_file = request.POST['attached_file']
+            if 'attached_file' in request.FILES:
+                new_post.attached_file = request.FILES['attached_file']
 
         elif 'reply_text' in request.POST:
             reply_source_id = int(request.POST['reply_source'])
@@ -97,8 +98,8 @@ def signboard_page_view(request, pk, selected_id=None):
                 post_count = signboard_prefetch.post_set.all().count()
 
                 for i in range(post_count):
-                    if request.POST['attached_file' + str(i)]:
-                        new_post.attached_file = request.POST['attached_file' + str(i)]
+                    if 'attached_file' + str(i) in request.FILES:
+                        new_post.attached_file = request.FILES['attached_file' + str(i)]
 
         # if 'attached_file' in request.POST:
         #     for attached_file in request.POST['attached_file']:
@@ -139,7 +140,9 @@ def signboard_page_view(request, pk, selected_id=None):
             for query in Signboard.objects.filter(pk=pk).prefetch_related('post_set'):
                 post_list = query.post_set.all().order_by('-created_at')
 
-        situation_list = {'read_counter': 0, 'read_members': []}
+        situation_list = {}
+        situation_list['read_counter'] = 0
+        situation_list['read_members'] = []
         for post in post_list:
             read_list = situation_counter(post)
             situation_list['read_counter'] = read_list[0]
