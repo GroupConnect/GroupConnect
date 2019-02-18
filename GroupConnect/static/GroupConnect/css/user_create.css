@@ -72,6 +72,13 @@ img {
     background-color: #ffda37;
 }
 
+.back {
+    width: 180px;
+    height: 35px;
+    font-size: 20px;
+    margin: 0px 0px 20px 0px;
+}
+
 /*.nameblank, .romajiblank, .mailblank, .passblank, .passconfblank, .passformatcheck, .passconfformatcheck, .passconfdifferent {
     color: #ff0000;
     font-size: 15px;
