@@ -856,7 +856,6 @@ def signboard_page_view(request, pk, selected_id=None):
 
         elif 'reply_text' in request.POST:
             reply_source_id = int(request.POST['reply_source'])
-<<<<<<< HEAD
             new_post = Post(
                 signboard_id=signboard,
                 text=request.POST['reply_text'],
@@ -869,7 +868,6 @@ def signboard_page_view(request, pk, selected_id=None):
                 text=request.POST['post_text'],
                 contributer=get_object_or_404(Member, pk=ID)
             )
-=======
             new_post.reply = get_object_or_404(Post, pk=reply_source_id)
             new_post.text = request.POST['reply_text']
 
@@ -884,7 +882,6 @@ def signboard_page_view(request, pk, selected_id=None):
         #     for attached_file in request.POST['attached_file']:
         #         if attached_file:
         #             new_post.attached_file = attached_file
->>>>>>> origin/掲示板個別ページ機能
 
         new_post.save()
 
