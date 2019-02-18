@@ -61,7 +61,7 @@ class UserMailaddressUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         if User.USERNAME_FIELD == 'email':
-            fields = ('plan_mail_time','new_mail_stop_time','new_mail_start_time','notice_signboard','notice_group')
+            fields = ('email',)
         else:
             fields = ('username', 'email', 'first_name', 'last_name')
 
@@ -77,6 +77,8 @@ class GroupUpdateForm(forms.ModelForm):
         fields = ('group_name','icon','notice')
 class MyPasswordChangeForm(PasswordChangeForm):
     """パスワード変更フォーム"""
+
+    field = ('password',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

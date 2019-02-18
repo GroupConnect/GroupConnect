@@ -540,6 +540,8 @@ class UserTest2MailaddressUpdate(OnlyYouMixin, generic.UpdateView, ModelChoiceFi
 
 class PasswordChange(PasswordChangeView):
     """パスワード変更ビュー"""
+    model = User
+
     form_class = MyPasswordChangeForm
     success_url = reverse_lazy('GroupConnect:password_change_done')
     template_name = 'GroupConnect/password_change.html'

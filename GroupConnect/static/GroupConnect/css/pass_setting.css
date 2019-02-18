@@ -42,10 +42,10 @@ span {
     color: #ff0000;
 }
 
-.currentpass, .pass, .passconf {
+/*.currentpass, .pass, .passconf {
     width: 500px;
     margin: 0px 0px 10px 0px;
-}
+}*/
 
 img {
     width: 25px;
@@ -61,4 +61,17 @@ img {
 .btn-warning {
     width: 100px;
     margin: 30px 0px 0px 350px;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    color: #ff0000;
+}
+
+.form-control {
+    width: 500px;
+    margin: 0px 0px 10px 0px;
 }
