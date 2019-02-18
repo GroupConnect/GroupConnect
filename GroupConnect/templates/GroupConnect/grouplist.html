@@ -27,7 +27,7 @@
                             </a>
                             <div class="dropdown-menu menu" aria-labelledby="navbarDropdown">
                                 {% for group in groups %}
-                                    <a class="dropdown-item" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_id.group_name}}</a>
+                                    <a class="dropdown-item" href="{% url 'GroupConnect:group_top' group.group_id.pk %}">{{group.group_id.group_name}}</a>
                                 {% endfor %}
                                 <a class="dropdown-item" href="{% url 'GroupConnect:group_list' %}">グループ一覧へ</a>
                             </div>
@@ -61,7 +61,7 @@
                     <tr>
                         <td scope="row">
                             <a href="{% url 'GroupConnect:group_top' group.group_id.pk %}"><img class="rounded border" src="{{ group.group_id.icon.url }}"></a>
-                            <a class="grlist_name" href="{% url 'GroupConnect:group_top' group.pk %}">{{group.group_id.group_name}}</a>
+                            <a class="grlist_name" href="{% url 'GroupConnect:group_top' group.group_id.pk %}">{{group.group_id.group_name}}</a>
                         </td>
                         <td class="day">作成日：{{group.group_id.created_at}}</td>
                     </tr>
