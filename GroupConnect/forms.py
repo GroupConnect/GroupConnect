@@ -78,6 +78,8 @@ class GroupUpdateForm(forms.ModelForm):
 class MyPasswordChangeForm(PasswordChangeForm):
     """パスワード変更フォーム"""
 
+    field = ('password',)
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
