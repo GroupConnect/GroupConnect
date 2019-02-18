@@ -229,7 +229,8 @@ class GroupTop(generic.DetailView): #グループのトップページ
 
         ID = self.request.user.id
         members = Member.objects.filter(user_id=ID)
-        member_list = Member.objects.filter(group_id=self.kwargs.get('pk'))
+        group = Group.objects.get(id=self.kwargs.get('pk'))
+        member_list = Member.objects.filter(group_id=group)
 
         context = super().get_context_data(**kwargs)
         context.update({
