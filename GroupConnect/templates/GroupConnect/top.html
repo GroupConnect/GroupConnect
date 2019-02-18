@@ -31,8 +31,7 @@
                                         {{ field }}
                                         {{ field.errors }}
                                         <hr>
-                                    {% endfor %}                              {{ form.non_field_errors }}
-
+                                    {% endfor %}
                             </div>
                             <input type="submit" class="submit" value="ログイン">
                             <p><a href="{% url 'GroupConnect:password_reset' %}" class="forget">パスワードを忘れた場合はこちら</a></p>
