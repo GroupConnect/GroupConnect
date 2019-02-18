@@ -34,6 +34,8 @@ $(function() {
     });
 });
 
+
+var old_password = $("#password_user").val();
 $(function() {
     $("form").submit(function(){
     if ($("input[name='old_password']").val() == '' && $("input[name='new_password1']").val() == '' && $("input[name='new_password2']").val() == '') {
@@ -195,6 +197,16 @@ $(function() {
         $('.passformatcheck').hide();
         $('.passconfformatcheck').hide();
         $('.passconfdifferent').show();
+        return false;
+    } else if ($("input[name='old_password1']").val() !== old_password) {
+        //パスワードとパスワード(確認用)が異なる場合
+        $('.currentpassblank').hide();
+        $('.passblank').hide();
+        $('.passconfblank').hide();
+        $('.currentpassformatcheck').hide();
+        $('.passformatcheck').show();
+        $('.passconfformatcheck').hide();
+        $('.passconfdifferent').hide();
         return false;
     } else {
       $("form").submit();
