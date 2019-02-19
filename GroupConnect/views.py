@@ -840,22 +840,27 @@ def signboard_page_view(request, pk, selected_id=None):
 
     if request.method == 'POST':
         
-        new_post = Post(
-            signboard_id = signboard,
-            contributer = get_object_or_404(Member, pk=member.id)
-        )
-        if 'post_text' in request.POST:
-            new_post.text = request.POST['post_text']
-        elif 'reply_text' in request.POST:
-            reply_source_id = int(request.POST['reply_source'])
-        
-            new_post.reply = get_object_or_404(Post, pk=reply_source_id)
-            new_post.text = request.POST['reply_text']
+        if 'delete' in request.POST:
+            post_pk = request.POST['delete']
+            Post.objects.get(pk=post_pk).delete()
 
-        if 'attached_file' in request.FILES:
-            new_post.attached_file = request.FILES['attached_file']
+        else:
+            new_post = Post(
+                signboard_id = signboard,
+                contributer = get_object_or_404(Member, pk=member.id)
+            )
+            if 'post_text' in request.POST:
+                new_post.text = request.POST['post_text']
+            elif 'reply_text' in request.POST:
+                reply_source_id = int(request.POST['reply_source'])
+            
+                new_post.reply = get_object_or_404(Post, pk=reply_source_id)
+                new_post.text = request.POST['reply_text']
 
-        new_post.save()
+            if 'attached_file' in request.FILES:
+                new_post.attached_file = request.FILES['attached_file']
+
+            new_post.save()
 
         if selected_id:
             for query in Signboard.objects.filter(pk=pk).prefetch_related('post_set'):

@@ -155,7 +155,7 @@ thead, tbody {
 .custom-file-input:lang(ja) ~ .custom-file-label::after {
     content: "参照";
 }
-       
+
 .custom-file {
     max-width: 20rem;
     overflow: hidden;
@@ -163,7 +163,6 @@ thead, tbody {
 
 .custom-file-label {
     white-space: nowrap;
-  
 }
 
 .text {
