@@ -169,7 +169,9 @@
                                         <div class="post-frame" id="post-frame{{ forloop.counter0 }}">
                                             <div class="post-outside" id="post-outside1">
                                                 <div class="post">
-                                                    <p class="Contributor">{{ post.contributer }}</p><p class="time">{{ post.diff_date }}</p><a class="post-delete" data-toggle="modal" data-target="#basicModal3" href="">投稿を削除</a>
+                                                    <p class="Contributor">{{ post.contributer }}</p><p class="time">{{ post.diff_date }}</p><button type="submit" form="post-form{{ forloop.counter0 }}" class="btn btn-link post-delete" name="delete" value="{{ post.id }}">投稿を削除</button>
+                                                    {% comment %} <form action="{% url 'GroupConnect:signboard' signboard.id %}" method="POST">
+                                                    </form> {% endcomment %}
                                                     <p class="letter-body"><a href="{% url 'GroupConnect:signboard' signboard.id post.id %}" class="post-text">{{ post.text|linebreaks }}</a></p>
                                                     {% if post.attached_file %}
                                                         <a class="filename" href="{{ post.attached_file.url }}">{{ post.attached_file|get_filename }}
